@@ -9,20 +9,30 @@
 
 <body>
 
-<div id="employeeListPage" data-role="page" >
+<div id="login" data-role="page" >
 
-    <div data-role="header" data-position="fixed">
-        <h1>Employee Directory  <a href="#MainNavPage">Main Menu</a></h1>
-1    </div>
+
 
     <div data-role="content">
-        <ul id="employeeList" data-role="listview" data-filter="true"></ul>
+        <div id="logo"><img src="img/splash/logo_big.png"></div>
+        <form action="form.php" method="post"> ...
+        <label for="user">Username</label>
+        <input type="text" name="name" id="user" value=""  />
+        <label for="pword">Password</label>
+        <input type="text" name="name" id="pword" value=""  />
+        </form>
+        <a href="#MainNavPage" data-role="button">Submit</a>
     </div>
 
 </div>
 
 <div id="MainNavPage" data-role="page">
+
     <div data-role="content">
+        <div id="logobuttons">
+            <div style="float: left"><img src="img/splash/logo_big.png"></div>
+            <div style="float: right"><a href="#" ><img src="img/navbut/user.png"></a><br/><a href="#" ><img src="img/navbut/home.png"></a></div><br/>
+        </div><div style="clear: right"><div style="clear: left"></div></div>
         <div class="ui-grid-d">
             <!-- first row -->
             <div class="ui-block-a">
@@ -51,9 +61,6 @@
                 <a href="#" ><img src="img/navbut/tellStory.png"></a>
             </div>
         </div>
-    </div>
-    <div data-role="footer">
-        <a href="#employeeListPage">List Page</a>
     </div>
 </div>
 
