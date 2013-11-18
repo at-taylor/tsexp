@@ -18,7 +18,6 @@
         Anna Taylor
     </author>
 
-    <plugin name="Camera" value="CDVCamera" />
 
     <!-- ANNA Notes of config features of interest -->
 
@@ -65,4 +64,6 @@
     <feature name="http://api.phonegap.com/1.0/media"/>
     <feature name="http://api.phonegap.com/1.0/network"/>
     <feature name="http://api.phonegap.com/1.0/notification"/>
+
+    <gap:plugin name="org.apache.cordova.camera" />
 </widget>
