@@ -18,6 +18,8 @@
         Anna Taylor
     </author>
 
+    <plugin name="Camera" value="CDVCamera" />
+
     <!-- ANNA Notes of config features of interest -->
 
     <!-- AT: only build against these target platforms -->
