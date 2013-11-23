@@ -141,7 +141,34 @@ var app = {
     camera: function() {
 
         function onSuccess(imageData) {
-            console.log('success');
+            //console.log('success');
+
+            document.getElementById('testMsg').value = "in onSuccess";
+
+            //Anna
+            //var image = document.getElementById('myImage');
+            //image.src = "data:image/jpeg;base64," + imageData;
+
+            var smallImage = document.getElementById('smallImage');
+
+            // Unhide image elements
+            //
+            smallImage.style.display = 'block';
+
+            // Show the captured photo
+            // The inline CSS rules are used to resize the image
+            //
+            smallImage.src = "data:image/jpeg;base64," + imageData;
+
+            // Get image handle
+            //
+            var largeImage = document.getElementById('largeImage');
+
+            // Unhide image elements
+            //
+            largeImage.style.display = 'block';
+            largeImage.src = "data:image/jpeg;base64," + imageData;
+
         }
 
         function onFail(message) {
