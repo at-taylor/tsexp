@@ -2,11 +2,28 @@ var serviceURL = "http://localhost/emp/services/";
 
 var stories;
 
+$('#storyListPage').bind('pagebeforecreate', function(event) {
+    alert('bind: pagebeforecreate');
+    getStoryList();
+});
+$('#storyListPage').bind('pagecreate', function(event) {
+    alert('bind: pagecreate');
+    getStoryList();
+});
+
 $('#storyListPage').bind('pageinit', function(event) {
+    alert('bind: pageinit');
+    getStoryList();
+});
+
+$('#storyListPage').live('pageinit', function(event) {
+    alert('live: pageinit');
     getStoryList();
 });
 
 function getStoryList() {
+     //alert('running list()')        ;
+
     $.getJSON('getstorylist.html', function(data) {
         /*$.getJSON(serviceURL + 'getemployees.html', function(data) {*/
         $('#storyList li').remove();

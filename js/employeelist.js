@@ -2,11 +2,56 @@ var serviceURL = "http://localhost/emp/services/";
 
 var employees;
 
+$('#employeeListPage').bind('pagebeforecreate', function(event) {
+    alert('bind: pagebeforecreate');
+    //getEmployeeList();
+});
+$('#employeeListPage').bind('pagecreate', function(event) {
+    alert('bind: pagecreate');
+    //getEmployeeList();
+});
+
 $('#employeeListPage').bind('pageinit', function(event) {
-	getEmployeeList();
+    alert('bind: pageinit');
+    getEmployeeList();
+});
+
+$('#employeeListPage').live('pageinit', function(event) {
+    alert('live: pageinit');
+    getEmployeeList();
+});
+$('#employeeListPage').bind('pagebeforeload', function(event) {
+    alert('bind: pagebeforeload');
+    //getEmployeeList();
+});
+
+$('#employeeListPage').bind('pageload', function(event) {
+    alert('bind: pageload');
+    //getEmployeeList();
+});
+
+$('#employeeListPage').bind('pagebeforeshow', function(event) {
+    alert('bind: pagebeforeshow');
+    getEmployeeList();
+});
+
+$('#employeeListPage').bind('pageshow', function(event) {
+    alert('bind: pageshow');
+    //getEmployeeList();
+});
+$('#employeeListPage').bind('pagebeforechange', function(event) {
+    alert('bind: pagebeforeshow');
+    //getEmployeeList();
+});
+
+$('#employeeListPage').bind('pagechange', function(event) {
+    alert('bind: pageshow');
+    //getEmployeeList();
 });
 
 function getEmployeeList() {
+   // alert('running list()')        ;
+
 	$.getJSON('getemployees.html', function(data) {
             /*$.getJSON(serviceURL + 'getemployees.html', function(data) {*/
 		$('#employeeList li').remove();
