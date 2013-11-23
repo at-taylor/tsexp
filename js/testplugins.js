@@ -142,9 +142,23 @@ var app = {
 
         function onSuccess(imageData) {
             console.log('success');
+
+            document.getElementsById('testMsg').value = "in onSuccess";
+
             //Anna
-            var image = document.getElementById('myImage');
-            image.src = "data:image/jpeg;base64," + imageData;
+            //var image = document.getElementById('myImage');
+            //image.src = "data:image/jpeg;base64," + imageData;
+
+            var smallImage = document.getElementById('smallImage');
+
+            // Unhide image elements
+            //
+            smallImage.style.display = 'block';
+
+            // Show the captured photo
+            // The inline CSS rules are used to resize the image
+            //
+            smallImage.src = "data:image/jpeg;base64," + imageData;
 
 
         }
