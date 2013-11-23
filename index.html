@@ -8,51 +8,46 @@
 
     <script src="phonegap.js"></script>
     <script src="cordova.js" ></script>
-    <script src="Camera.js"></script>
+    <script src="camera.js"></script>
 
 </head>
 
 <body>
 
 <div id="login" data-role="page" >
+    <div data-theme="c" data-role="header"  >
+        <h1><img src="img/splash/logo_big.png"></h1>
 
+
+    </div>
 
 
     <div data-role="content">
-        <div id="logo"><img src="img/splash/logo_big.png"></div>
+
         <form action="form.php" method="post"> ...
         <label for="user">Username</label>
         <input type="text" name="name" id="user" value=""  />
         <label for="pword">Password</label>
         <input type="text" name="name" id="pword" value=""  />
         </form>
-        <a href="#MainNavPage" data-role="button">Submit</a>
+        <a href="tsnav.html" data-role="button">Submit</a>
     </div>
 
 </div>
 
-<div id="MainNavPage" data-role="page">
+<div id="MainNavPage" data-role="page" data-add-back-btn="true">
+
+    <div data-theme="c" data-role="header"  >
+        <h1><img src="img/splash/logo_big.png"></h1>
+        <a href="#" ><img src="img/navbut/user.png"></a>
+
+
+    </div>
 
     <div data-role="content">
-        <div id="logobuttons">
-            <div style="float: left"><img src="img/splash/logo_big.png"></div>
-            <div style="float: right"><a href="#" ><img src="img/navbut/user.png"></a><br/><a href="#" ><img src="img/navbut/home.png"></a></div><br/>
-        </div><div style="clear: right"><div style="clear: left"></div></div>
+
         <div class="ui-grid-d">
             <!-- first row -->
-            <div class="ui-block-a">
-                <a href="#" ><img src="img/navbut/tellStory.png"></a>
-            </div>
-            <div class="ui-block-b">
-                <a href="testcamera.html" ><img src="img/navbut/addMedia.png"></a>
-            </div>
-            <div class="ui-block-c">
-                <a href="#" ><img src="img/navbut/tellStory.png"></a>
-            </div>
-            <div class="ui-block-d">
-                <a href="#" ><img src="img/navbut/tellStory.png"></a>
-            </div>
-            <!-- second row -->
             <div class="ui-block-a">
                 <a href="#" ><img src="img/navbut/tellStory.png"></a>
             </div>
@@ -60,14 +55,28 @@
                 <a href="testplugins.html" ><img src="img/navbut/addMedia.png"></a>
             </div>
             <div class="ui-block-c">
-                <a href="#" ><img src="img/navbut/tellStory.png"></a>
+                <a href="#" ><img src="img/navbut/addMedia.png"></a>
             </div>
             <div class="ui-block-d">
-                <a href="#" ><img src="img/navbut/tellStory.png"></a>
+                <a href="storylist.html" ><img src="img/navbut/storyLibrary.png"></a>
+            </div>
+            <!-- second row -->
+            <div class="ui-block-a">
+                <a href="#" ><img src="img/navbut/myLifeStory.png"></a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#" ><img src="img/navbut/requestStory.png"></a>
+            </div>
+            <div class="ui-block-c">
+                <a href="#" ><img src="img/navbut/inviteFriends.png"></a>
+            </div>
+            <div class="ui-block-d">
+                <a href="#" ><img src="img/navbut/myAccount.png"></a>
             </div>
         </div>
     </div>
 </div>
+
 
 <script src="js/jquery.js"></script>
 <script src="js/jquery.mobile-1.0rc1.min.js"></script>
