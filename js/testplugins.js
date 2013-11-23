@@ -160,6 +160,14 @@ var app = {
             //
             smallImage.src = "data:image/jpeg;base64," + imageData;
 
+            // Get image handle
+            //
+            var largeImage = document.getElementById('largeImage');
+
+            // Unhide image elements
+            //
+            largeImage.style.display = 'block';
+            largeImage.src = "data:image/jpeg;base64," + imageData;
 
         }
 
