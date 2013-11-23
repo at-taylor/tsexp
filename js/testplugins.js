@@ -141,9 +141,9 @@ var app = {
     camera: function() {
 
         function onSuccess(imageData) {
-            console.log('success');
+            //console.log('success');
 
-            document.getElementsById('testMsg').value = "in onSuccess";
+            document.getElementById('testMsg').value = "in onSuccess";
 
             //Anna
             //var image = document.getElementById('myImage');
