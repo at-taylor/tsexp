@@ -1,4 +1,4 @@
-var serviceURL = "http://localhost/emp/services/";
+var serviceURL = "http://216.74.49.91:8080/tssvc/resourcesS/stories/";
 
 var employees;
 var stories;
@@ -52,17 +52,49 @@ $('#employeeListPage').bind('pagechange', function(event) {
 
 function getEmployeeList() {
    // alert('running list()')        ;
-        $.getJSON('getstorylist.html', function(data) {
-        /*$.getJSON(serviceURL + 'getemployees.html', function(data) {*/
+
+
+//       // $.getJSON('getstorylist.html', function(data) {
+//        $.getJSON(serviceURL, function(data) {
+//        $('#employeeList li').remove();
+//        stories = data.storyModelList;
+//        $.each(stories, function(index, story) {
+//            $('#employeeList').append('<li>Id ' + story.id    +   ' </li>');
+////            $('#employeeList').append('<li><a href="storydetails.html?id=' + story.id + '">' +
+////                '<h4>' + story.title + '</h4>' +
+////                '<p>' + story.storyDateAgeHr  + story.categoryListHr + '</p>' +'<p>' + story.status + '</p>' +
+////                '</a><a href="delete"></a> </li>');
+//        });
+//        $('#employeeList').listview('refresh');
+//    });
+
+  /*  // local version
+    $.getJSON('getstorylist.html', function(data) {
+        *//*$.getJSON(serviceURL + 'getemployees.html', function(data) {*//*
         $('#employeeList li').remove();
         stories = data.items;
         $.each(stories, function(index, story) {
             $('#employeeList').append('<li><a href="storydetails.html?id=' + story.id + '">' +
                 '<h4>' + story.title + '</h4>' +
-                '<p>' + story.storydate + '</p>' +
-                '<p>' + story.categories + '</p>' +
-                '<p>' + story.status + '</p>' +
-                '</a></li>');
+                '<p>' + story.storydate  + story.categories + '</p>' +'<p>' + story.status + '</p>' +
+                '</a><a href="delete"></a> </li>');
+        });
+        $('#employeeList').listview('refresh');
+    });*/
+
+    // local version
+    $.getJSON('getstorylist.html', function(data) {
+        /*$.getJSON(serviceURL + 'getemployees.html', function(data) {*/
+        $('#employeeList li').remove();
+        stories = data.items;
+        $.each(stories, function(index, story) {
+            $('#employeeList').append('<li><a href="storydetails.html?id=' + story.id + '">' +
+                '<div class="ui-grid-c" style="padding-left: 10px">' +
+                '<div class="ui-block-a">' + '<h3  style="white-space: normal;">' + story.title + '</h3>' + '</div>' +
+                '<div class="ui-block-b">' + '<h6 style="padding-left: 60px;">' + story.storydate + '</h6>' +'</div>' +
+                '<div class="ui-block-c">' + '<h6 style="padding-left: 60px;">' + story.categories + '</h6>' + '</div>' +
+                '<div class="ui-block-d">' + '<h6 style="padding-left: 60px;">' + story.status + '</h6>' + '</div>' +
+            '</div>' + '</a><a href="delete"></a></li>');
         });
         $('#employeeList').listview('refresh');
     });

@@ -18,14 +18,29 @@
 
 <div id="employeeListPage" data-role="page" data-add-back-btn="true" data-back-btn-text="back" data-back-btn-theme="e">
 
-    <div data-theme="c" data-role="header"  >
+    <div data-theme="c" data-role="header" data-position="fixed"  >
         <h1><img src="img/splash/logo_big.png"></h1>
         <!--<a href="#" ><img src="img/navbut/user.png"></a><br/><a href="#" ></a>-->
 
     </div>
 
-    <div data-role="content">
-        <ul id="employeeList" data-role="listview" data-filter="true"></ul>
+     <div data-role="content">
+         <ul data-role="listview" data-inset="true" data-filter="false" data-position="fixed">
+             <li>
+                <div class="ui-grid-c" style="padding-left: 20px; font-size: larger;">
+                    <div class="ui-block-a" style="">Title</div>
+                    <div class="ui-block-b">Date</div>
+                    <div class="ui-block-c">Categories</div>
+                    <div class="ui-block-d">Status</div>
+                </div>
+             </li>
+
+         </ul>
+
+     <!--</div>-->
+
+    <!--<div data-role="content">-->
+        <ul id="employeeList" data-role="listview" data-inset="true" data-split-icon="delete" data-filter="true"></ul>
     </div>
 
 </div>
