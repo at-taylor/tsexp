@@ -18,6 +18,9 @@
         Anna Taylor
     </author>
 
+    <!-- allow reaching out to REST services in any domain -->
+    <access origin="*" />
+
     <!-- core plugins -->
     <gap:plugin name="org.apache.cordova.battery-status" />
     <gap:plugin name="org.apache.cordova.camera" />
