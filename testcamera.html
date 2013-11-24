@@ -94,11 +94,25 @@
     </script>
 </head>
 <body>
+
+<div id="testcamerapage" data-role="page" data-add-back-btn="true" data-back-btn-text="back" data-back-btn-theme="e">
+
+    <div data-theme="c" data-role="header" data-position="fixed"  >
+        <h1><img src="img/splash/logo_big.png"></h1>
+        <a href="#" data-icon="home" class="ui-btn-right">Home</a>
+
+    </div>
+
+    <div data-role="content">
+
 <button onclick="capturePhoto();">Capture Photo</button> <br>
 <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
 <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
 <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
 <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
 <img style="display:none;" id="largeImage" src="" />
+
+        </div>
+    </div>
 </body>
 </html>
