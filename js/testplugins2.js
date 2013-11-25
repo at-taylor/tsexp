@@ -40,103 +40,104 @@ var app = {
         document.getElementById('camera').addEventListener('click', this.camera, false);
         document.getElementById('video').addEventListener('click', this.captureVideo, false);
     },
-    // deviceready Event Handler
-    //
-    // The scope of `this` is the event. In order to call the `receivedEvent`
-    // function, we must explicity call `app.receivedEvent(...);`
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-        console.log('CORDOVA VERSION: ' + window.device.cordova);
-        window.addEventListener('batterystatus', app.onBatteryStatus, false);
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
-    },
-    onBatteryStatus: function(info) {
-        console.log("Level: " + info.level + " isPlugged: " + info.isPlugged);
-    },
-    scan: function() {
-        console.log('scanning');
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-
-        scanner.scan( function (result) {
-
-            alert("We got a barcode\n" +
-                "Result: " + result.text + "\n" +
-                "Format: " + result.format + "\n" +
-                "Cancelled: " + result.cancelled);
-
-            console.log("Scanner result: \n" +
-                "text: " + result.text + "\n" +
-                "format: " + result.format + "\n" +
-                "cancelled: " + result.cancelled + "\n");
-            document.getElementById("info").innerHTML = result.text;
-            console.log(result);
-            /*
-             if (args.format == "QR_CODE") {
-             window.plugins.childBrowser.showWebPage(args.text, { showLocationBar: false });
-             }
-             */
-
-        }, function (error) {
-            console.log("Scanning failed: ", error);
-        } );
-    },
-
-    encode: function() {
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-
-        scanner.encode(scanner.Encode.TEXT_TYPE, "http://www.nhl.com", function(success) {
-                alert("encode success: " + success);
-            }, function(fail) {
-                alert("encoding failed: " + fail);
-            }
-        );
-
-    },
-
-    whitelist: function() {
-
-        app.xhr("https://tv.eurosport.com/", function(xhr) {
-            console.log("eurosport is invalid " + xhr.status);
-            console.log("eurosport: " + xhr.responseText.substring(0, 100));
-        });
-        /*
-         app.xhr("http://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js", function(xhr) {
-         console.log("googleapis: should succeed: " + xhr.status);
-         console.log("googleapis: " + xhr.responseText.substring(0, 100));
-         });
-
-         app.xhr("http://code.jquery.com/jquery-1.10.2.min.js", function(xhr) {
-         console.log("jquery: should fail: " + xhr.status);
-         console.log("jquery: " + xhr.responseText.substring(0, 100));
-         });
-
-         app.xhr("http://phonegap.com", function(xhr) {
-         console.log("phonegap: should fail: " + xhr.status);
-         console.log("phonegap: " + xhr.responseText.substring(0, 100));
-         });
-
-         app.xhr("http://googleapis.com", function(xhr) {
-         console.log("googleapis.com: should succeed: " + xhr.status);
-         console.log("googleapis.com: " + xhr.responseText.substring(0, 100));
-         });
-
-         app.xhr("http://jquery.com", function(xhr) {
-         console.log("jquery.com: should succeed: " + xhr.status);
-         console.log("jquery.com: " + xhr.responseText.substring(0, 100));
-         });
-         */
-
-    },
+//    // deviceready Event Handler
+//    //
+//    // The scope of `this` is the event. In order to call the `receivedEvent`
+//    // function, we must explicity call `app.receivedEvent(...);`
+//    onDeviceReady: function() {
+//        app.receivedEvent('deviceready');
+//        console.log('CORDOVA VERSION: ' + window.device.cordova);
+//        window.addEventListener('batterystatus', app.onBatteryStatus, false);
+//    },
+//    // Update DOM on a Received Event
+//    receivedEvent: function(id) {
+//        var parentElement = document.getElementById(id);
+//        var listeningElement = parentElement.querySelector('.listening');
+//        var receivedElement = parentElement.querySelector('.received');
+//
+//        listeningElement.setAttribute('style', 'display:none;');
+//        receivedElement.setAttribute('style', 'display:block;');
+//
+//        console.log('Received Event: ' + id);
+//    },
+//    onBatteryStatus: function(info) {
+//        console.log("Level: " + info.level + " isPlugged: " + info.isPlugged);
+//    },
+//    scan: function() {
+//        console.log('scanning');
+//        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+//
+//        scanner.scan( function (result) {
+//
+//            alert("We got a barcode\n" +
+//                "Result: " + result.text + "\n" +
+//                "Format: " + result.format + "\n" +
+//                "Cancelled: " + result.cancelled);
+//
+//            console.log("Scanner result: \n" +
+//                "text: " + result.text + "\n" +
+//                "format: " + result.format + "\n" +
+//                "cancelled: " + result.cancelled + "\n");
+//            document.getElementById("info").innerHTML = result.text;
+//            console.log(result);
+//            /*
+//             if (args.format == "QR_CODE") {
+//             window.plugins.childBrowser.showWebPage(args.text, { showLocationBar: false });
+//             }
+//             */
+//
+//        }, function (error) {
+//            console.log("Scanning failed: ", error);
+//        } );
+//    },
+//
+//    encode: function() {
+//        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+//
+//        scanner.encode(scanner.Encode.TEXT_TYPE, "http://www.nhl.com", function(success) {
+//                alert("encode success: " + success);
+//            }, function(fail) {
+//                alert("encoding failed: " + fail);
+//            }
+//        );
+//
+//    },
+//
+//    whitelist: function() {
+//
+//        app.xhr("https://tv.eurosport.com/", function(xhr) {
+//            console.log("eurosport is invalid " + xhr.status);
+//            console.log("eurosport: " + xhr.responseText.substring(0, 100));
+//        });
+//        /*
+//         app.xhr("http://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js", function(xhr) {
+//         console.log("googleapis: should succeed: " + xhr.status);
+//         console.log("googleapis: " + xhr.responseText.substring(0, 100));
+//         });
+//
+//         app.xhr("http://code.jquery.com/jquery-1.10.2.min.js", function(xhr) {
+//         console.log("jquery: should fail: " + xhr.status);
+//         console.log("jquery: " + xhr.responseText.substring(0, 100));
+//         });
+//
+//         app.xhr("http://phonegap.com", function(xhr) {
+//         console.log("phonegap: should fail: " + xhr.status);
+//         console.log("phonegap: " + xhr.responseText.substring(0, 100));
+//         });
+//
+//         app.xhr("http://googleapis.com", function(xhr) {
+//         console.log("googleapis.com: should succeed: " + xhr.status);
+//         console.log("googleapis.com: " + xhr.responseText.substring(0, 100));
+//         });
+//
+//         app.xhr("http://jquery.com", function(xhr) {
+//         console.log("jquery.com: should succeed: " + xhr.status);
+//         console.log("jquery.com: " + xhr.responseText.substring(0, 100));
+//         });
+//         */
+//
+//    },
 
     camera: function() {
 
@@ -175,7 +176,7 @@ var app = {
             console.log('failed');
         }
 
-        navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+        navigator.camera.getPicture(onSuccess, onFail, { quality: 50, saveToPhotoAlbum: true,
             destinationType: Camera.DestinationType.DATA_URL
         });
 
