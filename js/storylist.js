@@ -15,12 +15,12 @@ $('#employeeListPage').bind('pagecreate', function(event) {
 });
 
 $('#employeeListPage').bind('pageinit', function(event) {
-    //alert('bind: pageinit');
+    alert('bind: pageinit');
     getEmployeeList();
 });
 
 $('#employeeListPage').live('pageinit', function(event) {
-    //alert('live: pageinit');
+    alert('live: pageinit');
     getEmployeeList();
 });
 $('#employeeListPage').bind('pagebeforeload', function(event) {
@@ -58,7 +58,7 @@ function callbackStoryFunc(data) {
 }
 
 function getEmployeeList() {
-    alert('running list()5')        ;
+    alert('running list()7')        ;
 
     //
     // this works as it is on localhost.
@@ -83,8 +83,8 @@ function getEmployeeList() {
     //  this purely local  updated to use proper column names
     //
     // local version   - use this one
-    $.getJSON('getstorylist2.html', function(data) {
-        /*$.getJSON(serviceURL + 'getemployees.html', function(data) {*/
+    //$.getJSON('getstorylist2.html', function(data) {
+        $.getJSON(serviceURL, function(data) {
         $('#employeeList li').remove();
         stories = data.storyModelList;
         $.each(stories, function(index, story) {
