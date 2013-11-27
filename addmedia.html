@@ -11,20 +11,21 @@
 <body>
 <div id="mediaPage" data-role="page" data-add-back-btn="true" data-back-btn-text="back" data-back-btn-theme="c">
 
-    <div data-theme="c" data-role="header" data-position="fixed"  >
+    <div data-theme="c" data-role="header"  >
         <h1><img src="img/splash/logo_big.png"></h1>
-        <a href="tsnav.html" data-icon="home" class="ui-btn-right">Home</a>
-    </div>
+        <div data-role="controlgroup" class="ui-btn-right" data-type="vertical"> <a href="tsnav.html" data-role="button"><img src="img/navbut/home.png"></a>
+            <a href="index.html"data-role="button"><img src="img/navbut/user.png"></a>
+        </div></div>
 
     <div data-role="content"><p>I am the media content2.</p>
         <!--<ul id="employeeList" data-role="listview" data-inset="true" data-split-icon="delete" data-filter="true"></ul>-->
-        <a data-role="button" href="#" data-shadow="false" data-theme="none">
+        <a data-role="button" href="#" data-inline="true" data-theme="none">
             <img id="camera" src="img/navbut/photo.png" border="0"/>
         </a>
-        <a data-role="button" href="#" data-shadow="false" data-theme="none">
+        <a data-role="button" href="#" data-inline="true" data-theme="none">
             <img id="video" src="img/navbut/video.png" border="0"/>
         </a>
-        <a data-role="button" href="#" data-shadow="false" data-theme="none">
+        <a data-role="button" href="#" data-inline="true" data-theme="none">
             <img src="img/navbut/audio.png" border="0"/>
         </a>
 
