@@ -23,6 +23,44 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+$(document).bind( "pageinit", function( event ){
+         alert('document bind');
+});
+
+$('#appPage').bind('pagebeforecreate', function(event) {
+    alert('bind: pagebeforecreate');
+    //getapp();
+});
+$('#appPage').bind('pagecreate', function(event) {
+    alert('bind: pagecreate');
+    //getapp();
+});
+
+$('#appPage').bind('pageinit', function(event) {
+    alert('bind: pageinit');
+    //app.initialize();
+
+});
+
+$('#appPage').live('pageinit', function(event) {
+    alert('live: pageinit');
+   //app.initialize()
+});
+$('#appPage').bind('pagebeforeload', function(event) {
+    alert('bind: pagebeforeload');
+    //getapp();
+});
+
+$('#appPage').bind('pageload', function(event) {
+    alert('bind: pageload');
+    //getapp();
+});
+
+$('#appPage').bind('pagebeforeshow', function(event) {
+    alert('bind: pagebeforeshow');
+    //getapp();
+});
 $('#appPage').bind('pageinit', function(event) {
     alert('bind: pageinit');
     //app.initialize();
@@ -31,6 +69,7 @@ $('#appPage').bind('pageinit', function(event) {
 $('#appPage').live('pageinit', function(event) {
     alert('live: pageinit');
     //app.initialize();
+} )   ;
 
 var app = {
     // Application Constructor
