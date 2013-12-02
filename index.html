@@ -24,13 +24,15 @@
 
     <div data-role="content">
 
-        <form action="form.php" method="post">
+        <!--<form data-ajax="false" action="http://localhost:8080/tssvc/resourcesS/login" type="POST">-->
         <label for="user">Username</label>
-        <input type="text" name="name" id="user" value=""  />
-        <label for="pword">Password</label>
-        <input type="password" name="name" id="pword" value=""  />
-        </form>
-        <a href="tsnav.html" data-role="button">Submit</a>
+        <input type="text" name="username" id="user" value=""  />
+        <label for="pass">Password</label>
+        <input type="password" name="passname" id="pass" value=""  />
+
+        <button id="login_submit" type="submit" data-theme="a">Submit</button>
+       <!--</form>-->
+        <!--<a href="tsnav.html" data-role="button">Submit</a>-->
     </div>
 
     <!--<div data-role="content">-->
@@ -58,6 +60,53 @@
 <script src="js/storylist.js"></script>
 <script src="js/template.js"></script>
 <script src="js/addmedia.js"></script>
+
+<script>
+
+$(document).bind('pageinit', function(event) {
+    alert('bind in index.html: pageinit');
+
+    $("#login_submit").click(function(event) {
+        alert('you clicked the login button');
+        //$.mobile.changePage("tsnav.html");
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/tssvc/resourcesS/login",
+            data:'user='+ $('#user').val() +'&pass='+ $('#pass').val(),
+            cache: false,
+            success: function(data) {
+                //validate the response here, set variables... whatever needed
+                //and if credentials are valid, forward to the next page
+                //alert ("logon valid");
+                //alert("data is" + data)
+                $.mobile.changePage("tsnav.html");
+                //or show an error message
+            },
+            error: function() { // server couldn't be reached or other error
+                alert("Please try again");
+            }
+        })
+    })
+})
+
+//        event.preventDefault();
+//        var credentials = { type: 'EMAIL', username: $('#user').val(), password: $('#pass').val() };
+//        $.ajax({
+//            type: "PUT",
+//            url: "api/auth",
+//            cache: false,
+//            data: JSON.stringify(credentials),
+//            contentType: "application/json; charset=utf-8",
+//            success: function(data) {
+//                //validate the response here, set variables... whatever needed
+//                //and if credentials are valid, forward to the next page
+//                $.mobile.changePage($('#main_menu'));
+//                //or show an error message
+//            },
+//            error: function() { // server couldn't be reached or other error }
+//            });
+
+</script>
 
 <!--<script src="js/employeedetails.js"></script>-->
 <!--<script src="js/reportlist.js"></script>-->
