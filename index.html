@@ -71,7 +71,7 @@ $(document).bind('pageinit', function(event) {
         //$.mobile.changePage("tsnav.html");
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/tssvc/resourcesS/login",
+            url: "http://216.74.49.91:8080/tssvc/resourcesS/login",
             data:'user='+ $('#user').val() +'&pass='+ $('#pass').val(),
             cache: false,
             success: function(data) {

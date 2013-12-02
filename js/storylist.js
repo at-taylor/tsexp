@@ -1,5 +1,5 @@
-//var serviceURL = "http://216.74.49.91:8080/tssvc/resourcesS/stories/";
-var serviceURL = "http://localhost:8080/tssvc/resourcesS/stories";
+var serviceURL = "http://216.74.49.91:8080/tssvc/resourcesS/stories/";
+//var serviceURL = "http://localhost:8080/tssvc/resourcesS/stories";
 //var serviceURL = "http://localhost:8080/tssvc/getstorylist2.html";
 
 var employees;
