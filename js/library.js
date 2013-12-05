@@ -5,8 +5,8 @@
  * Time: 5:56 PM
  * To change this template use File | Settings | File Templates.
  */
-//var serviceURL = "http://216.74.49.91:8080/tssvc/resourcesS/stories/";
-var serviceURL = "http://localhost:8080/tssvc/resourcesS/media";
+var serviceURL = "http://216.74.49.91:8080/tssvc/resourcesS/media/";
+//var serviceURL = "http://localhost:8080/tssvc/resourcesS/media";
 //var serviceURL = "http://localhost:8080/tssvc/getstorylist2.html";
 
 var employees;
