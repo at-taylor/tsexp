@@ -35,31 +35,63 @@
         <!--<a href="tsnav.html" data-role="button">Submit</a>-->
     </div>
 
-    <!--<div data-role="content">-->
-        <!--<form id="check-user" class="ui-body ui-body-a ui-corner-all" data-ajax="false">-->
-            <!--<fieldset>-->
-                <!--<div data-role="fieldcontain">-->
-                    <!--<label for="username">Enter your username:</label>-->
-                    <!--<input type="text" value="" name="username" id="username"/>-->
-                <!--</div>-->
-                <!--<div data-role="fieldcontain">-->
-                    <!--<label for="password">Enter your password:</label>-->
-                    <!--<input type="password" value="" name="password" id="password"/>-->
-                <!--</div>-->
-                <!--<input type="button" data-theme="b" name="submit" id="submit" value="Submit">-->
-            <!--</fieldset>-->
-        <!--</form>-->
-    <!--</div>-->
 
+
+</div>
+
+<div id="MainNavPage" data-role="page" >
+
+    <div data-theme="c" data-role="header"  >
+        <h1><img src="img/splash/logo_big.png"></h1>
+        <!--<div data-role="controlgroup" class="ui-btn-right" data-type="vertical"> <a href="#" data-role="button"><img src="img/navbut/home.png"></a>-->
+            <!--<a href="#"data-role="button"><img src="img/navbut/user.png"></a>-->
+        <!--</div>-->
+
+
+
+    </div>
+
+    <div data-role="content">
+
+        <div class="ui-grid-c" style="padding-left: 75px">
+            <!-- first row -->
+            <div class="ui-block-a" style="width: 210px;" >
+                <a href="#" ><img src="img/navbut/tellStory.png"></a>
+            </div>
+            <div class="ui-block-b" style="width: 210px;">
+                <a href="addmedia.html" ><img src="img/navbut/addMedia.png"></a>
+            </div>
+            <div class="ui-block-c" style="width: 210px;">
+                <a href="media-library.html" ><img src="img/navbut/mediaLIbrary.png"></a>
+            </div>
+            <div class="ui-block-d" style="width: 210px;">
+                <a href="story-directory.html" ><img src="img/navbut/storyLibrary.png"></a>
+            </div>
+            <!-- second row -->
+            <div class="ui-block-a" style="width: 210px;">
+                <a href="#" ><img src="img/navbut/myLifeStory.png"></a>
+            </div>
+            <div class="ui-block-b" style="width: 210px;">
+                <a href="#" ><img src="img/navbut/requestStory.png"></a>
+            </div>
+            <div class="ui-block-c" style="width: 210px;">
+                <a href="#" ><img src="img/navbut/inviteFriends.png"></a>
+            </div>
+            <div class="ui-block-d" style="width: 210px;">
+                <a href="#" ><img src="img/navbut/myAccount.png"></a>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 
 <script src="js/jquery.js"></script>
 <script src="js/jquery.mobile-1.3.2.min.js"></script>
-<script src="js/storylist.js"></script>
+<!--<script src="js/storylist.js"></script>-->
 <script src="js/template.js"></script>
 <script src="js/addmedia.js"></script>
+<!--<script src="js/library.js"></script>-->
 
 <script>
 
@@ -71,7 +103,8 @@ $(document).bind('pageinit', function(event) {
         //$.mobile.changePage("tsnav.html");
         $.ajax({
             type: "POST",
-            url: "http://216.74.49.91:8080/tssvc/resourcesS/login",
+//            url: "http://216.74.49.91:8080/tssvc/resourcesS/login",
+            url: "http://localhost:8080/tssvc/resourcesS/login",
             data:'user='+ $('#user').val() +'&pass='+ $('#pass').val(),
             cache: false,
             success: function(data) {
@@ -79,7 +112,7 @@ $(document).bind('pageinit', function(event) {
                 //and if credentials are valid, forward to the next page
                 //alert ("logon valid");
                 //alert("data is" + data)
-                $.mobile.changePage("tsnav.html");
+                $.mobile.changePage('#MainNavPage');
                 //or show an error message
             },
             error: function() { // server couldn't be reached or other error
