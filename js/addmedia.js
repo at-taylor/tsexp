@@ -80,7 +80,7 @@ var app = {
 // document.getElementById('whitelist').addEventListener('click', this.whitelist, false);
         document.getElementById('camera').addEventListener('click', this.camera, false);
         document.getElementById('video').addEventListener('click', this.captureVideo, false);
-        document.getElementById('getphoto').addEventListener('click', this.captureVideo, false);
+        document.getElementById('getphoto').addEventListener('click', this.getphoto, false);
         alert('after binding events');
     },
 
@@ -248,7 +248,17 @@ var app = {
                 limit: 1,
                 duration: 12
             });
-    }
+    },
+
+    // A button will call this function
+    //
+    getphoto: function() {
+    // Retrieve image file location from specified source
+    navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+        destinationType: destinationType.FILE_URI,
+        sourceType: source });
+}
+
 
 
 
