@@ -20,6 +20,7 @@
 
     <!-- allow reaching out to REST services in any domain -->
     <access origin="http://216.74.49.91:8080" subdomains="true" />
+    <access origin="http://dev-treasuredstories.com" subdomains="true" />
 
 
     <!-- core plugins -->
