@@ -65,7 +65,7 @@ function callbackStoryFunc(data) {
 }
 
 function getMediaList() {
-    alert('running list()7')        ;
+    alert('running list()7') ;
 
 
     $.getJSON(serviceURL, function(data) {
@@ -76,7 +76,7 @@ function getMediaList() {
 
                 '<div class="ui-grid-c" style="padding-left: 10px">' +
                 '<div class="ui-block-a">' + '<img height="80" width="80" src= '+ item.url +'>' + '</div>' +
-                '<div class="ui-block-b">' + '<h3  style="white-space: normal;">' + item.title + '</h3>' +'</div>' +
+                '<div class="ui-block-b">' + '<h3 style="white-space: normal;">' + item.title + '</h3>' +'</div>' +
                 '<div class="ui-block-c">' + '<h6 style="padding-left: 60px;">' + item.createdHr + '</h6>' + '</div>' +
                 '<div class="ui-block-d">' + '<h6 style="padding-left: 60px;">' + item.fileType + '</h6>' + '</div>' +
                 '</div>' + '</a><a href="delete"></a></li>');
