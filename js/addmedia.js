@@ -6,24 +6,24 @@
  * To change this template use File | Settings | File Templates.
  */
 
-//var serviceURL = "http://216.74.49.91:8080/tssvc/resourcesS/stories/";
-var serviceURL = "http://localhost:8080/tssvc/resourcesS/stories";
+var serviceURL = "http://216.74.49.91:8080/tssvc/resourcesS/stories/";
+//var serviceURL = "http://localhost:8080/tssvc/resourcesS/stories";
 //var serviceURL = "http://localhost:8080/tssvc/getstorylist2.html";
 
 //var employees;
 //var stories;
 
 $('#mediaPage').bind('pagebeforecreate', function(event) {
-    alert('bind: pagebeforecreate');
+    //alert('bind: pagebeforecreate');
     //getEmployeeList();
 });
 $('#mediaPage').bind('pagecreate', function(event) {
-    alert('bind: pagecreate');
+   // alert('bind: pagecreate');
     //getEmployeeList();
 });
 
 $('#mediaPage').bind('pageinit', function(event) {
-    alert('bind: pageinit');
+    //alert('bind: pageinit');
     //getEmployeeList();
 });
 
@@ -34,31 +34,31 @@ $('#mediaPage').live('pageinit', function(event) {
     //getEmployeeList();
 });
 $('#mediaPage').bind('pagebeforeload', function(event) {
-    alert('bind: pagebeforeload');
+   // alert('bind: pagebeforeload');
     //getEmployeeList();
 });
 
 $('#mediaPage').bind('pageload', function(event) {
-    alert('bind: pageload');
+   // alert('bind: pageload');
     //getEmployeeList();
 });
 
 $('#mediaPage').bind('pagebeforeshow', function(event) {
-    alert('bind: pagebeforeshow');
+   // alert('bind: pagebeforeshow');
     //getEmployeeList();
 });
 
 $('#mediaPage').bind('pageshow', function(event) {
-    alert('bind: pageshow');
+    //alert('bind: pageshow');
     //getEmployeeList();
 });
 $('#mediaPage').bind('pagebeforechange', function(event) {
-    alert('bind: pagebeforeshow');
+    //alert('bind: pagebeforeshow');
     //getEmployeeList();
 });
 
 $('#mediaPage').bind('pagechange', function(event) {
-    alert('bind: pageshow');
+   // alert('bind: pageshow');
     //getEmployeeList();
 });
 
@@ -224,6 +224,51 @@ var app = {
         });
 
     },
+
+    getphoto: function() {
+
+        function onSuccess(imageData) {
+            //console.log('success');
+
+            document.getElementById('testMsg').value = "in onSuccess";
+
+            //Anna
+            //var image = document.getElementById('myImage');
+            //image.src = "data:image/jpeg;base64," + imageData;
+
+            var smallImage = document.getElementById('smallImage');
+
+            // Unhide image elements
+            //
+            smallImage.style.display = 'block';
+
+            // Show the captured photo
+            // The inline CSS rules are used to resize the image
+            //
+            smallImage.src = "data:image/jpeg;base64," + imageData;
+
+            // Get image handle
+            //
+            var largeImage = document.getElementById('largeImage');
+
+            // Unhide image elements
+            //
+            largeImage.style.display = 'block';
+            largeImage.src = "data:image/jpeg;base64," + imageData;
+
+        }
+
+        function onFail(message) {
+            console.log('failed');
+        }
+
+        navigator.camera.getPicture(onSuccess, onFail, { quality: 50, saveToPhotoAlbum: true,
+            destinationType: Camera.DestinationType.DATA_URL,sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            mediaType: Camera.MediaType.ALLMEDIA
+        });
+
+    },
+
 
     xhr: function(url, cb) {
         var xhr1 = new XMLHttpRequest();
