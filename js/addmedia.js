@@ -218,7 +218,7 @@ var app = {
         function onFail(message) {
             console.log('failed');
         }
-        var cameraPopoverOptions = new CameraPopoverOptions(300,300,100,100,Camera.PopoverArrowDirection.ARROW_ANY) ;
+        var cameraPopoverOptions = new CameraPopoverOptions(150,150,50,50,Camera.PopoverArrowDirection.ARROW_ANY) ;
         var cameraHandle = navigator.camera.getPicture(onSuccess, onFail, { quality: 50, saveToPhotoAlbum: true,
             destinationType: Camera.DestinationType.DATA_URL
         });
