@@ -218,11 +218,11 @@ var app = {
         function onFail(message) {
             console.log('failed');
         }
-        var cameraPopoverOptions = new CameraPopoverOptions(150,150,50,50,Camera.PopoverArrowDirection.ARROW_ANY) ;
+        var cameraPopoverOptions = new CameraPopoverOptions(220, 600, 320, 480, Camera.PopoverArrowDirection.ARROW_DOWN) ;
         var cameraHandle = navigator.camera.getPicture(onSuccess, onFail, { quality: 50, saveToPhotoAlbum: true,
-            destinationType: Camera.DestinationType.DATA_URL
+            destinationType: Camera.DestinationType.DATA_URL, popoverOptions:cameraPopoverOptions
         });
-        cameraHandle.setPosition(cameraPopoverOptions);
+        //cameraHandle.setPosition(cameraPopoverOptions);
 
     },
 
