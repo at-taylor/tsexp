@@ -1,0 +1,30 @@
+
+
+
+#my-login ui-hide-label input.ui-input-text, .ui-hide-label textarea.ui-input-text, .ui-hide-label .ui-input-search, .ui-hide-label div.ui-input-text, .ui-input-search input.ui-input-text, div.ui-input-text input.ui-input-text {
+    width: 100%;
+
+}
+
+#my-login div.ui-input-text {
+    width:40%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#my-login label.ui-input-text {
+    color: #ffffff;
+    text-shadow: 0 1px 0 #333333;
+}
+
+#my-login div.ui-checkbox{
+    width:30%;
+    margin-left: auto;
+    margin-right: auto;
+    color: #ffffff;
+    text-shadow: 0 1px 0 #333333;
+}
+
+
+

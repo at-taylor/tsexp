@@ -14,8 +14,8 @@ $('#MainNavPage').live('pageinit', function(event) {
 
         $.ajax({
             type: "GET",
-            url: "http://216.74.49.91:8080/tssvc/resourcesS/logout",
- //           url: "http://localhost:8080/tssvc/resourcesS/logout",
+ //           url: "http://216.74.49.91:8080/tssvc/resourcesS/logout",
+            url: "http://localhost:8080/tssvc/resourcesS/logout",
             //data:'user='+ $('#user').val() +'&pass='+ $('#pass').val(),
             cache: false,
             success: function(data) {

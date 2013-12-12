@@ -79,7 +79,7 @@ function getMediaList() {
                 '<div class="ui-block-b">' + '<h3 style="white-space: normal;">' + item.title + '</h3>' +'</div>' +
                 '<div class="ui-block-c">' + '<h6 style="padding-left: 60px;">' + item.createdHr + '</h6>' + '</div>' +
                 '<div class="ui-block-d">' + '<h6 style="padding-left: 60px;">' + item.fileType + '</h6>' + '</div>' +
-                '</div>' + '</a><a href="delete"></a></li>');
+                '</div>' + '</a><a href="confirm.html" data-rel="dialogue"></a></li>');
         });
         $('#mediaList').listview('refresh');
     });
