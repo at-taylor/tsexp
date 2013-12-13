@@ -80,7 +80,7 @@ var app = {
 // document.getElementById('whitelist').addEventListener('click', this.whitelist, false);
         document.getElementById('camera').addEventListener('click', this.camera, false);
         document.getElementById('video').addEventListener('click', this.captureVideo, false);
-        document.getElementById('audio').addEventListener('click', this.captureAudio, false);
+        document.getElementById('audio').addEventListener('click', this.recordAudio, false);
         document.getElementById('getphoto').addEventListener('click', this.getphoto, false);
         alert('after binding events');
     },
@@ -299,7 +299,33 @@ var app = {
 
     },
 
-    captureAudio: function() {
+    // Record audio
+//
+     recordAudio: function() {
+    var src = "myrecording.wav";
+    var mediaRec = new Media(src,
+        // success callback
+        function() {
+            console.log("recordAudio():Audio Success");
+            alert('audio success');
+        },
+
+        // error callback
+        function(err) {
+            console.log("recordAudio():Audio Error: "+ err.code);
+        }
+    );
+
+    // Record audio
+    mediaRec.startRecord();
+
+    // Stop recording after 10 seconds
+    setTimeout(function() {
+        mediaRec.stopRecord();
+    }, 10000);
+}
+
+    /*captureAudio: function() {
 
         // Called when capture operation is finished
         //
@@ -351,7 +377,7 @@ var app = {
 //        }
 
     }
-
+*/
 };
 
 
