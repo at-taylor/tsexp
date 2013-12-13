@@ -308,7 +308,7 @@ var app = {
             for (i = 0, len = mediaFiles.length; i < len; i += 1) {
                 uploadFile(mediaFiles[i]);
             }
-            alert(mediaFiles[0].fullPath);
+            document.getElementById('testMsg').value = "in captureSuccess";
 
         }
 
