@@ -295,22 +295,63 @@ var app = {
                 limit: 1,
                 duration: 12
             });
+
+
     },
 
     captureAudio: function() {
+
+        // Called when capture operation is finished
+        //
+        function captureSuccess(mediaFiles) {
+            var i, len;
+            for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+                uploadFile(mediaFiles[i]);
+            }
+            alert(mediaFiles[0].fullPath);
+
+        }
+
+        // Called if something bad happens.
+        //
+        function captureError(error) {
+            var msg = 'An error occurred during capture: ' + error.code;
+            navigator.notification.alert(msg, null, 'Uh oh!');
+        }
+
         navigator.device.capture.captureAudio(function(mediaFiles)
             {
                 console.log('CALLBACK!');
                 console.log(JSON.stringify(mediaFiles));
             }, function(error)
             {
-                console.log('Video capture failed');
+                console.log('Audio capture failed');
             },
             {
                 limit: 1,
                 duration: 12
             });
+
+        // Upload files to server
+//        function uploadFile(mediaFile) {
+//            var ft = new FileTransfer(),
+//                path = mediaFile.fullPath,
+//                name = mediaFile.name;
+//
+//            ft.upload(path,
+//                "http://my.domain.com/upload.php",
+//                function(result) {
+//                    console.log('Upload success: ' + result.responseCode);
+//                    console.log(result.bytesSent + ' bytes sent');
+//                },
+//                function(error) {
+//                    console.log('Error uploading file ' + path + ': ' + error.code);
+//                },
+//                { fileName: name });
+//        }
+
     }
+
 };
 
 
