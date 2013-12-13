@@ -80,7 +80,7 @@ var app = {
 // document.getElementById('whitelist').addEventListener('click', this.whitelist, false);
         document.getElementById('camera').addEventListener('click', this.camera, false);
         document.getElementById('video').addEventListener('click', this.captureVideo, false);
-        document.getElementById('audio').addEventListener('click', this.recordAudio, false);
+        document.getElementById('audio').addEventListener('click', this.captureAudio, false);
         document.getElementById('getphoto').addEventListener('click', this.getphoto, false);
         alert('after binding events');
     },
