@@ -299,7 +299,7 @@ var app = {
 
     },
 
-    // Record audio
+ /*   // Record audio
 //
      recordAudio: function() {
     var src = "myrecording.wav";
@@ -323,18 +323,20 @@ var app = {
     setTimeout(function() {
         mediaRec.stopRecord();
     }, 10000);
-}
+}*/
 
-    /*captureAudio: function() {
+    captureAudio: function() {
 
         // Called when capture operation is finished
         //
         function captureSuccess(mediaFiles) {
+
+            alert ('audio success');
             var i, len;
             for (i = 0, len = mediaFiles.length; i < len; i += 1) {
                 uploadFile(mediaFiles[i]);
             }
-            document.getElementById('testMsg').value = "in captureSuccess";
+
 
         }
 
@@ -377,7 +379,6 @@ var app = {
 //        }
 
     }
-*/
 };
 
 
