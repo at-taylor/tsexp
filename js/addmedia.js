@@ -290,6 +290,7 @@ var app = {
             }, function(error)
             {
                 console.log('Video capture failed');
+                alert ('video failed');
             },
             {
                 limit: 1,
