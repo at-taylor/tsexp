@@ -28,9 +28,9 @@ $('#mediaPage').bind('pageinit', function(event) {
 });
 
 $('#mediaPage').live('pageinit', function(event) {
-    alert('live: pageinit');
+    //alert('live: pageinit');
     app.initialize();
-    alert('live: after app.init');
+   // alert('live: after app.init');
     //getEmployeeList();
 });
 $('#mediaPage').bind('pagebeforeload', function(event) {
@@ -73,7 +73,7 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // `load`, `deviceready`, `offline`, and `online`.
     bindEvents: function() {
-        alert('before binding events');
+       // alert('before binding events');
 // document.addEventListener('deviceready', this.onDeviceReady, false);
 // document.getElementById('scan').addEventListener('click', this.scan, false);
 // document.getElementById('encode').addEventListener('click', this.encode, false);
@@ -82,7 +82,7 @@ var app = {
         document.getElementById('video').addEventListener('click', this.captureVideo, false);
         document.getElementById('audio').addEventListener('click', this.captureAudio, false);
         document.getElementById('getphoto').addEventListener('click', this.getphoto, false);
-        alert('after binding events');
+       // alert('after binding events');
     },
 
 // // deviceready Event Handler
@@ -239,7 +239,7 @@ var app = {
             console.log('failed');
         }
         var cameraPopoverOptions = new CameraPopoverOptions(220, 600, 320, 480, Camera.PopoverArrowDirection.ARROW_DOWN) ;
-        var cameraHandle = navigator.camera.getPicture(onSuccessURI, onFail, { quality: 50, saveToPhotoAlbum: true,
+        var cameraHandle = navigator.camera.getPicture(onSuccessURI, onFail, { quality: 10, saveToPhotoAlbum: true,
             destinationType: Camera.DestinationType.FILE_URI, popoverOptions:cameraPopoverOptions
         });
         //cameraHandle.setPosition(cameraPopoverOptions);
