@@ -28,9 +28,9 @@ $('#mediaPage').bind('pageinit', function(event) {
 });
 
 $('#mediaPage').live('pageinit', function(event) {
-   // alert('live: pageinit');
+    alert('live: pageinit');
     app.initialize();
-   // alert('live: after app.init');
+    alert('live: after app.init');
     //getEmployeeList();
 });
 $('#mediaPage').bind('pagebeforeload', function(event) {
@@ -73,7 +73,7 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // `load`, `deviceready`, `offline`, and `online`.
     bindEvents: function() {
-       // alert('before binding events');
+        alert('before binding events');
 // document.addEventListener('deviceready', this.onDeviceReady, false);
 // document.getElementById('scan').addEventListener('click', this.scan, false);
 // document.getElementById('encode').addEventListener('click', this.encode, false);
@@ -82,7 +82,7 @@ var app = {
         document.getElementById('video').addEventListener('click', this.captureVideo, false);
         document.getElementById('audio').addEventListener('click', this.captureAudio, false);
         document.getElementById('getphoto').addEventListener('click', this.getphoto, false);
-       // alert('after binding events');
+        alert('after binding events');
     },
 
 // // deviceready Event Handler
@@ -184,10 +184,29 @@ var app = {
 // },
 
     camera: function() {
+        function onSuccessURI(imageURI) {
 
+            var options = new FileUploadOptions();
+            options.fileKey="file";
+            options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+            options.mimeType="image/jpeg";
+
+            var params = {};
+            params.value1 = "test";
+            params.value2 = "param";
+
+            options.params = params;
+
+            var ft = new FileTransfer();
+            ft.upload(imageURI, encodeURI("http://216.74.49.91:8080/tssvc/resourcesS/upload"), fileok, filefail, options);
+
+        }
         function onSuccess(imageData) {
             //console.log('success');
 
+
+            // AT: the old code
+            //
             document.getElementById('testMsg').value = "in onSuccess";
 
             //Anna
@@ -220,10 +239,23 @@ var app = {
             console.log('failed');
         }
         var cameraPopoverOptions = new CameraPopoverOptions(220, 600, 320, 480, Camera.PopoverArrowDirection.ARROW_DOWN) ;
-        var cameraHandle = navigator.camera.getPicture(onSuccess, onFail, { quality: 10, saveToPhotoAlbum: true,
-            destinationType: Camera.DestinationType.DATA_URL, popoverOptions:cameraPopoverOptions
+        var cameraHandle = navigator.camera.getPicture(onSuccessURI, onFail, { quality: 50, saveToPhotoAlbum: true,
+            destinationType: Camera.DestinationType.FILE_URI, popoverOptions:cameraPopoverOptions
         });
         //cameraHandle.setPosition(cameraPopoverOptions);
+        function fileok(r) {
+            document.getElementById('testMsg').value = "Success. Code = " + r.responseCode + " Resposne = " + r.response + " sent = " + r.byteSent;
+            //console.log("Response = " + r.response);
+            //console.log("Sent = " + r.bytesSent);
+        }
+
+        function filefail(error) {
+            document.getElementById('testMsg').value = "Error. Code = " + error.code + " source = " + error.source + " target = " + error.target;
+            //alert("An error has occurred: Code = " + error.code);
+            //console.log("upload error source " + error.source);
+            //console.log("upload error target " + error.target);
+        }
+
 
     },
 
