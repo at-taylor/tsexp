@@ -184,9 +184,7 @@ var app = {
 // },
 
     camera: function() {
-
-        function onSuccess(imageData) {
-            //console.log('success');
+        function onSuccessURI(imageURI) {
 
             var options = new FileUploadOptions();
             options.fileKey="file";
@@ -202,33 +200,38 @@ var app = {
             var ft = new FileTransfer();
             ft.upload(imageURI, encodeURI("http://216.74.49.91:8080/tssvc/resourcesS/upload"), fileok, filefail, options);
 
+        }
+        function onSuccess(imageData) {
+            //console.log('success');
+
+
             // AT: the old code
             //
-//            document.getElementById('testMsg').value = "in onSuccess";
-//
-//            //Anna
-//            //var image = document.getElementById('myImage');
-//            //image.src = "data:image/jpeg;base64," + imageData;
-//
-//            var smallImage = document.getElementById('smallImage');
-//
-//            // Unhide image elements
-//            //
-//            smallImage.style.display = 'block';
-//
-//            // Show the captured photo
-//            // The inline CSS rules are used to resize the image
-//            //
-//            smallImage.src = "data:image/jpeg;base64," + imageData;
-//
-//            // Get image handle
-//            //
-//            var largeImage = document.getElementById('largeImage');
-//
-//            // Unhide image elements
-//            //
-//            largeImage.style.display = 'block';
-//            largeImage.src = "data:image/jpeg;base64," + imageData;
+            document.getElementById('testMsg').value = "in onSuccess";
+
+            //Anna
+            //var image = document.getElementById('myImage');
+            //image.src = "data:image/jpeg;base64," + imageData;
+
+            var smallImage = document.getElementById('smallImage');
+
+            // Unhide image elements
+            //
+            smallImage.style.display = 'block';
+
+            // Show the captured photo
+            // The inline CSS rules are used to resize the image
+            //
+            smallImage.src = "data:image/jpeg;base64," + imageData;
+
+            // Get image handle
+            //
+            var largeImage = document.getElementById('largeImage');
+
+            // Unhide image elements
+            //
+            largeImage.style.display = 'block';
+            largeImage.src = "data:image/jpeg;base64," + imageData;
 
         }
 
@@ -236,7 +239,7 @@ var app = {
             console.log('failed');
         }
         var cameraPopoverOptions = new CameraPopoverOptions(220, 600, 320, 480, Camera.PopoverArrowDirection.ARROW_DOWN) ;
-        var cameraHandle = navigator.camera.getPicture(onSuccess, onFail, { quality: 50, saveToPhotoAlbum: true,
+        var cameraHandle = navigator.camera.getPicture(onSuccessURI, onFail, { quality: 50, saveToPhotoAlbum: true,
             destinationType: Camera.DestinationType.FILE_URI, popoverOptions:cameraPopoverOptions
         });
         //cameraHandle.setPosition(cameraPopoverOptions);
