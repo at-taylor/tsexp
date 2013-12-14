@@ -22,12 +22,12 @@ $('#mediaListPage').bind('pagecreate', function(event) {
 });
 
 $('#mediaListPage').bind('pageinit', function(event) {
-    alert('bind: pageinit');
+   // alert('bind: pageinit');
     getMediaList();
 });
 
 $('#mediaListPage').live('pageinit', function(event) {
-    alert('live: pageinit');
+   // alert('live: pageinit');
     getMediaList();
 });
 $('#mediaListPage').bind('pagebeforeload', function(event) {
@@ -65,7 +65,7 @@ function callbackStoryFunc(data) {
 }
 
 function getMediaList() {
-    alert('running list()7') ;
+   // alert('running list()7') ;
 
 
     $.getJSON(serviceURL, function(data) {

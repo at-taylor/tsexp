@@ -15,7 +15,7 @@ $('#employeeListPage').bind('pagecreate', function(event) {
 });
 
 $('#employeeListPage').bind('pageinit', function(event) {
-    alert('bind: pageinit');
+   // alert('bind: pageinit');
     getEmployeeList();
 });
 
@@ -58,7 +58,7 @@ function callbackStoryFunc(data) {
 }
 
 function getEmployeeList() {
-    alert('running list()7') ;
+   // alert('running list()7') ;
 
     //
     // this works as it is on localhost.

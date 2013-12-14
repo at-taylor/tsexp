@@ -35,12 +35,12 @@
         <label for="pass">Password</label>
         <input type="password"  name="passname" id="pass"  value="passw0rd" />
 
-        <label for="remember">Remember me</label>
-        <input type="checkbox" data-inline="true"data-theme="none" id="remember" name="remember" value="yes">
+            <p><label for="remember">Remember me</label>
+        <input type="checkbox" data-inline="true"data-theme="none" id="remember" name="remember" value="yes"> </p>
 
-        <a data-role="button" id="login_submit" data-inline="true" data-theme="none"><img src="img/navbut/login.png"></a>
+            <p> <a data-role="button" id="login_submit" data-inline="true" data-theme="none"><img src="img/navbut/login.png"></a></p>
 
-        <a href="#">Forgot password?</a> or <a href="#">create an account?</a>
+            <p><a href="#">Forgot password?</a> or <a href="#">create an account?</a> </p>
 
 
         </div>
@@ -61,7 +61,22 @@
 
     </div>
 
+    <!--<div data-theme="c" data-role="header" data-position="fixed" class="ui-bar" style="text-align: center" >-->
+        <!--<div style="display: inline-block;  float: left">-->
+            <!--<a href="#"><img height="51" width="50" src="img/navbut/home.png" /></a>-->
+            <!--<a href="#"><img height="51" width="50" src="img/navbut/myLifeStory.png" /></a>-->
+            <!--<a href="#"><img height="51" width="50" src="img/navbut/tellStory.png" /></a>-->
+            <!--<a href="#"><img height="51" width="50" src="img/navbut/mediaLIbrary.png" /></a></div>-->
+        <!--<div style="display: inline-block;  text-align: center">-->
+            <!--<h1>Dashboard</h1></div>-->
+            <!--<div style="display: inline-block;  float: right">-->
+                <!--<a href="#"><img height="51" width="50" src="img/navbut/inviteFriends.png" /></a>-->
+                <!--<a href="#"><img height="51" width="50" src="img/navbut/myAccount.png" /></a></div>-->
+        <!--</div>-->
+
     <div data-role="content">
+
+        <!--<div style="text-align: center; padding-bottom: 10px "><img src="img/splash/logo_big.png"></div>-->
 
         <div class="ui-grid-c" style="padding-left: 75px">
             <!-- first row -->
@@ -77,7 +92,7 @@
             <div class="ui-block-d" style="width: 210px;">
                 <a href="story-directory.html" ><img src="img/navbut/storyLibrary.png"></a>
             </div>
-            <!-- second row -->
+             <!--second row-->
             <div class="ui-block-a" style="width: 210px;">
                 <a href="#" ><img src="img/navbut/myLifeStory.png"></a>
             </div>
@@ -93,18 +108,7 @@
         </div>
     </div>
 
-    <div data-theme="c" data-role="footer" data-position="fixed" class="ui-bar" style="text-align: center" >
-        <div style="display: inline-block"></div>
-        <a href="#"><img height="51" width="50" src="img/navbut/home.png" /></a>
-        <a href="#"><img height="51" width="50" src="img/navbut/user.png" /></a>
-        <a href="#"><img height="51" width="50" src="img/navbut/addMedia.png" /></a>
-        <a href="#"><img height="51" width="50" src="img/navbut/inviteFriends.png" /></a>
-        <a href="#"><img height="51" width="50" src="img/navbut/myAccount.png" /></a>
-        <a href="#"><img height="51" width="50" src="img/navbut/tellStory.png" /></a>
-        <a href="#"><img height="51" width="50" src="img/navbut/mediaLIbrary.png" /></a>
-        <a href="#"><img height="51" width="50" src="img/navbut/storyLibrary.png" /></a>
-        <a href="#"><img height="51" width="50" src="img/navbut/requestStory.png" /></a>
-    </div>
+
 
 </div>
 
@@ -123,7 +127,7 @@
         //alert('bind in index.html: pageinit');
 
         $("#login_submit").click(function(event) {
-            alert('you clicked the login button');
+           // alert('you clicked the login button');
             //$.mobile.changePage("tsnav.html");
             $.ajax({
                 type: "POST",
