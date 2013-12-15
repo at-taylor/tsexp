@@ -364,22 +364,25 @@ var app = {
 
         navigator.device.capture.captureVideo(function(mediaFiles)
             {
+                alert("in capture");
 //                console.log('CALLBACK!');
 //                console.log(JSON.stringify(mediaFiles));
                 var options = new FileUploadOptions();
                 options.fileKey="file";
-                options.fileName=mediaFiles[0].substr(mediaFiles[0].lastIndexOf('/')+1);
+                //options.fileName=mediaFiles[0].substr(mediaFiles[0].lastIndexOf('/')+1);
+                options.fileName="testvideo.mov";
                 alert("File name: " + options.fileName);
                 //options.mimeType="image/jpeg";
 
-//                var params = {};
-//                params.value1 = "test";
-//                params.value2 = "param";
+                var params = {};
+                params.value1 = "test";
+                params.value2 = "param";
 
-                //options.params = params;
+                options.params = params;
 
                 var ft = new FileTransfer();
-                ft.upload(mediaFiles[0], encodeURI("http://216.74.49.91:8080/tssvc/resourcesS/upload"), fileok, filefail, options);
+                //ft.upload(mediaFiles[0], encodeURI("http://216.74.49.91:8080/tssvc/resourcesS/upload"), fileok, filefail, options);
+                alert("exiting ...")
             }, function(error)
             {
                 console.log('Video capture failed');
