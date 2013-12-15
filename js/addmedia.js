@@ -239,7 +239,8 @@ var app = {
             console.log('failed');
         }
         var cameraPopoverOptions = new CameraPopoverOptions(220, 600, 320, 480, Camera.PopoverArrowDirection.ARROW_DOWN) ;
-        var cameraHandle = navigator.camera.getPicture(onSuccessURI, onFail, { quality: 10, saveToPhotoAlbum: true,
+        var cameraHandle = navigator.camera.getPicture(onSuccessURI, onFail, { quality: 10, targetWidth: 100, targetHeight: 100,
+            saveToPhotoAlbum: true,
             destinationType: Camera.DestinationType.FILE_URI, popoverOptions:cameraPopoverOptions
         });
         //cameraHandle.setPosition(cameraPopoverOptions);
