@@ -348,10 +348,37 @@ var app = {
     },
 
     captureVideo: function() {
+
+        function fileok(r) {
+            document.getElementById('testMsg').value = "Success. Code = " + r.responseCode + " Resposne = " + r.response + " sent = " + r.byteSent;
+            //console.log("Response = " + r.response);
+            //console.log("Sent = " + r.bytesSent);
+        }
+
+        function filefail(error) {
+            document.getElementById('testMsg').value = "Error. Code = " + error.code + " source = " + error.source + " target = " + error.target;
+            //alert("An error has occurred: Code = " + error.code);
+            //console.log("upload error source " + error.source);
+            //console.log("upload error target " + error.target);
+        }
+
         navigator.device.capture.captureVideo(function(mediaFiles)
             {
-                console.log('CALLBACK!');
-                console.log(JSON.stringify(mediaFiles));
+//                console.log('CALLBACK!');
+//                console.log(JSON.stringify(mediaFiles));
+                var options = new FileUploadOptions();
+                options.fileKey="file";
+                options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+                //options.mimeType="image/jpeg";
+
+//                var params = {};
+//                params.value1 = "test";
+//                params.value2 = "param";
+
+                options.params = params;
+
+                var ft = new FileTransfer();
+                ft.upload(imageURI, encodeURI("http://216.74.49.91:8080/tssvc/resourcesS/upload"), fileok, filefail, options);
             }, function(error)
             {
                 console.log('Video capture failed');
