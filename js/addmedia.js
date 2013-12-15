@@ -368,7 +368,7 @@ var app = {
 //                console.log(JSON.stringify(mediaFiles));
                 var options = new FileUploadOptions();
                 options.fileKey="file";
-                options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+                options.fileName=mediaFiles[0].substr(mediaFiles[0].lastIndexOf('/')+1);
                 //options.mimeType="image/jpeg";
 
 //                var params = {};
@@ -378,7 +378,7 @@ var app = {
                 options.params = params;
 
                 var ft = new FileTransfer();
-                ft.upload(imageURI, encodeURI("http://216.74.49.91:8080/tssvc/resourcesS/upload"), fileok, filefail, options);
+                ft.upload(mediaFiles[0], encodeURI("http://216.74.49.91:8080/tssvc/resourcesS/upload"), fileok, filefail, options);
             }, function(error)
             {
                 console.log('Video capture failed');
