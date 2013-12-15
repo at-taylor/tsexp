@@ -320,6 +320,20 @@ var app = {
             mediaType: Camera.MediaType.ALLMEDIA
         });
 
+        function fileok(r) {
+            document.getElementById('testMsg').value = "Success. Code = " + r.responseCode + " Resposne = " + r.response + " sent = " + r.byteSent;
+            //console.log("Response = " + r.response);
+            //console.log("Sent = " + r.bytesSent);
+        }
+
+        function filefail(error) {
+            document.getElementById('testMsg').value = "Error. Code = " + error.code + " source = " + error.source + " target = " + error.target;
+            //alert("An error has occurred: Code = " + error.code);
+            //console.log("upload error source " + error.source);
+            //console.log("upload error target " + error.target);
+        }
+
+
     },
 
 
