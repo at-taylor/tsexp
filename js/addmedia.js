@@ -364,7 +364,7 @@ var app = {
 
         navigator.device.capture.captureVideo(function(mediaFiles)
             {
-                alert("in capture");
+                alert("in capture2");
 //                console.log('CALLBACK!');
 //                console.log(JSON.stringify(mediaFiles));
                 var options = new FileUploadOptions();
