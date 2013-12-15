@@ -261,6 +261,23 @@ var app = {
     },
 
     getphoto: function() {
+        function onSuccessURI(imageURI) {
+
+            var options = new FileUploadOptions();
+            options.fileKey="file";
+            options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+            options.mimeType="image/jpeg";
+
+            var params = {};
+            params.value1 = "test";
+            params.value2 = "param";
+
+            options.params = params;
+
+            var ft = new FileTransfer();
+            ft.upload(imageURI, encodeURI("http://216.74.49.91:8080/tssvc/resourcesS/upload"), fileok, filefail, options);
+
+        }
 
         function onSuccess(imageData) {
             //console.log('success');
@@ -297,8 +314,9 @@ var app = {
             console.log('failed');
         }
 
-        navigator.camera.getPicture(onSuccess, onFail, { quality: 50, saveToPhotoAlbum: true,
-            destinationType: Camera.DestinationType.DATA_URL,sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        navigator.camera.getPicture(onSuccessURI, onFail, { quality: 10, saveToPhotoAlbum: true,
+            targetWidth: 100, targetHeight: 100,
+            destinationType: Camera.DestinationType.FILE_URI,sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
             mediaType: Camera.MediaType.ALLMEDIA
         });
 
