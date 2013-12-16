@@ -289,6 +289,23 @@ var app = {
             options.params = params;
 
             var ft = new FileTransfer();
+
+            statusDom = document.querySelector('#status');
+            statusDom.innerHTML = "";
+            var ft = new FileTransfer();
+            ft.onprogress = function(progressEvent) {
+                if (progressEvent.lengthComputable) {
+                    var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+                    statusDom.innerHTML = perc + "% loaded...";
+                } else {
+                    if(statusDom.innerHTML == "") {
+                        statusDom.innerHTML = "Loading";
+                    } else {
+                        statusDom.innerHTML += ".";
+                    }
+                }
+            };
+
             ft.upload(imageURI, encodeURI("http://216.74.49.91:8080/tssvc/resourcesS/upload"), fileok, filefail, options);
 
         }
