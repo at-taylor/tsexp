@@ -7,6 +7,9 @@
  */
 
 var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/stories";
+
+console.log("addmedia js: Executing");
+console.log("mediaPage: executing using services at: " + serviceURL);
 //var serviceURL = "http://localhost:8080/tssvc/resourcesS/stories";
 //var serviceURL = "http://localhost:8080/tssvc/getstorylist2.html";
 
@@ -65,6 +68,7 @@ $('#mediaPage').bind('pagebeforeshow', function(event) {
 });
 
 $('#mediaPage').bind('pageshow', function(event) {
+     alert("pageshow");
 
 
     $(["<div id=\"progressbar-overlay\" class=\"ui-tolito-progressbar-overlay\">",
@@ -93,9 +97,10 @@ $('#mediaPage').bind('pageshow', function(event) {
                 .build()
                 .run();
         });
+    alert("after prog bar");
 
     setTimeout(function () {
-
+        alert("in set timeout");
         var pbDiv = document.getElementById("progressbar-overlay");
         if (pbDiv != null)
             pbDiv.parentNode.removeChild(pbDiv);
@@ -108,7 +113,7 @@ $('#mediaPage').bind('pagebeforechange', function(event) {
 });
 
 $('#mediaPage').bind('pagechange', function(event) {
-   // alert('bind: pageshow');
+   alert('bind: pagechange');
     //getEmployeeList();
 });
 
