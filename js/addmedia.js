@@ -13,109 +13,65 @@ console.log("mediaPage: executing using services at: " + serviceURL);
 //var serviceURL = "http://localhost:8080/tssvc/resourcesS/stories";
 //var serviceURL = "http://localhost:8080/tssvc/getstorylist2.html";
 
-//var employees;
-//var stories;
-
-$('#mediaPage').bind('pagebeforecreate', function(event) {
-    //alert('bind: pagebeforecreate');
-    //getEmployeeList();
-});
-$('#mediaPage').bind('pagecreate', function(event) {
-   // alert('bind: pagecreate');
-    //getEmployeeList();
-});
-
-$('#mediaPage').bind('pageinit', function(event) {
-    //alert('bind: pageinit');
-    //getEmployeeList();
-});
 
 $('#mediaPage').live('pageinit', function(event) {
-    alert('live: pageinit');
-
     app.initialize();
 });
 
 
 $('#mediaPage').bind('pagebeforeload', function(event) {
    // alert('bind: pagebeforeload');
-    //getEmployeeList();
 });
 
 $('#mediaPage').bind('pageload', function(event) {
    // alert('bind: pageload');
-    //getEmployeeList();
 });
 
 $('#mediaPage').bind('pagebeforeshow', function(event) {
    // alert('bind: pagebeforeshow');
-    //getEmployeeList();
-
-
-
-
-//    setTimeout(function () {
-//        //alert("triggered in timeout");
-//
-//        var pbDiv = document.getElementById("progressbar-overlay");
-//        alert("pbDiv = " + pbDiv.innerHTML)     ;
-//        pbDiv.parentNode.removeChild(pbDiv);
-//        //pbDiv.innerHTML="";.
-////                pb.stop();
-////                pb.destroy();
-//    }, 4000);
-//
 });
 
 $('#mediaPage').bind('pageshow', function(event) {
-     alert("pageshow");
-
-
-    $(["<div id=\"progressbar-overlay\" class=\"ui-tolito-progressbar-overlay\">",
-        "<div class=\"ui-tolito-progressbar-overlay-box\">",
-        "<div class=\"ui-tolito-progressbar-overlay-box-corner-top ui-tolito-progressbar-overlay-box-corner-bottom ui-tolito-progressbar-overlay-box-content ui-tolito-progressbar-overlay-box-body-c\">",
-//        "<h1>Loading data..</h1>",
-//        "<p>Place the desired text here in order to inform the user for the procedure which is in progress.</p>",
-        "<div id=\"progressbar\"></div>",
-        "</div>",
-        "</div>",
-        "</div>"].join(""))
-        .css({
-            "opacity": 0.15
-        })
-        .appendTo($.mobile.pageContainer)
-        .show(function () {
-            TolitoProgressBar('progressbar')
-                .setOuterTheme('d')
-                .setInnerTheme('b')
-                .isMini(true)
-                .setMax(100)
-                .setStartFrom(0)
-                .setInterval(10)
-                .showCounter(true)
-                .logOptions()
-                .build()
-                .run();
-        });
-    alert("after prog bar");
-
-    setTimeout(function () {
-        alert("in set timeout");
-        var pbDiv = document.getElementById("progressbar-overlay");
-        if (pbDiv != null)
-            pbDiv.parentNode.removeChild(pbDiv);
-    }, 2000);
+//     alert("pageshow");
+//
+//
+//    $(["<div id=\"progressbar-overlay\" class=\"ui-tolito-progressbar-overlay\">",
+//        "<div class=\"ui-tolito-progressbar-overlay-box\">",
+//        "<div class=\"ui-tolito-progressbar-overlay-box-corner-top ui-tolito-progressbar-overlay-box-corner-bottom ui-tolito-progressbar-overlay-box-content ui-tolito-progressbar-overlay-box-body-c\">",
+////        "<h1>Loading data..</h1>",
+////        "<p>Place the desired text here in order to inform the user for the procedure which is in progress.</p>",
+//        "<div id=\"progressbar\"></div>",
+//        "</div>",
+//        "</div>",
+//        "</div>"].join(""))
+//        .css({
+//            "opacity": 0.15
+//        })
+//        .appendTo($.mobile.pageContainer)
+//        .show(function () {
+//            TolitoProgressBar('progressbar')
+//                .setOuterTheme('d')
+//                .setInnerTheme('b')
+//                .isMini(true)
+//                .setMax(100)
+//                .setStartFrom(0)
+//                .setInterval(10)
+//                .showCounter(true)
+//                .logOptions()
+//                .build()
+//                .run();
+//        });
+//    alert("after prog bar");
+//
+//    setTimeout(function () {
+//        alert("in set timeout");
+//        var pbDiv = document.getElementById("progressbar-overlay");
+//        if (pbDiv != null)
+//            pbDiv.parentNode.removeChild(pbDiv);
+//    }, 2000);
 
 });
-$('#mediaPage').bind('pagebeforechange', function(event) {
-    //alert('bind: pagebeforeshow');
-    //getEmployeeList();
-});
 
-$('#mediaPage').bind('pagechange', function(event) {
-   alert('bind: pagechange');
-    //getEmployeeList();
-});
 
 
 var app = {
