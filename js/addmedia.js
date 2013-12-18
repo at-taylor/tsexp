@@ -30,40 +30,6 @@ $('#mediaPage').bind('pageinit', function(event) {
 $('#mediaPage').live('pageinit', function(event) {
     alert('live: pageinit');
 
-    $(["<div id=\"progressbar-overlay\" class=\"ui-tolito-progressbar-overlay\">",
-        "<div class=\"ui-tolito-progressbar-overlay-box\">",
-        "<div class=\"ui-tolito-progressbar-overlay-box-corner-top ui-tolito-progressbar-overlay-box-corner-bottom ui-tolito-progressbar-overlay-box-content ui-tolito-progressbar-overlay-box-body-c\">",
-//        "<h1>Loading data..</h1>",
-//        "<p>Place the desired text here in order to inform the user for the procedure which is in progress.</p>",
-        "<div id=\"progressbar\"></div>",
-        "</div>",
-        "</div>",
-        "</div>"].join(""))
-        .css({
-            "opacity": 0.15
-        })
-        .appendTo($.mobile.pageContainer)
-        .show(function () {
-            TolitoProgressBar('progressbar')
-                .setOuterTheme('d')
-                .setInnerTheme('b')
-                .isMini(true)
-                .setMax(100)
-                .setStartFrom(0)
-                .setInterval(10)
-                .showCounter(true)
-                .logOptions()
-                .build()
-                .run();
-        });
-
-    setTimeout(function () {
-
-        var pbDiv = document.getElementById("progressbar-overlay");
-        if (pbDiv != null)
-            pbDiv.parentNode.removeChild(pbDiv);
-    }, 2000);
-
     app.initialize();
 });
 
@@ -99,8 +65,42 @@ $('#mediaPage').bind('pagebeforeshow', function(event) {
 });
 
 $('#mediaPage').bind('pageshow', function(event) {
-    //alert('bind: pageshow');
-    //getEmployeeList();
+
+
+    $(["<div id=\"progressbar-overlay\" class=\"ui-tolito-progressbar-overlay\">",
+        "<div class=\"ui-tolito-progressbar-overlay-box\">",
+        "<div class=\"ui-tolito-progressbar-overlay-box-corner-top ui-tolito-progressbar-overlay-box-corner-bottom ui-tolito-progressbar-overlay-box-content ui-tolito-progressbar-overlay-box-body-c\">",
+//        "<h1>Loading data..</h1>",
+//        "<p>Place the desired text here in order to inform the user for the procedure which is in progress.</p>",
+        "<div id=\"progressbar\"></div>",
+        "</div>",
+        "</div>",
+        "</div>"].join(""))
+        .css({
+            "opacity": 0.15
+        })
+        .appendTo($.mobile.pageContainer)
+        .show(function () {
+            TolitoProgressBar('progressbar')
+                .setOuterTheme('d')
+                .setInnerTheme('b')
+                .isMini(true)
+                .setMax(100)
+                .setStartFrom(0)
+                .setInterval(10)
+                .showCounter(true)
+                .logOptions()
+                .build()
+                .run();
+        });
+
+    setTimeout(function () {
+
+        var pbDiv = document.getElementById("progressbar-overlay");
+        if (pbDiv != null)
+            pbDiv.parentNode.removeChild(pbDiv);
+    }, 2000);
+
 });
 $('#mediaPage').bind('pagebeforechange', function(event) {
     //alert('bind: pagebeforeshow');
