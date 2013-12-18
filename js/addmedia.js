@@ -28,7 +28,7 @@ $('#mediaPage').bind('pageinit', function(event) {
 });
 
 $('#mediaPage').live('pageinit', function(event) {
-   // alert('live: pageinit');
+    alert('live: pageinit');
 
     $(["<div id=\"progressbar-overlay\" class=\"ui-tolito-progressbar-overlay\">",
         "<div class=\"ui-tolito-progressbar-overlay-box\">",
@@ -64,7 +64,7 @@ $('#mediaPage').live('pageinit', function(event) {
         var pbDiv = document.getElementById("progressbar-overlay");
         if (pbDiv != null)
             pbDiv.parentNode.removeChild(pbDiv);
-    }, 4000);
+    }, 2000);
 });
 
 
@@ -156,9 +156,9 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         // this will cancel out the progress bar started on the live() binding when the page is first loaded
-        var pbDiv = document.getElementById("progressbar-overlay");
-        if (pbDiv != null)
-            pbDiv.parentNode.removeChild(pbDiv);
+//        var pbDiv = document.getElementById("progressbar-overlay");
+//        if (pbDiv != null)
+//            pbDiv.parentNode.removeChild(pbDiv);
 
         console.log('Received Event: ' + id);
     },
