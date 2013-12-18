@@ -28,11 +28,46 @@ $('#mediaPage').bind('pageinit', function(event) {
 });
 
 $('#mediaPage').live('pageinit', function(event) {
-    //alert('live: pageinit');
+   // alert('live: pageinit');
+
+    $(["<div id=\"progressbar-overlay\" class=\"ui-tolito-progressbar-overlay\">",
+        "<div class=\"ui-tolito-progressbar-overlay-box\">",
+        "<div class=\"ui-tolito-progressbar-overlay-box-corner-top ui-tolito-progressbar-overlay-box-corner-bottom ui-tolito-progressbar-overlay-box-content ui-tolito-progressbar-overlay-box-body-c\">",
+//        "<h1>Loading data..</h1>",
+//        "<p>Place the desired text here in order to inform the user for the procedure which is in progress.</p>",
+        "<div id=\"progressbar\"></div>",
+        "</div>",
+        "</div>",
+        "</div>"].join(""))
+        .css({
+            "opacity": 0.15
+        })
+        .appendTo($.mobile.pageContainer)
+        .show(function () {
+            TolitoProgressBar('progressbar')
+                .setOuterTheme('d')
+                .setInnerTheme('b')
+                .isMini(true)
+                .setMax(100)
+                .setStartFrom(0)
+                .setInterval(10)
+                .showCounter(true)
+                .logOptions()
+                .build()
+                .run();
+        });
+
     app.initialize();
-   // alert('live: after app.init');
-    //getEmployeeList();
+
+    setTimeout(function () {
+
+        var pbDiv = document.getElementById("progressbar-overlay");
+        if (pbDiv != null)
+            pbDiv.parentNode.removeChild(pbDiv);
+    }, 4000);
 });
+
+
 $('#mediaPage').bind('pagebeforeload', function(event) {
    // alert('bind: pagebeforeload');
     //getEmployeeList();
@@ -46,6 +81,21 @@ $('#mediaPage').bind('pageload', function(event) {
 $('#mediaPage').bind('pagebeforeshow', function(event) {
    // alert('bind: pagebeforeshow');
     //getEmployeeList();
+
+
+
+
+//    setTimeout(function () {
+//        //alert("triggered in timeout");
+//
+//        var pbDiv = document.getElementById("progressbar-overlay");
+//        alert("pbDiv = " + pbDiv.innerHTML)     ;
+//        pbDiv.parentNode.removeChild(pbDiv);
+//        //pbDiv.innerHTML="";.
+////                pb.stop();
+////                pb.destroy();
+//    }, 4000);
+//
 });
 
 $('#mediaPage').bind('pageshow', function(event) {
@@ -104,6 +154,11 @@ var app = {
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
+
+        // this will cancel out the progress bar started on the live() binding when the page is first loaded
+        var pbDiv = document.getElementById("progressbar-overlay");
+        if (pbDiv != null)
+            pbDiv.parentNode.removeChild(pbDiv);
 
         console.log('Received Event: ' + id);
     },
