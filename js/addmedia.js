@@ -57,14 +57,14 @@ $('#mediaPage').live('pageinit', function(event) {
                 .run();
         });
 
-    app.initialize();
-
     setTimeout(function () {
 
         var pbDiv = document.getElementById("progressbar-overlay");
         if (pbDiv != null)
             pbDiv.parentNode.removeChild(pbDiv);
     }, 2000);
+
+    app.initialize();
 });
 
 
