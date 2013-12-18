@@ -35,8 +35,6 @@
             <!--<img id="getphoto" src="img/navbut/device.png" border="0"/>-->
         <!--</a>-->
 
-
-
         <a data-role="button" href="#" data-inline="true" data-theme="none">
         <img id="camera" src="img/navbut/photo.png" height="182" width="182"/>
         </a>
@@ -50,6 +48,10 @@
         <img id="getphoto" src="img/navbut/device.png" height="182" width="182"/>
         </a>
 
+        <div id="deviceready" class="blink">
+            <p class="event listening">Connecting to Device</p>
+            <p class="event received">Device is Ready</p>
+        </div>
 
         <input id="testMsg" type="text" value="initial">
         <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
@@ -70,7 +72,7 @@
     </div>
     <div id="status"></div>
 
-    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/addmedia.js"></script>
 </div>
 
 </body>

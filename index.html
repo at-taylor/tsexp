@@ -1,23 +1,41 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Employee Directory</title>
+    <title>Treasured Stories</title>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
+
     <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/text.css" />
 
-
+    <script src="js/jquery.js"></script>
+    <script>
+        $(document).bind('mobileinit', function() {
+            console.log("TREASURED STORIES document: framework: mobileinit()");
+            $.mobile.page.prototype.options.addBackBtn = true;
+        } );
+    </script>
+    <script src="js/jquery.mobile-1.3.2.min.js"></script>
 
     <script src="phonegap.js"></script>
     <!--<script src="cordova.js" ></script>-->
-    <script src="camera.js"></script>
+
+    <script>
+        //
+        // define a global variable to point to where the service code resides
+        //
+        //var tsServiceURLDomain = "http://localhost:8080/";
+        var tsServiceURLDomain = "http://216.74.49.91:8080/";
+        console.log("Using service domain of: " + tsServiceURLDomain);
+
+    </script>
+
 
 </head>
 
 <body>
 
-<div id="login" data-role="page" style="background: transparent url('img/navbut/background.png') repeat;">
+<div id="loginPage" data-role="page" style="background: transparent url('img/navbut/background.png') repeat;">
     <!--<div data-theme="c" data-role="header" >-->
         <!--<h1><img src="img/splash/logo_big.png"></h1>-->
     <!--</div>-->
@@ -27,31 +45,63 @@
         
         <img  src="img/navbut/logo_white.png">
 
-        <!--<form data-ajax="false" action="http://localhost:8080/tssvc/resourcesS/login" type="POST">-->
-
         <div id="my-login" data-theme="none" >
-        <label for="user">Username</label>
-        <input type="text" name="username" id="user"  value="demo" />
-        <label for="pass">Password</label>
-        <input type="password"  name="passname" id="pass"  value="passw0rd" />
+            <label for="user">Username</label>
+            <input type="text" name="username" id="user"  value="demo" />
+            <label for="pass">Password</label>
+            <input type="password"  name="passname" id="pass"  value="passw0rd" />
 
             <p><label for="remember">Remember me</label>
-        <input type="checkbox" data-inline="true"data-theme="none" id="remember" name="remember" value="yes"> </p>
+            <input type="checkbox" data-inline="true"data-theme="none" id="remember" name="remember" value="yes"> </p>
 
             <p> <a data-role="button" id="login_submit" data-inline="true" data-theme="none"><img src="img/navbut/login.png"></a></p>
 
             <p><a href="#">Forgot password?</a> or <a href="#">create an account?</a> </p>
 
-
         </div>
-        <!--<button id="login_submit" type="submit"  data-theme="c">Submit</button>-->
-        <!--</form>-->
-        <!--<a href="tsnav.html" data-role="button">Submit</a>-->
+
+        <!-- For testing when no authentication is needed -->
+        <a href="#MainNavPage" data-role="button">Submit</a>
+
+        <script>
+            console.log("loginPage js: Executing");
+            $('#loginPage').bind('pageinit', function(event) {
+                //alert('loginPage: bind in #loginPage : pageinit');
+                console.log("loginPage: in bind: pageinit()");
+                console.log("loginPage: binding click function on #login_submit");
+
+                $("#login_submit").click(function(event) {
+                    // alert('you clicked the login button');
+                    $.ajax({
+                        type: "POST",
+                        url: tsServiceURLDomain + "tssvc/resourcesS/login",
+                        data:'user='+ $('#user').val() +'&pass='+ $('#pass').val(),
+                        cache: false,
+                        success: function(data) {
+                            //validate the response here, set variables... whatever needed
+                            //and if credentials are valid, forward to the next page
+                            //alert ("logon valid");
+                            console.log("loginPage: login: success: isAuth: " + data.isAuth);
+                            console.log("loginPage: login: success: webSession: " + data.webSessionId);
+                            console.log("loginPage: login: success: msg: " + data.msg);
+
+                            if (data.isAuth = "true")  {
+                                 //alert("data is" + data.isAuth) ;
+                                 $.mobile.changePage('#MainNavPage');
+                            }
+                            else
+                                alert("Please try to login again");
+                        },
+                        error: function() { // server couldn't be reached or other error
+                            alert("Please try again");
+                        }
+                    })
+                })
+            });
+        </script>
     </div>
 
-
-
-</div>
+</div>  <!-- end of loginPage -->
 
 <div id="MainNavPage" data-role="page" >
 
@@ -108,69 +158,44 @@
         </div>
     </div>
 
+    <script>
+        console.log("MainNavPage js: Executing");
+        $('#MainNavPage').live('pageinit', function(event) {
+            //alert('MainNavPage live: pageinit');
+            console.log("MainNavPage: in bind: pageinit()");
+            console.log("MainNavPage: binding click function on #logout_submit");
 
+            $("#logout_submit").click(function(event) {
+                console.log("MainNavPage: handling the click event of the logout button");
 
-</div>
-
-
-
-<script src="js/jquery.js"></script>
-<script src="js/jquery.mobile-1.3.2.min.js"></script>
-<!--<script src="js/storylist.js"></script>-->
-<!--<script src="js/template.js"></script>-->
-<script src="js/addmedia.js"></script>
-<!--<script src="js/library.js"></script>-->
-
-<script>
-
-    $(document).bind('pageinit', function(event) {
-        //alert('bind in index.html: pageinit');
-
-        $("#login_submit").click(function(event) {
-           // alert('you clicked the login button');
-            //$.mobile.changePage("tsnav.html");
-            $.ajax({
-                type: "POST",
-                url: "http://216.74.49.91:8080/tssvc/resourcesS/login",
-//                url: "http://localhost:8080/tssvc/resourcesS/login",
-                data:'user='+ $('#user').val() +'&pass='+ $('#pass').val(),
-                cache: false,
-                success: function(data) {
-                    //validate the response here, set variables... whatever needed
-                    //and if credentials are valid, forward to the next page
-                    //alert ("logon valid");
-                    //alert("data is" + data)
-                    $.mobile.changePage('#MainNavPage');
-                    //or show an error message
-                },
-                error: function() { // server couldn't be reached or other error
-                    alert("Please try again");
-                }
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/tssvc/resourcesS/logout",
+                    //data:'user='+ $('#user').val() +'&pass='+ $('#pass').val(),
+                    cache: false,
+                    success: function(data) {
+                        console.log("ManNavPage: logout: success: data=" + data);
+                        //
+                        // alert("data is" + data)   ;
+                        $.mobile.changePage("index.html");
+                    },
+                    done: function (data) {
+                        alert("done : " + data);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("ManNavPage: logout: error:");
+                        alert("in error");
+                        alert("status: " + status) ;
+                        alert("error: " + error);
+                        alert(xhr.responseText);
+                        $.mobile.changePage("index.html");
+                    }
+                })
             })
-        })
-    });
+        });
+    </script>
 
-    // event.preventDefault();
-    // var credentials = { type: 'EMAIL', username: $('#user').val(), password: $('#pass').val() };
-    // $.ajax({
-    // type: "PUT",
-    // url: "api/auth",
-    // cache: false,
-    // data: JSON.stringify(credentials),
-    // contentType: "application/json; charset=utf-8",
-    // success: function(data) {
-    // //validate the response here, set variables... whatever needed
-    // //and if credentials are valid, forward to the next page
-    // $.mobile.changePage($('#main_menu'));
-    // //or show an error message
-    // },
-    // error: function() { // server couldn't be reached or other error }
-    // });
-
-</script>
-     <script src="js/logout.js"></script>
-<!--<script src="js/employeedetails.js"></script>-->
-<!--<script src="js/reportlist.js"></script>-->
+</div>    <-- end of main nav page -->
 
 </body>
 

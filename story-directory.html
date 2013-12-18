@@ -1,23 +1,12 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
-    <title>Employee Directory</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-
-    <!--<script>
-$(document).bind('mobileinit', function() {
-alert('in init');
-$.mobile.page.prototype.options.addBackBtn = true;
-} );
-</script>-->
-
 </head>
 
 <body>
 
-<div id="employeeListPage" data-role="page" data-add-back-btn="true" data-back-btn-text="back" data-back-btn-theme="c">
+<div id="storyListPage" data-role="page" data-add-back-btn="true" data-back-btn-text="back" data-back-btn-theme="c">
 
     <div data-theme="c" data-role="header" data-position="fixed" >
         <h1><img src="img/splash/logo.png"></h1>
@@ -43,7 +32,7 @@ $.mobile.page.prototype.options.addBackBtn = true;
 
         <!--<div data-role="content">-->
         <div>
-            <ul id="employeeList" data-role="listview" data-inset="true" data-split-icon="delete" data-filter="true"></ul>
+            <ul id="storyList" data-role="listview" data-inset="true" data-split-icon="delete" data-filter="true"></ul>
         </div>
     </div>
 
@@ -62,16 +51,7 @@ $.mobile.page.prototype.options.addBackBtn = true;
 
     <script src="js/storylist.js"></script>
 
-</div>
-
-<script src="js/jquery.js"></script>
-<script src="js/jquery.mobile-1..3.2.min.js"></script>
-
-<!--<script src="js/employeedetails.js"></script>-->
-<!--<script src="js/reportlist.js"></script>-->
-
-
+</div> <!-- end of storyListPage -->
 
 </body>
-
 </html>

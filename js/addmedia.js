@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var serviceURL = "http://216.74.49.91:8080/tssvc/resourcesS/stories/";
+var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/stories";
 //var serviceURL = "http://localhost:8080/tssvc/resourcesS/stories";
 //var serviceURL = "http://localhost:8080/tssvc/getstorylist2.html";
 
@@ -68,16 +68,17 @@ var app = {
     initialize: function() {
         this.bindEvents();
     },
+
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
     // `load`, `deviceready`, `offline`, and `online`.
     bindEvents: function() {
        // alert('before binding events');
-// document.addEventListener('deviceready', this.onDeviceReady, false);
-// document.getElementById('scan').addEventListener('click', this.scan, false);
-// document.getElementById('encode').addEventListener('click', this.encode, false);
-// document.getElementById('whitelist').addEventListener('click', this.whitelist, false);
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+        // document.getElementById('scan').addEventListener('click', this.scan, false);
+        // document.getElementById('encode').addEventListener('click', this.encode, false);
+        // document.getElementById('whitelist').addEventListener('click', this.whitelist, false);
         document.getElementById('camera').addEventListener('click', this.camera, false);
         document.getElementById('video').addEventListener('click', this.captureVideo, false);
         document.getElementById('audio').addEventListener('click', this.captureAudio, false);
@@ -85,29 +86,30 @@ var app = {
        // alert('after binding events');
     },
 
-// // deviceready Event Handler
-// //
-// // The scope of `this` is the event. In order to call the `receivedEvent`
-// // function, we must explicity call `app.receivedEvent(...);`
-// onDeviceReady: function() {
-// app.receivedEvent('deviceready');
-// console.log('CORDOVA VERSION: ' + window.device.cordova);
-// window.addEventListener('batterystatus', app.onBatteryStatus, false);
-// },
-// // Update DOM on a Received Event
-// receivedEvent: function(id) {
-// var parentElement = document.getElementById(id);
-// var listeningElement = parentElement.querySelector('.listening');
-// var receivedElement = parentElement.querySelector('.received');
-//
-// listeningElement.setAttribute('style', 'display:none;');
-// receivedElement.setAttribute('style', 'display:block;');
-//
-// console.log('Received Event: ' + id);
-// },
-// onBatteryStatus: function(info) {
-// console.log("Level: " + info.level + " isPlugged: " + info.isPlugged);
-// },
+    // deviceready Event Handler
+    //
+    // The scope of `this` is the event. In order to call the `receivedEvent`
+    // function, we must explicity call `app.receivedEvent(...);`
+    onDeviceReady: function() {
+        app.receivedEvent('deviceready');
+        console.log('CORDOVA VERSION: ' + window.device.cordova);
+        alert("onDeviceReady");
+        window.addEventListener('batterystatus', app.onBatteryStatus, false);
+    },
+    // Update DOM on a Received Event
+    receivedEvent: function(id) {
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+
+        console.log('Received Event: ' + id);
+    },
+    onBatteryStatus: function(info) {
+        console.log("Level: " + info.level + " isPlugged: " + info.isPlugged);
+    },
 // scan: function() {
 // console.log('scanning');
 // var scanner = cordova.require("cordova/plugin/BarcodeScanner");
