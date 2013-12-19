@@ -37,7 +37,7 @@
 
 
         function gotPicture(event) {
-            alert ("in gotpicture()");
+            //alert ("in gotpicture()");
             console.log("what follows is the gotPicture() event object");
             console.log(event.target);
             console.log(event.target.files);
@@ -63,7 +63,7 @@
 
                 $("#yourimage").attr("src",localStorage.getItem("fileUrl"));
 
-                alert("after set item");
+                //alert("after set item");
                 $.mobile.changePage('testadd.html');
             }
         }
