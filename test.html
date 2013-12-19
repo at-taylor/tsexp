@@ -1,160 +1,92 @@
 <html>
+
 <head>
-    <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/text.css" />
-
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery.mobile-1.3.2.min.js"></script>
-    <style>
-        input[type='file'] {
-            background: rgb(0, 0, 0);
-            border-radius: 5px;
-            color: rgb(255, 255, 255);
-            font-family: 'Lucida Grande';
-            padding: 0px 0px 0px 0px;
-            font-size: 16px;
-            margin-bottom: 20px;
-            width: 210px;
-            vertical-align: top;
-            margin-top: -2px;
-            webkit-appearence: none;
-        }
-    </style>
-
 </head>
+
 <body>
-<h1>File Upload with Jersey</h1>
 
 <div id="testCapturePage" data-role="page" data-add-back-btn="true" data-back-btn-text="back" data-back-btn-theme="c">
 
-<form action="http://localhost:8080/tssvc/resourcesS/uploadloc" method="post" enctype="multipart/form-data">
+    <div data-theme="c" data-role="header" >
+    <h1>File Upload with Jersey</h1>
+    </div>
 
-    <p>
-        Select a file : <input type="file" name="file" size="45" />
-    </p>
+    <div data-role="content">
+        Empty page
+        <button id="testButton" >Click me</button>
+        <button id="testButton2" onclick="gotPic(event);">Click me2</button>
+        <br/>
+        Test Camera Capture <input type="file" capture accept="image/*" id="takePictureField" onchange="gotPicture(event);">
 
-    <input type="submit" value="Upload It" />
-    <br/>
-</form>
+        <img id="yourimage" heigth=100 width=100>
+        <br/>
+    </div>
 
-    Test Camera Capture <input type="file" capture accept="image/*" id="takePictureField" onchange="gotPic(event);">
+    <script>
+        $('#testCapturePage').live('pageinit', (function() {
+           // alert("In live of testCapturePage");
+           // console.log("In live of testCapturePage2");
+            //$.mobile.changePage($('#testCapturePageAdd'));
 
-    <img id="yourimage" heigth=100 width=100>
-    <br/>
+          //  $('#testButton').click(function(event) {
+         //       alert("in bound click() function");
+          //      $.mobile.changePage('testadd.html');
+          //  });
 
-    Test Video Capture <input type="file" capture accept="video/*" id="takeVideoField" onchange="gotVid(event);">
-
-    <video id="yourvid" src="none" height=100 width=100> </video>
-    <br/>
-
-    Test Audio Capture <input type="file" capture="camera" accept="audio/*" id="takeAudioField" >
-
-
-
-<script>
-
-    var desiredWidth;
-
-    $(document).bind('pageinit', (function() {
-
-        console.log('onReady');
-        alert("on Ready");
-        //$("#takePictureField").on("change",gotPic);
-        //$("#takePictureField").onchange(gotPic);
-        //$("#yourimage").load(getSwatches);
-        desiredWidth = window.innerWidth;
-        if(!("url" in window) && ("webkitURL" in window)) {
-            window.URL = window.webkitURL;
-        }
-
-    }));
+        }));
 
 
-    //Credit: <a href="https://www.youtube.com/watch?v=EPYnGFEcis4&;feature=youtube_gdata_player">https://www.youtube.com/watch?v=EPYnGFEcis4&;feature=youtube_gdata_player</a>
+        function gotPicture(event) {
+            alert ("in gotpicture()");
+            console.log("what follows is the gotPicture() event object");
+            console.log(event.target);
+            console.log(event.target.files);
+            console.log(event.target.files[0]);
 
-    function gotPic(event) {
-        alert ("in gotpic()");
-        if(event.target.files.length == 1 &&
+            var theFile = event.target.files[0];
+            console.log("name = " + theFile.name);
+            console.log("type = " + theFile.type);
+            console.log("last date = " + theFile.lastModifiedDate);
+            console.log("size = " + theFile.size);
 
-           event.target.files[0].type.indexOf("image/") == 0) {
+            if(event.target.files.length == 1 &&
+                event.target.files[0].type.indexOf("image/") == 0) {
 
-            $("#yourimage").attr("src",URL.createObjectURL(event.target.files[0]));
+                localStorage.setItem("fileUrl", URL.createObjectURL(event.target.files[0]));
+                localStorage.setItem("fileData", JSON.stringify(event.target.files[0]));
 
-        }
+                console.log("logging file items - url");
+                console.log(localStorage.getItem("fileUrl"));
 
-        alert("Starting upload...ajax")
+                console.log("logging file items - filedata");
+                console.log(localStorage.getItem("fileData"));  // in JSON format, note it doesn't stringify the blob.
 
-        $.ajax({
-            type: "POST",
-//            url: "http://216.74.49.91:8080/tssvc/resourcesS/logout",
-            url: "http://localhost:8080/tssvc/resourcesS/uploadloc",
-            data: 'file='+ event.target.files[0],
-            //data:'user='+ $('#user').val() +'&pass='+ $('#pass').val(),
-            cache: false,
-            success: function(data) {
-                //validate the response here, set variables... whatever needed
-                //and if credentials are valid, forward to the next page
-                alert ("in success");
-                alert("data: " + data);
-                //alert("data is" + data)   ;
-               // $.mobile.changePage("index.html");
-                //or show an error message
-            },
-            done: function (data) {
-                alert("done : " + data);
-            },
-//            error: function(data) { // server couldn't be reached or other error
-//                alert("Please try again");
-//                alert("data: " + data);
-//                $.mobile.changePage("index2.html");
-//            }
-            error: function(xhr, status, error) {
-                alert("in error");
-                alert("status: " + status) ;
-                alert("error: " + error);
-                alert(xhr.responseText);
+                $("#yourimage").attr("src",localStorage.getItem("fileUrl"));
+
+                alert("after set item");
+                $.mobile.changePage('testadd.html');
             }
-        })
-
-
-//        var form = new FormData(),
-//                xhr = new XMLHttpRequest();
-//
-//        form.append('file', event.target.files[0]);
-//        xhr.open('post', 'http://localhost:8080/tssvc/resourcesS/uploadloc', true);
-//        xhr.onreadystatechange=function() {
-//            if (xhr.readyState==4) {
-//                //alert the user that a response now exists in the responseTest property.
-//                alert(xhr.responseText);
-//                // And to view in firebug
-//                console.log('xhr',xhr)
-//            }
-//        }
-//        xhr.send(form);
-//
-//        alert("resp: " + xhr.response);
-//        alert(" resp text: " + xhr.responseText);
-//        alert("status : " + xhr.status)   ;
-//        alert ("status text: " + xhr.statusText);
-
-    }
-    function gotVid(event) {
-        alert ("in gotvid()");
-        if(event.target.files.length == 1 &&
-
-                event.target.files[0].type.indexOf("video/") == 0) {
-
-            $("#yourvid").attr("src",URL.createObjectURL(event.target.files[0]));
-
         }
 
-    }
+       function gotPic(event) {
+          alert ("in gotpic()");
+          alert("about to changepage");
+           $.mobile.changePage('testadd.html');
 
-</script>
-<script src="js/jquery.js"></script>
-<script src="js/jquery.mobile-1.3.2.min.js"></script>
+        <!--if(event.target.files.length == 1 &&-->
+        <!--event.target.files[0].type.indexOf("image/") == 0) {-->
+        <!--$("#yourimage").attr("src",URL.createObjectURL(event.target.files[0]));-->
+        <!--localStorage.setItem("file", URL.createObjectURL(event.target.files[0]));-->
+        <!--alert("after set item");-->
+        <!--$.mobile.changePage("#testCapturePageAdd");-->
+        <!--}-->
+        <!--$.mobile.changePage('#testCapturePageAdd');-->
+        }
+    </script>
 
 </div>
+
+
+
 </body>
 </html>
