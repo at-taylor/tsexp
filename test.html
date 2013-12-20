@@ -53,13 +53,14 @@
                 event.target.files[0].type.indexOf("image/") == 0) {
 
                 localStorage.setItem("fileUrl", URL.createObjectURL(event.target.files[0]));
-                localStorage.setItem("fileData", JSON.stringify(event.target.files[0]));
+                localStorage.setItem("fileName", theFile.name);
+                localStorage.setItem("fileType", theFile.type);
+                localStorage.setItem("fileDate", theFile.lastModifiedDate);
+                localStorage.setItem("fileSize", theFile.size);
+                //localStorage.setItem("fileData", JSON.stringify(event.target.files[0]));
 
                 console.log("logging file items - url");
                 console.log(localStorage.getItem("fileUrl"));
-
-                console.log("logging file items - filedata");
-                console.log(localStorage.getItem("fileData"));  // in JSON format, note it doesn't stringify the blob.
 
                 $("#yourimage").attr("src",localStorage.getItem("fileUrl"));
 

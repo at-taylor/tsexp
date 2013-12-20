@@ -15,13 +15,16 @@
         <p>Add media page test</p>
         <section class="ui-grid-a">
             <div class="ui-block-a">
-                <label for="titleTxt">Title:</label><input type="text" id="titleTxt" name="titleTxt" length=80>
+                <label for="titleTxt">Title:</label><input type="text" id="titleTxt" name="titleTxt" length=80 placeholder="Enter a Description for this Media">
                 <label for="dateTxt">Date Taken:</label><input type="date" data-role="datebox" id="dateTxt" name="dateTxt">
                 <label for="descrTxt">Description:</label><input type="text" id="descrTxt" name="descrTxt" length=160>
             </div>
             <div class="ui-block-b">
                 <img id="theImage" heigth=360 width=270>
+                <label for="fileInfoTxt">File Info:</label><input type="text" id="fileInfoTxt" name="fileInfoTxt" >
+                <label for="fileLocTxt">File Loc:</label><input type="text" id="fileLocTxt" name="fileLocTxt" >
                 <button id="uploadBtn" name="uploadBtn">Upload My Media</button>
+                <label for="fileUploadTxt">Upload Info:</label><input type="text" id="fileUploadTxt" name="fileUploadTxt" >
             </div>
 
         </section>
@@ -42,6 +45,11 @@
 
             $("#theImage").attr("src",localStorage.getItem("fileUrl"));
             //alert("local storage name: " + localStorage.getItem("name"));
+            var theFileInfo = "Name: " + localStorage.getItem("fileName") + " Type: " + localStorage.getItem("fileType") +
+                  " Size: " + localStorage.getItem("fileSize") + " Date: " + localStorage.getItem("fileDate");
+            $("#fileInfoTxt").attr("value",theFileInfo);
+            var theFileLoc = "Loc: " + localStorage.getItem("fileUrl");
+            $("#fileLocTxt").attr("value",theFileLoc);
 
             //var form = new FormData();
             //form.append('file', theImageUri);
@@ -67,23 +75,27 @@
                           //form.append('file', localStorage.getItem("fileData"));
                           //form.append('file', event.target.files[0]);
                           // form.append('file', JSON.parse(localStorage.getItem("fileBlob")), "test.jpg");
-                          var theFileAttr = JSON.parse(localStorage.getItem("fileData"));
-                          console.log("the file name: " + theFileAttr.name);
+                          var theFileName = localStorage.getItem("fileName");
+                          if (theFileName == null)
+                            theFileName = "uploadedFile";
 
-                          form.append('file', theBlob, theFileAttr.name);
+                          console.log("the file name: " + theFileName);
+
+                          form.append('file', theBlob, theFileName);
                           //form.append('name',"test.jpg");
                           xhr.open('post', serviceURL, true);
                           xhr.onreadystatechange=function() {
                               if (xhr.readyState==4) {
                                   //alert the user that a response now exists in the responseTest property.
-                                  alert(xhr.responseText);
+                                  //alert(xhr.responseText);
                                   // And to view in firebug
                                   console.log('xhr',xhr)   ;
                                   console.log("resp: " + xhr.response);
                                   console.log(" resp text: " + xhr.responseText);
                                   console.log("status : " + xhr.status)   ;
                                   console.log("status text: " + xhr.statusText);
-
+                                  var theResp = "Resp Text: " + xhr.responseText + " Status: " + xhr.status + " Status Text: " + xhr.statusText;
+                                  $("#fileUploadTxt").attr("value",theResp);
                                   URL.revokeObjectURL(localStorage.getItem("fileUrl"))   ;
                               }
                           }
