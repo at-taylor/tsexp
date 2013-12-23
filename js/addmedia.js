@@ -257,7 +257,30 @@ var app = {
     },
 
     getphoto: function() {
+
+        function onSuccessURItoMediaAdd(imageURI) {
+
+
+            localStorage.setItem("fileUrl", imageURI);
+            localStorage.setItem("fileName", imageURI.substr(imageURI.lastIndexOf('/')+1));
+
+            localStorage.setItem("fileType", "no type");
+            localStorage.setItem("fileDate", "no date");
+            localStorage.setItem("fileSize", "no size");
+//            localStorage.setItem("fileType", theFile.type);
+//            localStorage.setItem("fileDate", theFile.lastModifiedDate);
+//            localStorage.setItem("fileSize", theFile.size);
+
+            console.log("logging file items - url");
+            console.log(localStorage.getItem("fileUrl"));
+
+            //alert("after set item");
+            $.mobile.changePage('testadd.html');
+
+        }
+
         function onSuccessURI(imageURI) {
+
 
             var options = new FileUploadOptions();
             options.fileKey="file";
@@ -288,7 +311,8 @@ var app = {
                 }
             };
 
-            ft.upload(imageURI, encodeURI("http://216.74.49.91:8080/tssvc/resourcesS/upload"), fileok, filefail, options);
+            var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/upload;
+            ft.upload(imageURI, encodeURI(serviceURL), fileok, filefail, options);
 
         }
 
@@ -327,8 +351,8 @@ var app = {
             console.log('failed');
         }
 
-        navigator.camera.getPicture(onSuccessURI, onFail, { quality: 10, saveToPhotoAlbum: true,
-            targetWidth: 100, targetHeight: 100,
+        navigator.camera.getPicture(onSuccessURItoMediaAdd, onFail, { quality: 10, saveToPhotoAlbum: true,
+            targetWidth: 300, targetHeight: 300,
             destinationType: Camera.DestinationType.FILE_URI,sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
             mediaType: Camera.MediaType.ALLMEDIA
         });
