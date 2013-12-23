@@ -260,6 +260,7 @@ var app = {
 
         function onSuccessURItoMediaAdd(imageURI) {
 
+            document.getElementById('testMsg').value = "in onSuccess to AddMedia";
 
             localStorage.setItem("fileUrl", imageURI);
             localStorage.setItem("fileName", imageURI.substr(imageURI.lastIndexOf('/')+1));
@@ -311,7 +312,7 @@ var app = {
                 }
             };
 
-            var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/upload;
+            var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/upload";
             ft.upload(imageURI, encodeURI(serviceURL), fileok, filefail, options);
 
         }
