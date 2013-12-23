@@ -14,7 +14,7 @@ console.log("mediaPage: executing using services at: " + serviceURL);
 //var serviceURL = "http://localhost:8080/tssvc/getstorylist2.html";
 
 
-$('#mediaPage').live('pageinit', function(event) {
+$('#mediaPage').bind('pageinit', function(event) {
     app.initialize();
 });
 

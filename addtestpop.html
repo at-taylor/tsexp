@@ -23,11 +23,21 @@
                 <img id="theImage" heigth=360 width=270>
                 <label for="fileInfoTxt">File Info:</label><input type="text" id="fileInfoTxt" name="fileInfoTxt" >
                 <label for="fileLocTxt">File Loc:</label><input type="text" id="fileLocTxt" name="fileLocTxt" >
-                <button id="uploadBtn" name="uploadBtn">Upload My Media</button>
+                <!--<button id="uploadBtn" name="uploadBtn">Upload My Media</button>-->
+                <a href="#uploadConfirm" data-rel="popup">Upload My Media</a>
                 <label for="fileUploadTxt">Upload Info:</label><input type="text" id="fileUploadTxt" name="fileUploadTxt" >
             </div>
 
         </section>
+
+
+            <div data-role="popup" id="uploadConfirm">
+                <p>Are you sure?</p>
+                <a href="#" data-rel="back" data-role="button" data-theme="a" >Cancel</a>
+                <button id="uploadBtn" name="uploadBtn"> Yes! Upload My Media</button>
+            </div>
+
+
 
     </div>
 
@@ -46,7 +56,7 @@
             $("#theImage").attr("src",localStorage.getItem("fileUrl"));
             //alert("local storage name: " + localStorage.getItem("name"));
             var theFileInfo = "Name: " + localStorage.getItem("fileName") + " Type: " + localStorage.getItem("fileType") +
-                  " Size: " + localStorage.getItem("fileSize") + " Date: " + localStorage.getItem("fileDate");
+                    " Size: " + localStorage.getItem("fileSize") + " Date: " + localStorage.getItem("fileDate");
             $("#fileInfoTxt").attr("value",theFileInfo);
             var theFileLoc = "Loc: " + localStorage.getItem("fileUrl");
             $("#fileLocTxt").attr("value",theFileLoc);
@@ -54,61 +64,61 @@
             //var form = new FormData();
             //form.append('file', theImageUri);
 
-              $('#uploadBtn').click(function(event) {
-                   alert("in uploadBtn()");
+            $('#uploadBtn').click(function(event) {
+                alert("in uploadBtn()");
 
-                  var xhr2 = new XMLHttpRequest();
-                  xhr2.open('GET', localStorage.getItem("fileUrl"), true);
-                  xhr2.responseType = 'blob';
-                  xhr2.onload = function(e) {
-                      if (this.status == 200) {
-                          var theBlob = this.response;
-                          console.log("loggin blob");
-                          console.log(theBlob);
-                          console.log(this.response);
+                var xhr2 = new XMLHttpRequest();
+                xhr2.open('GET', localStorage.getItem("fileUrl"), true);
+                xhr2.responseType = 'blob';
+                xhr2.onload = function(e) {
+                    if (this.status == 200) {
+                        var theBlob = this.response;
+                        console.log("loggin blob");
+                        console.log(theBlob);
+                        console.log(this.response);
 
-                          var form = new FormData(),
-                                  xhr = new XMLHttpRequest();
+                        var form = new FormData(),
+                                xhr = new XMLHttpRequest();
 
 
-                          console.log("about to do upload");
-                          //form.append('file', localStorage.getItem("fileData"));
-                          //form.append('file', event.target.files[0]);
-                          // form.append('file', JSON.parse(localStorage.getItem("fileBlob")), "test.jpg");
-                          var theFileName = localStorage.getItem("fileName");
-                          if (theFileName == null)
+                        console.log("about to do upload");
+                        //form.append('file', localStorage.getItem("fileData"));
+                        //form.append('file', event.target.files[0]);
+                        // form.append('file', JSON.parse(localStorage.getItem("fileBlob")), "test.jpg");
+                        var theFileName = localStorage.getItem("fileName");
+                        if (theFileName == null)
                             theFileName = "uploadedFile";
 
-                          console.log("the file name: " + theFileName);
+                        console.log("the file name: " + theFileName);
 
-                          form.append('file', theBlob, theFileName);
-                          //form.append('name',"test.jpg");
-                          xhr.open('post', serviceURL, true);
-                          xhr.onreadystatechange=function() {
-                              if (xhr.readyState==4) {
-                                  //alert the user that a response now exists in the responseTest property.
-                                  //alert(xhr.responseText);
-                                  // And to view in firebug
-                                  console.log('xhr',xhr)   ;
-                                  console.log("resp: " + xhr.response);
-                                  console.log(" resp text: " + xhr.responseText);
-                                  console.log("status : " + xhr.status)   ;
-                                  console.log("status text: " + xhr.statusText);
-                                  var theResp = "Resp Text: " + xhr.responseText + " Status: " + xhr.status + " Status Text: " + xhr.statusText;
-                                  $("#fileUploadTxt").attr("value",theResp);
-                                  URL.revokeObjectURL(localStorage.getItem("fileUrl"))   ;
-                              }
-                          }
-                          xhr.send(form);
+                        form.append('file', theBlob, theFileName);
+                        //form.append('name',"test.jpg");
+                        xhr.open('post', serviceURL, true);
+                        xhr.onreadystatechange=function() {
+                            if (xhr.readyState==4) {
+                                //alert the user that a response now exists in the responseTest property.
+                                //alert(xhr.responseText);
+                                // And to view in firebug
+                                console.log('xhr',xhr)   ;
+                                console.log("resp: " + xhr.response);
+                                console.log(" resp text: " + xhr.responseText);
+                                console.log("status : " + xhr.status)   ;
+                                console.log("status text: " + xhr.statusText);
+                                var theResp = "Resp Text: " + xhr.responseText + " Status: " + xhr.status + " Status Text: " + xhr.statusText;
+                                $("#fileUploadTxt").attr("value",theResp);
+                                URL.revokeObjectURL(localStorage.getItem("fileUrl"))   ;
+                            }
+                        }
+                        xhr.send(form);
 
-                      }
-                  };
-                  console.log("the xhr2 request");
-                  console.log(xhr2);
-                  xhr2.send();
+                    }
+                };
+                console.log("the xhr2 request");
+                console.log(xhr2);
+                xhr2.send();
 
-                  //$.mobile.changePage('testadd.html');
-                  //alert("Starting upload...ajax")
+                //$.mobile.changePage('testadd.html');
+                //alert("Starting upload...ajax")
 //                  $.ajax({
 //                      type: "POST",
 //                      url: "http://localhost:8080/tssvc/resourcesS/uploadloc",
@@ -137,7 +147,7 @@
 //                          alert(xhr.responseText);
 //                      }
 //                   })
-              });
+            });
 
         }))  ;
 

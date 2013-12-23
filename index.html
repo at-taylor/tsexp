@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/text.css" />
     <link rel="stylesheet" type="text/css" href="css/tolito-1.0.6.css" />
 
-    <script src="js/jquery.js"></script>
+    <script src="js/jquery-1.9.1.js"></script>
     <script>
         $(document).bind('mobileinit', function() {
             console.log("TREASURED STORIES document: framework: mobileinit()");
@@ -67,6 +67,7 @@
 
         <script>
             console.log("loginPage js: Executing");
+            //(document).on("click", "a.foo", fn)
             $('#loginPage').bind('pageinit', function(event) {
                 //alert('loginPage: bind in #loginPage : pageinit');
                 console.log("loginPage: in bind: pageinit()");
@@ -149,24 +150,27 @@
                 <a href="#" ><img src="img/navbut/myLifeStory.png"></a>
             </div>
             <div class="ui-block-b" style="width: 210px;">
-                <a href="#" ><img src="img/navbut/requestStory.png"></a>
+                <a href="libtest.html" ><img src="img/navbut/requestStory.png"></a>
             </div>
             <div class="ui-block-c" style="width: 210px;">
                 <a href="test.html" ><img src="img/navbut/inviteFriends.png"></a>
             </div>
             <div class="ui-block-d" style="width: 210px;">
-                <a href="#" ><img src="img/navbut/myAccount.png"></a>
+                <a href="addtestpop.html" ><img src="img/navbut/myAccount.png"></a>
             </div>
         </div>
     </div>
 
     <script>
         console.log("MainNavPage js: Executing");
-        $('#MainNavPage').live('pageinit', function(event) {
-            //alert('MainNavPage live: pageinit');
+        //(document).on("click", "a.foo", fn)
+       // $(document).on('pageinit', '#MainNavPage', function(event) {
+       // $('#MainNavPage').live('pageinit', function(event) {
+        $('#MainNavPage').bind('pageinit', function(event)   {
+                //alert('MainNavPage live: pageinit');
             console.log("MainNavPage: in bind: pageinit()");
-            console.log("MainNavPage: binding click function on #logout_submit");
 
+            console.log("MainNavPage: binding click function on #logout_submit");
             $("#logout_submit").click(function(event) {
                 console.log("MainNavPage: handling the click event of the logout button");
 

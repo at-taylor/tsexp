@@ -13,9 +13,9 @@ var stories;
 console.log("storyListPage js: Executing");
 console.log("storyListPage: executing using services at: " + serviceURL);
 
-$('#storyListPage').live('pageinit', function(event) {
+$('#storyListPage').bind('pageinit', function(event) {
     //alert('live: pageinit');
-    console.log('storyListPage: live: pageinit()');
+    console.log('storyListPage: bind: pageinit()');
     getEmployeeList();
 });
 

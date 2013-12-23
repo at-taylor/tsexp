@@ -23,7 +23,7 @@
     </div>
 
     <script>
-        $('#testCapturePage').live('pageinit', (function() {
+        $('#testCapturePage').bind('pageinit', (function() {
            // alert("In live of testCapturePage");
            // console.log("In live of testCapturePage2");
             //$.mobile.changePage($('#testCapturePageAdd'));
@@ -65,14 +65,16 @@
                 $("#yourimage").attr("src",localStorage.getItem("fileUrl"));
 
                 //alert("after set item");
-                $.mobile.changePage('testadd.html');
+               // $.mobile.changePage('testadd.html');
+                $.mobile.changePage('addtestpop.html');
             }
         }
 
        function gotPic(event) {
           alert ("in gotpic()");
           alert("about to changepage");
-           $.mobile.changePage('testadd.html');
+           //$.mobile.changePage('testadd.html');
+           $.mobile.changePage('addtestpop.html');
 
         <!--if(event.target.files.length == 1 &&-->
         <!--event.target.files[0].type.indexOf("image/") == 0) {-->

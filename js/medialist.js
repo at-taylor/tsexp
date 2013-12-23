@@ -13,9 +13,9 @@ var media;
 console.log("mediaListPage js: Executing");
 console.log("mediaListPage: executing using services at: " + serviceURL);
 
-$('#mediaListPage').live('pageinit', function(event) {
+$('#mediaListPage').bind('pageinit', function(event) {
    // alert('mediaListPage: live: pageinit');
-    console.log('mediaListPage: live: pageinit()');
+    console.log('mediaListPage: bind: pageinit()');
     getMediaList();
 });
 
