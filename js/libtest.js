@@ -5,12 +5,13 @@
  * Time: 5:56 PM
  * To change this template use File | Settings | File Templates.
  */
-//var serviceURL = "http://216.74.49.91:8080/tssvc/resourcesS/media/";
-var serviceURL = "http://localhost:8080/tssvc/resourcesS/media";
-//var serviceURL = "http://localhost:8080/tstest/getmedialist.html";
-
-var employees;
+var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/media";
 var media;
+
+console.log("libtestPage js: Executing");
+console.log("libtestPage: executing using services at: " + serviceURL);
+
+
 
 ;
 
@@ -32,8 +33,16 @@ function getMediaList() {
         $('#libTest li').remove();
         media = data.mediaModelList;
         $.each(media, function(index, item) {
+
+            var videoOrImageTag;
+            if (item.fileType == "mp4")
+                videoOrImageTag = '<video ><source  type="video/mp4" src=' + item.url + '></video>'
+            else
+                videoOrImageTag =  '<img src= '+ item.url +'>'
+
+
             $('#libTest').append('<li><a href="storydetails.html?id=' + item.id + '">' +
-                '<img src= '+ item.url +'>' +
+                videoOrImageTag +
                 '<h2>' + item.title + '</h2>' +
                 '<p>' + item.createdHr + '</p>' +
                 '<p class="ui-li-aside">' + item.fileType + '</p>' +
