@@ -46,8 +46,8 @@ function getMediaList() {
                 '<div class="ui-block-d">' + '<h6 style="padding-left: 60px;">' + item.fileType + '</h6>' + '</div>' +
                 '</div>' + '</a><a href="confirm.html" data-rel="dialogue"></a></li>');
         });
-        $('#mediaList').listview('refresh');
-    });
+$('#mediaList').listview('refresh');
+});
     console.log('mediaListPage: getMediaList() completed');
 }
 

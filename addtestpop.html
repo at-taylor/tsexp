@@ -13,11 +13,30 @@
 
     <div data-role="content">
         <p>Add media page test</p>
+
+
         <section class="ui-grid-a">
             <div class="ui-block-a">
-                <label for="titleTxt">Title:</label><input type="text" id="titleTxt" name="titleTxt" length=80 placeholder="Enter a Description for this Media">
+                <div data-role="fieldcontainer">
+                <label for="titleTxt">Title:</label><input type="text" id="titleTxt" name="titleTxt" length=80 placeholder="Enter a Title for this Media">
+                </div>
+                <div data-role="fieldcontainer">
                 <label for="dateTxt">Date Taken:</label><input type="date" data-role="datebox" id="dateTxt" name="dateTxt">
-                <label for="descrTxt">Description:</label><input type="text" id="descrTxt" name="descrTxt" length=160>
+                </div>
+                <div data-role="fieldcontainer">
+                <label for="descrTxt">Description:</label><textarea rows="4" cols="50" id="descrTxt" name="descrTxt" length=200 placeholder="Enter a descrition for this media"></textarea>
+                </div>
+                <div data-role="fieldcontainer">
+                  <div id="categoryDiv">
+                  <label for="categoryList">Categories</label>
+                    <select id="categoryList" name="categoryList" data-native-menu="false" multiple>
+                        <!--<option value="1">red</option>-->
+                        <!--<option value="2">green</option>-->
+                        <!--<option value="3">yellow</option>-->
+                        <!--<option value="4">blue</option>-->
+                    </select>
+                  </div> <!-- categoryDiv -->
+                </div>
             </div>
             <div class="ui-block-b">
                 <img id="theImage" heigth=360 width=270>
@@ -45,13 +64,39 @@
     <script>
         $("#testCapturePageAdd").bind('pageinit', (function() {
 
-            var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/uploadloc";
+            var serviceUploadURL = tsServiceURLDomain + "tssvc/resourcesS/upload";
+            var serviceCategoryURL = tsServiceURLDomain + "tssvc/resourcesS/categories";
+            var serviceUpdateURL = tsServiceURLDomain + "tssvc/resourcesS/media";
             //var serviceURL = "http://localhost:8080/" + "tssvc/resourcesS/uploadloc";
 
             console.log("testCapturePageAdd js: Executing");
-            console.log("testCapturePageAdd: executing using services at: " + serviceURL);
+            console.log("testCapturePageAdd: executing using upload services at: " + serviceUploadURL);
+            console.log("testCapturePageAdd: executing using category services at: " + serviceCategoryURL);
+            console.log("testCapturePageAdd: executing using media update services at: " + serviceUpdateURL);
 
             //alert("in the live of the add media page");
+            //<option value="1">red</option>
+            console.log("testCapturePageAdd: starting category load");
+            $.getJSON(serviceCategoryURL, function(data) {
+                //$('#categoryList option').remove();
+                cat = data.categoryModelList;
+                console.log("building select");
+                //$('#categoryDiv').append("<select id='categoryList' name='categoryList' data-native-menu='false' multiple>");
+                $.each(cat, function(index, item) {
+                    console.log("index = " + index);
+                    console.log("item.id = " + item.categoryId);
+                    console.log("item descr = " + item.categoryDescr);
+                    var optionListItem = "<option value='" + item.categoryId + "'>" +item.categoryDescr + "</option>";
+                    console.log("option Item: " + optionListItem);
+                    $('#categoryList').append("<option value='" + item.categoryId + "'>" +item.categoryDescr + "</option>");
+                    //$('#categoryList').show(300);
+                });
+                //$('#categoryDiv').append("</select>");
+                //$('#mediaList').listview('refresh');
+                //$('#categoryList').html('refresh');
+                $('#categoryList').selectmenu("refresh", true);
+            });
+            console.log("testCapturePageAdd: end category load");
 
             $("#theImage").attr("src",localStorage.getItem("fileUrl"));
             //alert("local storage name: " + localStorage.getItem("name"));
@@ -93,7 +138,7 @@
 
                         form.append('file', theBlob, theFileName);
                         //form.append('name',"test.jpg");
-                        xhr.open('post', serviceURL, true);
+                        xhr.open('post', serviceUploadURL, true);
                         xhr.onreadystatechange=function() {
                             if (xhr.readyState==4) {
                                 //alert the user that a response now exists in the responseTest property.
@@ -102,11 +147,42 @@
                                 console.log('xhr',xhr)   ;
                                 console.log("resp: " + xhr.response);
                                 console.log(" resp text: " + xhr.responseText);
+                                var respObj = JSON.parse(xhr.responseText)  ;
+                                console.log("the id = " + respObj.id ) ;
                                 console.log("status : " + xhr.status)   ;
                                 console.log("status text: " + xhr.statusText);
                                 var theResp = "Resp Text: " + xhr.responseText + " Status: " + xhr.status + " Status Text: " + xhr.statusText;
                                 $("#fileUploadTxt").attr("value",theResp);
                                 URL.revokeObjectURL(localStorage.getItem("fileUrl"))   ;
+
+                                console.log("About to POST updates to media id: " + respObj.id) ;
+                                console.log("title = " + $('#titleTxt').val())    ;
+                                console.log("date = " + $('#dateTxt').val()) ;
+                                console.log("descr = " + $('#descrTxt').val())  ;
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: serviceUpdateURL + "/" + respObj.id,
+                                    data:'mediaTitle='+ $('#titleTxt').val() +'&mediaDate='+ $('#dateTxt').val() +'&mediaDescr='+ $('#descrTxt').val(),
+                                    cache: false,
+                                    success: function(data) {
+                                        console.log("testCapturePageAdd: success: data=" + data);
+                                        //
+                                        // alert("data is" + data)   ;
+                                        //$.mobile.changePage("index.html");
+                                    },
+                                    done: function (data) {
+                                        alert("done : " + data);
+                                    },
+                                    error: function(xhr, status, error) {
+                                        console.log("testCapturePageAdd: error:");
+                                        alert("in error");
+                                        alert("status: " + status) ;
+                                        alert("error: " + error);
+                                        alert(xhr.responseText);
+                                        //$.mobile.changePage("index.html");
+                                    }
+                                })
                             }
                         }
                         xhr.send(form);
