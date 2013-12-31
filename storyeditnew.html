@@ -25,10 +25,10 @@
                 <label for="storyDateTxt">Date Taken:</label><input type="date" data-role="datebox" id="storyDateTxt" >
 
                 <label for="storyDescrTxt">Description:</label>
-                <textarea class="editable"  id="storyDescrTxt">An editable textarea.</textarea>
+                <textarea id="storyDescrTxt" data-role="none" >An editable textarea.</textarea>
             </div>
             <div class="ui-block-b">
-                       Placeholder
+                <input type="text" id="htmlSourceTxt" data-role="none">
 
             </div>
 
@@ -50,7 +50,40 @@
     </div>
 
     <!--<script src="js/storylist.js"></script>-->
+    <script type="text/javascript" src="js/vendor/tinyedit/tinyeditor.js"></script>
+    <script type="text/javascript">
+        console.log("Before declaring the editor and attaching it. Data role is none.");
+        new TINY.editor.edit('editor',{
+            id:'storyDescrTxt',
+            width:900,
+            height:250,
+            cssclass:'te',
+            controlclass:'tecontrol',
+            rowclass:'teheader',
+            dividerclass:'tedivider',
+            controls:['bold','italic','underline','strikethrough','|','subscript','superscript','|',
+                'orderedlist','unorderedlist','|','outdent','indent','|','leftalign',
+                'centeralign','rightalign','blockjustify','|','unformat','|','undo','redo','n',
+                'font','size','style','|','image','hr','link','unlink','|','cut','copy','paste','print'],
+            footer:true,
+            fonts:['Verdana','Arial','Georgia','Trebuchet MS'],
+            xhtml:true,
+            cssfile:'style.css',
+            bodyid:'editor',
+            footerclass:'tefooter',
+            toggle:{text:'source',activetext:'wysiwyg',cssclass:'toggle'},
+            resize:{cssclass:'resize'}
+        });
+        console.log("after declaring the editor");
 
+        function submitIt() {
+            console.log("In submitIt()");
+            console.log("i value : " + editor.i.contentWindow.document.body.innerHTML);
+            var theTarget = document.getElementById("htmlSourceTxt");
+            theTarget.value = editor.i.contentWindow.document.body.innerHTML;
+
+        }
+        </script>
 
 </div> <!-- end of storyListPage -->
 
