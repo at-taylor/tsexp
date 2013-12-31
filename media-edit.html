@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<div id="mediaEditpage" data-role="page" data-add-back-btn="true" data-back-btn-text="back" data-back-btn-theme="c">
+
+<div data-theme="c" data-role="header" >
+    <h1>Add Media</h1>
+</div>
+
+<div data-role="content">
+    <p>Add media page test</p>
+
+
+    <section class="ui-grid-a">
+        <div class="ui-block-a">
+            <div data-role="fieldcontainer">
+                <label for="titleTxt">Title:</label><input type="text" id="titleTxt" name="titleTxt" length=80 placeholder="Enter a Title for this Media">
+            </div>
+            <div data-role="fieldcontainer">
+                <label for="dateTxt">Date Taken:</label><input type="date" data-role="datebox" id="dateTxt" name="dateTxt">
+            </div>
+            <div data-role="fieldcontainer">
+                <label for="descrTxt">Description:</label><textarea rows="4" cols="50" id="descrTxt" name="descrTxt" length=200 placeholder="Enter a descrition for this media"></textarea>
+            </div>
+            <div data-role="fieldcontainer">
+                <div id="categoryDiv">
+                    <label for="categoryList">Categories</label>
+                    <select id="categoryList" name="categoryList"  multiple >
+                        <!--<option value="1">red</option>-->
+                        <!--<option value="2">green</option>-->
+                        <!--<option value="3">yellow</option>-->
+                        <!--<option value="4">blue</option>-->
+                    </select>
+                </div> <!-- categoryDiv -->
+            </div>
+        </div>
+        <div class="ui-block-b">
+            <img id="theImage" heigth=360 width=270>
+            <label for="fileInfoTxt">File Info:</label><input type="text" id="fileInfoTxt" name="fileInfoTxt" >
+            <label for="fileLocTxt">File Loc:</label><input type="text" id="fileLocTxt" name="fileLocTxt" >
+            <!--<button id="uploadBtn" name="uploadBtn">Upload My Media</button>-->
+            <a href="#editfirm" data-rel="popup">Edit My Media</a>
+            <label for="fileUploadTxt">Upload Info:</label><input type="text" id="fileUploadTxt" name="fileUploadTxt" >
+        </div>
+
+    </section>
+
+
+    <div data-role="popup" id="editConfirm">
+        <p>Are you sure?</p>
+        <a href="#" data-rel="back" data-role="button" data-theme="a" >Cancel</a>
+        <button id="editBtn" name="uploadBtn"> Yes! Edit My Media</button>
+    </div>
+
+
+
+</div>
+
+    <script>
+
+        var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/media";
+
+        console.log("editmedia js: Executing");
+        console.log("mediaPage: executing using services at: " + serviceURL);
+        //var serviceURL = "http://localhost:8080/tssvc/resourcesS/stories";
+        //var serviceURL = "http://localhost:8080/tssvc/getstorylist2.html";
+
+
+        function getMediaList() {
+            //alert('running list()7') ;
+            console.log("libTestPage: getMediaList(): running")     ;
+
+
+
+            $.getJSON(serviceURL, function(data) {
+                $('#libTest li').remove();
+                media = data.mediaModelList;
+                $.each(media, function(index, item) {
+
+                    var videoOrImageTag;
+                    if (item.fileType == "mp4")
+                        videoOrImageTag = '<video ><source  type="video/mp4" src=' + item.url + '></video>'
+                    else
+                        videoOrImageTag =  '<img src= '+ item.url +'>'
+
+
+                    $('#libTest').append('<li><a href="storydetails.html?id=' + item.id + '">' +
+                            videoOrImageTag +
+                            '<h2>' + item.title + '</h2>' +
+                            '<p>' + item.createdHr + '</p>' +
+                            '<p class="ui-li-aside">' + item.fileType + '</p>' +
+                            '</a></li>');
+
+
+                });
+                $('#libTest').listview('refresh');
+                console.log("libTestPage: getMediaList(): complete")     ;
+            });
+
+
+            function mediaEdit(data) {
+                var media = data.item;
+                console.log(media);
+                $('#employeePic').attr('src', 'pics/' + employee.picture);
+                $('#fullName').text(employee.firstName + ' ' + employee.lastName);
+                $('#employeeTitle').text(employee.title);
+                $('#city').text(employee.city);
+                console.log(employee.officePhone);
+                if (employee.managerId>0) {
+                    $('#actionList').append('<li><a href="employeedetails.html?id=' + employee.managerId + '"><h3>View Manager</h3>' +
+                            '<p>' + employee.managerFirstName + ' ' + employee.managerLastName + '</p></a></li>');
+                }
+                if (employee.reportCount>0) {
+                    $('#actionList').append('<li><a href="reportlist.html?id=' + employee.id + '"><h3>View Direct Reports</h3>' +
+                            '<p>' + employee.reportCount + '</p></a></li>');
+                }
+                if (employee.email) {
+                    $('#actionList').append('<li><a href="mailto:' + employee.email + '"><h3>Email</h3>' +
+                            '<p>' + employee.email + '</p></a></li>');
+                }
+                if (employee.officePhone) {
+                    $('#actionList').append('<li><a href="tel:' + employee.officePhone + '"><h3>Call Office</h3>' +
+                            '<p>' + employee.officePhone + '</p></a></li>');
+                }
+                if (employee.cellPhone) {
+                    $('#actionList').append('<li><a href="tel:' + employee.cellPhone + '"><h3>Call Cell</h3>' +
+                            '<p>' + employee.cellPhone + '</p></a></li>');
+                    $('#actionList').append('<li><a href="sms:' + employee.cellPhone + '"><h3>SMS</h3>' +
+                            '<p>' + employee.cellPhone + '</p></a></li>');
+                }
+                $('#actionList').listview('refresh');
+
+            }
+
+            function getUrlVars() {
+                var vars = [], hash;
+                var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for(var i = 0; i < hashes.length; i++)
+                {
+                    hash = hashes[i].split('=');
+                    vars.push(hash[0]);
+                    vars[hash[0]] = hash[1];
+                }
+                return vars;
+            }
+
+
+
+
+
+
+        }
+
+
+    </script>
+
+
+
+    </div>
+
+
+</body>
+</html>
