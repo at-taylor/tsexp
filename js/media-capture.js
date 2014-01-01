@@ -176,7 +176,7 @@ var app = {
             sessionStorage.setItem("fileUrl", imageURI);
             sessionStorage.setItem("fileName", imageURI.substr(imageURI.lastIndexOf('/')+1));
 
-            sessionStorage.setItem("fileType", "no type");
+            sessionStorage.setItem("fileType", "image/jpeg");
             sessionStorage.setItem("fileDate", "no date");
             sessionStorage.setItem("fileSize", "no size");
 //            sessionStorage.setItem("fileType", theFile.type);
@@ -290,7 +290,12 @@ var app = {
             sessionStorage.setItem("fileUrl", imageURI);
             sessionStorage.setItem("fileName", imageURI.substr(imageURI.lastIndexOf('/')+1));
 
-            sessionStorage.setItem("fileType", "no type");
+            var ext =imageURI.substr(imageURI.lastIndexOf('.')+1);
+            if (ext == "MOV")
+                sessionStorage.setItem("fileType", "image/mov");
+            else
+                sessionStorage.setItem("fileType", "image/jpeg");
+
             sessionStorage.setItem("fileDate", "no date");
             sessionStorage.setItem("fileSize", "no size");
 //            sessionStorage.setItem("fileType", theFile.type);

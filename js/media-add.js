@@ -22,13 +22,68 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
         var mediaId;
         if (Number(fileUrl.indexOf("http")) > 0)  {
            console.log("url contains http: " + fileUrl);
-           mediaId = uploadFileFromUrl();
+           uploadFileFromUrl();
             console.log("id returned: " + mediaId)
         }
-        else
+        else   {
            console.log("url does not contain http: " + fileUrl);
+           uploadFileFromFileHandle ()
+        }
     });
 });
+
+function uploadFileFromFileHandle ()
+{
+    console.log("mediaAddPageAdd: uploadFileFromFileHandle()");
+
+    var options = new FileUploadOptions();
+    options.fileKey="file";
+    options.fileName= sessionStorage.getItem("fileName");
+    options.mimeType=sessionStorage.getItem("fileType");
+
+    var params = {};
+    params.value1 = "test";
+    params.value2 = "param";
+
+    options.params = params;
+
+    statusDom = document.querySelector('#mediaAddStatus');
+    statusDom.innerHTML = "";
+    var ft = new FileTransfer();
+    ft.onprogress = function(progressEvent) {
+        if (progressEvent.lengthComputable) {
+            var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+            statusDom.innerHTML = perc + "% loaded...";
+        } else {
+            if(statusDom.innerHTML == "") {
+                statusDom.innerHTML = "Loading";
+            } else {
+                statusDom.innerHTML += ".";
+            }
+        }
+    };
+    var imageURI = sessionStorage.getItem("fileUrl");
+    ft.upload(imageURI, encodeURI(serviceMediaUploadURL), fileok, filefail, options);
+
+}
+function fileok(r) {
+   var theResp = "Success. Code = " + r.responseCode + " Resposne = " + r.response + " sent = " + r.byteSent;
+    $("#fileUploadTxt").attr("value",theResp);
+
+    var respObj = JSON.parse(r.response);
+
+    //console.log("Response = " + r.response);
+    //console.log("Sent = " + r.bytesSent);
+}
+
+function filefail(error) {
+
+    var theResp = "Error. Code = " + error.code + " source = " + error.source + " target = " + error.target;
+    $("#fileUploadTxt").attr("value",theResp);
+    //alert("An error has occurred: Code = " + error.code);
+    //console.log("upload error source " + error.source);
+    //console.log("upload error target " + error.target);
+}
 
 function uploadFileFromUrl() {
 
