@@ -41,7 +41,7 @@ function getMediaList() {
                 videoOrImageTag =  '<img src= '+ item.url +'>'
 
 
-            $('#libTest').append('<li><a href="storydetails.html?id=' + item.id + '">' +
+            $('#libTest').append('<li><a href="media-edit.html?id=' + item.id + '">' +
                 videoOrImageTag +
                 '<h2>' + item.title + '</h2>' +
                 '<p>' + item.createdHr + '</p>' +
