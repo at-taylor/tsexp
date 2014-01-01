@@ -173,16 +173,16 @@ var app = {
 
             removeMediaItemStorage();
 
-            localStorage.setItem("fileUrl", imageURI);
-            localStorage.setItem("fileName", imageURI.substr(imageURI.lastIndexOf('/')+1));
+            sessionStorage.setItem("fileUrl", imageURI);
+            sessionStorage.setItem("fileName", imageURI.substr(imageURI.lastIndexOf('/')+1));
 
-            localStorage.setItem("fileType", "no type");
-            localStorage.setItem("fileDate", "no date");
-            localStorage.setItem("fileSize", "no size");
-//            localStorage.setItem("fileType", theFile.type);
-//            localStorage.setItem("fileDate", theFile.lastModifiedDate);
-//            localStorage.setItem("fileSize", theFile.size);
-            console.log(localStorage.getItem("fileUrl"));
+            sessionStorage.setItem("fileType", "no type");
+            sessionStorage.setItem("fileDate", "no date");
+            sessionStorage.setItem("fileSize", "no size");
+//            sessionStorage.setItem("fileType", theFile.type);
+//            sessionStorage.setItem("fileDate", theFile.lastModifiedDate);
+//            sessionStorage.setItem("fileSize", theFile.size);
+            console.log(sessionStorage.getItem("fileUrl"));
 
             //alert("after set item");
             $.mobile.changePage('media-add.html');
@@ -287,16 +287,16 @@ var app = {
 
             removeMediaItemStorage();
 
-            localStorage.setItem("fileUrl", imageURI);
-            localStorage.setItem("fileName", imageURI.substr(imageURI.lastIndexOf('/')+1));
+            sessionStorage.setItem("fileUrl", imageURI);
+            sessionStorage.setItem("fileName", imageURI.substr(imageURI.lastIndexOf('/')+1));
 
-            localStorage.setItem("fileType", "no type");
-            localStorage.setItem("fileDate", "no date");
-            localStorage.setItem("fileSize", "no size");
-//            localStorage.setItem("fileType", theFile.type);
-//            localStorage.setItem("fileDate", theFile.lastModifiedDate);
-//            localStorage.setItem("fileSize", theFile.size);
-            console.log(localStorage.getItem("fileUrl"));
+            sessionStorage.setItem("fileType", "no type");
+            sessionStorage.setItem("fileDate", "no date");
+            sessionStorage.setItem("fileSize", "no size");
+//            sessionStorage.setItem("fileType", theFile.type);
+//            sessionStorage.setItem("fileDate", theFile.lastModifiedDate);
+//            sessionStorage.setItem("fileSize", theFile.size);
+            console.log(sessionStorage.getItem("fileUrl"));
 
             //alert("after set item");
             $.mobile.changePage('media-add.html');
