@@ -8,30 +8,30 @@
 
 var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/stories";
 
-console.log("addmedia js: Executing");
+console.log("media-capture js: Executing");
 console.log("mediaPage: executing using services at: " + serviceURL);
 //var serviceURL = "http://localhost:8080/tssvc/resourcesS/stories";
 //var serviceURL = "http://localhost:8080/tssvc/getstorylist2.html";
 
 
-$('#mediaPage').bind('pageinit', function(event) {
+$('#mediaCapturePage').bind('pageinit', function(event) {
     app.initialize();
 });
 
 
-$('#mediaPage').bind('pagebeforeload', function(event) {
+$('#mediaCapturePage').bind('pagebeforeload', function(event) {
    // alert('bind: pagebeforeload');
 });
 
-$('#mediaPage').bind('pageload', function(event) {
+$('#mediaCapturePage').bind('pageload', function(event) {
    // alert('bind: pageload');
 });
 
-$('#mediaPage').bind('pagebeforeshow', function(event) {
+$('#mediaCapturePage').bind('pagebeforeshow', function(event) {
    // alert('bind: pagebeforeshow');
 });
 
-$('#mediaPage').bind('pageshow', function(event) {
+$('#mediaCapturePage').bind('pageshow', function(event) {
 //     alert("pageshow");
 
 });
@@ -166,6 +166,29 @@ var app = {
 // },
 
     camera: function() {
+
+        function onSuccessURItoMediaAdd(imageURI) {
+
+            document.getElementById('testMsg').value = "mediaCapturePage: camera(): onSuccessURItoMediaAdd";
+
+            removeMediaItemStorage();
+
+            localStorage.setItem("fileUrl", imageURI);
+            localStorage.setItem("fileName", imageURI.substr(imageURI.lastIndexOf('/')+1));
+
+            localStorage.setItem("fileType", "no type");
+            localStorage.setItem("fileDate", "no date");
+            localStorage.setItem("fileSize", "no size");
+//            localStorage.setItem("fileType", theFile.type);
+//            localStorage.setItem("fileDate", theFile.lastModifiedDate);
+//            localStorage.setItem("fileSize", theFile.size);
+            console.log(localStorage.getItem("fileUrl"));
+
+            //alert("after set item");
+            $.mobile.changePage('media-add.html');
+
+        }
+
         function onSuccessURI(imageURI) {
 
             var options = new FileUploadOptions();
@@ -235,8 +258,8 @@ var app = {
             console.log('failed');
         }
         var cameraPopoverOptions = new CameraPopoverOptions(220, 600, 320, 480, Camera.PopoverArrowDirection.ARROW_DOWN) ;
-        var cameraHandle = navigator.camera.getPicture(onSuccessURI, onFail, { quality: 10, targetWidth: 100, targetHeight: 100,
-            saveToPhotoAlbum: true,
+        var cameraHandle = navigator.camera.getPicture(onSuccessURItoMediaAdd, onFail, { quality: 10, targetWidth: 200, targetHeight: 200,
+            saveToPhotoAlbum: false,
             destinationType: Camera.DestinationType.FILE_URI, popoverOptions:cameraPopoverOptions
         });
         //cameraHandle.setPosition(cameraPopoverOptions);
@@ -260,7 +283,9 @@ var app = {
 
         function onSuccessURItoMediaAdd(imageURI) {
 
-            document.getElementById('testMsg').value = "in onSuccess to AddMedia";
+            document.getElementById('testMsg').value = "mediaCapturePage: getphoto(): onSuccessURItoMediaAdd";
+
+            removeMediaItemStorage();
 
             localStorage.setItem("fileUrl", imageURI);
             localStorage.setItem("fileName", imageURI.substr(imageURI.lastIndexOf('/')+1));
@@ -271,12 +296,10 @@ var app = {
 //            localStorage.setItem("fileType", theFile.type);
 //            localStorage.setItem("fileDate", theFile.lastModifiedDate);
 //            localStorage.setItem("fileSize", theFile.size);
-
-            console.log("logging file items - url");
             console.log(localStorage.getItem("fileUrl"));
 
             //alert("after set item");
-            $.mobile.changePage('testadd.html');
+            $.mobile.changePage('media-add.html');
 
         }
 

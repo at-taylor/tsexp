@@ -52,21 +52,21 @@
             if(event.target.files.length == 1 &&
                 event.target.files[0].type.indexOf("image/") == 0) {
 
-                localStorage.setItem("fileUrl", URL.createObjectURL(event.target.files[0]));
-                localStorage.setItem("fileName", theFile.name);
-                localStorage.setItem("fileType", theFile.type);
-                localStorage.setItem("fileDate", theFile.lastModifiedDate);
-                localStorage.setItem("fileSize", theFile.size);
-                //localStorage.setItem("fileData", JSON.stringify(event.target.files[0]));
+                sessionStorage.setItem("fileUrl", URL.createObjectURL(event.target.files[0]));
+                sessionStorage.setItem("fileName", theFile.name);
+                sessionStorage.setItem("fileType", theFile.type);
+                sessionStorage.setItem("fileDate", theFile.lastModifiedDate);
+                sessionStorage.setItem("fileSize", theFile.size);
+                //sessionStorage.setItem("fileData", JSON.stringify(event.target.files[0]));
 
                 console.log("logging file items - url");
-                console.log(localStorage.getItem("fileUrl"));
+                console.log(sessionStorage.getItem("fileUrl"));
 
-                $("#yourimage").attr("src",localStorage.getItem("fileUrl"));
+                $("#yourimage").attr("src",sessionStorage.getItem("fileUrl"));
 
                 //alert("after set item");
                // $.mobile.changePage('testadd.html');
-                $.mobile.changePage('addtestpop.html');
+                $.mobile.changePage('media-add.html');
             }
         }
 
@@ -74,12 +74,12 @@
           alert ("in gotpic()");
           alert("about to changepage");
            //$.mobile.changePage('testadd.html');
-           $.mobile.changePage('addtestpop.html');
+           $.mobile.changePage('media-add.html');
 
         <!--if(event.target.files.length == 1 &&-->
         <!--event.target.files[0].type.indexOf("image/") == 0) {-->
         <!--$("#yourimage").attr("src",URL.createObjectURL(event.target.files[0]));-->
-        <!--localStorage.setItem("file", URL.createObjectURL(event.target.files[0]));-->
+        <!--sessionStorage.setItem("file", URL.createObjectURL(event.target.files[0]));-->
         <!--alert("after set item");-->
         <!--$.mobile.changePage("#testCapturePageAdd");-->
         <!--}-->

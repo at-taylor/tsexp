@@ -1,0 +1,66 @@
+<html>
+
+<head>
+</head>
+
+<body>
+
+<div id="mediaAddPage" data-role="page" data-add-back-btn="true" data-back-btn-text="back" data-back-btn-theme="c">
+
+    <div data-theme="c" data-role="header" >
+        <h1>Add Media</h1>
+    </div>      <!-- end of header -->
+
+    <div data-role="content">
+
+        <section class="ui-grid-a">
+            <div class="ui-block-a">
+                <div data-role="fieldcontainer">
+                    <label for="titleTxt">Title:</label><input type="text" id="titleTxt" name="titleTxt" length=80 placeholder="Enter a Title for this Media">
+                </div>
+                <div data-role="fieldcontainer">
+                    <label for="dateTxt">Date Taken:</label><input type="date" data-role="datebox" id="dateTxt" name="dateTxt">
+                </div>
+                <div data-role="fieldcontainer">
+                    <label for="descrTxt">Description:</label><textarea rows="4" cols="50" id="descrTxt" name="descrTxt" length=200 placeholder="Enter a descrition for this media"></textarea>
+                </div>
+                <div data-role="fieldcontainer">
+                    <div id="categoryDiv">
+                        <label for="categoryList">Categories</label>
+                        <select id="categoryList" name="categoryList"  multiple >
+                            <!--<option value="1">red</option>-->
+                            <!--<option value="2">green</option>-->
+                            <!--<option value="3">yellow</option>-->
+                            <!--<option value="4">blue</option>-->
+                        </select>
+                    </div> <!-- categoryDiv -->
+                </div>
+            </div>  <!-- end of block a -->
+            <div class="ui-block-b">
+                <img id="theImage" heigth=360 width=270>
+                <label for="fileInfoTxt">File Info:</label><input type="text" id="fileInfoTxt" name="fileInfoTxt" >
+                <label for="fileLocTxt">File Loc:</label><input type="text" id="fileLocTxt" name="fileLocTxt" >
+                <!--<button id="uploadBtn" name="uploadBtn">Upload My Media</button>-->
+                <a href="#uploadConfirm" data-rel="popup">Upload My Media</a>
+                <label for="fileUploadTxt">Upload Info:</label><input type="text" id="fileUploadTxt" name="fileUploadTxt" >
+            </div>    <!-- end of block b -->
+
+        </section>
+
+
+        <div data-role="popup" id="uploadConfirm">
+            <p>Are you sure?</p>
+            <a href="#" data-rel="back" data-role="button" data-theme="a" >Cancel</a>
+            <button id="uploadBtn" name="uploadBtn"> Yes! Upload My Media</button>
+        </div>   <!-- end of upload confirm -->
+
+
+    </div>    <!-- end of content div -->
+
+    <script src="js/media-add.js"></script>
+
+
+</div> <!-- end of mediaAddPage div -->
+
+</body>
+</html>

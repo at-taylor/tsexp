@@ -23,7 +23,16 @@
             <div class="ui-block-a">
                 <label for="storyTitleTxt">Title:</label><input type="text" id="storyTitleTxt" length=80 >
                 <label for="storyDateTxt">Date Taken:</label><input type="date" data-role="datebox" id="storyDateTxt" >
-
+                <div data-role="fieldcontainer">
+                    <div id="storyCategoryDiv">
+                        <label for="storyCategoryList">Categories</label>
+                        <select id="storyCategoryList" name="categoryList"  multiple >
+                            <!--<option value="1">red</option>-->
+                            <!--<option value="2">green</option>-->
+                            <!--<option value="3">yellow</option>-->
+                            <!--<option value="4">blue</option>-->
+                        </select>
+                    </div> <!-- categoryDiv -->
                 <label for="storyDescrTxt">Description:</label>
                 <textarea id="storyDescrTxt" data-role="none" >An editable textarea.</textarea>
             </div>
@@ -50,6 +59,8 @@
     </div>
 
     <!--<script src="js/storylist.js"></script>-->
+    <link rel="stylesheet" href="css/tinyedit/style.css" />
+
     <script type="text/javascript" src="js/vendor/tinyedit/tinyeditor.js"></script>
     <script type="text/javascript">
         console.log("Before declaring the editor and attaching it. Data role is none.");
