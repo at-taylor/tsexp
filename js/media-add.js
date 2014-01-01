@@ -72,9 +72,13 @@ function fileok(r) {
 
     var respObj = JSON.parse(r.response);
 
-    //console.log("Response = " + r.response);
-    //console.log("Sent = " + r.bytesSent);
+    updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), 'media-capture.html', document.getElementById('fileUploadTxt'));
+
+    removeMediaItemStorage();
+
+    navigator.camera.cleanup(function() { console.log("Camera cleanup success.")}, function(message) { console.log("Camera cleanup failed.")});
 }
+
 
 function filefail(error) {
 
