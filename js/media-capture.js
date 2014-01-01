@@ -19,25 +19,6 @@ $('#mediaCapturePage').bind('pageinit', function(event) {
 });
 
 
-$('#mediaCapturePage').bind('pagebeforeload', function(event) {
-   // alert('bind: pagebeforeload');
-});
-
-$('#mediaCapturePage').bind('pageload', function(event) {
-   // alert('bind: pageload');
-});
-
-$('#mediaCapturePage').bind('pagebeforeshow', function(event) {
-   // alert('bind: pagebeforeshow');
-});
-
-$('#mediaCapturePage').bind('pageshow', function(event) {
-//     alert("pageshow");
-
-});
-
-
-
 var app = {
     // Application Constructor
     initialize: function() {
@@ -430,23 +411,36 @@ var app = {
 
         navigator.device.capture.captureVideo(function(mediaFiles)
             {
-                alert("in capture2");
-//                console.log('CALLBACK!');
-//                console.log(JSON.stringify(mediaFiles));
-                var options = new FileUploadOptions();
-                options.fileKey="file";
-                //options.fileName=mediaFiles[0].substr(mediaFiles[0].lastIndexOf('/')+1);
-                options.fileName="testvideo.mov";
-                alert("File name: " + options.fileName);
-                //options.mimeType="image/jpeg";
+                document.getElementById('testMsg').value = "mediaCapturePage: captureVideo()";
 
-                var params = {};
-                params.value1 = "test";
-                params.value2 = "param";
+                removeMediaItemStorage();
 
-                options.params = params;
+                var imageURI = mediaFiles[0];
+                sessionStorage.setItem("fileUrl", imageURI);
+                sessionStorage.setItem("fileName", imageURI.substr(imageURI.lastIndexOf('/')+1));
+                sessionStorage.setItem("fileType", "image/mov");
 
-                var ft = new FileTransfer();
+                sessionStorage.setItem("fileDate", "no date");
+                sessionStorage.setItem("fileSize", "no size");
+                console.log(sessionStorage.getItem("fileUrl"));
+
+                //alert("after set item");
+                $.mobile.changePage('media-add.html');
+
+//                var options = new FileUploadOptions();
+//                options.fileKey="file";
+//                //options.fileName=mediaFiles[0].substr(mediaFiles[0].lastIndexOf('/')+1);
+//                options.fileName="testvideo.mov";
+//                alert("File name: " + options.fileName);
+//                //options.mimeType="image/jpeg";
+//
+//                var params = {};
+//                params.value1 = "test";
+//                params.value2 = "param";
+//
+//                options.params = params;
+//
+//                var ft = new FileTransfer();
                 //ft.upload(mediaFiles[0], encodeURI("http://216.74.49.91:8080/tssvc/resourcesS/upload"), fileok, filefail, options);
                 alert("exiting ...")
             }, function(error)
