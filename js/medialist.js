@@ -34,7 +34,7 @@ function getMediaList() {
 
             //console.log("item = " + item.id + " fileType = " + item.fileType + " tag = " + videoOrImageTag);
 
-            $('#mediaList').append('<li><a href="storydetails.html?id=' + item.id + '">' +
+            $('#mediaList').append('<li><a href="media-edit.html?id=' + item.id + '">' +
 
                 '<div class="ui-grid-c" style="padding-left: 10px">' +
                 '<div class="ui-block-a">' +
