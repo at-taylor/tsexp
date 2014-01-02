@@ -7,16 +7,18 @@
 
 <div id="mediaEditPage" data-role="page" data-add-back-btn="true" data-back-btn-text="back" data-back-btn-theme="c">
 
-<div data-theme="c" data-role="header" >
-    <h1>Add Media</h1>
-</div>
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <h1><img src="img/splash/logo.png"></h1>
+        <a href="#MainNavPage" data-icon="home" class="ui-btn-right">Home</a>
 
-<div data-role="content">
-    <p>Add media page test</p>
+    </div>
+
+    <div data-role="content">
+    <h3>Edit Media</h3>
 
 
-    <section class="ui-grid-a">
-        <div class="ui-block-a">
+    <div class="ui-grid-a">
+        <div class="ui-block-a" style="width:55%; padding-left: 5%; padding-right: 2%">
             <div data-role="fieldcontainer">
                 <label for="editTitleTxt">Title:</label><input type="text" id="editTitleTxt"  length=80 placeholder="Enter a Title for this Media">
             </div>
@@ -38,7 +40,7 @@
                 </div> <!-- categoryDiv -->
             </div>
         </div>
-        <div class="ui-block-b">
+        <div class="ui-block-b" style="text-align: center; width:45%; padding-left: 2%; padding-right: 5%">
             <div data-role="fieldcontainer">
             <img id="editImage" heigth=360 width=270 >
                 </div>
@@ -46,20 +48,32 @@
             <!--<label for="fileLocTxt">File Loc:</label><input type="text" id="fileLocTxt" name="fileLocTxt" >-->
             <!--<button id="uploadBtn" name="uploadBtn">Upload My Media</button>-->
             <div data-role="fieldcontainer">
-            <a href="#editConfirm" data-rel="popup">Edit My Media</a>
+            <a href="#editConfirm" data-role="button" data-rel="popup">Edit My Media</a>
             </div>
             <!--<label for="fileUploadTxt">Upload Info:</label><input type="text" id="fileUploadTxt" name="fileUploadTxt" >-->
         </div>
 
-    </section>
+    </div>
 
 
     <div data-role="popup" id="editConfirm">
-        <p>Are you sure?</p>
-        <a href="#" data-rel="back" data-role="button" data-theme="a" >Cancel</a>
+        <h2>This will change the media data</h2>
+        <a href="#" data-rel="back" data-role="button" data-theme="a" >Don't Allow</a>
         <button id="editBtn" name="editBtn"> Yes! Edit My Media</button>
     </div>
 
+    <div data-theme="c" data-role="footer" data-position="fixed" class="ui-bar" style="text-align: center" >
+        <div style="display: inline-block"></div>
+        <a href="#MainNavPage"><img height="51" width="50" src="img/navbut/home.png" /></a>
+        <a href="#"><img height="51" width="50" src="img/navbut/user.png" /></a>
+        <a href="media-capture.html"><img height="51" width="50" src="img/navbut/addMedia.png" /></a>
+        <a href="#"><img height="51" width="50" src="img/navbut/inviteFriends.png" /></a>
+        <a href="#"><img height="51" width="50" src="img/navbut/myAccount.png" /></a>
+        <a href="#"><img height="51" width="50" src="img/navbut/tellStory.png" /></a>
+        <a href="media-library.html"><img height="51" width="50" src="img/navbut/mediaLIbrary.png" /></a>
+        <a href="story-directory.html"><img height="51" width="50" src="img/navbut/storyLibrary.png" /></a>
+        <a href="#"><img height="51" width="50" src="img/navbut/requestStory.png" /></a>
+    </div>
 
 
 </div>
