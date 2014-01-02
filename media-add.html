@@ -7,14 +7,18 @@
 
 <div id="mediaAddPage" data-role="page" data-add-back-btn="true" data-back-btn-text="back" data-back-btn-theme="c">
 
-    <div data-theme="c" data-role="header" >
-        <h1>Add Media</h1>
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <h1><img src="img/splash/logo.png"></h1>
+        <a href="#MainNavPage" data-icon="home" id="logout_submit" class="ui-btn-right">Logout</a>
+
+
     </div>      <!-- end of header -->
 
     <div data-role="content">
+        <div style="text-align: center"><h1>ADD MEDIA</h1> </div>
 
-        <section class="ui-grid-a">
-            <div class="ui-block-a">
+        <div class="ui-grid-a">
+            <div class="ui-block-a" style="width:55%; padding-left: 5%; padding-right: 2%">
                 <div data-role="fieldcontainer">
                     <label for="titleTxt">Title:</label><input type="text" id="titleTxt" name="titleTxt" length=80 placeholder="Enter a Title for this Media">
                 </div>
@@ -36,16 +40,16 @@
                     </div> <!-- categoryDiv -->
                 </div>
             </div>  <!-- end of block a -->
-            <div class="ui-block-b">
-                <img id="theImage" heigth=360 width=270>
-                <label for="fileInfoTxt">File Info:</label><input type="text" id="fileInfoTxt" name="fileInfoTxt" >
+            <div class="ui-block-b" style="text-align: center; width:45%; padding-left: 2%; padding-right: 5%">
+                <img id="theImage" heigth=360 width=270 >
+                <label for="fileInfoTxt">File Info2:</label><input type="text" id="fileInfoTxt" name="fileInfoTxt" >
                 <label for="fileLocTxt">File Loc:</label><input type="text" id="fileLocTxt" name="fileLocTxt" >
                 <!--<button id="uploadBtn" name="uploadBtn">Upload My Media</button>-->
-                <a href="#uploadConfirm" data-rel="popup">Upload My Media</a>
+                <a href="#uploadConfirm" data-role="button" data-rel="popup">Upload My Media</a>
                 <label for="fileUploadTxt">Upload Info:</label><input type="text" id="fileUploadTxt" name="fileUploadTxt" >
             </div>    <!-- end of block b -->
 
-        </section>
+        </div>
 
         <div id="mediaAddStatus"></div>
 
@@ -55,6 +59,19 @@
             <a href="#" data-rel="back" data-role="button" data-theme="a" >Cancel</a>
             <button id="uploadBtn" name="uploadBtn"> Yes! Upload My Media</button>
         </div>   <!-- end of upload confirm -->
+
+        <div data-theme="c" data-role="footer" data-position="fixed" class="ui-bar" style="text-align: center" >
+            <div style="display: inline-block"></div>
+            <a href="#MainNavPage"><img height="51" width="50" src="img/navbut/home.png" /></a>
+            <a href="#"><img height="51" width="50" src="img/navbut/user.png" /></a>
+            <a href="media-capture.html"><img height="51" width="50" src="img/navbut/addMedia.png" /></a>
+            <a href="#"><img height="51" width="50" src="img/navbut/inviteFriends.png" /></a>
+            <a href="#"><img height="51" width="50" src="img/navbut/myAccount.png" /></a>
+            <a href="#"><img height="51" width="50" src="img/navbut/tellStory.png" /></a>
+            <a href="media-library.html"><img height="51" width="50" src="img/navbut/mediaLIbrary.png" /></a>
+            <a href="story-directory.html"><img height="51" width="50" src="img/navbut/storyLibrary.png" /></a>
+            <a href="#"><img height="51" width="50" src="img/navbut/requestStory.png" /></a>
+        </div>
 
 
     </div>    <!-- end of content div -->

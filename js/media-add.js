@@ -1,6 +1,27 @@
 var serviceMediaUploadURL = tsServiceURLDomain + "tssvc/resourcesS/upload";
+var serviceCategoryURL = tsServiceURLDomain + "tssvc/resourcesS/categories";
 
 console.log("mediaAddPage js: Executing media-add.js");
+
+function setCategoryList(element) {
+
+    console.log("json-common: setCategoryList() for element id: " + element.id);
+
+    var jQName = '#' + element.id;
+
+    $.getJSON(serviceCategoryURL, function(data) {
+        cat = data.categoryModelList;
+
+        $.each(cat, function(index, item) {
+
+            var optionListItem = "<option value='" + item.categoryId + "'>" +item.categoryDescr + "</option>";
+            //console.log("option Item: " + optionListItem);
+            $(jQName).append("<option value='" + item.categoryId + "'>" +item.categoryDescr + "</option>");
+        });
+        $(jQName).selectmenu("refresh", true);
+    });
+
+}
 
 $(document).on('pagebeforeshow', '#mediaAddPage', function()
 {
