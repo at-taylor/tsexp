@@ -8,16 +8,13 @@
 var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/media";
 var media;
 
-console.log("libtestPage js: Executing");
-console.log("libtestPage: executing using services at: " + serviceURL);
+console.log("mediaLibGridPage js: Executing");
+console.log("mediaLibGridPage: executing using services at: " + serviceURL);
 
 
-
-;
-
-$('#libTestPage').bind('pageinit', function(event) {
+$('#mediaLibGridPage').bind('pageinit', function(event) {
     // alert('bind: pageinit');
-    console.log("libTestPage: in bind(): pageinit");
+    console.log("mediaLibGridPage: in bind(): pageinit");
     getMediaList();
 });
 
@@ -25,12 +22,12 @@ $('#libTestPage').bind('pageinit', function(event) {
 
 function getMediaList() {
      //alert('running list()7') ;
-     console.log("libTestPage: getMediaList(): running")     ;
+     console.log("mediaLibGridPage: getMediaList(): running")     ;
 
 
 
     $.getJSON(serviceURL, function(data) {
-        $('#libTest li').remove();
+        $('#mediaLibGridList li').remove();
         media = data.mediaModelList;
         $.each(media, function(index, item) {
 
@@ -41,7 +38,7 @@ function getMediaList() {
                 videoOrImageTag =  '<img src= '+ item.url +'>'
 
 
-            $('#libTest').append('<li><a href="media-edit.html?id=' + item.id + '">' +
+            $('#mediaLibGridList').append('<li><a href="media-edit.html?id=' + item.id + '">' +
                 videoOrImageTag +
                 '<h2>' + item.title + '</h2>' +
                 '<p>' + item.createdHr + '</p>' +
@@ -50,8 +47,8 @@ function getMediaList() {
 
 
         });
-        $('#libTest').listview('refresh');
-        console.log("libTestPage: getMediaList(): complete")     ;
+        $('#mediaLibGridList').listview('refresh');
+        console.log("mediaLibGridPage: getMediaList(): complete")     ;
     });
 
 

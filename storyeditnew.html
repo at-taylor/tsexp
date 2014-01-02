@@ -5,12 +5,29 @@
 
 <body>
 
-<div id="storyEditNewPage" data-role="page" data-add-back-btn="true" data-back-btn-text="back" data-back-btn-theme="c">
+<div id="storyEditNewPage"  data-role="page" data-add-back-btn="true" data-back-btn-text="back" data-back-btn-theme="c">
     <div data-theme="c" data-role="header" data-position="fixed" >
         <h1><img src="img/splash/logo.png"></h1>
         <a href="#MainNavPage" data-icon="home" class="ui-btn-right">Home</a>
 
     </div>
+
+    <div data-role="panel" id="storyNewMediaPanel" data-dismissible="false">
+        <!--<ul  data-role="listview" id="#storyEditMedia" data-inset="true" data-filter="true">-->
+            <!--<li><a href="media-edit.html?id=128"><img src= http://app.treasuredstories.com/uploaded/media/image/p180ifioobmvv5c9gcgm0btpb13.JPG></a></li>-->
+            <!--<li><a href="media-edit.html?id=79"><img src= http://app.treasuredstories.com/uploaded/media/image/p1809l9mrujpuijkst5gtb1hlg5.jpg><h2>Me and Jim</h2><p class="ui-li-aside">image</p></a></li>-->
+            <!--<li><a href="media-edit.html?id=78"><img src= http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png><h2>TS Logo square</h2><p class="ui-li-aside">image</p></a></li>-->
+        <!--</ul>-->
+
+        <div data-role="fieldcontain">
+            <fieldset data-role="controlgroup">
+                <input type="checkbox" id="OptIn" class="{src:'img\navbut\add.png'}" checked="checked"/>
+
+                <input type="checkbox" value="1" class="cbox" name="tandc" id="tandc"/>
+                <label for="tandc">I agree to the <a href="#tc" data-rel="dialog" ><img src="http://dummyimages.com/25x25" /></a></label>
+            </fieldset>
+        </div>
+    </div><!-- /panel -->
 
     <div data-role="content">
 
@@ -35,9 +52,15 @@
                     </div> <!-- categoryDiv -->
                 <label for="storyDescrTxt">Description:</label>
                 <textarea id="storyDescrTxt" data-role="none" >An editable textarea.</textarea>
+                    <input type="text" id="htmlSourceTxt" data-role="none">
             </div>
             <div class="ui-block-b">
-                <input type="text" id="htmlSourceTxt" data-role="none">
+
+                <!--<ul  data-role="listview" id="#storyEditMedia" data-inset="true" data-filter="true">-->
+                    <!--<li><a href="media-edit.html?id=128"><img src= http://app.treasuredstories.com/uploaded/media/image/p180ifioobmvv5c9gcgm0btpb13.JPG><h2>In the Navy</h2><p>07/28/2013</p><p class="ui-li-aside">JPG</p></a></li>-->
+                    <!--<li><a href="media-edit.html?id=79"><img src= http://app.treasuredstories.com/uploaded/media/image/p1809l9mrujpuijkst5gtb1hlg5.jpg><h2>Me and Jim</h2><p>07/24/2013</p><p class="ui-li-aside">image</p></a></li>-->
+                    <!--<li><a href="media-edit.html?id=78"><img src= http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png><h2>TS Logo square</h2><p>07/24/2013</p><p class="ui-li-aside">image</p></a></li>-->
+                <!--</ul>-->
 
             </div>
 
@@ -45,7 +68,7 @@
 
     </div>       <!-- end of content div -->
 
-    <div data-theme="c" data-role="footer" data-position="fixed" class="ui-bar" style="text-align: center" >
+    <div data-theme="c" data-role="footer"  class="ui-bar" style="text-align: center" >
         <div style="display: inline-block"></div>
         <a href="#"><img height="51" width="50" src="img/navbut/home.png" /></a>
         <a href="#"><img height="51" width="50" src="img/navbut/user.png" /></a>
@@ -94,6 +117,45 @@
             theTarget.value = editor.i.contentWindow.document.body.innerHTML;
 
         }
+
+        $(document).on('pagebeforeshow', '#storyEditNewPage', function()
+        {
+            console.log("storyEditNewPage: pagebeforeshow()");
+            var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/media";
+            var media;
+
+            console.log("About to open panel");
+            $( "#storyNewMediaPanel" ).panel( "open");
+            console.log("After open panel");
+
+
+//            $.getJSON(serviceURL, function(data) {
+//                $('#storyEditMedia li').remove();
+//                media = data.mediaModelList;
+//                $.each(media, function(index, item) {
+//
+//                    var videoOrImageTag;
+//                    if (item.fileType == "mp4")
+//                        videoOrImageTag = '<video ><source  type="video/mp4" src=' + item.url + '></video>'
+//                    else
+//                        videoOrImageTag =  '<img src= '+ item.url +'>'
+//
+//                    var lineItem = '<li><a href="media-edit.html?id=' + item.id + '">' +
+//                            videoOrImageTag +
+//                            '<h2>' + item.title + '</h2>' +
+//                            '<p>' + item.createdHr + '</p>' +
+//                            '<p class="ui-li-aside">' + item.fileType + '</p>' +
+//                            '</a></li>';
+//                    console.log("Line Item: " + lineItem) ;
+//                    $('#storyEditMedia').append( lineItem);
+//
+//
+//                });
+//                $('#storyEditMedia').listview('refresh');
+//                console.log("storyEditNewPage: getMediaList(): complete")     ;
+//            });
+        });
+
         </script>
 
 </div> <!-- end of storyListPage -->
