@@ -239,6 +239,15 @@ margin-bottom: 20px ;
 /* For this demo we used images with a size of 310x310 pixels. Just before the second breakpoint the images reach their max width: 1019px - 2 x 9px padding = 1001px x 30.9333% = ~310px */
 
 
-  .my-addpage .ui-block-b{
-    text-align: center;
+.my-page .ui-listview-filter-inset {
+    background: transparent;
+    border: transparent;
+
+}
+
+
+.medlist .ui-listview-filter-inset {
+    background: transparent;
+    border: transparent;
+
 }
