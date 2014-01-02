@@ -39,12 +39,12 @@
 
         <section class="ui-grid-a">
             <div class="ui-block-a" style="width=60%">
-                <label for="storyTitleTxt">Title:</label><input type="text" id="storyTitleTxt" length=80 >
-                <label for="storyDateTxt">Date Taken:</label><input type="date" data-role="datebox" id="storyDateTxt" >
+                <label for="storyEditNewTitleTxt">Title:</label><input type="text" id="storyEditNewTitleTxt" length=80 >
+                <label for="storyEditNewDateTxt">Date:</label><input type="date" data-role="datebox" id="storyEditNewDateTxt" >
                 <div data-role="fieldcontainer">
                     <div id="storyCategoryDiv">
-                        <label for="storyCategoryList">Categories</label>
-                        <select id="storyCategoryList" name="categoryList"  multiple >
+                        <label for="storyEditNewCategoryList">Categories</label>
+                        <select id="storyEditNewCategoryList"  multiple >
                             <!--<option value="1">red</option>-->
                             <!--<option value="2">green</option>-->
                             <!--<option value="3">yellow</option>-->
@@ -121,10 +121,10 @@
 
     <script type="text/javascript" src="js/vendor/tinyedit/tinyeditor.js"></script>
     <script type="text/javascript">
-        console.log("Before declaring the editor and attaching it. Data role is none.");
+
         new TINY.editor.edit('editor',{
             id:'storyDescrTxt',
-            width:900,
+            width:400,
             height:250,
             cssclass:'te',
             controlclass:'tecontrol',
@@ -143,7 +143,6 @@
             toggle:{text:'source',activetext:'wysiwyg',cssclass:'toggle'},
             resize:{cssclass:'resize'}
         });
-        console.log("after declaring the editor");
 
         function submitIt() {
             console.log("In submitIt()");
@@ -159,109 +158,42 @@
 
         }
 
-        $( "#controlgroup" ).on( "controlgroupcreate", function( event, ui ) {
-            console.log("controlgroupcteate: triggered()");
-
-            //var boxId = document.getElementById("controlgroup");
-            //boxId.parent.remove();
-            //$('.ui-controlgroup-controls').remove();
-        } );
-
-        $(document).on('pagebeforehide', '#storyEditNewPage', function()
-        {
-            console.log("page before hide: start") ;
-
-            console.log("page before hide: end");
-        });
 
         $(document).on('pagebeforeshow', '#storyEditNewPage', function()
         {
-            console.log("storyEditNewPage: pagebeforeshow14()");
+            console.log("storyEditNewPage: pagebeforeshow()");
+            $('#storyEditNewTitleTxt').val(sessionStorage.getItem("storyTitle"));
+            setCategoryList(document.getElementById('storyEditNewCategoryList'));
+
             var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/media";
-            var media;
+            $.getJSON(serviceURL, function(data) {
+                console.log("storyEditNewPage: pagebeforeshow(): getJSON for media library: start()");
 
-            //console.log("About to open panel");
-           // $( "#storyNewMediaPanel" ).panel( "open");
-           // console.log("After open panel");
+                var media;
+                var group = $( "#controlgroup" );
+                $('.ui-checkbox').remove();
+                var el;
+                media = data.mediaModelList;
+                $.each(media, function(index, item) {
 
-            var group = $( "#controlgroup" );
-//            var action = function() {
-//                var option = $( "[name='radio-option']:checked" ).attr( "id" );
-//                $el[ option ](); group.controlgroup( "refresh" );
-//            };
-           // var counter = 1;
-            //var $el = $( "<label for='widget" + counter + "'>Checkbox " + counter + "</label><input type='checkbox' id='widget" + counter + "'></input>" );
+                    //console.log("Index from url: " + item.url + " is " + item.url.substring(item.url.lastIndexOf('.')+1) );
+                    var theExt = item.url.substring(item.url.lastIndexOf('.')+1);
+                    if ((theExt == "jpg") || (theExt == "png") || (theExt == "JPG"))
+                        $el = $('<input type="checkbox" data-inline="true" id="mediaCheck' + item.id + '" class="mediaCheck" value=' + item.id +' ><label for="mediaCheck' + item.id +'"><img width=100 height=100 src= "' + item.url + '"></label>');
+                    //console.log("Element :" + $el);
+                    $( "#controlgroup" ).controlgroup( "container" )["append"]( $el );
 
-//            //$( $el[ 1 ] ).bind( "change", action );
-//            $( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
-
-            //$('.ui-controlgroup-controls').remove();
-
-            $('.ui-checkbox').remove();
-            var $el = $('<input type="checkbox"  data-inline="true" id="testCheck5" class="mediaCheck" value=2><label for="testCheck5"><img width=100 src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>');
-            $( "#controlgroup" ).controlgroup( "container" )["append"]( $el );
-
-            $el = $('<input type="checkbox"  data-inline="true" id="testCheck6" class="mediaCheck" value=2><label for="testCheck6"><img width=100 src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>');
-            $( "#controlgroup" ).controlgroup( "container" )["append"]( $el );
-
-            //$( $el[ 1 ] ).checkboxradio();
-//
-            console.log("after control group append");
-
-             group.controlgroup( "refresh" );
-            console.log("after refresh");
-            console.log("ask for another create");
-            $('#controlgroup').trigger('create');
-            $('div').trigger('create');
-            console.log("after div refresh");
-
-            //$('#storyAddMediaCheckboxFieldSet').append(item);
-
-            //var item = '<input type="checkbox"  data-inline="true" id="testCheck" class="mediaCheck" value=1><label for="testCheck"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>';
-           // $('#storyAddMediaCheckboxFieldSet').trigger('create');
-            //$('#storyAddMediaCheckboxFieldSet').checkboxradio('refresh');
-            //$('<input type="checkbox" id="radio-choice-5"><label for="radio-choice-5">Horse</label>').appendTo("fieldset");
-           // $('<input type="checkbox"  data-inline="true" id="testCheck" class="mediaCheck" value=1><label for="testCheck"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>').appendTo("fieldset");
-           // $('<input type="checkbox"  data-inline="true" id="testCheck2" class="mediaCheck" value=2><label for="testCheck2"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>').appendTo("fieldset");
-
-//            $(item).appendTo("fieldset");
-//            $(item).appendTo("fieldset");
-//            $(item).appendTo("fieldset");
-           // $('#storyAddMediaCheckboxFieldSet').trigger('create');
-           // $('div').trigger('create');
-            //$('#testCheck').attr('checked',true).checkboxradio('refresh');
-
-
-//            $.getJSON(serviceURL, function(data) {
-//                $('#storyEditMedia li').remove();
-//                media = data.mediaModelList;
-//                $.each(media, function(index, item) {
-//
-//                    var videoOrImageTag;
-//                    if (item.fileType == "mp4")
-//                        videoOrImageTag = '<video ><source  type="video/mp4" src=' + item.url + '></video>'
-//                    else
-//                        videoOrImageTag =  '<img src= '+ item.url +'>'
-//
-//                    var lineItem = '<li><a href="media-edit.html?id=' + item.id + '">' +
-//                            videoOrImageTag +
-//                            '<h2>' + item.title + '</h2>' +
-//                            '<p>' + item.createdHr + '</p>' +
-//                            '<p class="ui-li-aside">' + item.fileType + '</p>' +
-//                            '</a></li>';
-//                    console.log("Line Item: " + lineItem) ;
-//                    $('#storyEditMedia').append( lineItem);
-//
-//
-//                });
-//                $('#storyEditMedia').listview('refresh');
-//                console.log("storyEditNewPage: getMediaList(): complete")     ;
-//            });
+                });
+                group.controlgroup( "refresh" );
+                $('#controlgroup').trigger('create');
+                $('div').trigger('create');
+                console.log("storyEditNewPage: pagebeforeshow(): getJSON for media library: end()");
+            });
         });
 
         </script>
 
-</div> <!-- end of storyListPage -->
+</div> <!-- end of storyEditNewPage -->
 
 </body>
 </html>
