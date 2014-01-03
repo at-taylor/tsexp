@@ -23,8 +23,22 @@ console.log("mediaAddPage js: Executing media-add.js");
 //
 //}
 
+
+
 $(document).on('pagebeforeshow', '#mediaAddPage', function()
 {
+//    console.log("stack");
+//    console.log( $.mobile.urlHistory.stack );
+
+
+    console.log("mediaAddPage: pagebeforeshow()");
+//    if (sessionStorage.getItem("fileUrl") == null) { // page access thru a back button
+//        console.log("mediaAddPage: pagebeforeshow(): accessed with null");
+//        console.log("mediaAddPage: pagebeforeshow(); going back in history to:")
+//        console.log($.mobile.urlHistory.activeIndex-1);
+//        console.log($.mobile.urlHistory.stack[$.mobile.urlHistory.activeIndex-1]);
+//        $.mobile.changePage($.mobile.urlHistory.stack[$.mobile.urlHistory.activeIndex-1].pageUrl)
+//    }
 
     console.log("mediaAddPageAdd: starting category load");
     setCategoryList(document.getElementById('categoryList'));
@@ -39,6 +53,8 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
     $('#uploadBtn').click(function(event) {
         console.log("mediaAddPageAdd: uploadBtn.click()");
 
+        $('[type="submit"]').button('disable');
+
         var fileUrl = sessionStorage.getItem("fileUrl");
         var mediaId;
         if (Number(fileUrl.indexOf("http")) > 0)  {
@@ -50,6 +66,22 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
            console.log("url does not contain http: " + fileUrl);
            uploadFileFromFileHandle () ;
         }
+    });
+
+    $('#cancelBtn').click(function(event) {
+
+        console.log("mediaAddPageAdd: cancelBtn.click()");
+
+        $('[type="submit"]').button('disable');
+
+        removeMediaItemStorage();
+
+        $.mobile.changePage('media-capture.html',{
+            transition: "pop",
+            reverse: false,
+            changeHash: false
+        });
+
     });
 });
 
@@ -94,14 +126,7 @@ function fileok(r) {
     var respObj = JSON.parse(r.response);
     var selectedValsArray = $('#categoryList').val();
     console.log("mediaAddPageAdd: fileOK(): selected Category Array" + selectedValsArray);
-//    var jsonStringArr = "{";
-//    for(i = 0; i < selectedValsArray.length; i++) {
-//        //console.log("value at index: " + i + " is " + selectedValsArray[i] );
-//        jsonStringArr = jsonStringArr + '"' + selectedValsArray[i] + '"';
-//        if (i < selectedValsArray.length-1)
-//            jsonStringArr = jsonStringArr + ","
-//    }
-//    jsonStringArr = jsonStringArr + "}";
+
     var jsonStringArr = JSON.stringify(selectedValsArray);
     console.log("mediaAddPageAdd: fileOK(): selected Category Array as JSON" + jsonStringArr);
 
@@ -157,16 +182,9 @@ function uploadFileFromUrl() {
 
                     var selectedValsArray = $('#categoryList').val();
                     console.log("mediaAddPageAdd: uploadFileFromUrl(): selected Category Array" + selectedValsArray);
-//                    var jsonStringArr = "{";
-//                    for(i = 0; i < selectedValsArray.length; i++) {
-//                        //console.log("value at index: " + i + " is " + selectedValsArray[i] );
-//                        jsonStringArr = jsonStringArr + '"' + selectedValsArray[i] + '"';
-//                        if (i < selectedValsArray.length-1)
-//                            jsonStringArr = jsonStringArr + ","
-//                    }
-//                    jsonStringArr = jsonStringArr + "}";
                     var jsonStringArr = JSON.stringify(selectedValsArray);
                     console.log("mediaAddPageAdd: uploadFileFromUrl: selected Category Array as JSON" + jsonStringArr);
+
                     updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), jsonStringArr, 'test.html', document.getElementById('fileUploadTxt'));
 
                     removeMediaItemStorage();

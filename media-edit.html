@@ -52,7 +52,7 @@
             <div data-role="fieldcontainer">
             <a href="#editConfirm" data-role="button" data-rel="popup">Edit My Media</a>
             </div>
-            <!--<label for="fileUploadTxt">Upload Info:</label><input type="text" id="fileUploadTxt" name="fileUploadTxt" >-->
+            <label for="fileUploadTxt">Error Info:</label><input type="text" id="fileUploadTxt" name="fileUploadTxt" >
         </div>
 
     </div>
@@ -61,7 +61,7 @@
     <div data-role="popup" id="editConfirm">
         <h2>This will change the media data</h2>
         <a href="#" data-rel="back" data-role="button" data-theme="a" >Don't Allow</a>
-        <button id="editBtn" name="editBtn"> Yes! Edit My Media</button>
+        <button type="submit" id="editBtn" name="editBtn"> Yes! Edit My Media</button>
     </div>
 
     <div data-theme="c" data-role="footer" data-position="fixed" class="ui-bar" style="text-align: center" >
@@ -85,32 +85,29 @@
         var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/media";
         var serviceCategoryURL = tsServiceURLDomain + "tssvc/resourcesS/categories";
 
-        console.log("editmedia js: Executing");
-        console.log("mediaPage: executing using services at: " + serviceURL);
-        console.log("testCapturePageAdd: executing using category services at: " + serviceCategoryURL);
+        console.log("media-edit.js: Executing");
+        console.log("mediaEditPage: executing using services at: " + serviceURL);
+        console.log("mediaEditPage: executing using category services at: " + serviceCategoryURL);
 
-//
         $('#mediaEditPage').bind('pageinit', function(event) {
             console.log('mediaEditPage: bind: pageinit()');
-
         })
 
         $(document).on('pagebeforeshow', '#mediaEditPage', function(){
+
             console.log('mediaEditPage: pagebeforeshow()');
-
-            console.log("activePage: " + $.mobile.activePage.data('url')   );
-            console.log("urlHistory: " + $.mobile.urlHistory.getActive().url)   ;
-
             var mediaId = getUrlVars() ["id"];
+            console.log ("mediaEditPage: pagebeforeshow(): called with media id=" + mediaId);
 
-            console.log ("id=" + mediaId);
+            //console.log("activePage: " + $.mobile.activePage.data('url')   );
+            //console.log("urlHistory: " + $.mobile.urlHistory.getActive().url)   ;
+
             var categoryResultArray = new Array();
-
             $.getJSON(serviceURL + '/' + mediaId, function(data) {
 
-                console.log("mediaEditpage: Title : " + data.title);
-                console.log("mediaEditpage: Created : " + data.mediaDateRaw);
-                console.log("mediaEditpage: Descr : " + data.descr);
+                console.log("mediaEditPage: Title : " + data.title);
+                console.log("mediaEditPage: Created : " + data.mediaDateRaw);
+                console.log("mediaEditPage: Descr : " + data.descr);
 
                 // Build array of selected categories, use to set the 'selected' values
                 var iItr = 0;
@@ -125,28 +122,42 @@
                 $('#editDescrTxt').val(data.descr);
                 $('#editImage').attr("src", data.url);
 
+                console.log("mediaEditPage: starting category load.");
                 $.getJSON(serviceCategoryURL, function(data) {
+
+                    $('#editCategoryList option').remove();       // clear previous entries
 
                     cat = data.categoryModelList;
                     $.each(cat, function(index, item) {
                         var optionListItem = "<option value='" + item.categoryId + "'>" +item.categoryDescr + "</option>";
-                        console.log("option Item: " + optionListItem);
-                        $('#editCategoryList').append("<option value='" + item.categoryId + "'>" +item.categoryDescr + "</option>");
+                        $('#editCategoryList').append(optionListItem);
                     });
 
                     // make selected any items that are in the result array
-                    console.log("Category Array outer processing.  Length: " + categoryResultArray.length) ;
+                    //console.log("Category Array outer processing.  Length: " + categoryResultArray.length) ;
                     for(i = 0; i < categoryResultArray.length; i++) {
-                        console.log("value at index: " + i + " is " + categoryResultArray[i] )
+                        //console.log("value at index: " + i + " is " + categoryResultArray[i] )
                         $("#editCategoryList option[value='"+categoryResultArray[i]+"']").attr('selected', 'selected');
                     }
                     $('#editCategoryList').selectmenu("refresh", true);
                 });
+                console.log("mediaEditPage: ending category load.");
 
             });
 
+            $('#editBtn').click(function(event) {
+                console.log("mediaAddPageAdd: editBtn.click(): for id of: " + mediaId);
 
+                $('[type="submit"]').button('disable');
 
+                var selectedValsArray = $('#editCategoryList').val();
+                console.log("mediaAddPageAdd: editBtn.click(): selected Category Array" + selectedValsArray);
+                var jsonStringArr = JSON.stringify(selectedValsArray);
+                console.log("mediaAddPageAdd: editBtn.click():  selected Category Array as JSON" + jsonStringArr);
+
+                updateMediaItem(mediaId, $('#editTitleTxt').val(), $('#editDateTxt').val(),$('#editDescrTxt').val(), jsonStringArr, 'media-library-grid.html', document.getElementById('fileUploadTxt'));
+
+            });
 
         });    // end of pagebeforeshow
 

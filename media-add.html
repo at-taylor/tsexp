@@ -5,11 +5,11 @@
 
 <body>
 
-<div id="mediaAddPage" data-role="page" data-add-back-btn="true" data-back-btn-text="back" data-back-btn-theme="c">
+<div id="mediaAddPage" data-role="page" data-add-back-btn="false">
 
     <div data-theme="c" data-role="header" data-position="fixed" >
         <h1><img src="img/splash/logo.png"></h1>
-        <a href="#MainNavPage" data-icon="home" class="ui-btn-right">Home</a>
+        <!--<a href="#MainNavPage" data-icon="home" class="ui-btn-right">Home</a>-->
 
     </div>     <!-- end of header -->
 
@@ -47,6 +47,7 @@
                 <label for="fileLocTxt">File Loc:</label><input type="text" id="fileLocTxt" name="fileLocTxt" >
                 <!--<button id="uploadBtn" name="uploadBtn">Upload My Media</button>-->
                 <a href="#uploadConfirm" data-role="button" data-rel="popup">Upload My Media</a>
+                <a href="#cancelConfirm" data-role="button" data-rel="popup">Cancel</a>
                 <label for="fileUploadTxt">Upload Info:</label><input type="text" id="fileUploadTxt" name="fileUploadTxt" >
             </div>    <!-- end of block b -->
 
@@ -58,7 +59,14 @@
         <div data-role="popup" id="uploadConfirm">
             <h2>Treasured Stories would like to upload this media.</h2>
             <a href="#" data-rel="back" data-role="button" data-theme="a" >Don't Allow</a>
-            <button id="uploadBtn" name="uploadBtn"> Yes! Upload My Media</button>
+            <button type="submit" id="uploadBtn" name="uploadBtn"> Yes! Upload My Media</button>
+        </div>   <!-- end of upload confirm -->
+
+        <div data-role="popup" id="cancelConfirm">
+            <h2>If you confirm you would like to cancel no information for this media will be saved to the Treasured Stories server. </h2>
+            <button type="submit" id="cancelBtn" name="cancelBtn">Yes, Cancel and do not upload anything</button>
+            <a href="#" data-rel="back" data-role="button" data-theme="a" >No, just close this dialog for now</a>
+
         </div>   <!-- end of upload confirm -->
 
         <div data-theme="c" data-role="footer" data-position="fixed" class="ui-bar" style="text-align: center" >

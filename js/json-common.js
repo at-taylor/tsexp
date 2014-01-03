@@ -10,11 +10,13 @@ function setCategoryList(element) {
     $.getJSON(serviceCategoryURL, function(data) {
         cat = data.categoryModelList;
 
+        $(jQName + ' option').remove();       // clear previous entries
         $.each(cat, function(index, item) {
+            //$("option[value='" + item.categoryId + "'']").remove ();     // remove option if already exists
 
             var optionListItem = "<option value='" + item.categoryId + "'>" +item.categoryDescr + "</option>";
             //console.log("option Item: " + optionListItem);
-            $(jQName).append("<option value='" + item.categoryId + "'>" +item.categoryDescr + "</option>");
+            $(jQName).append(optionListItem);
         });
         $(jQName).selectmenu("refresh", true);
     });
