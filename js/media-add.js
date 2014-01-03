@@ -1,27 +1,27 @@
 var serviceMediaUploadURL = tsServiceURLDomain + "tssvc/resourcesS/upload";
-var serviceCategoryURL = tsServiceURLDomain + "tssvc/resourcesS/categories";
+//var serviceCategoryURL = tsServiceURLDomain + "tssvc/resourcesS/categories";
 
 console.log("mediaAddPage js: Executing media-add.js");
 
-function setCategoryList(element) {
-
-    console.log("json-common: setCategoryList() for element id: " + element.id);
-
-    var jQName = '#' + element.id;
-
-    $.getJSON(serviceCategoryURL, function(data) {
-        cat = data.categoryModelList;
-
-        $.each(cat, function(index, item) {
-
-            var optionListItem = "<option value='" + item.categoryId + "'>" +item.categoryDescr + "</option>";
-            //console.log("option Item: " + optionListItem);
-            $(jQName).append("<option value='" + item.categoryId + "'>" +item.categoryDescr + "</option>");
-        });
-        $(jQName).selectmenu("refresh", true);
-    });
-
-}
+//function setCategoryList(element) {
+//
+//    console.log("json-common: setCategoryList() for element id: " + element.id);
+//
+//    var jQName = '#' + element.id;
+//
+//    $.getJSON(serviceCategoryURL, function(data) {
+//        cat = data.categoryModelList;
+//
+//        $.each(cat, function(index, item) {
+//
+//            var optionListItem = "<option value='" + item.categoryId + "'>" +item.categoryDescr + "</option>";
+//            //console.log("option Item: " + optionListItem);
+//            $(jQName).append("<option value='" + item.categoryId + "'>" +item.categoryDescr + "</option>");
+//        });
+//        $(jQName).selectmenu("refresh", true);
+//    });
+//
+//}
 
 $(document).on('pagebeforeshow', '#mediaAddPage', function()
 {
@@ -48,7 +48,7 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
         }
         else   {
            console.log("url does not contain http: " + fileUrl);
-           uploadFileFromFileHandle ()
+           uploadFileFromFileHandle () ;
         }
     });
 });
@@ -92,8 +92,20 @@ function fileok(r) {
     $("#fileUploadTxt").attr("value",theResp);
 
     var respObj = JSON.parse(r.response);
+    var selectedValsArray = $('#categoryList').val();
+    console.log("mediaAddPageAdd: fileOK(): selected Category Array" + selectedValsArray);
+//    var jsonStringArr = "{";
+//    for(i = 0; i < selectedValsArray.length; i++) {
+//        //console.log("value at index: " + i + " is " + selectedValsArray[i] );
+//        jsonStringArr = jsonStringArr + '"' + selectedValsArray[i] + '"';
+//        if (i < selectedValsArray.length-1)
+//            jsonStringArr = jsonStringArr + ","
+//    }
+//    jsonStringArr = jsonStringArr + "}";
+    var jsonStringArr = JSON.stringify(selectedValsArray);
+    console.log("mediaAddPageAdd: fileOK(): selected Category Array as JSON" + jsonStringArr);
 
-    updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), 'media-capture.html', document.getElementById('fileUploadTxt'));
+    updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), jsonStringArr, 'media-capture.html', document.getElementById('fileUploadTxt'));
 
     removeMediaItemStorage();
 
@@ -143,7 +155,19 @@ function uploadFileFromUrl() {
                     $("#fileUploadTxt").attr("value",theResp);
                     URL.revokeObjectURL(sessionStorage.getItem("fileUrl"))   ;
 
-                    updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), 'test.html', document.getElementById('fileUploadTxt'));
+                    var selectedValsArray = $('#categoryList').val();
+                    console.log("mediaAddPageAdd: uploadFileFromUrl(): selected Category Array" + selectedValsArray);
+//                    var jsonStringArr = "{";
+//                    for(i = 0; i < selectedValsArray.length; i++) {
+//                        //console.log("value at index: " + i + " is " + selectedValsArray[i] );
+//                        jsonStringArr = jsonStringArr + '"' + selectedValsArray[i] + '"';
+//                        if (i < selectedValsArray.length-1)
+//                            jsonStringArr = jsonStringArr + ","
+//                    }
+//                    jsonStringArr = jsonStringArr + "}";
+                    var jsonStringArr = JSON.stringify(selectedValsArray);
+                    console.log("mediaAddPageAdd: uploadFileFromUrl: selected Category Array as JSON" + jsonStringArr);
+                    updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), jsonStringArr, 'test.html', document.getElementById('fileUploadTxt'));
 
                     removeMediaItemStorage();
 

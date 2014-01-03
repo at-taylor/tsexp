@@ -21,7 +21,7 @@ function setCategoryList(element) {
 
 }
 
-function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, changePageTo, errorElement) {
+function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCategories, changePageTo, errorElement) {
 
     console.log("json-common: updateMediaItem() for media item id: " + mediaId);
 
@@ -30,7 +30,7 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, changePageT
     $.ajax({
         type: "POST",
         url: serviceMediaUpdateURL + "/" + mediaId,
-        data:'mediaTitle='+ mediaTitle +'&mediaDate='+ mediaDate +'&mediaDescr='+ mediaDescr,
+        data:'mediaTitle='+ mediaTitle +'&mediaDate='+ mediaDate +'&mediaDescr='+ mediaDescr +'&catList='+ mediaCategories,
         cache: false,
         success: function(data) {
             console.log("json-common: updateMediaItem(): success: data=" + data.id);
