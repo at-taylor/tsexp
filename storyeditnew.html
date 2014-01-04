@@ -24,7 +24,6 @@
                 <input type="checkbox" id="OptIn" class="{src:'img\navbut\add.png'}" checked="checked"/>
 
                 <input type="checkbox" value="1" class="cbox" name="tandc" id="tandc"/>
-                <label for="tandc">I agree to the <a href="#tc" data-rel="dialog" ><img src="http://dummyimages.com/25x25" /></a></label>
             </fieldset>
         </div>
     </div><!-- /panel -->
@@ -54,14 +53,14 @@
                 </div>
                 <!--<label for="storyDescrTxt">Description:</label>-->
                 <!--<textarea id="storyDescrTxt" data-role="none" >An editable textarea.</textarea>-->
-                <input type="text" id="htmlSourceTxt" data-role="none">
-                editable begin
-                <div id="testEditDiv" contenteditable="true">
-                editable end
-                </div>
+                <!--<input type="text" id="htmlSourceTxt" data-role="none">-->
+                <!--editable begin-->
+                <!--<div id="testEditDiv" contenteditable="true">-->
+                <!--editable end-->
+                <!--</div>-->
 
                 <!------------------------------------------------------------ Toggle jQTE Button ------------------------------------------------------------>
-                <button class="status">Toggle jQTE</button>
+                <!--<button class="status">Toggle jQTE</button>-->
 
                 <!------------------------------------------------------------ jQUERY TEXT EDITOR ------------------------------------------------------------>
 
@@ -139,12 +138,12 @@
         $('.jqte-test').jqte();
 
         // settings of status
-        var jqteStatus = true;
-        $(".status").click(function()
-        {
-            jqteStatus = jqteStatus ? false : true;
-            $('.jqte-test').jqte({"status" : jqteStatus})
-        });
+//        var jqteStatus = true;
+//        $(".status").click(function()
+//        {
+//            jqteStatus = jqteStatus ? false : true;
+//            $('.jqte-test').jqte({"status" : jqteStatus})
+//        });
 
 
 //        new TINY.editor.edit('editor',{
@@ -174,9 +173,9 @@
             console.log("storyEditNewPage: submitIt()");
 
             //console.log("i value : " + editor.i.contentWindow.document.body.innerHTML);
-            var theTarget = document.getElementById("htmlSourceTxt");
+            //var theTarget = document.getElementById("htmlSourceTxt");
             //theTarget.value = editor.i.contentWindow.document.body.innerHTML;
-            theTarget.value = $('.jqte-test').val();
+
 
             var val = new Array();
             $(':checkbox:checked').each(function(i){
@@ -185,6 +184,20 @@
             });
             sessionStorage.setItem("storyMediaItems", val);
             console.log("storyEditNewPage: submitIt(): cached Media Items: " + sessionStorage.getItem("storyMediaItems"));
+
+            sessionStorage.setItem("storyDate", $('#storyEditNewDateTxt').val()) ;
+            console.log("storyEditNewPage: submitIt(): cached Story Date: " + sessionStorage.getItem("storyDate"));
+
+            var theStoryContent = $('.jqte-test').val();
+            sessionStorage.setItem("storyContent", theStoryContent);
+            console.log("storyEditNewPage: submitIt(): cached Story Content: " + sessionStorage.getItem("storyContent"));
+
+            var selectedValsArray = $('#storyEditNewCategoryList').val();
+            var jsonStringArr = JSON.stringify(selectedValsArray);
+            sessionStorage.setItem("storyCategories", jsonStringArr);
+            console.log("storyEditNewPage: submitIt(): cached Story Categories: " + sessionStorage.getItem("storyCategories"));
+
+            $.mobile.changePage('storypreview.html');
 
         }
 

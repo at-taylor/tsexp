@@ -1,0 +1,151 @@
+<html>
+
+<head>
+</head>
+
+<body>
+
+<div id="storyPreviewPage"  data-role="page" data-add-back-btn="true" data-back-btn-text="back" data-back-btn-theme="c">
+<div data-theme="c" data-role="header" data-position="fixed" >
+    <h1><img src="img/splash/logo.png"></h1>
+    <a href="#MainNavPage" data-icon="home" class="ui-btn-right">Home</a>
+
+</div>
+
+
+<div data-role="content">
+
+    <h2>Preview Story</h2>
+    <a data-role="button" href="#" data-shadow="false" data-theme="none" onclick="submitIt()">
+        <img src="img/navbut/next1.png" border="0"/>
+    </a>
+
+
+    <section class="ui-grid-a">
+        <div class="ui-block-a" style="width=60%">
+            <label for="storyPreviewTitleTxt">Title:</label><input type="text" id="storyPreviewTitleTxt" length=80 disabled="true" >
+            <label for="storyPreviewDateTxt">Date:</label><input type="date" data-role="datebox" id="storyPreviewDateTxt" disabled="true" >
+            <div data-role="fieldcontainer">
+                <div id="storyPreviewCategoryDiv">
+                    <label for="storyPreviewCategoryList">Categories</label>
+                    <select id="storyPreviewCategoryList"  multiple >
+                        <!--<option value="1">red</option>-->
+                        <!--<option value="2">green</option>-->
+                        <!--<option value="3">yellow</option>-->
+                        <!--<option value="4">blue</option>-->
+                    </select>
+                </div> <!-- categoryDiv -->
+            </div>
+
+            <div id="storyPreviewContent" disabled=true></div>
+        </div>
+        <div class="ui-block-b" style="width:40%;padding-left:2%;">
+            <div data-role="controlgroup" id="controlgroup" data-type="horizontal">
+                <!--<input type="checkbox"  data-inline="true" id="testCheck" class="mediaCheck" value=1>-->
+                <!--<label for="testCheck"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png" width=100></label>-->
+                <!--<input type="checkbox"    data-inline="true" id="testCheck2" class="mediaCheck" value=2>-->
+                <!--<label for="testCheck2"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png" width=100></label>-->
+                <!--<input type="checkbox"    data-inline="true" id="testCheck3" class="mediaCheck" value=3>-->
+                <!--<label for="testCheck3"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png" width=100></label>-->
+            </div>
+
+        </div>
+
+    </section>
+
+</div>       <!-- end of content div -->
+
+<div data-theme="c" data-role="footer"  class="ui-bar" style="text-align: center" >
+    <div style="display: inline-block"></div>
+    <a href="#"><img height="51" width="50" src="img/navbut/home.png" /></a>
+    <a href="#"><img height="51" width="50" src="img/navbut/user.png" /></a>
+    <a href="#"><img height="51" width="50" src="img/navbut/addMedia.png" /></a>
+    <a href="#"><img height="51" width="50" src="img/navbut/inviteFriends.png" /></a>
+    <a href="#"><img height="51" width="50" src="img/navbut/myAccount.png" /></a>
+    <a href="#"><img height="51" width="50" src="img/navbut/tellStory.png" /></a>
+    <a href="#"><img height="51" width="50" src="img/navbut/mediaLIbrary.png" /></a>
+    <a href="#"><img height="51" width="50" src="img/navbut/storyLibrary.png" /></a>
+    <a href="#"><img height="51" width="50" src="img/navbut/requestStory.png" /></a>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    function submitIt() {
+
+        console.log("storyPreviewPage: submitIt()");
+
+        //console.log("i value : " + editor.i.contentWindow.document.body.innerHTML);
+        //var theTarget = document.getElementById("htmlSourceTxt");
+        //theTarget.value = editor.i.contentWindow.document.body.innerHTML;
+
+
+        var val = new Array();
+        $(':checkbox:checked').each(function(i){
+            val[i] = $(this).val();
+            //alert("checked: " + $(this).val());
+        });
+
+        sessionStorage.setItem("storyMediaItems", val);
+        console.log("storyPreviewPage: submitIt(): cached Media Items: " + sessionStorage.getItem("storyMediaItems"));
+        var theStoryContent = $('.jqte-test').val();
+        sessionStorage.setItem("storyContent", theStoryContent);
+        console.log("storyPreviewPage: submitIt(): cached Story Content: " + sessionStorage.getItem("storyContent"));
+
+        var selectedValsArray = $('#storyEditNewCategoryList').val();
+        var jsonStringArr = JSON.stringify(selectedValsArray);
+        sessionStorage.setItem("storyCategories", jsonStringArr);
+        console.log("storyPreviewPage: submitIt(): cached Story Categories: " + sessionStorage.getItem("storyCategories"));
+
+    }
+
+
+    $(document).on('pagebeforeshow', '#storyPreviewPage', function()
+    {
+        console.log("storyPreviewPage: pagebeforeshow()");
+
+        $('#storyPreviewTitleTxt').val(sessionStorage.getItem("storyTitle"));
+        $('#storyPreviewDateTxt').val(sessionStorage.getItem("storyDate"));
+        setCategoryList(document.getElementById('storyPreviewCategoryList'));
+        $('#storyPreviewContent').append(sessionStorage.getItem("storyContent"));
+
+
+//        var selectedValsArray = $('#storyEditNewCategoryList').val();
+//        var jsonStringArr = JSON.stringify(selectedValsArray);
+//        sessionStorage.setItem("storyCategories", jsonStringArr);
+//        console.log("storyEditNewPage: submitIt(): cached Story Categories: " + sessionStorage.getItem("storyCategories"));
+
+//        var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/media";
+//        $.getJSON(serviceURL, function(data) {
+//            console.log("storyPreviewPage: pagebeforeshow(): getJSON for media library: start()");
+//
+//            var media;
+//            var group = $( "#controlgroup" );
+//            $('.ui-checkbox').remove();
+//            var el;
+//            media = data.mediaModelList;
+//            $.each(media, function(index, item) {
+//
+//                //console.log("Index from url: " + item.url + " is " + item.url.substring(item.url.lastIndexOf('.')+1) );
+//                var theExt = item.url.substring(item.url.lastIndexOf('.')+1);
+//                if ((theExt == "jpg") || (theExt == "png") || (theExt == "JPG"))
+//                    $el = $('<input type="checkbox" data-inline="true" id="mediaCheck' + item.id + '" class="mediaCheck" value=' + item.id +' ><label for="mediaCheck' + item.id +'"><img width=100 height=100 src= "' + item.url + '"></label>');
+//                //console.log("Element :" + $el);
+//                $( "#controlgroup" ).controlgroup( "container" )["append"]( $el );
+//
+//            });
+//            group.controlgroup( "refresh" );
+//            $('#controlgroup').trigger('create');
+//            $('div').trigger('create');
+//            console.log("storyPreviewPage: pagebeforeshow(): getJSON for media library: end()");
+//        });
+    });
+
+</script>
+
+</div> <!-- end of storyPreviewPage -->
+
+</body>
+</html>

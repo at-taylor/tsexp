@@ -50,6 +50,22 @@ a:link, a:visited {
 	font-size:15px
 }*/
 
+
+
+.categoryBtn {
+
+    background: #5D6057;  /*-- 5D6057 --*/
+    color: #FFFFFF;
+    font-family: 'TradeGothicLT-Bold', sans-serif;
+    font-size: 16px;
+    padding: 4px 4px;
+    display: inline-block;
+    text-decoration: none;
+    border: 0;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+
+}
 .jqte-test {
 	display:block;
 	margin:0 0 10px;
