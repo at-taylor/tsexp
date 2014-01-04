@@ -52,9 +52,16 @@
                         </select>
                     </div> <!-- categoryDiv -->
                 </div>
-                <label for="storyDescrTxt">Description:</label>
-                <textarea id="storyDescrTxt" data-role="none" >An editable textarea.</textarea>
-                    <input type="text" id="htmlSourceTxt" data-role="none">
+                <!--<label for="storyDescrTxt">Description:</label>-->
+                <!--<textarea id="storyDescrTxt" data-role="none" >An editable textarea.</textarea>-->
+                <input type="text" id="htmlSourceTxt" data-role="none">
+
+                <!------------------------------------------------------------ Toggle jQTE Button ------------------------------------------------------------>
+                <!--<button class="status">Toggle jQTE</button>-->
+
+                <!------------------------------------------------------------ jQUERY TEXT EDITOR ------------------------------------------------------------>
+
+                <textarea name="textarea" class="jqte-test" placeholder="Tell Your Story here"></textarea>
             </div>
             <div class="ui-block-b" style="width:40%;padding-left:2%;">
                 <div data-role="controlgroup" id="controlgroup" data-type="horizontal">
@@ -117,44 +124,63 @@
     </div>
 
     <!--<script src="js/storylist.js"></script>-->
-    <link rel="stylesheet" href="css/tinyedit/style.css" />
+    <!--<link rel="stylesheet" href="css/tinyedit/style.css" />-->
+    <!--<script type="text/javascript" src="js/vendor/tinyedit/tinyeditor.js"></script>-->
+    <link type="text/css" rel="stylesheet" href="demo.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-te-1.4.0.css">
+    <script type="text/javascript" src="js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
 
-    <script type="text/javascript" src="js/vendor/tinyedit/tinyeditor.js"></script>
     <script type="text/javascript">
 
-        new TINY.editor.edit('editor',{
-            id:'storyDescrTxt',
-            width:400,
-            height:250,
-            cssclass:'te',
-            controlclass:'tecontrol',
-            rowclass:'teheader',
-            dividerclass:'tedivider',
-            controls:['bold','italic','underline','strikethrough','|','subscript','superscript','|',
-                'orderedlist','unorderedlist','|','outdent','indent','|','leftalign',
-                'centeralign','rightalign','blockjustify','|','unformat','|','undo','redo','n',
-                'font','size','style','|','image','hr','link','unlink','|','cut','copy','paste','print'],
-            footer:true,
-            fonts:['Verdana','Arial','Georgia','Trebuchet MS'],
-            xhtml:true,
-            cssfile:'style.css',
-            bodyid:'editor',
-            footerclass:'tefooter',
-            toggle:{text:'source',activetext:'wysiwyg',cssclass:'toggle'},
-            resize:{cssclass:'resize'}
-        });
+        $('.jqte-test').jqte();
+
+        // settings of status
+//        var jqteStatus = true;
+//        $(".status").click(function()
+//        {
+//            jqteStatus = jqteStatus ? false : true;
+//            $('.jqte-test').jqte({"status" : jqteStatus})
+//        });
+
+
+//        new TINY.editor.edit('editor',{
+//            id:'storyDescrTxt',
+//            width:400,
+//            height:250,
+//            cssclass:'te',
+//            controlclass:'tecontrol',
+//            rowclass:'teheader',
+//            dividerclass:'tedivider',
+//            controls:['bold','italic','underline','strikethrough','|','subscript','superscript','|',
+//                'orderedlist','unorderedlist','|','outdent','indent','|','leftalign',
+//                'centeralign','rightalign','blockjustify','|','unformat','|','undo','redo','n',
+//                'font','size','style','|','image','hr','link','unlink','|','cut','copy','paste','print'],
+//            footer:true,
+//            fonts:['Verdana','Arial','Georgia','Trebuchet MS'],
+//            xhtml:true,
+//            cssfile:'style.css',
+//            bodyid:'editor',
+//            footerclass:'tefooter',
+//            toggle:{text:'source',activetext:'wysiwyg',cssclass:'toggle'},
+//            resize:{cssclass:'resize'}
+//        });
 
         function submitIt() {
-            console.log("In submitIt()");
-            console.log("i value : " + editor.i.contentWindow.document.body.innerHTML);
-            var theTarget = document.getElementById("htmlSourceTxt");
-            theTarget.value = editor.i.contentWindow.document.body.innerHTML;
 
-            var val = [];
+            console.log("storyEditNewPage: submitIt()");
+
+            //console.log("i value : " + editor.i.contentWindow.document.body.innerHTML);
+            var theTarget = document.getElementById("htmlSourceTxt");
+            //theTarget.value = editor.i.contentWindow.document.body.innerHTML;
+            theTarget.value = $('.jqte-test').val();
+
+            var val = new Array();
             $(':checkbox:checked').each(function(i){
                 val[i] = $(this).val();
-                alert("checked: " + $(this).val());
+                //alert("checked: " + $(this).val());
             });
+            sessionStorage.setItem("storyMediaItems", val);
+            console.log("storyEditNewPage: submitIt(): cached Media Items: " + sessionStorage.getItem("storyMediaItems"));
 
         }
 
