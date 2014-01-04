@@ -55,9 +55,13 @@
                 <!--<label for="storyDescrTxt">Description:</label>-->
                 <!--<textarea id="storyDescrTxt" data-role="none" >An editable textarea.</textarea>-->
                 <input type="text" id="htmlSourceTxt" data-role="none">
+                editable begin
+                <div id="testEditDiv" contenteditable="true">
+                editable end
+                </div>
 
                 <!------------------------------------------------------------ Toggle jQTE Button ------------------------------------------------------------>
-                <!--<button class="status">Toggle jQTE</button>-->
+                <button class="status">Toggle jQTE</button>
 
                 <!------------------------------------------------------------ jQUERY TEXT EDITOR ------------------------------------------------------------>
 
@@ -135,12 +139,12 @@
         $('.jqte-test').jqte();
 
         // settings of status
-//        var jqteStatus = true;
-//        $(".status").click(function()
-//        {
-//            jqteStatus = jqteStatus ? false : true;
-//            $('.jqte-test').jqte({"status" : jqteStatus})
-//        });
+        var jqteStatus = true;
+        $(".status").click(function()
+        {
+            jqteStatus = jqteStatus ? false : true;
+            $('.jqte-test').jqte({"status" : jqteStatus})
+        });
 
 
 //        new TINY.editor.edit('editor',{
