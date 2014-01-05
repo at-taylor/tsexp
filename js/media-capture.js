@@ -361,10 +361,12 @@ var app = {
             console.log('failed');
         }
 
+        //var cameraPopoverOptions = new CameraPopoverOptions(220, 600, 320, 480, Camera.PopoverArrowDirection.ARROW_DOWN) ;
+        var cameraPopoverOptions = new CameraPopoverOptions(220, 600, 640, 960, Camera.PopoverArrowDirection.ARROW_DOWN) ;
         navigator.camera.getPicture(onSuccessURItoMediaAdd, onFail, { quality: 10, saveToPhotoAlbum: true,
             targetWidth: 300, targetHeight: 300,
             destinationType: Camera.DestinationType.FILE_URI,sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-            mediaType: Camera.MediaType.ALLMEDIA
+            mediaType: Camera.MediaType.ALLMEDIA, popoverOptions:cameraPopoverOptions
         });
 
         function fileok(r) {
