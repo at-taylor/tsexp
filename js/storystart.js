@@ -23,8 +23,9 @@ $(document).on('pagebeforeshow', '#storyStartPage', function(){
     // attempt to set a theme on a textinput, it did not work
     //    console.log("setting theme b");
     //    $( '.selector' ).textinput({ theme: "b" });
+    removeNewStoryStorage();
 
-     getStarterList();
+    getStarterList();
 
     // sample code on setting div html thru jquery functions
     //$('#storyStarterDiv').html("QUERY STYLE");

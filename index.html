@@ -16,7 +16,7 @@
         //
        //var tsServiceURLDomain = "http://localhost:8080/";
        var tsServiceURLDomain = "http://216.74.49.91:8080/";
-        console.log("Using service domain of: " + tsServiceURLDomain);
+       console.log("Using service domain of: " + tsServiceURLDomain);
 
     </script>
 
@@ -29,6 +29,8 @@
                 $.mobile.selectmenu.prototype.options.nativeMenu = false;
                 console.log("   set native menu =false");
             }
+            console.log("    setting domCache to true");
+            $.mobile.page.prototype.options.domCache = true;
             localStorage.clear();
             sessionStorage.clear();
             console.log("   end mobileinit");

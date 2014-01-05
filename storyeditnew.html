@@ -177,13 +177,18 @@
             //theTarget.value = editor.i.contentWindow.document.body.innerHTML;
 
 
+
             var val = new Array();
             $(':checkbox:checked').each(function(i){
                 val[i] = $(this).val();
+                //console.log("inner label html: " + $('#mediaCheck657 label').html());
                 //alert("checked: " + $(this).val());
             });
-            sessionStorage.setItem("storyMediaItems", val);
+            sessionStorage.setItem("storyMediaItems",JSON.stringify(val));
             console.log("storyEditNewPage: submitIt(): cached Media Items: " + sessionStorage.getItem("storyMediaItems"));
+
+            sessionStorage.setItem("storyTitle", $('#storyEditNewTitleTxt').val()) ;
+            console.log("storyEditNewPage: submitIt(): cached Story Title: " + sessionStorage.getItem("storyTitle"));
 
             sessionStorage.setItem("storyDate", $('#storyEditNewDateTxt').val()) ;
             console.log("storyEditNewPage: submitIt(): cached Story Date: " + sessionStorage.getItem("storyDate"));
@@ -197,7 +202,7 @@
             sessionStorage.setItem("storyCategories", jsonStringArr);
             console.log("storyEditNewPage: submitIt(): cached Story Categories: " + sessionStorage.getItem("storyCategories"));
 
-            $.mobile.changePage('storypreview.html');
+            $.mobile.changePage('storypreview2.html');
 
         }
 
@@ -221,8 +226,10 @@
 
                     //console.log("Index from url: " + item.url + " is " + item.url.substring(item.url.lastIndexOf('.')+1) );
                     var theExt = item.url.substring(item.url.lastIndexOf('.')+1);
-                    if ((theExt == "jpg") || (theExt == "png") || (theExt == "JPG"))
+                    if ((theExt == "jpg") || (theExt == "png") || (theExt == "JPG"))  {
                         $el = $('<input type="checkbox" data-inline="true" id="mediaCheck' + item.id + '" class="mediaCheck" value=' + item.id +' ><label for="mediaCheck' + item.id +'"><img width=100 height=100 src= "' + item.url + '"></label>');
+                        sessionStorage.setItem("storyAddMediaId" + item.id, item.url);
+                    }
                     //console.log("Element :" + $el);
                     $( "#controlgroup" ).controlgroup( "container" )["append"]( $el );
 
@@ -230,8 +237,13 @@
                 group.controlgroup( "refresh" );
                 $('#controlgroup').trigger('create');
                 $('div').trigger('create');
+
+//                console.log("Investigating the media session storage option");
+//                console.log("657");
+//                console.log(sessionStorage.getItem("storyAddMediaId657"));
                 console.log("storyEditNewPage: pagebeforeshow(): getJSON for media library: end()");
             });
+
         });
 
         </script>

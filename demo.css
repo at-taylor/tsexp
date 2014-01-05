@@ -52,12 +52,26 @@ a:link, a:visited {
 
 
 
+#preview h1 {
+    font-size: 4em;
+    font-style: italic;
+}
+
+#preview h2 {
+
+    font-size: 30px;
+
+}
+
+.txtfa {
+    font-family: 'TradeGothicLT-Bold', sans-serif;
+    font-size: 16px;
+}
 .categoryBtn {
 
     background: #5D6057;  /*-- 5D6057 --*/
     color: #FFFFFF;
-    font-family: 'TradeGothicLT-Bold', sans-serif;
-    font-size: 16px;
+
     padding: 4px 4px;
     display: inline-block;
     text-decoration: none;

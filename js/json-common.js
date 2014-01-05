@@ -64,3 +64,14 @@ function removeMediaItemStorage() {
     sessionStorage.removeItem("fileDate");
     sessionStorage.removeItem("fileSize");
 }
+
+function removeNewStoryStorage() {
+
+    console.log("json-common: removeNewStoryStorage()");
+
+    sessionStorage.removeItem("storyMediaItems");
+    sessionStorage.removeItem("storyContent");
+    sessionStorage.removeItem("storyTitle");
+    sessionStorage.removeItem("storyDate");
+    sessionStorage.removeItem("storyCategories");
+}
