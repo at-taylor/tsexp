@@ -30,6 +30,13 @@ $(document).on('pageshow', '#mediaLibGridPage', function(){
     console.log("Grid: " + 'pageshow');
 });
 
+
+function sendItGrid(theId) {
+    console.log("mediaLibGridPage: sendItGrid(): the Id = " + theId)     ;
+    sessionStorage.setItem("mediaEditId", theId);
+    $.mobile.changePage("media-edit.html")   ;
+}
+
 //$('#mediaLibGridPage').bind('pageinit', function(event) {
 $(document).on('pageshow', '#mediaLibGridPage', function(){
     // alert('bind: pageinit');
@@ -59,8 +66,9 @@ $(document).on('pageshow', '#mediaLibGridPage', function(){
 
             console.log("tag");
             console.log(videoOrImageTag);
-            ''
-            $('#mediaLibGridList').append('<li><a href="media-edit.html?id=' + item.id + '">' +
+
+            //$('#mediaLibGridList').append('<li><a onclick=sendIt(' + item.id + ') href="media-edit.html?id=' + item.id + '">' +
+            $('#mediaLibGridList').append('<li><a onclick=sendItGrid(' + item.id + ') href="#">' +
                 videoOrImageTag +
                 '<h2>' + item.title + '</h2>' +
                 '<p>' + item.createdHr + '</p>' +
@@ -76,6 +84,8 @@ $(document).on('pageshow', '#mediaLibGridPage', function(){
         console.log("mediaLibGridPage: pagebeforeshow: completed refresh and trigger");
 
     });
+
+
 
 });
 

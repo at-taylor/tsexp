@@ -4,7 +4,9 @@ console.log("media-edit.js: Executing");
 $(document).on('pageshow', '#mediaEditPage', function(){
 
     console.log('mediaEditPage: pageeshow()');
-    var mediaId = getUrlVars() ["id"];
+    //var mediaId = getUrlVars() ["id"];
+
+    var mediaId = sessionStorage.getItem("mediaEditId");
 
     if (mediaId == null)   {
         console.log("missing mediaId....changing page");

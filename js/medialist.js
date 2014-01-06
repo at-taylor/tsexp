@@ -19,6 +19,12 @@ $('#mediaListPage').bind('pageinit', function(event) {
     getMediaList();
 });
 
+function sendItList(theId) {
+    console.log("mediaListPage: sendItList(): the Id = " + theId)     ;
+    sessionStorage.setItem("mediaEditId", theId);
+    $.mobile.changePage("media-edit.html")   ;
+}
+
 function getMediaList() {
     console.log('mediaListPage: getMediaList() running');
 
@@ -34,7 +40,9 @@ function getMediaList() {
 
             //console.log("item = " + item.id + " fileType = " + item.fileType + " tag = " + videoOrImageTag);
 
-            $('#mediaList').append('<li><a href="media-edit.html?id=' + item.id + '">' +
+
+            //$('#mediaList').append('<li><a href="media-edit.html?id=' + item.id + '">' +
+            $('#mediaList').append('<li><a onclick=sendItList(' + item.id + ') href="#">' +
 
                 '<div class="ui-grid-c" style="padding-left: 10px">' +
                 '<div class="ui-block-a">' +
