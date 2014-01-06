@@ -130,7 +130,8 @@ function fileok(r) {
     var jsonStringArr = JSON.stringify(selectedValsArray);
     console.log("mediaAddPageAdd: fileOK(): selected Category Array as JSON" + jsonStringArr);
 
-    updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), jsonStringArr, 'media-capture.html', document.getElementById('fileUploadTxt'));
+    var newPage = 'media-library-grid.html?nocache='+new Date().getTime();
+    updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), jsonStringArr, newPage, document.getElementById('fileUploadTxt'));
 
     removeMediaItemStorage();
 
@@ -185,7 +186,9 @@ function uploadFileFromUrl() {
                     var jsonStringArr = JSON.stringify(selectedValsArray);
                     console.log("mediaAddPageAdd: uploadFileFromUrl: selected Category Array as JSON" + jsonStringArr);
 
-                    updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), jsonStringArr, 'test.html', document.getElementById('fileUploadTxt'));
+
+                    var newPage = 'media-library-grid.html?nocache='+new Date().getTime();
+                    updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), jsonStringArr, newPage, document.getElementById('fileUploadTxt'));
 
                     removeMediaItemStorage();
 

@@ -9,6 +9,11 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
 
     console.log('mediaEditPage: pagebeforeshow()');
     var mediaId = getUrlVars() ["id"];
+
+    if (mediaId == null)   {
+        var newPage = 'media-library-grid.html?nocache='+new Date().getTime();
+        $.mobile.changePage(newPage);
+    }
     console.log ("mediaEditPage: pagebeforeshow(): called with media id=" + mediaId);
 
     $('[type="submit"]').button('enable');
