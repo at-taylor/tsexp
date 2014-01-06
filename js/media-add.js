@@ -130,7 +130,7 @@ function fileok(r) {
 
     var theTime = new Date().getTime();
     //var newPage = 'media-library-grid.html?nocache=' + theTime;
-    var newPage=    'media-library-grid.html';
+    var newPage=    'media-capture.html';
     updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), jsonStringArr, newPage, document.getElementById('fileUploadTxt'));
 
     removeMediaItemStorage();
@@ -188,7 +188,7 @@ function uploadFileFromUrl() {
 
                     var theTime = new Date().getTime();
                     //var newPage = 'media-library-grid.html?nocache='+ theTime;
-                    var newPage = 'media-library-grid.html';
+                    var newPage = 'media-capture.html';
                     console.log("mediaAddPageAdd: uploadFileFromUrl(): calling update media with page change of :" + newPage);
                     updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), jsonStringArr, newPage, document.getElementById('fileUploadTxt'));
 
