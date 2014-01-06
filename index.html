@@ -29,8 +29,8 @@
                 $.mobile.selectmenu.prototype.options.nativeMenu = false;
                 console.log("   set native menu =false");
             }
-            //console.log("    setting domCache to true");
-            //$.mobile.page.prototype.options.domCache = true;
+            console.log("    setting domCache to true");
+            $.mobile.page.prototype.options.domCache = true;
             localStorage.clear();
             sessionStorage.clear();
             console.log("   end mobileinit");
