@@ -49,7 +49,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
         console.log('CORDOVA VERSION: ' + window.device.cordova);
-        alert("onDeviceReady");
+        //alert("onDeviceReady");
         window.addEventListener('batterystatus', app.onBatteryStatus, false);
     },
     // Update DOM on a Received Event
@@ -417,7 +417,11 @@ var app = {
 
                 removeMediaItemStorage();
 
+                document.getElementById('testVideoEmbed').src = mediaFiles[0];
+
                 var imageURI = mediaFiles[0];
+                document.getElementById('testMsg').value("uri: " + imageURI);
+
                 sessionStorage.setItem("fileUrl", imageURI);
                 sessionStorage.setItem("fileName", imageURI.substr(imageURI.lastIndexOf('/')+1));
                 sessionStorage.setItem("fileType", "image/mov");
