@@ -11,6 +11,8 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
     var mediaId = getUrlVars() ["id"];
     console.log ("mediaEditPage: pagebeforeshow(): called with media id=" + mediaId);
 
+    $('[type="submit"]').button('enable');
+
     //console.log("activePage: " + $.mobile.activePage.data('url')   );
     //console.log("urlHistory: " + $.mobile.urlHistory.getActive().url)   ;
 
@@ -58,16 +60,32 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
     });
 
     $('#editBtn').click(function(event) {
-        console.log("mediaAddPageAdd: editBtn.click(): for id of: " + mediaId);
+        console.log("mediaEditPage: editBtn.click(): for id of: " + mediaId);
 
         $('[type="submit"]').button('disable');
 
         var selectedValsArray = $('#editCategoryList').val();
-        console.log("mediaAddPageAdd: editBtn.click(): selected Category Array" + selectedValsArray);
+        console.log("mediaEditPage: editBtn.click(): selected Category Array" + selectedValsArray);
         var jsonStringArr = JSON.stringify(selectedValsArray);
-        console.log("mediaAddPageAdd: editBtn.click():  selected Category Array as JSON" + jsonStringArr);
+        console.log("mediaEditPage: editBtn.click():  selected Category Array as JSON" + jsonStringArr);
 
         updateMediaItem(mediaId, $('#editTitleTxt').val(), $('#editDateTxt').val(),$('#editDescrTxt').val(), jsonStringArr, 'media-library-grid.html', document.getElementById('fileUploadTxt'));
+
+    });
+
+    $('#cancelEditBtn').click(function(event) {
+
+        console.log("mediaEditPage: cancelBtn.click()");
+
+        $('[type="submit"]').button('disable');
+
+        //removeMediaItemStorage();
+
+        $.mobile.changePage('media-library-grid.html',{
+            transition: "pop",
+            reverse: false,
+            changeHash: false
+        });
 
     });
 
