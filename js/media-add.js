@@ -40,6 +40,8 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
 //        $.mobile.changePage($.mobile.urlHistory.stack[$.mobile.urlHistory.activeIndex-1].pageUrl)
 //    }
 
+    $('[type="submit"]').button('enable');
+
     console.log("mediaAddPageAdd: starting category load");
     setCategoryList(document.getElementById('categoryList'));
 
@@ -76,11 +78,7 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
 
         removeMediaItemStorage();
 
-        $.mobile.changePage('media-capture.html',{
-            transition: "pop",
-            reverse: false,
-            changeHash: false
-        });
+        $.mobile.changePage('media-capture.html');
 
     });
 });
@@ -131,7 +129,8 @@ function fileok(r) {
     console.log("mediaAddPageAdd: fileOK(): selected Category Array as JSON" + jsonStringArr);
 
     var theTime = new Date().getTime();
-    var newPage = 'media-library-grid.html?nocache=' + theTime;
+    //var newPage = 'media-library-grid.html?nocache=' + theTime;
+    var newPage=    'media-library-grid.html';
     updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), jsonStringArr, newPage, document.getElementById('fileUploadTxt'));
 
     removeMediaItemStorage();
@@ -188,7 +187,9 @@ function uploadFileFromUrl() {
                     console.log("mediaAddPageAdd: uploadFileFromUrl: selected Category Array as JSON" + jsonStringArr);
 
                     var theTime = new Date().getTime();
-                    var newPage = 'media-library-grid.html?nocache='+ theTime;
+                    //var newPage = 'media-library-grid.html?nocache='+ theTime;
+                    var newPage = 'media-library-grid.html';
+                    console.log("mediaAddPageAdd: uploadFileFromUrl(): calling update media with page change of :" + newPage);
                     updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), jsonStringArr, newPage, document.getElementById('fileUploadTxt'));
 
                     removeMediaItemStorage();

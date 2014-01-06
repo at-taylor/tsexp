@@ -75,7 +75,9 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
         console.log("mediaEditPage: editBtn.click():  selected Category Array as JSON" + jsonStringArr);
 
         var theTime = new Date().getTime();
-        var newPage = 'media-library-grid.html?nocache=' + theTime;
+       // var newPage = 'media-library-grid.html?nocache=' + theTime;
+        var newPage = 'media-library-grid.html';
+
         updateMediaItem(mediaId, $('#editTitleTxt').val(), $('#editDateTxt').val(),$('#editDescrTxt').val(), jsonStringArr, newPage, document.getElementById('fileUploadTxt'));
 
     });
@@ -89,7 +91,8 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
         //removeMediaItemStorage();
 
         var theTime = new Date().getTime();
-        var newPage = 'media-library-grid.html?nocache=' + theTime;
+        //var newPage = 'media-library-grid.html?nocache=' + theTime;
+        var newPage = 'media-library-grid.html';
         $.mobile.changePage(newPage);
 
     });

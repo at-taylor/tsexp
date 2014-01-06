@@ -11,24 +11,38 @@ var media;
 console.log("mediaLibGridPage js: Executing");
 console.log("mediaLibGridPage: executing using services at: " + serviceURL);
 
-
-$('#mediaLibGridPage').bind('pageinit', function(event) {
-    // alert('bind: pageinit');
-    console.log("mediaLibGridPage: in bind(): pageinit");
-    getMediaList();
+$(document).on('pagebeforeshow', '#mediaLibGridPage', function(){
+      console.log("Grid: " + 'pagebeforeshow');
 });
 
+$(document).on('pagebeforecreate', '#mediaLibGridPage', function(){
+    console.log("Grid: " + 'pagebeforecreate');
+});
 
+$(document).on('pageinit', '#mediaLibGridPage', function(){
+    console.log("Grid: " + 'pageinit');
+});
 
-function getMediaList() {
-     //alert('running list()7') ;
-     console.log("mediaLibGridPage: getMediaList(): running")     ;
+$(document).on('pageload', '#mediaLibGridPage', function(){
+    console.log("Grid: " + 'pageload');
+});
 
+$(document).on('pageshow', '#mediaLibGridPage', function(){
+    console.log("Grid: " + 'pageshow');
+});
 
+//$('#mediaLibGridPage').bind('pageinit', function(event) {
+$(document).on('pagebeforeshow', '#mediaLibGridPage', function(){
+    // alert('bind: pageinit');
+    console.log("mediaLibGridPage: pagebeforeshow");
 
     $.getJSON(serviceURL, function(data) {
+
+        console.log("mediaLibGridPage: pagebeforeshow: removing list items");
         $('#mediaLibGridList li').remove();
         media = data.mediaModelList;
+
+        console.log("mediaLibGridPage: pagebeforeshow: pulled list about to iterate");
         $.each(media, function(index, item) {
 
             var videoOrImageTag;
@@ -47,15 +61,14 @@ function getMediaList() {
 
 
         });
+        console.log("mediaLibGridPage: pagebeforeshow: completed iterate");
         $('#mediaLibGridList').listview('refresh');
-        console.log("mediaLibGridPage: getMediaList(): complete")     ;
+        $('#mediaLibGridList').trigger('create');
+
+        console.log("mediaLibGridPage: pagebeforeshow: completed refresh and trigger");
+
     });
 
+});
 
 
-
-
-
-
-
-}
