@@ -6,13 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/stories";
-
 console.log("media-capture js: Executing");
-console.log("mediaPage: executing using services at: " + serviceURL);
-//var serviceURL = "http://localhost:8080/tssvc/resourcesS/stories";
-//var serviceURL = "http://localhost:8080/tssvc/getstorylist2.html";
-
 
 $('#mediaCapturePage').bind('pageinit', function(event) {
     app.initialize();
@@ -321,8 +315,7 @@ var app = {
                 }
             };
 
-            var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/upload";
-            ft.upload(imageURI, encodeURI(serviceURL), fileok, filefail, options);
+            ft.upload(imageURI, encodeURI(tsServiceURLDomain + "tssvc/resourcesS/upload"), fileok, filefail, options);
 
         }
 

@@ -1,20 +1,19 @@
-var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/media";
-var serviceCategoryURL = tsServiceURLDomain + "tssvc/resourcesS/categories";
-
 console.log("media-edit.js: Executing");
-console.log("mediaEditPage: executing using services at: " + serviceURL);
-console.log("mediaEditPage: executing using category services at: " + serviceCategoryURL);
 
-$(document).on('pagebeforeshow', '#mediaEditPage', function(){
 
-    console.log('mediaEditPage: pagebeforeshow()');
+$(document).on('pageshow', '#mediaEditPage', function(){
+
+    console.log('mediaEditPage: pageeshow()');
     var mediaId = getUrlVars() ["id"];
 
     if (mediaId == null)   {
-        var newPage = 'media-library-grid.html?nocache='+new Date().getTime();
+        console.log("missing mediaId....changing page");
+        var newPage = 'media-library-grid.html';
         $.mobile.changePage(newPage);
+
     }
-    console.log ("mediaEditPage: pagebeforeshow(): called with media id=" + mediaId);
+    console.log ("mediaEditPage: pageshow(): called with media id=" + mediaId);
+
 
     $('[type="submit"]').button('enable');
 
@@ -22,7 +21,7 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
     //console.log("urlHistory: " + $.mobile.urlHistory.getActive().url)   ;
 
     var categoryResultArray = new Array();
-    $.getJSON(serviceURL + '/' + mediaId, function(data) {
+    $.getJSON(tsServiceURLDomain + "tssvc/resourcesS/media" + '/' + mediaId, function(data) {
 
         console.log("mediaEditPage: Title : " + data.title);
         console.log("mediaEditPage: Created : " + data.mediaDateRaw);
@@ -42,7 +41,7 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
         $('#editImage').attr("src", data.url);
 
         console.log("mediaEditPage: starting category load.");
-        $.getJSON(serviceCategoryURL, function(data) {
+        $.getJSON(tsServiceURLDomain + "tssvc/resourcesS/categories", function(data) {
 
             $('#editCategoryList option').remove();       // clear previous entries
 
@@ -97,7 +96,7 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
 
     });
 
-});    // end of pagebeforeshow
+});    // end of pageshow
 
 function getUrlVars() {
 

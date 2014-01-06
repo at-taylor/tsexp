@@ -40,6 +40,12 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
 //        $.mobile.changePage($.mobile.urlHistory.stack[$.mobile.urlHistory.activeIndex-1].pageUrl)
 //    }
 
+    $('#titleTxt').val("");
+    $('#tateTxt').val("");
+    $('#descrTxt').val("");
+    $('#theImage').attr("src", "");
+
+
     $('[type="submit"]').button('enable');
 
     console.log("mediaAddPageAdd: starting category load");
@@ -114,12 +120,14 @@ function uploadFileFromFileHandle ()
         }
     };
     var imageURI = sessionStorage.getItem("fileUrl");
-    ft.upload(imageURI, encodeURI(serviceMediaUploadURL), fileok, filefail, options);
+    ft.upload(imageURI, encodeURI(tsServiceURLDomain + "tssvc/resourcesS/upload"), fileok, filefail, options);
 
 }
 function fileok(r) {
    var theResp = "Success. Code = " + r.responseCode + " Resposne = " + r.response + " sent = " + r.byteSent;
     $("#fileUploadTxt").attr("value",theResp);
+
+    removeMediaItemStorage();
 
     var respObj = JSON.parse(r.response);
     var selectedValsArray = $('#categoryList').val();
@@ -132,8 +140,6 @@ function fileok(r) {
     //var newPage = 'media-library-grid.html?nocache=' + theTime;
     var newPage=    'media-capture.html';
     updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), jsonStringArr, newPage, document.getElementById('fileUploadTxt'));
-
-    removeMediaItemStorage();
 
     navigator.camera.cleanup(function() { console.log("Camera cleanup success.")}, function(message) { console.log("Camera cleanup failed.")});
 }
@@ -169,9 +175,11 @@ function uploadFileFromUrl() {
 
             console.log("mediaAddPageAdd: uploadFileFromUrl():attempting to upload file name: " + theFileName);
             form.append('file', theBlob, theFileName);
-            xhr.open('post', serviceMediaUploadURL, true);
+            xhr.open('post', tsServiceURLDomain + "tssvc/resourcesS/upload", true);
             xhr.onreadystatechange=function() {
                 if (xhr.readyState==4) {
+
+                    removeMediaItemStorage();
 
                     console.log("mediaAddPageAdd: uploadFileFromUrl():file upload response: " + xhr.responseText);
                     var respObj = JSON.parse(xhr.responseText)  ;
@@ -192,7 +200,7 @@ function uploadFileFromUrl() {
                     console.log("mediaAddPageAdd: uploadFileFromUrl(): calling update media with page change of :" + newPage);
                     updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), jsonStringArr, newPage, document.getElementById('fileUploadTxt'));
 
-                    removeMediaItemStorage();
+
 
                 }
             }

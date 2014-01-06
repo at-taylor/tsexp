@@ -1,5 +1,3 @@
-var serviceCategoryURL = tsServiceURLDomain + "tssvc/resourcesS/categories";
-var serviceMediaUpdateURL = tsServiceURLDomain + "tssvc/resourcesS/media";
 
 function setCategoryList(element) {
 
@@ -7,7 +5,7 @@ function setCategoryList(element) {
 
     var jQName = '#' + element.id;
 
-    $.getJSON(serviceCategoryURL, function(data) {
+    $.getJSON(tsServiceURLDomain + "tssvc/resourcesS/categories", function(data) {
         cat = data.categoryModelList;
 
         $(jQName + ' option').remove();       // clear previous entries
@@ -31,13 +29,14 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCatego
 
     $.ajax({
         type: "POST",
-        url: serviceMediaUpdateURL + "/" + mediaId,
+        url: tsServiceURLDomain + "tssvc/resourcesS/media" + "/" + mediaId,
         data:'mediaTitle='+ mediaTitle +'&mediaDate='+ mediaDate +'&mediaDescr='+ mediaDescr +'&catList='+ mediaCategories,
         cache: false,
         success: function(data) {
             console.log("json-common: updateMediaItem(): success: data=" + data.id);
             if (changePageTo != null)
                 $.mobile.changePage(changePageTo);
+
         },
         error: function(xhr, status, error) {
 
