@@ -5,28 +5,13 @@
 
 <body>
 
-<div id="storyPreviewPage" data-role="page">
+<div id="storyNewPreviewPage" data-role="page">
 <div data-theme="c" data-role="header" data-position="fixed" >
     <h1><img src="img/splash/logo.png"></h1>
     <a href="#MainNavPage" data-icon="home" class="ui-btn-right">Home</a>
 
 </div>
 
-<div data-role="panel" id="storyNewMediaPanel" data-dismissible="false">
-    <!--<ul  data-role="listview" id="#storyEditMedia" data-inset="true" data-filter="true">-->
-    <!--<li><a href="media-edit.html?id=128"><img src= http://app.treasuredstories.com/uploaded/media/image/p180ifioobmvv5c9gcgm0btpb13.JPG></a></li>-->
-    <!--<li><a href="media-edit.html?id=79"><img src= http://app.treasuredstories.com/uploaded/media/image/p1809l9mrujpuijkst5gtb1hlg5.jpg><h2>Me and Jim</h2><p class="ui-li-aside">image</p></a></li>-->
-    <!--<li><a href="media-edit.html?id=78"><img src= http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png><h2>TS Logo square</h2><p class="ui-li-aside">image</p></a></li>-->
-    <!--</ul>-->
-
-    <div data-role="fieldcontain">
-        <fieldset data-role="controlgroupPreview">
-            <input type="checkbox" id="OptIn" class="{src:'img\navbut\add.png'}" checked="checked"/>
-
-            <input type="checkbox" value="1" class="cbox" name="tandc" id="tandc"/>
-        </fieldset>
-    </div>
-</div><!-- /panel -->
 
 <div data-role="content">
 
@@ -68,39 +53,8 @@
                 <!--<input type="checkbox"    data-inline="true" id="testCheck3" class="mediaCheck" value=3>-->
                 <!--<label for="testCheck3"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png" width=100></label>-->
             </div>
-            <!--<div data-role="fieldcontain">-->
-            <!--<fieldset id="storyAddMediaCheckboxFieldSet" data-role="controlgroup" data-type="horizontal">-->
-            <!--<input type="checkbox"  data-inline="true" id="testCheck" class="mediaCheck" value=1>-->
-            <!--<label for="testCheck"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-            <!--<input type="checkbox"    data-inline="true" id="testCheck2" class="mediaCheck" value=2>-->
-            <!--<label for="testCheck2"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-            <!--<input type="checkbox"    data-inline="true" id="testCheck3" class="mediaCheck" value=3>-->
-            <!--<label for="testCheck3"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-
-
-            <!--<input type="checkbox"  data-inline="true" id="testCheck4" class="mediaCheck" value=4>-->
-            <!--<label for="testCheck4"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-            <!--<input type="checkbox"   data-inline="true" id="testCheck5" class="mediaCheck" value=5>-->
-            <!--<label for="testCheck5"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-            <!--<input type="checkbox"    data-inline="true" id="testCheck6" class="mediaCheck"value=6>-->
-            <!--<label for="testCheck6"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-
-            <!--<input type="checkbox"  data-inline="true" id="testCheck7" class="mediaCheck" value=7>-->
-            <!--<label for="testCheck7"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-            <!--<input type="checkbox"   data-inline="true" id="testCheck8" class="mediaCheck" value=8>-->
-            <!--<label for="testCheck8"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-            <!--<input type="checkbox"    data-inline="true" id="testCheck9" class="mediaCheck" value=9>-->
-            <!--<label for="testCheck9"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-            <!--</fieldset>-->
-            <!--</div>-->
 
         </div>
-
-        <!--<ul  data-role="listview" id="#storyEditMedia" data-inset="true" data-filter="true">-->
-        <!--<li><a href="media-edit.html?id=128"><img src= http://app.treasuredstories.com/uploaded/media/image/p180ifioobmvv5c9gcgm0btpb13.JPG><h2>In the Navy</h2><p>07/28/2013</p><p class="ui-li-aside">JPG</p></a></li>-->
-        <!--<li><a href="media-edit.html?id=79"><img src= http://app.treasuredstories.com/uploaded/media/image/p1809l9mrujpuijkst5gtb1hlg5.jpg><h2>Me and Jim</h2><p>07/24/2013</p><p class="ui-li-aside">image</p></a></li>-->
-        <!--<li><a href="media-edit.html?id=78"><img src= http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png><h2>TS Logo square</h2><p>07/24/2013</p><p class="ui-li-aside">image</p></a></li>-->
-        <!--</ul>-->
 
     </section>
 
@@ -125,11 +79,11 @@
 
 <script type="text/javascript">
 
-    console.log("storyPreviewPage: init");
+    console.log("storyNewPreviewPage: init");
 
     $(document).on('pagebeforeshow', '#storyPreviewPage', function()
     {
-        console.log("storyPreviewPage: pagebeforeshow()");
+        console.log("storyNewPreviewPage: pagebeforeshow()");
 
         $('#storyPreviewTitleTxt').html("");
         $('#storyPreviewTitleTxt').append(sessionStorage.getItem("storyTitle"));
@@ -159,7 +113,15 @@
         var categoryResultArray = JSON.parse(sessionStorage.getItem("storyCategories"));
         $('.fa').remove();
         $('.txtfa').remove();
-        if (categoryResultArray != null) {
+        if (categoryResultArray == null)  {
+            console.log ("storyPreviewPage: no categories found, removing categoryBtn");
+           $('.categoryBtn').remove();
+        }
+        else {
+            if (document.getElementById('categoryBtn') == null ) {
+                console.log("storyPreviewPage: categoryBtn not found.  readding.");
+                $('#previewCategoryDiv').append('<a class="categoryBtn" data-theme="none" data-role="none">');
+            }
             for(i = 0; i < categoryResultArray.length; i++) {
                 //console.log("value at index: " + i + " is " + categoryResultArray[i] )
 

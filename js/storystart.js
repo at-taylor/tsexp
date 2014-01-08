@@ -1,46 +1,51 @@
 
-var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/stories";
+
 var starters;
 var categories;
 var numberOfCategories = 0;
 var numberOfStarters = 0;
 
 console.log("storyStartPage js: Executing");
-console.log("storyStartPage: executing using services at: " + serviceURL);
-
-$('#storyStartPage').bind('pageinit', function(event) {
-    console.log('storyStartPage: bind: pageinit()');
-})
 
 $(document).on('pagebeforeshow', '#storyStartPage', function(){
 
     // Sample code to automatically open a side panel
-    //var optionsHash = "";
-    //console.log("About to open panel");
-    //$( "#mypanel" ).panel( "open");
-    //console.log("After open panel");
+     //$( "#mypanel" ).panel( "open");
 
-    // attempt to set a theme on a textinput, it did not work
-    //    console.log("setting theme b");
-    //    $( '.selector' ).textinput({ theme: "b" });
+    //1a.  Initialize input fields on the page to remove any cached values
+    $('#storyStarterTitleTxt').val("");
+
+    //1b.  For now, remove all session entries of in-prorgess story
     removeNewStoryStorage();
 
+    // 2. Set buttons to initialized state
+    $('#storyStartNextBtn').removeClass('ui-disabled');
+
+    // 3.  Reset the dyanmic content (the story starters).  Note: these should come from cache
     getStarterList();
 
     // sample code on setting div html thru jquery functions
     //$('#storyStarterDiv').html("QUERY STYLE");
 
+    // 4. Set any event handlers remembering to unset them first
+    $(document).off('click', '#storyStartNextBtn').on('click', '#storyStartNextBtn',function(event) {
+
+        $(this).addClass('ui-disabled');
+
+        console.log("storyStartPage: storyStartNextBtn: onclick()");
+
+        sessionStorage.setItem("storyTitle", $('#storyStarterTitleTxt').val());
+
+        console.log("storyStartPage: submitIt(): storing selected Title: " + sessionStorage.getItem("storyTitle"));
+
+        console.log("Stack");
+        console.log($.mobile.stack);
+
+        $.mobile.changePage('storyeditnew.html');
     });
 
-function submitIt() {
+});
 
-    console.log("storyStartPage: submitIt()");
-
-    sessionStorage.setItem("storyTitle", $('#storyStarterTitleTxt').val());
-    console.log("storyStartPage: submitIt(): storing selected Title: " + sessionStorage.getItem("storyTitle"));
-    $.mobile.changePage('storyeditnew.html');
-
-}
 function setIt(id) {
 
     console.log("storyStartPage: setIt(id=" + id + ")");
@@ -55,7 +60,7 @@ function setIt(id) {
     $("#starterListItem" + id).buttonMarkup({theme: 'a'});
 
     //  Set the title with the associated story starter suggested story title
-    $.getJSON(serviceURL + "/starters/" + id, function(data) {
+    $.getJSON(tsServiceURLDomain + "tssvc/resourcesS/stories/starters/" + id, function(data) {
 
         console.log("storyStartPage: setIt(): Title retrieved: " + data.starterTitle);
 
@@ -86,7 +91,7 @@ function showIt(id) {
 
     //  Fill the right-hand side of the grid with the corresponding story starters to selected category
     numberOfStarterCategories = 0;
-    $.getJSON(serviceURL + "/starters/categories/" + id, function(data) {
+    $.getJSON(tsServiceURLDomain + "tssvc/resourcesS/stories/starters/categories/" + id, function(data) {
 
         $('#showStoryStarters').listview( "option", "theme", "d" );
         $('#showStoryStarters li').remove();
@@ -114,7 +119,7 @@ function getStarterList() {
 
     numberOfCategories = 0;
     console.log('storyStartPage: getStarterList(): initializing number of categories: ' + numberOfCategories);
-    $.getJSON(serviceURL + "/starters/categories/", function(data) {
+    $.getJSON(tsServiceURLDomain + "tssvc/resourcesS/stories/starters/categories/", function(data) {
 
         $('#showStoryStartersList li').remove();
 

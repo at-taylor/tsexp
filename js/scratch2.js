@@ -32,3 +32,27 @@
         });
     });
 })( jQuery );
+
+
+//console.log("mediaEditPage: count the number of options which exist prior to running the dynamic build:");
+//console.log("note the dyn build is commented out");
+//console.log($('#editCategoryList option').size());
+
+//        $.getJSON(tsServiceURLDomain + "tssvc/resourcesS/categories", function(data) {
+//
+//            $('#editCategoryList option').remove();       // clear previous entries
+//
+//            cat = data.categoryModelList;
+//            $.each(cat, function(index, item) {
+//                var optionListItem = "<option value='" + item.categoryId + "'>" +item.categoryDescr + "</option>";
+//                $('#editCategoryList').append(optionListItem);
+//            });
+//
+//            // make selected any items that are in the result array
+//            //console.log("Category Array outer processing.  Length: " + categoryResultArray.length) ;
+//            for(i = 0; i < categoryResultArray.length; i++) {
+//                //console.log("value at index: " + i + " is " + categoryResultArray[i] )
+//                $("#editCategoryList option[value='"+categoryResultArray[i]+"']").attr('selected', 'selected');
+//            }
+//            $('#editCategoryList').selectmenu("refresh", true);
+//        });

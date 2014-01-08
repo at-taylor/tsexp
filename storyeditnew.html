@@ -31,7 +31,7 @@
     <div data-role="content">
 
         <h2>Tell Story</h2>
-        <a data-role="button" href="#" data-shadow="false" data-theme="none" onclick="submitIt()">
+        <a id="storyEditNewNextBtn" data-role="button" href="#" data-shadow="false" data-theme="none">
             <img src="img/navbut/next1.png" border="0"/>
         </a>
 
@@ -44,71 +44,23 @@
                     <div id="storyCategoryDiv">
                         <label for="storyEditNewCategoryList">Categories</label>
                         <select id="storyEditNewCategoryList"  multiple >
-                            <!--<option value="1">red</option>-->
-                            <!--<option value="2">green</option>-->
-                            <!--<option value="3">yellow</option>-->
-                            <!--<option value="4">blue</option>-->
+                            <!--<option value="1">Love</option>-->
                         </select>
                     </div> <!-- categoryDiv -->
                 </div>
                 <!--<label for="storyDescrTxt">Description:</label>-->
-                <!--<textarea id="storyDescrTxt" data-role="none" >An editable textarea.</textarea>-->
-                <!--<input type="text" id="htmlSourceTxt" data-role="none">-->
-                <!--editable begin-->
-                <!--<div id="testEditDiv" contenteditable="true">-->
-                <!--editable end-->
-                <!--</div>-->
-
                 <!------------------------------------------------------------ Toggle jQTE Button ------------------------------------------------------------>
                 <!--<button class="status">Toggle jQTE</button>-->
-
                 <!------------------------------------------------------------ jQUERY TEXT EDITOR ------------------------------------------------------------>
 
-                <textarea name="textarea" class="jqte-test" placeholder="Tell Your Story here"></textarea>
+                <textarea id="storyEditNewContentTxt" name="textarea" class="jqte-test" placeholder="Tell Your Story here"></textarea>
             </div>
             <div class="ui-block-b" style="width:40%;padding-left:2%;">
                 <div data-role="controlgroup" id="controlgroup" data-type="horizontal">
                     <!--<input type="checkbox"  data-inline="true" id="testCheck" class="mediaCheck" value=1>-->
                     <!--<label for="testCheck"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png" width=100></label>-->
-                    <!--<input type="checkbox"    data-inline="true" id="testCheck2" class="mediaCheck" value=2>-->
-                    <!--<label for="testCheck2"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png" width=100></label>-->
-                    <!--<input type="checkbox"    data-inline="true" id="testCheck3" class="mediaCheck" value=3>-->
-                    <!--<label for="testCheck3"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png" width=100></label>-->
                 </div>
-                    <!--<div data-role="fieldcontain">-->
-                        <!--<fieldset id="storyAddMediaCheckboxFieldSet" data-role="controlgroup" data-type="horizontal">-->
-                            <!--<input type="checkbox"  data-inline="true" id="testCheck" class="mediaCheck" value=1>-->
-                            <!--<label for="testCheck"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-                            <!--<input type="checkbox"    data-inline="true" id="testCheck2" class="mediaCheck" value=2>-->
-                            <!--<label for="testCheck2"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-                            <!--<input type="checkbox"    data-inline="true" id="testCheck3" class="mediaCheck" value=3>-->
-                            <!--<label for="testCheck3"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-
-
-                            <!--<input type="checkbox"  data-inline="true" id="testCheck4" class="mediaCheck" value=4>-->
-                            <!--<label for="testCheck4"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-                            <!--<input type="checkbox"   data-inline="true" id="testCheck5" class="mediaCheck" value=5>-->
-                            <!--<label for="testCheck5"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-                            <!--<input type="checkbox"    data-inline="true" id="testCheck6" class="mediaCheck"value=6>-->
-                            <!--<label for="testCheck6"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-
-                            <!--<input type="checkbox"  data-inline="true" id="testCheck7" class="mediaCheck" value=7>-->
-                            <!--<label for="testCheck7"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-                            <!--<input type="checkbox"   data-inline="true" id="testCheck8" class="mediaCheck" value=8>-->
-                            <!--<label for="testCheck8"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-                            <!--<input type="checkbox"    data-inline="true" id="testCheck9" class="mediaCheck" value=9>-->
-                            <!--<label for="testCheck9"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png"></label>-->
-                        <!--</fieldset>-->
-                    <!--</div>-->
-
             </div>
-
-                <!--<ul  data-role="listview" id="#storyEditMedia" data-inset="true" data-filter="true">-->
-                    <!--<li><a href="media-edit.html?id=128"><img src= http://app.treasuredstories.com/uploaded/media/image/p180ifioobmvv5c9gcgm0btpb13.JPG><h2>In the Navy</h2><p>07/28/2013</p><p class="ui-li-aside">JPG</p></a></li>-->
-                    <!--<li><a href="media-edit.html?id=79"><img src= http://app.treasuredstories.com/uploaded/media/image/p1809l9mrujpuijkst5gtb1hlg5.jpg><h2>Me and Jim</h2><p>07/24/2013</p><p class="ui-li-aside">image</p></a></li>-->
-                    <!--<li><a href="media-edit.html?id=78"><img src= http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png><h2>TS Logo square</h2><p>07/24/2013</p><p class="ui-li-aside">image</p></a></li>-->
-                <!--</ul>-->
-
         </section>
 
     </div>       <!-- end of content div -->
@@ -126,127 +78,13 @@
         <a href="#"><img height="51" width="50" src="img/navbut/requestStory.png" /></a>
     </div>
 
-    <!--<script src="js/storylist.js"></script>-->
-    <!--<link rel="stylesheet" href="css/tinyedit/style.css" />-->
-    <!--<script type="text/javascript" src="js/vendor/tinyedit/tinyeditor.js"></script>-->
+
+
     <link type="text/css" rel="stylesheet" href="demo.css">
     <link type="text/css" rel="stylesheet" href="css/jquery-te-1.4.0.css">
     <script type="text/javascript" src="js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
+    <script src="js/storyeditnew.js"></script>
 
-    <script type="text/javascript">
-
-        $('.jqte-test').jqte();
-
-        // settings of status
-//        var jqteStatus = true;
-//        $(".status").click(function()
-//        {
-//            jqteStatus = jqteStatus ? false : true;
-//            $('.jqte-test').jqte({"status" : jqteStatus})
-//        });
-
-
-//        new TINY.editor.edit('editor',{
-//            id:'storyDescrTxt',
-//            width:400,
-//            height:250,
-//            cssclass:'te',
-//            controlclass:'tecontrol',
-//            rowclass:'teheader',
-//            dividerclass:'tedivider',
-//            controls:['bold','italic','underline','strikethrough','|','subscript','superscript','|',
-//                'orderedlist','unorderedlist','|','outdent','indent','|','leftalign',
-//                'centeralign','rightalign','blockjustify','|','unformat','|','undo','redo','n',
-//                'font','size','style','|','image','hr','link','unlink','|','cut','copy','paste','print'],
-//            footer:true,
-//            fonts:['Verdana','Arial','Georgia','Trebuchet MS'],
-//            xhtml:true,
-//            cssfile:'style.css',
-//            bodyid:'editor',
-//            footerclass:'tefooter',
-//            toggle:{text:'source',activetext:'wysiwyg',cssclass:'toggle'},
-//            resize:{cssclass:'resize'}
-//        });
-
-        function submitIt() {
-
-            console.log("storyEditNewPage: submitIt()");
-
-            //console.log("i value : " + editor.i.contentWindow.document.body.innerHTML);
-            //var theTarget = document.getElementById("htmlSourceTxt");
-            //theTarget.value = editor.i.contentWindow.document.body.innerHTML;
-
-
-
-            var val = new Array();
-            $(':checkbox:checked').each(function(i){
-                val[i] = $(this).val();
-                //console.log("inner label html: " + $('#mediaCheck657 label').html());
-                //alert("checked: " + $(this).val());
-            });
-            sessionStorage.setItem("storyMediaItems",JSON.stringify(val));
-            console.log("storyEditNewPage: submitIt(): cached Media Items: " + sessionStorage.getItem("storyMediaItems"));
-
-            sessionStorage.setItem("storyTitle", $('#storyEditNewTitleTxt').val()) ;
-            console.log("storyEditNewPage: submitIt(): cached Story Title: " + sessionStorage.getItem("storyTitle"));
-
-            sessionStorage.setItem("storyDate", $('#storyEditNewDateTxt').val()) ;
-            console.log("storyEditNewPage: submitIt(): cached Story Date: " + sessionStorage.getItem("storyDate"));
-
-            var theStoryContent = $('.jqte-test').val();
-            sessionStorage.setItem("storyContent", theStoryContent);
-            console.log("storyEditNewPage: submitIt(): cached Story Content: " + sessionStorage.getItem("storyContent"));
-
-            var selectedValsArray = $('#storyEditNewCategoryList').val();
-            var jsonStringArr = JSON.stringify(selectedValsArray);
-            sessionStorage.setItem("storyCategories", jsonStringArr);
-            console.log("storyEditNewPage: submitIt(): cached Story Categories: " + sessionStorage.getItem("storyCategories"));
-
-            $.mobile.changePage('storypreview2.html');
-
-        }
-
-
-        $(document).on('pagebeforeshow', '#storyEditNewPage', function()
-        {
-            console.log("storyEditNewPage: pagebeforeshow()");
-            $('#storyEditNewTitleTxt').val(sessionStorage.getItem("storyTitle"));
-            setCategoryList(document.getElementById('storyEditNewCategoryList'));
-
-            var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/media";
-            $.getJSON(serviceURL, function(data) {
-                console.log("storyEditNewPage: pagebeforeshow(): getJSON for media library: start()");
-
-                var media;
-                var group = $( "#controlgroup" );
-                $('.ui-checkbox').remove();
-                var el;
-                media = data.mediaModelList;
-                $.each(media, function(index, item) {
-
-                    //console.log("Index from url: " + item.url + " is " + item.url.substring(item.url.lastIndexOf('.')+1) );
-                    var theExt = item.url.substring(item.url.lastIndexOf('.')+1);
-                    if ((theExt == "jpg") || (theExt == "png") || (theExt == "JPG"))  {
-                        $el = $('<input type="checkbox" data-inline="true" id="mediaCheck' + item.id + '" class="mediaCheck" value=' + item.id +' ><label for="mediaCheck' + item.id +'"><img width=100 height=100 src= "' + item.url + '"></label>');
-                        sessionStorage.setItem("storyAddMediaId" + item.id, item.url);
-                    }
-                    //console.log("Element :" + $el);
-                    $( "#controlgroup" ).controlgroup( "container" )["append"]( $el );
-
-                });
-                group.controlgroup( "refresh" );
-                $('#controlgroup').trigger('create');
-                $('div').trigger('create');
-
-//                console.log("Investigating the media session storage option");
-//                console.log("657");
-//                console.log(sessionStorage.getItem("storyAddMediaId657"));
-                console.log("storyEditNewPage: pagebeforeshow(): getJSON for media library: end()");
-            });
-
-        });
-
-        </script>
 
 </div> <!-- end of storyEditNewPage -->
 

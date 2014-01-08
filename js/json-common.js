@@ -1,4 +1,29 @@
 
+function appCacheCategoryList(prefix) {
+
+    console.log("json-common: appCacheCategoryList()");
+
+    var categoryStorageIdName = prefix + "Ids";
+    sessionStorage.removeItem(categoryStorageIdName);
+
+    $.getJSON(tsServiceURLDomain + "tssvc/resourcesS/categories", function(data) {
+        var categoryIdArray = new Array();
+        cat = data.categoryModelList;
+
+        $.each(cat, function(index, item) {
+            //$("option[value='" + item.categoryId + "'']").remove ();     // remove option if already exists
+            console.log("json-common: appCacheCategoryList: item: " + item.categoryId + " descr: " + item.categoryDescr);
+            sessionStorage.removeItem(prefix + item.categoryId);
+            sessionStorage.setItem(prefix + item.categoryId, item.categoryDescr);
+            categoryIdArray.push(item.categoryId);
+
+        });
+        sessionStorage.setItem(categoryStorageIdName, JSON.stringify(categoryIdArray));
+        console.log("json-common: appCacheCategoryList(): category array: " + sessionStorage.getItem(categoryStorageIdName));
+    });
+
+}
+
 function setCategoryList(element) {
 
     console.log("json-common: setCategoryList() for element id: " + element.id);

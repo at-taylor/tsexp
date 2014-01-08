@@ -1,67 +1,51 @@
-var serviceMediaUploadURL = tsServiceURLDomain + "tssvc/resourcesS/upload";
-//var serviceCategoryURL = tsServiceURLDomain + "tssvc/resourcesS/categories";
 
 console.log("mediaAddPage js: Executing media-add.js");
 
-//function setCategoryList(element) {
-//
-//    console.log("json-common: setCategoryList() for element id: " + element.id);
-//
-//    var jQName = '#' + element.id;
-//
-//    $.getJSON(serviceCategoryURL, function(data) {
-//        cat = data.categoryModelList;
-//
-//        $.each(cat, function(index, item) {
-//
-//            var optionListItem = "<option value='" + item.categoryId + "'>" +item.categoryDescr + "</option>";
-//            //console.log("option Item: " + optionListItem);
-//            $(jQName).append("<option value='" + item.categoryId + "'>" +item.categoryDescr + "</option>");
-//        });
-//        $(jQName).selectmenu("refresh", true);
-//    });
-//
-//}
-
-
-
 $(document).on('pagebeforeshow', '#mediaAddPage', function()
 {
-//    console.log("stack");
 //    console.log( $.mobile.urlHistory.stack );
-
-
     console.log("mediaAddPage: pagebeforeshow()");
-//    if (sessionStorage.getItem("fileUrl") == null) { // page access thru a back button
-//        console.log("mediaAddPage: pagebeforeshow(): accessed with null");
-//        console.log("mediaAddPage: pagebeforeshow(); going back in history to:")
-//        console.log($.mobile.urlHistory.activeIndex-1);
-//        console.log($.mobile.urlHistory.stack[$.mobile.urlHistory.activeIndex-1]);
-//        $.mobile.changePage($.mobile.urlHistory.stack[$.mobile.urlHistory.activeIndex-1].pageUrl)
-//    }
 
+    // AN ADD PAGE SEQUENCE OF EVENTS
+
+    // 1. Reset input fields to initialized state to unset any cached content prior to dynamic content load
     $('#titleTxt').val("");
-    $('#tateTxt').val("");
+    $('#dateTxt').val("");
     $('#descrTxt').val("");
     $('#theImage').attr("src", "");
+    $("#fileInfoTxt").val("");
+    $("#fileLocTxt").val("");
+
+    // 2, Reset buttons to initialized state
+    $('#uploadBtn').button('enable');
+    $('#cancelBtn').button('enable');
+    $('#uploadConfirmPopLink').removeClass('ui-disabled');
+    $('#uploadCancelPopLink').removeClass('ui-disabled');
 
 
-    $('[type="submit"]').button('enable');
-
+    // 3a. Load Dynamic content
     console.log("mediaAddPageAdd: starting category load");
     setCategoryList(document.getElementById('categoryList'));
 
+
+    // 3b. Load content from session state (if applicable)
     $("#theImage").attr("src",sessionStorage.getItem("fileUrl"));
     var theFileInfo = "Name: " + sessionStorage.getItem("fileName") + " Type: " + sessionStorage.getItem("fileType") +
         " Size: " + sessionStorage.getItem("fileSize") + " Date: " + sessionStorage.getItem("fileDate");
-    $("#fileInfoTxt").attr("value",theFileInfo);
+    $("#fileInfoTxt").val(theFileInfo);
     var theFileLoc = "Loc: " + sessionStorage.getItem("fileUrl");
-    $("#fileLocTxt").attr("value",theFileLoc);
+    $("#fileLocTxt").val(theFileLoc);
 
-    $('#uploadBtn').click(function(event) {
+    // 4. Set any button event handlers remembering to unset them first
+
+    // Must unload the event handler first to avoid multiple click event handlers firing when the page is loaded multiple times
+    $(document).off('click', '#uploadBtn').on('click', '#uploadBtn',function(event) {
         console.log("mediaAddPageAdd: uploadBtn.click()");
 
-        $('[type="submit"]').button('disable');
+        $('#uploadBtn').button('disable');
+        $('#cancelBtn').button('disable');
+        $('#uploadConfirmPopLink').addClass('ui-disabled');
+        $('#uploadCancelPopLink').addClass('ui-disabled');
 
         var fileUrl = sessionStorage.getItem("fileUrl");
         var mediaId;
@@ -76,17 +60,22 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
         }
     });
 
-    $('#cancelBtn').click(function(event) {
+    $(document).off('click', '#cancelBtn').on('click', '#cancelBtn',function(event) {
+   // $('#cancelBtn').click(function(event) {
 
         console.log("mediaAddPageAdd: cancelBtn.click()");
 
-        $('[type="submit"]').button('disable');
+        $('#cancelBtn').button('disable');
+        $('#uploadBtn').button('disable');
+        $('#uploadConfirmPopLink').addClass('ui-disabled');
+        $('#uploadCancelPopLink').addClass('ui-disabled');
 
         removeMediaItemStorage();
 
         $.mobile.changePage('media-capture.html');
 
     });
+
 });
 
 function uploadFileFromFileHandle ()
@@ -215,36 +204,7 @@ function uploadFileFromUrl() {
     $( "#uploadConfirm" ).popup( "close" );
 
 }
-        //$.mobile.changePage('testadd.html');
-        //alert("Starting upload...ajax")
-//                  $.ajax({
-//                      type: "POST",
-//                      url: "http://localhost:8080/tssvc/resourcesS/uploadloc",
-//                      //data: form,
-//                      data: 'file='+ theFile,
-//                      //data:'user='+ $('#user').val() +'&pass='+ $('#pass').val(),
-//                      cache: false,
-//                      contentType: false,
-//                      processData: false,
-//                      success: function(data) {
-//                          //validate the response here, set variables... whatever needed
-//                          //and if credentials are valid, forward to the next page
-//                          alert ("in success");
-//                          alert("data: " + data);
-//                          //alert("data is" + data)   ;
-//                          // $.mobile.changePage("index.html");
-//                          //or show an error message
-//                      },
-//                      done: function (data) {
-//                          alert("done : " + data);
-//                      },
-//                      error: function(xhr, status, error) {
-//                          alert("in error");
-//                          alert("status: " + status) ;
-//                          alert("error: " + error);
-//                          alert(xhr.responseText);
-//                      }
-//                   })
+
 
 
 
