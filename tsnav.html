@@ -61,12 +61,6 @@
             $('#tsNavStoryLibBtn').removeClass('ui-disabled');
             $('#tsNavMediaCaptureBtn').removeClass('ui-disabled');
             $('#logout_submit').removeClass('ui-disabled');
-        });
-
-        $(document).on('pageinit', '#MainNavPage', function(){
-        //$('#MainNavPage').bind('pageinit', function(event)   {
-            //alert('MainNavPage live: pageinit');
-            console.log("MainNavPage: pageinit(): start");
 
             $(document).off('click', '#tsNavTellStoryBtn').on('click', '#tsNavTellStoryBtn',function(event) {
 
@@ -113,7 +107,7 @@
 
                 console.log("MainNavPage: logout_submit: click()");
 
-                $(this).addClass('ui-disabled');
+                $('#logout_submit').addClass('ui-disabled');
 
                 $.ajax({
                     type: "GET",
