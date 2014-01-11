@@ -9,7 +9,7 @@
 
     <div data-theme="c" data-role="header" data-position="fixed" >
         <h1><img src="img/splash/logo.png"></h1>
-        <a href="#MainNavPage" data-icon="home" id="logout_submit" class="ui-btn-right">Logout</a>
+        <a href="#" data-icon="home" id="logout_submit" class="ui-btn-right">Logout</a>
 
     </div>
 
@@ -60,6 +60,7 @@
             $('#tsNavMediaLibBtn').removeClass('ui-disabled');
             $('#tsNavStoryLibBtn').removeClass('ui-disabled');
             $('#tsNavMediaCaptureBtn').removeClass('ui-disabled');
+            $('#logout_submit').removeClass('ui-disabled');
         });
 
         $(document).on('pageinit', '#MainNavPage', function(){
@@ -107,10 +108,12 @@
 
             });
 
+            //$("#logout_submit").click(function(event) {
+            $(document).off('click', '#logout_submit').on('click', '#logout_submit',function(event) {
 
-            console.log("MainNavPage: binding click function on #logout_submit");
-            $("#logout_submit").click(function(event) {
-                console.log("MainNavPage: handling the click event of the logout button");
+                console.log("MainNavPage: logout_submit: click()");
+
+                $(this).addClass('ui-disabled');
 
                 $.ajax({
                     type: "GET",
