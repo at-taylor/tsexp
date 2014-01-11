@@ -251,3 +251,36 @@ margin-bottom: 20px ;
     border: transparent;
 
 }
+
+.ts-home-btn {
+    width           : 175px;
+    height          : 175px;
+    display         : block;
+    text-decoration : none;
+    position        : relative;
+}
+
+.ts-rounded {
+    -moz-border-radius    : 87px;
+    -webkit-border-radius : 87px;
+    border-radius         : 87px;
+}
+
+#ts-home-preserve {
+    background : #47c282;
+}
+
+#navmenu {
+    margin: auto;
+    padding-top: 60px;
+}
+
+.grid-container {
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#mypanel {
+    padding-top: 50px;
+}

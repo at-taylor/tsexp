@@ -8,10 +8,10 @@
     <!-- See for reference https://build.phonegap.com/docs/config-xml -->
     <!-- versionCode is optional and Android only -->
 
-    <name>TS Experimental Example</name>
+    <name>Treasured Stories</name>
 
     <description>
-        An experimental proof-of-concept example
+        Developmental version
     </description>
 
     <author href="https://www.outremersystemdesign.com" email="at.taylor@yahoo.com">
@@ -78,9 +78,9 @@
     <!-- custom stuff. commenting out width and height attributes. including here for reference: width="320" height="480"-->
     <!-- <gap:splash src="img/splash/logo_big.png" gap:platform="ios" />
     <gap:splash src="img/splash/logo_big.png" gap:platform="android" /> -->
-    <!--<gap:splash src="splash/ios/Default-Landscape_at_2x.png" gap:platform="ios" width="2048" height="1496" />-->
+    <gap:splash src="img/splash/ios/splashscrn_blue_2048x1496.png" gap:platform="ios" width="2048" height="1496" />
     <!--<gap:splash src="splash/ios/Default-Portrait_at_2x.png" gap:platform="ios" width="1536" height="2008" />-->
-    <!--<gap:splash src="splash/ios/Default-Landscape.png" gap:platform="ios" width="1024" height="748" />-->
+    <gap:splash src="img/splash/ios/splashscrn_blue_1024x748.png" gap:platform="ios" width="1024" height="748" />
     <!--<gap:splash src="splash/ios/Default-Portrait.png" gap:platform="ios" width="768" height="1004" />-->
 
     <!-- permissions -->

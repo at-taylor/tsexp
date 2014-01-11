@@ -7,45 +7,71 @@
 
 <div id="MainNavPage" data-role="page" data-add-back-btn="false" data-back-btn-text="back" data-back-btn-theme="c">
 
-    <div data-theme="c" data-role="header" data-position="fixed" >
-        <h1><img src="img/splash/logo.png"></h1>
-        <a href="#" data-icon="home" id="logout_submit" class="ui-btn-right">Logout</a>
+    <div data-role="panel" data-position="right" data-display="reveal" id="mypanel">
+        <div style="text-align: center">
+            <a id="tsNavMediaLibBtnPnl" href="#" ><img src="img/navbut/medialibrary_btn_175.png"></a>
+            <p><a id="tsNavMediaLibBtnPnlTxt" href="#"> Media Library</a></p>
+        </div>
+        <div style="text-align: center">
+            <a id="tsNavStoryLibBtnPnl" href="#" ><img src="img/navbut/storylibrary_btn_175.png"></a>
+            <p> <a id="tsNavStoryLibBtnPnlPnlTxt" href="#" >Story Library</a></p>
+        </div>
+    </div><!-- /panel -->
+
+
+
+    <div data-theme="b" data-role="header" data-position="fixed" style="background:#8e44ad; height: 50px " >
+        <h1>Treasured Stories</h1>
+        <a href="#"  id="logout_submit" class="ui-btn-right"><img src="img/icons/home_22.png"></a>
 
     </div>
 
     <div data-role="content">
 
         <!--<div style="text-align: center; padding-bottom: 10px "><img src="img/splash/logo_big.png"></div>-->
+      <div id="navmenu" class="grid-container">
 
-        <div class="ui-grid-b" style="padding-left: 75px">
+        <div  class="ui-grid-b">
             <!-- first row -->
-            <div class="ui-block-a" style="width: 210px;" >
-                <a id="tsNavTellStoryBtn" href="#" ><img src="img/navbut/tellStory.png"></a>
+            <div class="ui-block-a" style="width: 210px; text-align: center" >
+                <a id="tsNavTellStoryBtn" href="#" ><img src="img/navbut/create_btn_175.png"></a>
+                <h3>Create</h3>
             </div>
-            <div class="ui-block-b" style="width: 210px;">
-                <a id="tsNavMediaCaptureBtn" href="#" ><img src="img/navbut/addMedia.png"></a>
+            <div class="ui-block-b" style="width: 210px; text-align: center">
+                <a id="tsNavMediaCaptureBtn" href="#" ><img src="img/navbut/display_btn_175.png"></a>
+                <h3>Preserve</h3>
             </div>
-            <div class="ui-block-c" style="width: 210px;">
-                <a id="tsNavMediaLibBtn" href="#" ><img src="img/navbut/mediaLIbrary.png"></a>
+            <div class="ui-block-c" style="width: 210px; text-align: center">
+                <a id="tsNavMediaLibBtn" href="#" ><img src="img/navbut/collaborate_btn_175.png"></a>
+                <h3>Connect</h3>
             </div>
-            <div class="ui-block-d" style="width: 210px;">
-                <a id="tsNavStoryLibBtn" href="#" ><img src="img/navbut/storyLibrary.png"></a>
+            <div class="ui-block-d" style="width: 210px; text-align: center">
+                <a id="tsNavStoryLibBtn" href="#" ><img src="img/navbut/initiate_btn_175.png"></a>
+                <h3>Inspire</h3>
             </div>
             <!--second row-->
             <!--<div class="ui-block-a" style="width: 210px;">-->
-                <!--<a href="demo.html" ><img src="img/navbut/myLifeStory.png"></a>-->
+            <!--<a href="demo.html" ><img src="img/navbut/myLifeStory.png"></a>-->
             <!--</div>-->
             <!--<div class="ui-block-b" style="width: 210px;">-->
-                <!--<a href="media-library-grid.html" ><img src="img/navbut/requestStory.png"></a>-->
+            <!--<a href="media-library-grid.html" ><img src="img/navbut/requestStory.png"></a>-->
             <!--</div>-->
             <!--<div class="ui-block-c" style="width: 210px;">-->
-                <!--<a href="test.html" ><img src="img/navbut/inviteFriends.png"></a>-->
+            <!--<a href="test.html" ><img src="img/navbut/inviteFriends.png"></a>-->
             <!--</div>-->
             <!--<div class="ui-block-d" style="width: 210px;">-->
-                <!--<a href="addtestpop.html" ><img src="img/navbut/myAccount.png"></a>-->
+            <!--<a href="addtestpop.html" ><img src="img/navbut/myAccount.png"></a>-->
             <!--</div>-->
         </div>
-    </div>
+
+      </div>
+
+        <div style="float: right;">
+            <a href="#mypanel"><img src="img/navbut/libraries_btn_60.png"></a>
+        </div>
+
+
+     </div>
 
     <script>
         console.log("MainNavPage js: Executing");
@@ -61,6 +87,10 @@
             $('#tsNavStoryLibBtn').removeClass('ui-disabled');
             $('#tsNavMediaCaptureBtn').removeClass('ui-disabled');
             $('#logout_submit').removeClass('ui-disabled');
+            $('#tsNavMediaLibBtnPnl').removeClass('ui-disabled');
+            $('#tsNavMediaLibBtnPnlTxt').removeClass('ui-disabled');
+            $('#tsNavStoryLibBtnPnl').removeClass('ui-disabled');
+            $('#tsNavStoryLibBtnPnlTxt').removeClass('ui-disabled');
 
             $(document).off('click', '#tsNavTellStoryBtn').on('click', '#tsNavTellStoryBtn',function(event) {
 
@@ -83,6 +113,27 @@
                 $.mobile.changePage('media-library-grid.html');
 
             });
+
+            $(document).off('click', '#tsNavMediaLibBtnPnl').on('click', '#tsNavMediaLibBtnPnl',function(event) {
+
+                console.log("MainNavPage: tsNavMediaLibBtnPnl: click");
+
+                $('#tsNavMediaLibBtnPnl').addClass('ui-disabled');
+
+                $.mobile.changePage('media-library-grid.html');
+
+            });
+
+            $(document).off('click', '#tsNavMediaLibBtnPnlTxt').on('click', '#tsNavMediaLibBtnPnlTxt',function(event) {
+
+                console.log("MainNavPage: tsNavMediaLibBtnPnlTxt: click");
+
+                $('#tsNavMediaLibBtnPnlTxt').addClass('ui-disabled');
+
+                $.mobile.changePage('media-library-grid.html');
+
+            });
+
             $(document).off('click', '#tsNavStoryLibBtn').on('click', '#tsNavStoryLibBtn',function(event) {
 
                 console.log("MainNavPage: tsNavStoryLibBtn: click");
@@ -92,6 +143,27 @@
                 $.mobile.changePage('story-directory.html');
 
             });
+
+            $(document).off('click', '#tsNavStoryLibBtnPnl').on('click', '#tsNavStoryLibBtnPnl',function(event) {
+
+                console.log("MainNavPage: tsNavStoryLibBtnPnl: click");
+
+                $('#tsNavStoryLibBtnPnl').addClass('ui-disabled');
+
+                $.mobile.changePage('story-directory.html');
+
+            });
+
+            $(document).off('click', '#tsNavStoryLibBtnPnlTxt').on('click', '#tsNavStoryLibBtnPnlTxt',function(event) {
+
+                console.log("MainNavPage: tsNavStoryLibBtnPnlTxt: click");
+
+                $('#tsNavStoryLibBtnPnlTxt').addClass('ui-disabled');
+
+                $.mobile.changePage('story-directory.html');
+
+            });
+
             $(document).off('click', '#tsNavMediaCaptureBtn').on('click', '#tsNavMediaCaptureBtn',function(event) {
 
                 console.log("MainNavPage: tsNavMediaCaptureBtn: click");
@@ -117,7 +189,7 @@
                     success: function(data) {
                         console.log("ManNavPage: logout: success: data=" + data);
                         //
-                        // alert("data is" + data)   ;
+                        // alert("data is" + data) ;
                         $.mobile.changePage("index.html");
                     },
                     done: function (data) {
@@ -138,7 +210,7 @@
 
     </script>
 
-</div>    <!-- end of main nav page -->
+</div> <!-- end of main nav page -->
 
 </body>
 
