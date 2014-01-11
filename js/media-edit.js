@@ -13,15 +13,6 @@ $(document).on('pageinit', '#mediaEditPage', function(){
     else
         console.log("mediaEditPage: Categories succesfully retrieved from cache");
 
-    $('#editCategoryList option').remove();
-    for (i = 0; i < categoryArray.length; i++) {
-        var catDescr = sessionStorage.getItem("appCacheCat" + categoryArray[i]);
-        //console.log("mediaEditPage: category id/descr pull id: " + categoryArray[i] + " descr: " + catDescr);
-        var optionListItem = "<option value='" + categoryArray[i] + "'>" + catDescr + "</option>";
-        $('#editCategoryList').append(optionListItem);
-    }
-    $('#editCategoryList').selectmenu("refresh", true);
-
     console.log("mediaEditPage: pageinit(): end");
 });
 
@@ -29,7 +20,25 @@ $(document).on('pageinit', '#mediaEditPage', function(){
 $(document).on('pagebeforeshow', '#mediaEditPage', function(){
 
     console.log('mediaEditPage: pagebeforeshow(): start');
+
+    console.log('mediaEditPage: pagebeforeshow(): Initialize buttons');
+    // Initialize any buttons to initial state
+    $('#editBtn').button('enable');
+    $('#cancelEditBtn').button('enable');
+    $('#editConfirmPopLink').removeClass('ui-disabled');
+    $('#mediaEditBackBtn').removeClass('ui-disabled');
+    $('#mediaEditHomeBtn').removeClass('ui-disabled');
+
     //var mediaId = getUrlVars() ["id"];
+    console.log('mediaEditPage: pagebeforeshow(): checking in-process flag');
+
+    var inProcessFlag = sessionStorage.getItem("mediaEditProcessFlag");
+    if (inProcessFlag == "true")     {
+        console.log('mediaEditPage: in-process.  Returning');
+        return;
+    }
+    console.log('mediaEditPage: pagebeforeshow(): continuing');
+    sessionStorage.setItem("mediaEditProcessFlag", "true");
 
     // AN EDIT PAGE SEQUENCE OF EVENTS
 
@@ -49,11 +58,6 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
     $('#editDescrTxt').val("");
     $('#editImage').attr("src", "");
     $('#editErrorTxt').val("");
-
-    // 3. Initialize any buttons to initial state
-    $('#editBtn').button('enable');
-    $('#cancelEditBtn').button('enable');
-    $('#editConfirmPopLink').removeClass('ui-disabled');
 
     //console.log("activePage: " + $.mobile.activePage.data('url')   );
     //console.log("urlHistory: " + $.mobile.urlHistory.getActive().url)   ;
@@ -78,6 +82,17 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
         $('#editDateTxt').val(data.mediaDateRaw);
         $('#editDescrTxt').val(data.descr);
         $('#editImage').attr("src", data.url);
+
+        console.log("mediaEditPage: pagebeforeshow(): Pull Categories");
+        var categoryArray = JSON.parse(sessionStorage.getItem("appCacheCatIds"));
+        $('#editCategoryList option').remove();
+        for (i = 0; i < categoryArray.length; i++) {
+            var catDescr = sessionStorage.getItem("appCacheCat" + categoryArray[i]);
+            //console.log("mediaEditPage: category id/descr pull id: " + categoryArray[i] + " descr: " + catDescr);
+            var optionListItem = "<option value='" + categoryArray[i] + "'>" + catDescr + "</option>";
+            $('#editCategoryList').append(optionListItem);
+        }
+        $('#editCategoryList').selectmenu("refresh", true);
 
         console.log("mediaEditPage: pagebeforeshow(): Start: Preselect already selected category options for this media item.");
         for(i = 0; i < categoryResultArray.length; i++) {
@@ -119,6 +134,7 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
        // var newPage = 'media-library-grid.html?nocache=' + theTime;
         var newPage = 'media-library-grid.html';
 
+        sessionStorage.setItem("mediaEditProcessFlag", "false");
         updateMediaItem(mediaId, $('#editTitleTxt').val(), $('#editDateTxt').val(),$('#editDescrTxt').val(), jsonStringArr, newPage, document.getElementById('editErrorTxt'));
 
     });
@@ -131,13 +147,35 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
 
        // $('[type="submit"]').button('disable');
         $('#cancelEditBtn').button('disable');
-
+        sessionStorage.setItem("mediaEditProcessFlag", "false");
         //removeMediaItemStorage();
 
         var theTime = new Date().getTime();
         //var newPage = 'media-library-grid.html?nocache=' + theTime;
         var newPage = 'media-library-grid.html';
         $.mobile.changePage(newPage);
+
+    });
+
+    $(document).off('click', '#mediaEditHomeBtn').on('click', '#mediaEditHomeBtn',function(event) {
+
+        console.log("mediaEditPage: mediaEditHomeBtn.click()");
+
+        $('#mediaEditHomeBtn').addClass('ui-disabled');
+        sessionStorage.setItem("mediaEditProcessFlag", "false");
+
+        $.mobile.changePage('tsnav.html');
+
+    });
+
+    $(document).off('click', '#mediaEditBackBtn').on('click', '#mediaEditBackBtn',function(event) {
+
+        console.log("mediaEditPage: mediaEditBackBtn.click()");
+
+        $('#mediaEditBackBtn').addClass('ui-disabled');
+        sessionStorage.setItem("mediaEditProcessFlag", "false");
+
+        $.mobile.changePage('media-library-grid.html');
 
     });
 

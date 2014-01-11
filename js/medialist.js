@@ -7,16 +7,30 @@
  */
 
 
-var serviceURL = tsServiceURLDomain + "tssvc/resourcesS/media";
+
 var media;
 
 console.log("mediaListPage js: Executing");
-console.log("mediaListPage: executing using services at: " + serviceURL);
+
+$(document).on('pagebeforeshow', '#mediaListPage', function(){
+
+    console.log('mediaListPage: pagebeforeshow(): start');
+
+    console.log('mediaListPage: pagebeforeshow(): Initialize buttons');
+    // Initialize any buttons to initial state
+    $('#mediaListBackBtn').removeClass('ui-disabled');
+    $('#mediaListHomeBtn').removeClass('ui-disabled');
+
+    getMediaList();
+
+    console.log('mediaListPage: pagebeforeshow(): end');
+
+});
 
 $('#mediaListPage').bind('pageinit', function(event) {
    // alert('mediaListPage: live: pageinit');
     console.log('mediaListPage: bind: pageinit()');
-    getMediaList();
+
 });
 
 function sendItList(theId) {
@@ -28,7 +42,7 @@ function sendItList(theId) {
 function getMediaList() {
     console.log('mediaListPage: getMediaList() running');
 
-    $.getJSON(serviceURL, function(data) {
+    $.getJSON( tsServiceURLDomain + "tssvc/resourcesS/media", function(data) {
         $('#mediaList li').remove();
         media = data.mediaModelList;
         $.each(media, function(index, item) {

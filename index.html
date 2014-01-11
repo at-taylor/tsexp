@@ -14,7 +14,7 @@
         //
         // define a global variable to point to where the service code resides
         //
-       //var tsServiceURLDomain = "http://localhost:8080/";
+       // var tsServiceURLDomain = "http://localhost:8080/";
        var tsServiceURLDomain = "http://216.74.49.91:8080/";
        console.log("Using service domain of: " + tsServiceURLDomain);
 
@@ -36,7 +36,9 @@
             $.mobile.page.prototype.options.domCache = true;
             localStorage.clear();
             sessionStorage.clear();
-            appCacheCategoryList("appCacheCat");
+            //appCacheCategoryList("appCacheCat");
+            //appCacheStoryStarterCategoryList("appCacheStarterCat");
+            appCacheConsol("appCache");
             console.log("   end mobileinit");
         } );
     </script>
@@ -71,19 +73,23 @@
             <p><label for="remember">Remember me</label>
             <input type="checkbox" data-inline="true" data-theme="none" id="remember" name="remember" value="yes"> </p>
 
-            <p> <a data-role="button" id="login_submit" data-inline="true" data-theme="none"><img src="img/navbut/login.png"></a></p>
+            <p> <a data-role="button" id="login_submit" data-inline="true" data-theme="none" ><img src="img/navbut/login.png"></a></p>
 
             <p><a href="#">Forgot password?</a> or <a href="#">create an account?</a> </p>
 
         </div>
 
         <!-- For testing when no authentication is needed -->
-        <a href="#MainNavPage" data-role="button">Submit</a>
+        <!--<a href="tsnav.html" data-role="button">Submit</a>-->
 
         <script>
             console.log("loginPage js: Executing");
+
             //(document).on("click", "a.foo", fn)
             $('#loginPage').bind('pageinit', function(event) {
+
+                $('#login_submit').addClass('ui-disabled');
+
                 //alert('loginPage: bind in #loginPage : pageinit');
                 console.log("loginPage: in bind: pageinit()");
                 console.log("loginPage: binding click function on #login_submit");
@@ -105,7 +111,7 @@
 
                             if (data.isAuth = "true")  {
                                  //alert("data is" + data.isAuth) ;
-                                 $.mobile.changePage('#MainNavPage');
+                                 $.mobile.changePage('tsnav.html');
                             }
                             else
                                 alert("Please try to login again");
@@ -121,102 +127,89 @@
 
 </div>  <!-- end of loginPage -->
 
-<div id="MainNavPage" data-role="page" >
+<!--<div id="MainNavPage" data-role="page" >-->
 
-    <div data-theme="c" data-role="header" data-position="fixed" >
-        <h1><img src="img/splash/logo.png"></h1>
-        <a href="#MainNavPage" data-icon="home" id="logout_submit" class="ui-btn-right">Logout</a>
+    <!--<div data-theme="c" data-role="header" data-position="fixed" >-->
+        <!--<h1><img src="img/splash/logo.png"></h1>-->
+        <!--<a href="#MainNavPage" data-icon="home" id="logout_submit" class="ui-btn-right">Logout</a>-->
 
-    </div>
+    <!--</div>-->
 
-    <!--<div data-theme="c" data-role="header" data-position="fixed" class="ui-bar" style="text-align: center" >-->
-        <!--<div style="display: inline-block;  float: left">-->
-            <!--<a href="#"><img height="51" width="50" src="img/navbut/home.png" /></a>-->
-            <!--<a href="#"><img height="51" width="50" src="img/navbut/myLifeStory.png" /></a>-->
-            <!--<a href="#"><img height="51" width="50" src="img/navbut/tellStory.png" /></a>-->
-            <!--<a href="#"><img height="51" width="50" src="img/navbut/mediaLIbrary.png" /></a></div>-->
-        <!--<div style="display: inline-block;  text-align: center">-->
-            <!--<h1>Dashboard</h1></div>-->
-            <!--<div style="display: inline-block;  float: right">-->
-                <!--<a href="#"><img height="51" width="50" src="img/navbut/inviteFriends.png" /></a>-->
-                <!--<a href="#"><img height="51" width="50" src="img/navbut/myAccount.png" /></a></div>-->
+    <!--<div data-role="content">-->
+
+        <!--&lt;!&ndash;<div style="text-align: center; padding-bottom: 10px "><img src="img/splash/logo_big.png"></div>&ndash;&gt;-->
+
+        <!--<div class="ui-grid-b" style="padding-left: 75px">-->
+            <!--&lt;!&ndash; first row &ndash;&gt;-->
+            <!--<div class="ui-block-a" style="width: 210px;" >-->
+                <!--<a href="storystart.html" ><img src="img/navbut/tellStory.png"></a>-->
+            <!--</div>-->
+            <!--<div class="ui-block-b" style="width: 210px;">-->
+                <!--<a href="media-capture.html" ><img src="img/navbut/addMedia.png"></a>-->
+            <!--</div>-->
+            <!--<div class="ui-block-c" style="width: 210px;">-->
+                <!--<a href="media-library-grid.html" ><img src="img/navbut/mediaLIbrary.png"></a>-->
+            <!--</div>-->
+            <!--<div class="ui-block-d" style="width: 210px;">-->
+                <!--<a href="story-directory.html" ><img src="img/navbut/storyLibrary.png"></a>-->
+            <!--</div>-->
+             <!--&lt;!&ndash;second row&ndash;&gt;-->
+            <!--<div class="ui-block-a" style="width: 210px;">-->
+                <!--<a href="demo.html" ><img src="img/navbut/myLifeStory.png"></a>-->
+            <!--</div>-->
+            <!--<div class="ui-block-b" style="width: 210px;">-->
+                <!--<a href="media-library-grid.html" ><img src="img/navbut/requestStory.png"></a>-->
+            <!--</div>-->
+            <!--<div class="ui-block-c" style="width: 210px;">-->
+                <!--<a href="test.html" ><img src="img/navbut/inviteFriends.png"></a>-->
+            <!--</div>-->
+            <!--<div class="ui-block-d" style="width: 210px;">-->
+                <!--<a href="addtestpop.html" ><img src="img/navbut/myAccount.png"></a>-->
+            <!--</div>-->
         <!--</div>-->
+    <!--</div>-->
 
-    <div data-role="content">
+    <!--<script>-->
+        <!--console.log("MainNavPage js: Executing");-->
+        <!--//(document).on("click", "a.foo", fn)-->
+       <!--// $(document).on('pageinit', '#MainNavPage', function(event) {-->
+       <!--// $('#MainNavPage').live('pageinit', function(event) {-->
+        <!--$('#MainNavPage').bind('pageinit', function(event)   {-->
+                <!--//alert('MainNavPage live: pageinit');-->
+            <!--console.log("MainNavPage: in bind: pageinit()");-->
 
-        <!--<div style="text-align: center; padding-bottom: 10px "><img src="img/splash/logo_big.png"></div>-->
+            <!--console.log("MainNavPage: binding click function on #logout_submit");-->
+            <!--$("#logout_submit").click(function(event) {-->
+                <!--console.log("MainNavPage: handling the click event of the logout button");-->
 
-        <div class="ui-grid-b" style="padding-left: 75px">
-            <!-- first row -->
-            <div class="ui-block-a" style="width: 210px;" >
-                <a href="storystart.html" ><img src="img/navbut/tellStory.png"></a>
-            </div>
-            <div class="ui-block-b" style="width: 210px;">
-                <a href="media-capture.html" ><img src="img/navbut/addMedia.png"></a>
-            </div>
-            <div class="ui-block-c" style="width: 210px;">
-                <a href="media-library-grid.html" ><img src="img/navbut/mediaLIbrary.png"></a>
-            </div>
-            <div class="ui-block-d" style="width: 210px;">
-                <a href="story-directory.html" ><img src="img/navbut/storyLibrary.png"></a>
-            </div>
-             <!--second row-->
-            <div class="ui-block-a" style="width: 210px;">
-                <a href="demo.html" ><img src="img/navbut/myLifeStory.png"></a>
-            </div>
-            <div class="ui-block-b" style="width: 210px;">
-                <a href="media-library-grid.html" ><img src="img/navbut/requestStory.png"></a>
-            </div>
-            <div class="ui-block-c" style="width: 210px;">
-                <a href="test.html" ><img src="img/navbut/inviteFriends.png"></a>
-            </div>
-            <div class="ui-block-d" style="width: 210px;">
-                <a href="addtestpop.html" ><img src="img/navbut/myAccount.png"></a>
-            </div>
-        </div>
-    </div>
+                <!--$.ajax({-->
+                    <!--type: "GET",-->
+                    <!--url: tsServiceURLDomain + "tssvc/resourcesS/logout",-->
+                    <!--//data:'user='+ $('#user').val() +'&pass='+ $('#pass').val(),-->
+                    <!--cache: false,-->
+                    <!--success: function(data) {-->
+                        <!--console.log("ManNavPage: logout: success: data=" + data);-->
+                        <!--//-->
+                        <!--// alert("data is" + data)   ;-->
+                        <!--$.mobile.changePage("index.html");-->
+                    <!--},-->
+                    <!--done: function (data) {-->
+                        <!--alert("done : " + data);-->
+                    <!--},-->
+                    <!--error: function(xhr, status, error) {-->
+                        <!--console.log("ManNavPage: logout: error:");-->
+                        <!--alert("in error");-->
+                        <!--alert("status: " + status) ;-->
+                        <!--alert("error: " + error);-->
+                        <!--alert(xhr.responseText);-->
+                        <!--$.mobile.changePage("index.html");-->
+                    <!--}-->
+                <!--})-->
+            <!--})-->
+        <!--});-->
+<!--   </script>       -->
 
-    <script>
-        console.log("MainNavPage js: Executing");
-        //(document).on("click", "a.foo", fn)
-       // $(document).on('pageinit', '#MainNavPage', function(event) {
-       // $('#MainNavPage').live('pageinit', function(event) {
-        $('#MainNavPage').bind('pageinit', function(event)   {
-                //alert('MainNavPage live: pageinit');
-            console.log("MainNavPage: in bind: pageinit()");
-
-            console.log("MainNavPage: binding click function on #logout_submit");
-            $("#logout_submit").click(function(event) {
-                console.log("MainNavPage: handling the click event of the logout button");
-
-                $.ajax({
-                    type: "GET",
-                    url: tsServiceURLDomain + "tssvc/resourcesS/logout",
-                    //data:'user='+ $('#user').val() +'&pass='+ $('#pass').val(),
-                    cache: false,
-                    success: function(data) {
-                        console.log("ManNavPage: logout: success: data=" + data);
-                        //
-                        // alert("data is" + data)   ;
-                        $.mobile.changePage("index.html");
-                    },
-                    done: function (data) {
-                        alert("done : " + data);
-                    },
-                    error: function(xhr, status, error) {
-                        console.log("ManNavPage: logout: error:");
-                        alert("in error");
-                        alert("status: " + status) ;
-                        alert("error: " + error);
-                        alert(xhr.responseText);
-                        $.mobile.changePage("index.html");
-                    }
-                })
-            })
-        });
-    </script>
-
-</div>    <!-- end of main nav page -->
+<!--</div> -->   <!-- end of main nav page -->
 
 </body>
 

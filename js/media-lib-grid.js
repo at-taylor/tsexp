@@ -35,6 +35,8 @@ $(document).on('pagebeforeshow', '#mediaLibGridPage', function(){
     // alert('bind: pageinit');
     console.log("mediaLibGridPage: pagebeforeshow");
 
+    $('#mediaLibGridBackBtn').removeClass('ui-disabled');
+
     $.getJSON(tsServiceURLDomain + "tssvc/resourcesS/media", function(data) {
 
         console.log("mediaLibGridPage: pagebeforeshow: removing list items");
@@ -70,6 +72,14 @@ $(document).on('pagebeforeshow', '#mediaLibGridPage', function(){
         $('#mediaLibGridList').trigger('create');
 
         console.log("mediaLibGridPage: pagebeforeshow: completed refresh and trigger");
+
+    });
+
+    $(document).off('click', '#mediaLibGridBackBtn').on('click', '#mediaLibGridBackBtn',function(event) {
+
+        console.log("mediaLibGridPage: mediaLibGridBackBtn.click()");
+        $('#mediaLibGridBackBtn').addClass('ui-disabled');
+        $.mobile.changePage('tsnav.html');
 
     });
 

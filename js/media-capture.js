@@ -8,7 +8,35 @@
 
 console.log("media-capture js: Executing");
 
+$(document).on('pagebeforeshow', '#mediaCapturePage', function(){
+
+    $('#mediaCaptureBackBtn').removeClass('ui-disabled');
+    $('#mediaCaptureHomeBtn').removeClass('ui-disabled');
+
+    //$('#mediaCaptureCameraBtn').removeClass('ui-disabled');
+    $('#mediaCaptureVideoBtn').removeClass('ui-disabled');
+    //$('#mediaCaptureDeviceBtn').removeClass('ui-disabled');
+
+
+    $(document).off('click', '#mediaCaptureBackBtn').on('click', '#mediaCaptureBackBtn',function(event) {
+
+        console.log("mediaCapturePage: mediaCaptureBackBtn.click()");
+        $('#mediaCaptureBackBtn').addClass('ui-disabled');
+        $.mobile.changePage('tsnav.html');
+
+    });
+
+    $(document).off('click', '#mediCaptureHomeBtn').on('click', '#mediaCaptureHomeBtn',function(event) {
+
+        console.log("mediaCapturePage: mediaCaptureHomeBtn.click()");
+        $('#mediaCaptureHomeBtn').addClass('ui-disabled');
+        $.mobile.changePage('tsnav.html');
+
+    });
+});
+
 $('#mediaCapturePage').bind('pageinit', function(event) {
+
     app.initialize();
 });
 
@@ -232,10 +260,13 @@ var app = {
         function onFail(message) {
             console.log('failed');
         }
-        var cameraPopoverOptions = new CameraPopoverOptions(220, 600, 320, 480, Camera.PopoverArrowDirection.ARROW_DOWN) ;
-        var cameraHandle = navigator.camera.getPicture(onSuccessURItoMediaAdd, onFail, { quality: 10, targetWidth: 200, targetHeight: 200,
+
+        //var cameraPopoverOptions = new CameraPopoverOptions(220, 600, 320, 480, Camera.PopoverArrowDirection.ARROW_DOWN) ;
+        $('mediaCaptureCameraBtn').addClass('ui-disabled');
+        console.log("mediaCapturePage: camera: clicked()");
+        var cameraHandle = navigator.camera.getPicture(onSuccessURItoMediaAdd, onFail, { quality: 10, targetWidth: 300, targetHeight: 300,
             saveToPhotoAlbum: false,
-            destinationType: Camera.DestinationType.FILE_URI, popoverOptions:cameraPopoverOptions
+            destinationType: Camera.DestinationType.FILE_URI
         });
         //cameraHandle.setPosition(cameraPopoverOptions);
         function fileok(r) {
@@ -355,6 +386,8 @@ var app = {
         }
 
         //var cameraPopoverOptions = new CameraPopoverOptions(220, 600, 320, 480, Camera.PopoverArrowDirection.ARROW_DOWN) ;
+        $('mediaCaptureDeviceBtn').addClass('ui-disabled');
+        console.log("mediaCapturePage: device: clicked()");
         var cameraPopoverOptions = new CameraPopoverOptions(220, 600, 640, 960, Camera.PopoverArrowDirection.ARROW_DOWN) ;
         navigator.camera.getPicture(onSuccessURItoMediaAdd, onFail, { quality: 10, saveToPhotoAlbum: true,
             targetWidth: 300, targetHeight: 300,
@@ -406,6 +439,8 @@ var app = {
 
         navigator.device.capture.captureVideo(function(mediaFiles)
             {
+                $('mediaCaptureVideoBtn').addClass('ui-disabled');
+
                 document.getElementById('testMsg').value = "mediaCapturePage: captureVideo()";
 
                 removeMediaItemStorage();

@@ -1,3 +1,92 @@
+function appCacheConsol(prefix) {
+
+    console.log("json-common: appCacheConsol(): start");
+
+    var starterCatPrefix = prefix + "StarterCat";
+    var starterCategoryStorageIdName = starterCatPrefix + "Ids";
+    sessionStorage.removeItem(starterCategoryStorageIdName);
+
+    var startersCatIdArr = new Array();
+    $.getJSON(tsServiceURLDomain + "tssvc/resourcesS/stories/starters/categories/", function(data) {
+
+        categories = data.storyStarterCategoryModelList;
+        $.each(categories, function(index, category) {
+
+            startersCatIdArr.push(category.starterCategoryId);
+
+            console.log("json-common: appCacheStoryStarterCategoryList: item: " + category.starterCategoryId + " descr: " + category.starterCategoryTitle);
+            sessionStorage.removeItem(starterCatPrefix + category.starterCategoryId );
+            sessionStorage.setItem(starterCatPrefix + category.starterCategoryId , category.starterCategoryTitle);
+
+
+        });
+
+        sessionStorage.setItem(starterCategoryStorageIdName, JSON.stringify(startersCatIdArr));
+
+        console.log("json-common: appCacheStoryStarterCategoryList(): story starter category id: " + sessionStorage.getItem(starterCategoryStorageIdName));
+        console.log("json-common: appCacheStoryStarterCategoryList(): story starter category id (parsed): " + JSON.parse(sessionStorage.getItem(starterCategoryStorageIdName)));
+
+        // done with starters so now do categories
+
+        var catPrefix = prefix + "Cat";
+        var categoryStorageIdName = catPrefix+ "Ids";
+        sessionStorage.removeItem(categoryStorageIdName);
+
+        $.getJSON(tsServiceURLDomain + "tssvc/resourcesS/categories", function(data) {
+            var categoryIdArray = new Array();
+            cat = data.categoryModelList;
+
+            $.each(cat, function(index, item) {
+                //$("option[value='" + item.categoryId + "'']").remove ();     // remove option if already exists
+                console.log("json-common: appCacheCategoryList: item: " + item.categoryId + " descr: " + item.categoryDescr);
+                sessionStorage.removeItem(catPrefix + item.categoryId);
+                sessionStorage.setItem(catPrefix + item.categoryId, item.categoryDescr);
+                categoryIdArray.push(item.categoryId);
+
+            });
+            sessionStorage.setItem(categoryStorageIdName, JSON.stringify(categoryIdArray));
+            console.log("json-common: appCacheCategoryList(): category array: " + sessionStorage.getItem(categoryStorageIdName));
+
+            $('#login_submit').removeClass('ui-disabled');
+            console.log("json-common: appCacheConsol(): end");
+        });
+
+    });
+}
+
+function appCacheStoryStarterCategoryList(prefix) {
+
+    console.log("json-common: appCacheStoryStarterCategoryList(): start");
+
+    var starterCategoryStorageIdName = prefix + "Ids";
+    sessionStorage.removeItem(starterCategoryStorageIdName);
+
+    var startersCatIdArr = new Array();
+    $.getJSON(tsServiceURLDomain + "tssvc/resourcesS/stories/starters/categories/", function(data) {
+
+        categories = data.storyStarterCategoryModelList;
+        $.each(categories, function(index, category) {
+
+            startersCatIdArr.push(category.starterCategoryId);
+
+            console.log("json-common: appCacheStoryStarterCategoryList: item: " + category.starterCategoryId + " descr: " + category.starterCategoryTitle);
+            sessionStorage.removeItem(prefix + category.starterCategoryId );
+            sessionStorage.setItem(prefix + category.starterCategoryId , category.starterCategoryTitle);
+
+
+        });
+
+        sessionStorage.setItem(starterCategoryStorageIdName, JSON.stringify(startersCatIdArr));
+
+        console.log("json-common: appCacheStoryStarterCategoryList(): story starter category id: " + sessionStorage.getItem(starterCategoryStorageIdName));
+        console.log("json-common: appCacheStoryStarterCategoryList(): story starter category id (parsed): " + JSON.parse(sessionStorage.getItem(starterCategoryStorageIdName)));
+
+    });
+
+
+    console.log("json-common: appCacheStoryStarterCategoryList(): end");
+
+}
 
 function appCacheCategoryList(prefix) {
 
@@ -93,9 +182,12 @@ function removeNewStoryStorage() {
 
     console.log("json-common: removeNewStoryStorage()");
 
+    sessionStorage.removeItem("storyStarterCategoryId");
+    sessionStorage.removeItem("storyStarterId") ;
     sessionStorage.removeItem("storyMediaItems");
     sessionStorage.removeItem("storyContent");
     sessionStorage.removeItem("storyTitle");
     sessionStorage.removeItem("storyDate");
     sessionStorage.removeItem("storyCategories");
+    sessionStorage.removeItem("storyPrivacy");
 }

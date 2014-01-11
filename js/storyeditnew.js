@@ -26,15 +26,15 @@ $(document).on('pageinit', '#storyEditNewPage', function(){
     }
     else
         console.log("storyEditNewPage: pageinit(): Categories succesfully retrieved from cache");
-
-    $('#storyEditNewCategoryList option').remove();
-    for (i = 0; i < categoryArray.length; i++) {
-        var catDescr = sessionStorage.getItem("appCacheCat" + categoryArray[i]);
-        //console.log("storyEditNewPage: category id/descr pull id: " + categoryArray[i] + " descr: " + catDescr);
-        var optionListItem = "<option value='" + categoryArray[i] + "'>" + catDescr + "</option>";
-        $('#storyEditNewCategoryList').append(optionListItem);
-    }
-    $('#storyEditNewCategoryList').selectmenu("refresh", true);
+//
+//    $('#storyEditNewCategoryList option').remove();
+//    for (i = 0; i < categoryArray.length; i++) {
+//        var catDescr = sessionStorage.getItem("appCacheCat" + categoryArray[i]);
+//        //console.log("storyEditNewPage: category id/descr pull id: " + categoryArray[i] + " descr: " + catDescr);
+//        var optionListItem = "<option value='" + categoryArray[i] + "'>" + catDescr + "</option>";
+//        $('#storyEditNewCategoryList').append(optionListItem);
+//    }
+//    $('#storyEditNewCategoryList').selectmenu("refresh", true);
 
     console.log("storyEditNewPage: pageinit(): end");
 });
@@ -42,31 +42,88 @@ $(document).on('pageinit', '#storyEditNewPage', function(){
 $(document).on('pagebeforeshow', '#storyEditNewPage', function(){
 
     console.log('storyEditNewPage: pagebeforeshow()');
+    console.log('storyEditNewPage: pagebeforeshow(): checking in-process flag');
+
+    var inProcessFlag = sessionStorage.getItem("storyEditNewProcessFlag");
+    if (inProcessFlag == "true")     {
+        console.log('storyEditNewPage: in-process.  Returning');
+        return;
+    }
+    console.log('storyEditNewPage: pagebeforeshow(): continuing');
+    sessionStorage.setItem("storyEditNewProcessFlag", "true");
 
     //$('.jqte-test').jqte();
-
-    //1a.  Initialize input fields on the page to remove any cached values
+      //1a.  Initialize input fields on the page to remove any cached values
     $('#storyEditNewTitleTxt').val("");
     $('#storyEditNewDateTxt').val("");
     $('#storyEditNewContentTxt').val("");
+    // clear selected both in categories and media
 
     //1b. Carryover values from session storage as needed
     $('#storyEditNewTitleTxt').val(sessionStorage.getItem("storyTitle"));
+    $('#storyEditNewDateTxt').val(sessionStorage.getItem("storyDate"));
+    $('#storyEditNewContentTxt').val(sessionStorage.getItem("storyContent"));
+    $('.jqte_editor').html("");  // clear the innards of the rich text editor
+    $('.jqte_editor').html(sessionStorage.getItem("storyContent"));
+
+    console.log("try resetting text in the text control on reload of page");
+    //$('.jqte-test').jqte();  // try rebuilding
+
+    if (sessionStorage.getItem("storyPrivacy") != null)
+        $('#storyEditNewPrivacySwitch').val(sessionStorage.getItem("storyPrivacy")).slider("refresh");
+    else
+        $('#storyEditNewPrivacySwitch').val("0").slider("refresh");
+
+    // categories
+
+    console.log("storyEditNewPage: pagebeforeshow(): Start: categories");
+    var categoryArray = JSON.parse(sessionStorage.getItem("appCacheCatIds"));
+
+    $('#storyEditNewCategoryList option').remove();
+    for (i = 0; i < categoryArray.length; i++) {
+        var catDescr = sessionStorage.getItem("appCacheCat" + categoryArray[i]);
+        var optionListItem = "<option value='" + categoryArray[i] + "'>" + catDescr + "</option>";
+        $('#storyEditNewCategoryList').append(optionListItem);
+    }
+    $('#storyEditNewCategoryList').selectmenu("refresh", true);
+
+    console.log("storyEditNewPage: pagebeforeshow(): Start: Preselect already selected category options for this  item.");
+    var categoryResultArray = new Array();
+    categoryResultArray = JSON.parse(sessionStorage.getItem("storyCategories"));
+    console.log("categoryResultArray: (parsed)" + categoryResultArray);
+    console.log("categoryResultArray: (raw) " + sessionStorage.getItem("storyCategories"));
+
+    if (categoryResultArray != null) {
+        for(i = 0; i < categoryResultArray.length; i++) {
+        console.log("value at index: " + i + " is " + categoryResultArray[i] )
+        $("#storyEditNewCategoryList option[value='"+categoryResultArray[i]+"']").attr('selected', 'selected');
+        }
+    }
+    $('#storyEditNewCategoryList').selectmenu("refresh", true);
+    console.log("storyEditNewPage: pagebeforeshow(): End: Preselect already selected category options for this  item.");
+
+    console.log("storyEditNewPage: pagebeforeshow(): End: categories");
+
 
     // 2. Set buttons to initialized state
     $('#storyEditNewNextBtn').removeClass('ui-disabled');
+    $('#storyEditNewBackBtn').removeClass('ui-disabled');
 
     // 3.  Set dynamic content     (note categories are fairly static and set thus in pageinit()
     console.log("Logging number of options that exist for media items.");
     console.log($('#controlgroup input').size());
     var theNumberOfMediaItems =$('#controlgroup input').size();
-    if (theNumberOfMediaItems == 0) {
+
+    //note: if media items are already there don't rebuild them.  this will avoid a rebuild every time the edit page
+    //   is invoked in a single tell story session.  The checkboxes will be removed at the end of tell story
+    //    to force a refresh
+    if (theNumberOfMediaItems == 0)  {
         $.getJSON(tsServiceURLDomain + "tssvc/resourcesS/media", function(data) {
             console.log("storyEditNewPage: pagebeforeshow(): getJSON for media library: start()");
 
             var media;
             var group = $( "#controlgroup" );
-            $('.ui-checkbox').remove();
+            $('#controlgroup .ui-checkbox').remove();
             var el;
             media = data.mediaModelList;
             $.each(media, function(index, item) {
@@ -83,47 +140,97 @@ $(document).on('pagebeforeshow', '#storyEditNewPage', function(){
             });
             group.controlgroup( "refresh" );
             $('#controlgroup').trigger('create');
-            console.log("commented out generic div create");
-            //$('div').trigger('create');   // is this causing the category issue?
 
             console.log("storyEditNewPage: pagebeforeshow(): getJSON for media library: end()");
         });
     }
 
     // 4. Set event handlers
+
+    $(document).off('click', '#storyEditNewBackBtn').on('click', '#storyEditNewBackBtn',function(event) {
+
+        $('#storyEditNewNextBtn').addClass('ui-disabled');
+        $('#storyEditNewBackBtn').addClass('ui-disabled');
+
+        console.log("storyEditNewPage: storyEditNewBackBtn: onclick()");
+
+        storyEditNewSetItems();
+
+        $.mobile.changePage('storystart.html');
+    });
+
     $(document).off('click', '#storyEditNewNextBtn').on('click', '#storyEditNewNextBtn',function(event) {
 
         $('#storyEditNewNextBtn').addClass('ui-disabled');
+        $('#storyEditNewBackBtn').addClass('ui-disabled');
 
         console.log("storyEditNewPage: storyEditNewNextBtn: onclick()");
 
-        var val = new Array();
-        $(':checkbox:checked').each(function(i){
-            val[i] = $(this).val();
-        //console.log("inner label html: " + $('#mediaCheck657 label').html());
-        //alert("checked: " + $(this).val());
-        });
-
-        sessionStorage.setItem("storyMediaItems",JSON.stringify(val));
-        console.log("storyEditNewPage: submitStoryEditNew: cached Media Items: " + sessionStorage.getItem("storyMediaItems"));
-
-        sessionStorage.setItem("storyTitle", $('#storyEditNewTitleTxt').val()) ;
-        console.log("storyEditNewPage: submitStoryEditNew: cached Story Title: " + sessionStorage.getItem("storyTitle"));
-
-        sessionStorage.setItem("storyDate", $('#storyEditNewDateTxt').val()) ;
-        console.log("storyEditNewPage: submitStoryEditNew: cached Story Date: " + sessionStorage.getItem("storyDate"));
-
-        var theStoryContent = $('.jqte-test').val();
-        sessionStorage.setItem("storyContent", theStoryContent);
-        console.log("storyEditNewPage: submitStoryEditNew: cached Story Content: " + sessionStorage.getItem("storyContent"));
-
-        var selectedValsArray = $('#storyEditNewCategoryList').val();
-        var jsonStringArr = JSON.stringify(selectedValsArray);
-        sessionStorage.setItem("storyCategories", jsonStringArr);
-        console.log("storyEditNewPage: submitStoryEditNew: cached Story Categories: " + sessionStorage.getItem("storyCategories"));
-
+        storyEditNewSetItems();
         $.mobile.changePage('storypreview2.html');
+
+//        var val = new Array();
+//        $(':checkbox:checked').each(function(i){
+//            val[i] = $(this).val();
+//        //console.log("inner label html: " + $('#mediaCheck657 label').html());
+//        //alert("checked: " + $(this).val());
+//        });
+//
+//        sessionStorage.setItem("storyMediaItems",JSON.stringify(val));
+//        console.log("storyEditNewPage: submitStoryEditNew: cached Media Items: " + sessionStorage.getItem("storyMediaItems"));
+//
+//        sessionStorage.setItem("storyTitle", $('#storyEditNewTitleTxt').val()) ;
+//        console.log("storyEditNewPage: submitStoryEditNew: cached Story Title: " + sessionStorage.getItem("storyTitle"));
+//
+//        sessionStorage.setItem("storyDate", $('#storyEditNewDateTxt').val()) ;
+//        console.log("storyEditNewPage: submitStoryEditNew: cached Story Date: " + sessionStorage.getItem("storyDate"));
+//
+//        var theStoryContent = $('.jqte-test').val();
+//        sessionStorage.setItem("storyContent", theStoryContent);
+//        console.log("storyEditNewPage: submitStoryEditNew: cached Story Content: " + sessionStorage.getItem("storyContent"));
+//
+//        var selectedValsArray = $('#storyEditNewCategoryList').val();
+//        var jsonStringArr = JSON.stringify(selectedValsArray);
+//        sessionStorage.setItem("storyCategories", jsonStringArr);
+//        console.log("storyEditNewPage: submitStoryEditNew: cached Story Categories: " + sessionStorage.getItem("storyCategories"));
+//
+//        sessionStorage.setItem("storyEditNewProcessFlag", "false");
 
     });
 
 });
+
+function storyEditNewSetItems()
+{
+    console.log("storyEditNewPage: storyEditNewSetItems: Start");
+
+    var val = new Array();
+    $(':checkbox:checked').each(function(i){
+        val[i] = $(this).val();
+        //console.log("inner label html: " + $('#mediaCheck657 label').html());
+        //alert("checked: " + $(this).val());
+    });
+
+    sessionStorage.setItem("storyMediaItems",JSON.stringify(val));
+    console.log("storyEditNewPage: storyEditNewSetItems: cached Media Items: " + sessionStorage.getItem("storyMediaItems"));
+
+    sessionStorage.setItem("storyTitle", $('#storyEditNewTitleTxt').val()) ;
+    console.log("storyEditNewPage: storyEditNewSetItems: cached Story Title: " + sessionStorage.getItem("storyTitle"));
+
+    sessionStorage.setItem("storyDate", $('#storyEditNewDateTxt').val()) ;
+    console.log("storyEditNewPage: storyEditNewSetItems: cached Story Date: " + sessionStorage.getItem("storyDate"));
+
+    var theStoryContent = $('.jqte-test').val();
+    sessionStorage.setItem("storyContent", theStoryContent);
+    console.log("storyEditNewPage: storyEditNewSetItems: cached Story Content: " + sessionStorage.getItem("storyContent"));
+
+    var selectedValsArray = $('#storyEditNewCategoryList').val();
+    var jsonStringArr = JSON.stringify(selectedValsArray);
+    sessionStorage.setItem("storyCategories", jsonStringArr);
+    console.log("storyEditNewPage: storyEditNewSetItems: cached Story Categories: " + sessionStorage.getItem("storyCategories"));
+
+    sessionStorage.setItem("storyPrivacy", $('#storyEditNewPrivacySwitch').val());
+
+    sessionStorage.setItem("storyEditNewProcessFlag", "false");
+
+}

@@ -5,10 +5,11 @@
 
 <body>
 
-<div id="storyEditNewPage"  data-role="page" >
+<div id="storyEditNewPage"  data-role="page" data-add-back-btn="false">
+
     <div data-theme="c" data-role="header" data-position="fixed" >
         <h1><img src="img/splash/logo.png"></h1>
-        <a href="#MainNavPage" data-icon="home" class="ui-btn-right">Home</a>
+        <!--<a href="#MainNavPage" data-icon="home" class="ui-btn-right">Home</a>-->
 
     </div>
 
@@ -31,7 +32,7 @@
     <div data-role="content">
 
         <div>
-            <h2 style="float: left;">Tell Story</h2>
+            <a id="storyEditNewBackBtn" href="#" data-role="button" data-mini="true" data-icon="back" class="ui-btn-left">Back</a>
             <div style="text-align: right; float:right; padding-right: 2%;">
                  <a id="storyEditNewNextBtn" href="#" data-role="none" data-shadow="false" data-theme="none">
                     <img src="img/navbut/next1.png" border="0"/>
@@ -39,10 +40,18 @@
             </div>
         </div>
         <p style="clear:both;"></p>
+        <h2 >Tell Story</h2>
 
         <section class="ui-grid-a">
             <div class="ui-block-a" style="width=60%">
                 <label for="storyEditNewTitleTxt">Title:</label><input type="text" id="storyEditNewTitleTxt" length=80 >
+                <div class="flipSwitchContainer" style=".ui-slider-switch { width: 9em };">
+                   <label for="storyEditNewPrivacySwitch">Story privacy setting:</label>
+                   <select id="storyEditNewPrivacySwitch" data-role="slider">
+                     <option value="0">Public</option>
+                     <option value="1">Private</option>
+                   </select>
+                </div>
                 <label for="storyEditNewDateTxt">Date:</label><input type="date" data-role="datebox" id="storyEditNewDateTxt" >
                 <div data-role="fieldcontainer">
                     <div id="storyCategoryDiv">
@@ -69,18 +78,18 @@
 
     </div>       <!-- end of content div -->
 
-    <div data-theme="c" data-role="footer"  class="ui-bar" style="text-align: center" >
-        <div style="display: inline-block"></div>
-        <a href="#"><img height="51" width="50" src="img/navbut/home.png" /></a>
-        <a href="#"><img height="51" width="50" src="img/navbut/user.png" /></a>
-        <a href="#"><img height="51" width="50" src="img/navbut/addMedia.png" /></a>
-        <a href="#"><img height="51" width="50" src="img/navbut/inviteFriends.png" /></a>
-        <a href="#"><img height="51" width="50" src="img/navbut/myAccount.png" /></a>
-        <a href="#"><img height="51" width="50" src="img/navbut/tellStory.png" /></a>
-        <a href="#"><img height="51" width="50" src="img/navbut/mediaLIbrary.png" /></a>
-        <a href="#"><img height="51" width="50" src="img/navbut/storyLibrary.png" /></a>
-        <a href="#"><img height="51" width="50" src="img/navbut/requestStory.png" /></a>
-    </div>
+    <!--<div data-theme="c" data-role="footer"  class="ui-bar" style="text-align: center" >-->
+        <!--<div style="display: inline-block"></div>-->
+        <!--<a href="#"><img height="51" width="50" src="img/navbut/home.png" /></a>-->
+        <!--<a href="#"><img height="51" width="50" src="img/navbut/user.png" /></a>-->
+        <!--<a href="#"><img height="51" width="50" src="img/navbut/addMedia.png" /></a>-->
+        <!--<a href="#"><img height="51" width="50" src="img/navbut/inviteFriends.png" /></a>-->
+        <!--<a href="#"><img height="51" width="50" src="img/navbut/myAccount.png" /></a>-->
+        <!--<a href="#"><img height="51" width="50" src="img/navbut/tellStory.png" /></a>-->
+        <!--<a href="#"><img height="51" width="50" src="img/navbut/mediaLIbrary.png" /></a>-->
+        <!--<a href="#"><img height="51" width="50" src="img/navbut/storyLibrary.png" /></a>-->
+        <!--<a href="#"><img height="51" width="50" src="img/navbut/requestStory.png" /></a>-->
+    <!--</div>-->
 
 
 

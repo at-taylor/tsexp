@@ -1,60 +1,148 @@
-<!DOCTYPE html>
 <html>
+
 <head>
-    <title>MainNav</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <link rel="stylesheet" href="css/jquery.mobile-1.0rc1.min.css" />
-    <link rel="stylesheet" href="css/styles.css" />
 </head>
+
 <body>
-<div id="MainNavPage" data-role="page" >
 
-     <div data-theme="c" data-role="header"  >
-         <h1><img src="img/splash/logo_big.png"></h1>
-         <div data-role="controlgroup" class="ui-btn-right" data-type="vertical"> <a href="#" data-role="button"><img src="img/navbut/home.png"></a>
-             <a href="#"data-role="button"><img src="img/navbut/user.png"></a>
-         </div>
+<div id="MainNavPage" data-role="page" data-add-back-btn="false" data-back-btn-text="back" data-back-btn-theme="c">
 
-
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <h1><img src="img/splash/logo.png"></h1>
+        <a href="#MainNavPage" data-icon="home" id="logout_submit" class="ui-btn-right">Logout</a>
 
     </div>
 
     <div data-role="content">
 
-        <div class="ui-grid-c" style="padding-left: 75px">
+        <!--<div style="text-align: center; padding-bottom: 10px "><img src="img/splash/logo_big.png"></div>-->
+
+        <div class="ui-grid-b" style="padding-left: 75px">
             <!-- first row -->
             <div class="ui-block-a" style="width: 210px;" >
-                <a href="testplugins3.html" ><img src="img/navbut/tellStory.png"></a>
+                <a id="tsNavTellStoryBtn" href="#" ><img src="img/navbut/tellStory.png"></a>
             </div>
             <div class="ui-block-b" style="width: 210px;">
-                <a href="testplugins2.html" ><img src="img/navbut/addMedia.png"></a>
+                <a id="tsNavMediaCaptureBtn" href="#" ><img src="img/navbut/addMedia.png"></a>
             </div>
             <div class="ui-block-c" style="width: 210px;">
-                    <a href="testplugins.html" ><img src="img/navbut/mediaLIbrary.png"></a>
+                <a id="tsNavMediaLibBtn" href="#" ><img src="img/navbut/mediaLIbrary.png"></a>
             </div>
             <div class="ui-block-d" style="width: 210px;">
-                <a href="story-directory.html" ><img src="img/navbut/storyLibrary.png"></a>
+                <a id="tsNavStoryLibBtn" href="#" ><img src="img/navbut/storyLibrary.png"></a>
             </div>
-            <!-- second row -->
-            <div class="ui-block-a" style="width: 210px;">
-                <a href="media-capture.html" ><img src="img/navbut/myLifeStory.png"></a>
-            </div>
-            <div class="ui-block-b" style="width: 210px;">
-                <a href="#" ><img src="img/navbut/requestStory.png"></a>
-            </div>
-            <div class="ui-block-c" style="width: 210px;">
-                    <a href="emp2.html" ><img src="img/navbut/inviteFriends.png"></a>
-            </div>
-            <div class="ui-block-d" style="width: 210px;">
-                <a href="#" ><img src="img/navbut/myAccount.png"></a>
-            </div>
+            <!--second row-->
+            <!--<div class="ui-block-a" style="width: 210px;">-->
+                <!--<a href="demo.html" ><img src="img/navbut/myLifeStory.png"></a>-->
+            <!--</div>-->
+            <!--<div class="ui-block-b" style="width: 210px;">-->
+                <!--<a href="media-library-grid.html" ><img src="img/navbut/requestStory.png"></a>-->
+            <!--</div>-->
+            <!--<div class="ui-block-c" style="width: 210px;">-->
+                <!--<a href="test.html" ><img src="img/navbut/inviteFriends.png"></a>-->
+            <!--</div>-->
+            <!--<div class="ui-block-d" style="width: 210px;">-->
+                <!--<a href="addtestpop.html" ><img src="img/navbut/myAccount.png"></a>-->
+            <!--</div>-->
         </div>
     </div>
-    </div>
+
+    <script>
+        console.log("MainNavPage js: Executing");
+        //(document).on("click", "a.foo", fn)
+        // $(document).on('pageinit', '#MainNavPage', function(event) {
+        // $('#MainNavPage').live('pageinit', function(event) {
+        $(document).on('pagebeforeshow', '#MainNavPage', function(){
+
+            console.log("MainNavPage: pagebeforeshow(): start");
+
+            $('#tsNavTellStoryBtn').removeClass('ui-disabled');
+            $('#tsNavMediaLibBtn').removeClass('ui-disabled');
+            $('#tsNavStoryLibBtn').removeClass('ui-disabled');
+            $('#tsNavMediaCaptureBtn').removeClass('ui-disabled');
+        });
+
+        $(document).on('pageinit', '#MainNavPage', function(){
+        //$('#MainNavPage').bind('pageinit', function(event)   {
+            //alert('MainNavPage live: pageinit');
+            console.log("MainNavPage: pageinit(): start");
+
+            $(document).off('click', '#tsNavTellStoryBtn').on('click', '#tsNavTellStoryBtn',function(event) {
+
+                console.log("MainNavPage: tsNavTellStoryBtn: click");
+
+                $('#tsNavTellStoryBtn').addClass('ui-disabled');
+
+                removeNewStoryStorage();
+
+                $.mobile.changePage('storystart.html');
+
+            });
+
+            $(document).off('click', '#tsNavMediaLibBtn').on('click', '#tsNavMediaLibBtn',function(event) {
+
+                console.log("MainNavPage: tsNavMediaLibBtn: click");
+
+                $('#tsNavMediaLibBtn').addClass('ui-disabled');
+
+                $.mobile.changePage('media-library-grid.html');
+
+            });
+            $(document).off('click', '#tsNavStoryLibBtn').on('click', '#tsNavStoryLibBtn',function(event) {
+
+                console.log("MainNavPage: tsNavStoryLibBtn: click");
+
+                $('#tsNavStoryLibBtn').addClass('ui-disabled');
+
+                $.mobile.changePage('story-directory.html');
+
+            });
+            $(document).off('click', '#tsNavMediaCaptureBtn').on('click', '#tsNavMediaCaptureBtn',function(event) {
+
+                console.log("MainNavPage: tsNavMediaCaptureBtn: click");
+
+                $('#tsNavMediaCaptureBtn').addClass('ui-disabled');
+
+                $.mobile.changePage('media-capture.html');
+
+            });
 
 
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery.mobile-1.0rc1.min.js"></script>
+            console.log("MainNavPage: binding click function on #logout_submit");
+            $("#logout_submit").click(function(event) {
+                console.log("MainNavPage: handling the click event of the logout button");
+
+                $.ajax({
+                    type: "GET",
+                    url: tsServiceURLDomain + "tssvc/resourcesS/logout",
+                    //data:'user='+ $('#user').val() +'&pass='+ $('#pass').val(),
+                    cache: false,
+                    success: function(data) {
+                        console.log("ManNavPage: logout: success: data=" + data);
+                        //
+                        // alert("data is" + data)   ;
+                        $.mobile.changePage("index.html");
+                    },
+                    done: function (data) {
+                        alert("done : " + data);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("ManNavPage: logout: error:");
+                        alert("in error");
+                        alert("status: " + status) ;
+                        alert("error: " + error);
+                        alert(xhr.responseText);
+                        $.mobile.changePage("index.html");
+                    }
+                })
+            })
+        });
+
+
+    </script>
+
+</div>    <!-- end of main nav page -->
 
 </body>
+
 </html>

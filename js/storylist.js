@@ -16,7 +16,34 @@ console.log("storyListPage: executing using services at: " + serviceURL);
 $('#storyListPage').bind('pageinit', function(event) {
     //alert('live: pageinit');
     console.log('storyListPage: bind: pageinit()');
+
+});
+
+
+$(document).on('pagebeforeshow', '#storyListPage', function(){
+
+    console.log('storyListPage: pagebeforeshow())');
+
+    $('#storyListBackBtn').removeClass('ui-disabled');
+    $('#storyListHomeBtn').removeClass('ui-disabled');
+
     getEmployeeList();
+
+    $(document).off('click', '#storyListBackBtn').on('click', '#storyListBackBtn',function(event) {
+
+        console.log("storyListPage: storyListBackBtn.click()");
+        $('#storyListBackBtn').addClass('ui-disabled');
+        $.mobile.changePage('tsnav.html');
+
+    });
+
+    $(document).off('click', '#storyListHomeBtn').on('click', '#storyListHomeBtn',function(event) {
+
+        console.log("storyListage: storyListHomeBtn.click()");
+        $('#storyListHomeBtn').addClass('ui-disabled');
+        $.mobile.changePage('tsnav.html');
+
+    });
 });
 
 
