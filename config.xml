@@ -65,12 +65,12 @@
 
     <!-- Special resolutions for different iPads. Included here but commented out -->
 
-    <!--<icon src="icons/ios/icon.png" gap:platform="ios" width="57" height="57" />
-<icon src="icons/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
-<icon src="icons/ios/icon_at_2x.png" gap:platform="ios" width="114" height="114" /> -->
+    <icon src="img/icons/ios/ts_app_icon_purple_57.png" gap:platform="ios" width="57" height="57" />
+<icon src="img/icons/ios/ts_app_icon_purple_76.png" gap:platform="ios" width="72" height="72" />
+<icon src="img/icons/ios/ts_app_icon_purple_114.png" gap:platform="ios" width="114" height="114" />
 
     <!-- retina iPad support: PhoneGap 2.5.0+ only -->
-    <!--<icon src="icons/ios/icon-72_at_2x.png" gap:platform="ios" width="144" height="144" /> -->
+    <icon src="img/icons/ios/ts_app_icon_purple_152.png" gap:platform="ios" width="144" height="144" />
 
     <!-- Splash screen stuff -->
     <!-- default -->
@@ -78,9 +78,9 @@
     <!-- custom stuff. commenting out width and height attributes. including here for reference: width="320" height="480"-->
     <!-- <gap:splash src="img/splash/logo_big.png" gap:platform="ios" />
     <gap:splash src="img/splash/logo_big.png" gap:platform="android" /> -->
-    <gap:splash src="img/splash/ios/splashscrn_blue_2048x1496.png" gap:platform="ios" width="2048" height="1496" />
+    <gap:splash src="img/splash/ios/splashscrn_purple_2048x1496.png" gap:platform="ios" width="2048" height="1496" />
     <!--<gap:splash src="splash/ios/Default-Portrait_at_2x.png" gap:platform="ios" width="1536" height="2008" />-->
-    <gap:splash src="img/splash/ios/splashscrn_blue_1024x748.png" gap:platform="ios" width="1024" height="748" />
+    <gap:splash src="img/splash/ios/splashscrn_purple_1024x748.png" gap:platform="ios" width="1024" height="748" />
     <!--<gap:splash src="splash/ios/Default-Portrait.png" gap:platform="ios" width="768" height="1004" />-->
 
     <!-- permissions -->
