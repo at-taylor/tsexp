@@ -5,29 +5,40 @@
 </head>
 <body>
 
-<div data-role="page" data-theme="a" id="mediaLibGridPage" data-add-back-btn="false" class="my-page" style="background: transparent url('img/navbut/background.png') repeat;" >
+<div data-role="page" data-theme="a" id="mediaLibGridPage" data-add-back-btn="false" class="my-page" style="background: #efeade; ;" >
+    <!-- style="background: transparent url('img/navbut/background.png') repeat;" -->
     <!--<div data-role="header">-->
         <!--<h1>Media Library</h1>-->
         <!--<a href="grid-listview.html" data-shadow="false" data-iconshadow="false" data-icon="arrow-l" data-iconpos="notext" data-rel="back" data-ajax="false">Back</a>-->
     <!--</div>&lt;!&ndash; /header &ndash;&gt;-->
 
-    <div data-theme="c" data-role="header" >
-        <h1><img src="img/splash/logo.png"></h1>
-        <!--<div data-role="controlgroup" class="ui-btn-right" data-type="vertical"> <a href="tsnav.html" data-role="button"><img src="img/navbut/home.png"></a>-->
-        <!--<a href="index.html"data-role="button"><img src="img/navbut/user.png"></a>-->
-        <!--</div>-->
-        <a id="mediaLibGridBackBtn" href="#" data-role="button"  data-icon="back" class="ui-btn-left">Back</a>
-        <a href="#MainNavPage" data-icon="home" class="ui-btn-right">Home</a>
+    <!--<div data-theme="c" data-role="header" >-->
+        <!--<h1><img src="img/splash/logo.png"></h1>-->
+        <!--&lt;!&ndash;<div data-role="controlgroup" class="ui-btn-right" data-type="vertical"> <a href="tsnav.html" data-role="button"><img src="img/navbut/home.png"></a>&ndash;&gt;-->
+        <!--&lt;!&ndash;<a href="index.html"data-role="button"><img src="img/navbut/user.png"></a>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--<a id="mediaLibGridBackBtn" href="#" data-role="button"  data-icon="back" class="ui-btn-left">Back</a>-->
+        <!--<a href="#MainNavPage" data-icon="home" class="ui-btn-right">Home</a>-->
 
+    <!--</div>-->
+
+    <div data-theme="b" data-role="header" data-position="fixed" class="TsHeader" >
+        <h1>Treasured Stories</h1>
+        <a id="mediaLibGridBackBtn" href="#" data-role="button" data-icon="back" class="ui-btn-left">
+            Back
+        </a>
+        <a href="tsnav.html" class="ui-btn-right" data-role="button"><img src="img/icons/home_22.png"></a>
     </div>
+
     <div data-role="content">
 
-        <div data-role="navbar" data-iconpos="bottom" >
-            <a href="#" data-role="button" data-icon="grid" data-theme="b">Grid</a>
-            <a href="media-library.html" data-role="button" data-icon="bars" data-theme="c">List</a>
-        </div>
+        <!--<div data-role="navbar" data-iconpos="bottom" >-->
+            <!--<a href="#" data-role="button" data-icon="grid" data-theme="b">Grid</a>-->
+            <!--<a href="media-library.html" data-role="button" data-icon="bars" data-theme="c">List</a>-->
+        <!--</div>-->
         <div style="padding-top: 20px">
-        <ul data-role="listview" id="mediaLibGridList" data-inset="true" data-filter="true">
+
+            <ul data-role="listview" id="mediaLibGridList" data-inset="true" data-filter="true">
 
         </ul>
         </div>
