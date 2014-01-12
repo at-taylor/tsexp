@@ -219,6 +219,13 @@
             var mediaArr = new Array();
             mediaArr = JSON.parse(sessionStorage.getItem("storyMediaItems"));
 
+            var storyContentClean = sessionStorage.getItem("storyContent");
+
+            //str.replace(/blue/g,"red");
+            storyContentClean = storyContentClean.replace(/&nbsp;/g, " ");
+            //storyContentClean = encodeURI(storyContentClean);
+            console.log("cleaning content: replace g " + storyContentClean);
+
             var storyAddJson = {
                 title: sessionStorage.getItem("storyTitle"),
                 descr: null,
@@ -233,7 +240,7 @@
                 storyYY: null,
                 privacySetting: Number(sessionStorage.getItem("storyPrivacy")),
                 publishStatus: Number(0),
-                content: sessionStorage.getItem("storyContent")
+                content:storyContentClean
             }
             var storyDate = sessionStorage.getItem("storyDate");
             if (storyDate.length = 10)  {
@@ -248,7 +255,9 @@
                 //type: "POST",
                 type: "GET",
                 url: tsServiceURLDomain + "tssvc/resourcesS/stories/add/?storyAddJson=" + JSON.stringify(storyAddJson),
+                //url: tsServiceURLDomain + "tssvc/resourcesS/stories/add/",
                 //data:'user='+ $('#user').val() +'&pass='+ $('#pass').val(),
+                //data: "storyAddJson=" + storyAddJson,
                 cache: false,
                 success: function(data) {
                     //validate the response here, set variables... whatever needed
