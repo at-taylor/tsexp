@@ -65,12 +65,12 @@
 
     <!-- Special resolutions for different iPads. Included here but commented out -->
 
-    <icon src="img/icons/ios/ts_app_icon_purple_57.png" gap:platform="ios" width="57" height="57" />
-<icon src="img/icons/ios/ts_app_icon_purple_76.png" gap:platform="ios" width="72" height="72" />
-<icon src="img/icons/ios/ts_app_icon_purple_114.png" gap:platform="ios" width="114" height="114" />
+    <!--<icon src="img/icons/ios/ts_app_icon_purple_57.png" gap:platform="ios" width="57" height="57" />-->
+<!--<icon src="img/icons/ios/ts_app_icon_purple_76.png" gap:platform="ios" width="72" height="72" />-->
+<!--<icon src="img/icons/ios/ts_app_icon_purple_114.png" gap:platform="ios" width="114" height="114" />-->
 
     <!-- retina iPad support: PhoneGap 2.5.0+ only -->
-    <icon src="img/icons/ios/ts_app_icon_purple_152.png" gap:platform="ios" width="144" height="144" />
+    <!--<icon src="img/icons/ios/ts_app_icon_purple_152.png" gap:platform="ios" width="144" height="144" />-->
 
     <!-- Splash screen stuff -->
     <!-- default -->
