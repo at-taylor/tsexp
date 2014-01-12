@@ -216,6 +216,9 @@
 
             var catArr = new Array();
             catArr = JSON.parse(sessionStorage.getItem("storyCategories"));
+            var mediaArr = new Array();
+            mediaArr = JSON.parse(sessionStorage.getItem("storyMediaItems"));
+
             var storyAddJson = {
                 title: sessionStorage.getItem("storyTitle"),
                 descr: null,
