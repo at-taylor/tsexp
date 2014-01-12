@@ -1,0 +1,246 @@
+<html>
+
+<head>
+</head>
+
+<body>
+
+<div id="MainNavPage" data-role="page" data-add-back-btn="false" data-back-btn-text="back" data-back-btn-theme="c">
+
+<div data-role="panel" data-position="right"  data-display="reveal" id="mypanel">
+    <div style="text-align: center">
+        <a id="tsNavMediaLibBtnPnl" href="#" ><img src="img/navbut/medialibrary_btn_175.png"></a>
+        <p><a id="tsNavMediaLibBtnPnlTxt" href="#"> Media Library</a></p>
+    </div>
+    <div style="text-align: center">
+        <a id="tsNavStoryLibBtnPnl" href="#" ><img src="img/navbut/storylibrary_btn_175.png"></a>
+        <p> <a id="tsNavStoryLibBtnPnlPnlTxt" href="#" >Story Library</a></p>
+    </div>
+</div><!-- /panel -->
+
+
+
+<div data-theme="b" data-role="header" data-position="fixed" class="TsHeader" >
+    <h1>Treasured Stories</h1>
+    <a href="#"  id="logout_submit" class="ui-btn-right" data-role="button" data-mini="true">Logout</a>
+    <!--<img src="img/icons/home_22.png">Logout</a>-->
+</div>
+
+<div data-role="content" >
+
+    <!--<div style="text-align: center; padding-bottom: 10px "><img src="img/splash/logo_big.png"></div>-->
+    <!--<div class="grid-container">-->
+
+    <table align="center" cellpadding="10x" cellspacing="5px">
+        <tr valign="bottom">
+            <td>
+                <a id="tsNavTellStoryBtn"  href="#" ><img src="img/navbut/create_btn_175.png"></a>
+            </td>
+            <td>
+                <a id="tsNavMediaCaptureBtn" href="#" ><img src="img/navbut/addmedia_btn_175.png"></a>
+            </td>
+        </tr>
+        <tr height="10px" valign="top" align="center">
+            <td >
+                <h4>Tell Story</h4>
+            </td>
+            <td >
+                <h4>Add Media</h4>
+            </td>
+        </tr>
+    </table>
+
+    <!--<div id="navmenu" data-theme="none>-->
+    <!---->
+    <!---->
+    <!--&lt;!&ndash; first row &ndash;&gt;-->
+    <!--&lt;!&ndash;<div data-role="none" data-theme="none">&ndash;&gt;-->
+    <!--<a id="tsNavTellStoryBtn" href="#" ><img src="img/navbut/create_btn_175.png"></a>-->
+    <!--Create-->
+    <!--</div>-->
+    <!--<div data-role="none" data-theme="none">-->
+    <!--<a id="tsNavMediaCaptureBtn" href="#" ><img src="img/navbut/addmedia_btn_175.png"></a>-->
+    <!--Media Library-->
+    <!--</div>-->
+    <!--<div style="width: 250px; text-align: center; display: inline" >-->
+    <!--<a id="tsNavTellStoryBtn" href="#" ><img src="img/navbut/create_btn_175.png"></a>-->
+    <!--<h3>Create</h3>-->
+    <!--</div>-->
+    <!--<div  style="width: 250px; text-align: center; display: inline">-->
+    <!--<a id="tsNavMediaCaptureBtn" href="#" ><img src="img/navbut/addmedia_btn_175.png"></a>-->
+    <!--<h3>Add Media</h3>-->
+    <!--</div>-->
+    <!--<div class="ui-block-c" style="width: 210px; text-align: center">-->
+    <!--<a id="tsNavMediaLibBtn" href="#" ><img src="img/navbut/collaborate_btn_175.png"></a>-->
+    <!--<h3>Connect</h3>-->
+    <!--</div>-->
+    <!--<div class="ui-block-d" style="width: 210px; text-align: center">-->
+    <!--<a id="tsNavStoryLibBtn" href="#" ><img src="img/navbut/initiate_btn_175.png"></a>-->
+    <!--<h3>Inspire</h3>-->
+    <!--</div>-->
+    <!--second row-->
+    <!--<div class="ui-block-a" style="width: 210px;">-->
+    <!--<a href="demo.html" ><img src="img/navbut/myLifeStory.png"></a>-->
+    <!--</div>-->
+    <!--<div class="ui-block-b" style="width: 210px;">-->
+    <!--<a href="media-library-grid.html" ><img src="img/navbut/requestStory.png"></a>-->
+    <!--</div>-->
+    <!--<div class="ui-block-c" style="width: 210px;">-->
+    <!--<a href="test.html" ><img src="img/navbut/inviteFriends.png"></a>-->
+    <!--</div>-->
+    <!--<div class="ui-block-d" style="width: 210px;">-->
+    <!--<a href="addtestpop.html" ><img src="img/navbut/myAccount.png"></a>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+
+    <div style="float: right;">
+        <a href="#mypanel"><img src="img/navbut/libraries_btn_60.png"></a>
+    </div>
+
+
+</div>
+
+<script>
+    console.log("MainNavPage js: Executing");
+    //(document).on("click", "a.foo", fn)
+    // $(document).on('pageinit', '#MainNavPage', function(event) {
+    // $('#MainNavPage').live('pageinit', function(event) {
+    $(document).on('pagebeforeshow', '#MainNavPage', function(){
+
+        console.log("MainNavPage: pagebeforeshow(): start");
+
+        $('#tsNavTellStoryBtn').removeClass('ui-disabled');
+        $('#tsNavMediaLibBtn').removeClass('ui-disabled');
+        $('#tsNavStoryLibBtn').removeClass('ui-disabled');
+        $('#tsNavMediaCaptureBtn').removeClass('ui-disabled');
+        $('#logout_submit').removeClass('ui-disabled');
+        $('#tsNavMediaLibBtnPnl').removeClass('ui-disabled');
+        $('#tsNavMediaLibBtnPnlTxt').removeClass('ui-disabled');
+        $('#tsNavStoryLibBtnPnl').removeClass('ui-disabled');
+        $('#tsNavStoryLibBtnPnlTxt').removeClass('ui-disabled');
+
+        $(document).off('click', '#tsNavTellStoryBtn').on('click', '#tsNavTellStoryBtn',function(event) {
+
+            console.log("MainNavPage: tsNavTellStoryBtn: click");
+
+            $('#tsNavTellStoryBtn').addClass('ui-disabled');
+
+            removeNewStoryStorage();
+
+            $.mobile.changePage('storystart.html');
+
+        });
+
+        $(document).off('click', '#tsNavMediaLibBtn').on('click', '#tsNavMediaLibBtn',function(event) {
+
+            console.log("MainNavPage: tsNavMediaLibBtn: click");
+
+            $('#tsNavMediaLibBtn').addClass('ui-disabled');
+
+            $.mobile.changePage('media-library-grid.html');
+
+        });
+
+        $(document).off('click', '#tsNavMediaLibBtnPnl').on('click', '#tsNavMediaLibBtnPnl',function(event) {
+
+            console.log("MainNavPage: tsNavMediaLibBtnPnl: click");
+
+            $('#tsNavMediaLibBtnPnl').addClass('ui-disabled');
+
+            $.mobile.changePage('media-library-grid.html');
+
+        });
+
+        $(document).off('click', '#tsNavMediaLibBtnPnlTxt').on('click', '#tsNavMediaLibBtnPnlTxt',function(event) {
+
+            console.log("MainNavPage: tsNavMediaLibBtnPnlTxt: click");
+
+            $('#tsNavMediaLibBtnPnlTxt').addClass('ui-disabled');
+
+            $.mobile.changePage('media-library-grid.html');
+
+        });
+
+        $(document).off('click', '#tsNavStoryLibBtn').on('click', '#tsNavStoryLibBtn',function(event) {
+
+            console.log("MainNavPage: tsNavStoryLibBtn: click");
+
+            $('#tsNavStoryLibBtn').addClass('ui-disabled');
+
+            $.mobile.changePage('story-directory.html');
+
+        });
+
+        $(document).off('click', '#tsNavStoryLibBtnPnl').on('click', '#tsNavStoryLibBtnPnl',function(event) {
+
+            console.log("MainNavPage: tsNavStoryLibBtnPnl: click");
+
+            $('#tsNavStoryLibBtnPnl').addClass('ui-disabled');
+
+            $.mobile.changePage('story-directory.html');
+
+        });
+
+        $(document).off('click', '#tsNavStoryLibBtnPnlTxt').on('click', '#tsNavStoryLibBtnPnlTxt',function(event) {
+
+            console.log("MainNavPage: tsNavStoryLibBtnPnlTxt: click");
+
+            $('#tsNavStoryLibBtnPnlTxt').addClass('ui-disabled');
+
+            $.mobile.changePage('story-directory.html');
+
+        });
+
+        $(document).off('click', '#tsNavMediaCaptureBtn').on('click', '#tsNavMediaCaptureBtn',function(event) {
+
+            console.log("MainNavPage: tsNavMediaCaptureBtn: click");
+
+            $('#tsNavMediaCaptureBtn').addClass('ui-disabled');
+
+            $.mobile.changePage('media-capture.html');
+
+        });
+
+        //$("#logout_submit").click(function(event) {
+        $(document).off('click', '#logout_submit').on('click', '#logout_submit',function(event) {
+
+            console.log("MainNavPage: logout_submit: click()");
+
+            $('#logout_submit').addClass('ui-disabled');
+
+            $.ajax({
+                type: "GET",
+                url: tsServiceURLDomain + "tssvc/resourcesS/logout",
+                //data:'user='+ $('#user').val() +'&pass='+ $('#pass').val(),
+                cache: false,
+                success: function(data) {
+                    console.log("ManNavPage: logout: success: data=" + data);
+                    //
+                    // alert("data is" + data) ;
+                    $.mobile.changePage("index.html");
+                },
+                done: function (data) {
+                    alert("done : " + data);
+                },
+                error: function(xhr, status, error) {
+                    console.log("ManNavPage: logout: error:");
+                    alert("in error");
+                    alert("status: " + status) ;
+                    alert("error: " + error);
+                    alert(xhr.responseText);
+                    $.mobile.changePage("index.html");
+                }
+            })
+        })
+    });
+
+
+</script>
+
+</div> <!-- end of main nav page -->
+
+</body>
+
+</html>

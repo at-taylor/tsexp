@@ -7,7 +7,7 @@
 
 <div id="MainNavPage" data-role="page" data-add-back-btn="false" data-back-btn-text="back" data-back-btn-theme="c">
 
-    <div data-role="panel" data-position="right" style="background: #ee7a81" data-display="reveal" id="mypanel">
+    <div data-role="panel" data-position="right"  data-display="reveal" id="mypanel">
         <div style="text-align: center">
             <a id="tsNavMediaLibBtnPnl" href="#" ><img src="img/navbut/medialibrary_btn_175.png"></a>
             <p><a id="tsNavMediaLibBtnPnlTxt" href="#"> Media Library</a></p>
@@ -23,32 +23,61 @@
     <div data-theme="b" data-role="header" data-position="fixed" class="TsHeader" >
         <h1>Treasured Stories</h1>
         <a href="#"  id="logout_submit" class="ui-btn-right" data-role="button" data-mini="true">Logout</a>
-            <!--<img src="img/icons/home_22.png">Logout</a>-->
+        <!--<img src="img/icons/home_22.png">Logout</a>-->
     </div>
 
-    <div id="navmenu" data-role="content">
+    <div data-role="content" >
 
         <!--<div style="text-align: center; padding-bottom: 10px "><img src="img/splash/logo_big.png"></div>-->
-      <div class="grid-container">
+      <!--<div class="grid-container">-->
 
-        <div  class="ui-grid-b">
-            <!-- first row -->
-            <div class="ui-block-a" style="width: 210px; text-align: center" >
-                <a id="tsNavTellStoryBtn" href="#" ><img src="img/navbut/create_btn_175.png"></a>
-                <h3>Create</h3>
-            </div>
-            <div class="ui-block-b" style="width: 210px; text-align: center">
-                <a id="tsNavMediaCaptureBtn" href="#" ><img src="img/navbut/display_btn_175.png"></a>
-                <h3>Preserve</h3>
-            </div>
-            <div class="ui-block-c" style="width: 210px; text-align: center">
-                <a id="tsNavMediaLibBtn" href="#" ><img src="img/navbut/collaborate_btn_175.png"></a>
-                <h3>Connect</h3>
-            </div>
-            <div class="ui-block-d" style="width: 210px; text-align: center">
-                <a id="tsNavStoryLibBtn" href="#" ><img src="img/navbut/initiate_btn_175.png"></a>
-                <h3>Inspire</h3>
-            </div>
+        <table align="center" cellpadding="10x" cellspacing="5px">
+            <tr valign="bottom">
+                <td>
+                    <a id="tsNavTellStoryBtn"  href="#" ><img src="img/navbut/create_btn_175.png"></a>
+                </td>
+                <td>
+                    <a id="tsNavMediaCaptureBtn" href="#" ><img src="img/navbut/addmedia_btn_175.png"></a>
+                </td>
+            </tr>
+            <tr height="10px" valign="top" align="center">
+                <td >
+                    <h4>Tell Story</h4>
+                </td>
+                <td >
+                    <h4>Add Media</h4>
+                </td>
+            </tr>
+        </table>
+
+        <!--<div id="navmenu" data-theme="none>-->
+         <!---->
+       <!---->
+            <!--&lt;!&ndash; first row &ndash;&gt;-->
+            <!--&lt;!&ndash;<div data-role="none" data-theme="none">&ndash;&gt;-->
+                <!--<a id="tsNavTellStoryBtn" href="#" ><img src="img/navbut/create_btn_175.png"></a>-->
+                <!--Create-->
+           <!--</div>-->
+            <!--<div data-role="none" data-theme="none">-->
+                <!--<a id="tsNavMediaCaptureBtn" href="#" ><img src="img/navbut/addmedia_btn_175.png"></a>-->
+               <!--Media Library-->
+            <!--</div>-->
+            <!--<div style="width: 250px; text-align: center; display: inline" >-->
+                <!--<a id="tsNavTellStoryBtn" href="#" ><img src="img/navbut/create_btn_175.png"></a>-->
+                <!--<h3>Create</h3>-->
+            <!--</div>-->
+            <!--<div  style="width: 250px; text-align: center; display: inline">-->
+                <!--<a id="tsNavMediaCaptureBtn" href="#" ><img src="img/navbut/addmedia_btn_175.png"></a>-->
+                <!--<h3>Add Media</h3>-->
+            <!--</div>-->
+            <!--<div class="ui-block-c" style="width: 210px; text-align: center">-->
+                <!--<a id="tsNavMediaLibBtn" href="#" ><img src="img/navbut/collaborate_btn_175.png"></a>-->
+                <!--<h3>Connect</h3>-->
+            <!--</div>-->
+            <!--<div class="ui-block-d" style="width: 210px; text-align: center">-->
+                <!--<a id="tsNavStoryLibBtn" href="#" ><img src="img/navbut/initiate_btn_175.png"></a>-->
+                <!--<h3>Inspire</h3>-->
+            <!--</div>-->
             <!--second row-->
             <!--<div class="ui-block-a" style="width: 210px;">-->
             <!--<a href="demo.html" ><img src="img/navbut/myLifeStory.png"></a>-->
@@ -62,9 +91,9 @@
             <!--<div class="ui-block-d" style="width: 210px;">-->
             <!--<a href="addtestpop.html" ><img src="img/navbut/myAccount.png"></a>-->
             <!--</div>-->
-        </div>
+        <!--</div>-->
 
-      </div>
+
 
         <div style="float: right;">
             <a href="#mypanel"><img src="img/navbut/libraries_btn_60.png"></a>

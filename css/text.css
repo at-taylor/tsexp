@@ -31,6 +31,11 @@
      height: 50px;
  }
 
+.TsHeader {
+    background:#8e44ad;
+    height: 50px;
+}
+
 #my-login ui-hide-label input.ui-input-text, .ui-hide-label textarea.ui-input-text, .ui-hide-label .ui-input-search, .ui-hide-label div.ui-input-text, .ui-input-search input.ui-input-text, div.ui-input-text input.ui-input-text {
     width: 100%;
 
@@ -275,17 +280,29 @@ margin-bottom: 20px ;
 }
 
 #navmenu {
-    margin: auto;
-    padding-top: 60px;
-    background: #efeade ;
-}
-
-.grid-container {
     margin-left: auto;
     margin-right: auto;
+    padding-top: 90px;
+    text-align: center;
+    width: 700px;
 
 }
+
+
 
 #mypanel {
     padding-top: 50px;
+    background: #efeade;
+}
+
+#addmed {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 90px;
+    text-align: center;
+}
+
+#mediaCaptureVideoBtn {
+    padding-left: 20px;
+    padding-right: 20px;
 }
