@@ -22,12 +22,29 @@ $('#storyListPage').bind('pageinit', function(event) {
 
 $(document).on('pagebeforeshow', '#storyListPage', function(){
 
-    console.log('storyListPage: pagebeforeshow())');
+    console.log('storyListPage: pagebeforeshow(): calling details in line');
 
     $('#storyListBackBtn').removeClass('ui-disabled');
     $('#storyListHomeBtn').removeClass('ui-disabled');
 
-    getEmployeeList();
+    $.getJSON(serviceURL, function(data) {
+        $('#storyList li').remove();
+        stories = data.storyModelList;
+        $.each(stories, function(index, story) {
+            var listItem = '<li><a href="storydetails.html?id=' + story.id + '">' +
+                '<div class="ui-grid-c" style="padding-left: 10px">' +
+                '<div class="ui-block-a">' + '<h3 style="white-space: normal;">' + story.title + '</h3>' + '</div>' +
+                '<div class="ui-block-b">' + '<h6 style="padding-left: 60px;">' + story.storyDateAgeHr + '</h6>' +'</div>' +
+                '<div class="ui-block-c">' + '<h6 style="padding-left: 60px;">' + story.categoryListHr + '</h6>' + '</div>' +
+                '<div class="ui-block-d">' + '<h6 style="padding-left: 60px;">' + story.status + '</h6>' + '</div>' +
+                '</div>' + '</a><a href="delete"></a></li>';
+
+            console.log("story-list: "+ story.categoryListHr + " id: " + story.id);
+
+            $('#storyList').append(listItem);
+        });
+        $('#storyList').listview('refresh');
+    });
 
     $(document).off('click', '#storyListBackBtn').on('click', '#storyListBackBtn',function(event) {
 
@@ -56,20 +73,7 @@ function getEmployeeList() {
 
     console.log('storyListPage: getstoryList() running');
 
-    $.getJSON(serviceURL, function(data) {
-        $('#storyList li').remove();
-        stories = data.storyModelList;
-        $.each(stories, function(index, story) {
-            $('#storyList').append('<li><a href="storydetails.html?id=' + story.id + '">' +
-                '<div class="ui-grid-c" style="padding-left: 10px">' +
-                '<div class="ui-block-a">' + '<h3 style="white-space: normal;">' + story.title + '</h3>' + '</div>' +
-                '<div class="ui-block-b">' + '<h6 style="padding-left: 60px;">' + story.storyDateAgeHr + '</h6>' +'</div>' +
-                '<div class="ui-block-c">' + '<h6 style="padding-left: 60px;">' + story.categoryListHr + '</h6>' + '</div>' +
-                '<div class="ui-block-d">' + '<h6 style="padding-left: 60px;">' + story.status + '</h6>' + '</div>' +
-                '</div>' + '</a><a href="delete"></a></li>');
-        });
-        $('#storyList').listview('refresh');
-    });
+
     console.log('storyListPage: getStoryList() completed');
 
 }
