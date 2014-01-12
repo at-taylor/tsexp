@@ -62,8 +62,9 @@
 
     <!-- Icon for app. This is the default -->
     <icon src="icon.png" />
-    <icon src="img/splash/ios/ts_app_icon__purple_72.png" gap:platform="ios" width="72" height="72" />
-    <icon src="img/splash/ios/ts_app_icon__purple_144.png" gap:platform="ios" width="144" height="144" />
+
+    <!--<icon src="img/splash/ios/ts_app_icon__purple_72.png" gap:platform="ios" width="72" height="72" />-->
+    <!--<icon src="img/splash/ios/ts_app_icon__purple_144.png" gap:platform="ios" width="144" height="144" />-->
 
     <!-- Special resolutions for different iPads. Included here but commented out -->
 
