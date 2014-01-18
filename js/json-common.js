@@ -135,7 +135,7 @@ function setCategoryList(element) {
 
 }
 
-function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCategories, changePageTo, errorElement) {
+function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCategories, mediaAudioUrl, changePageTo, errorElement) {
 
     console.log("json-common: updateMediaItem() for media item id: " + mediaId);
 
@@ -148,6 +148,18 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCatego
         cache: false,
         success: function(data) {
             console.log("json-common: updateMediaItem(): success: data=" + data.id);
+            console.log("json-common: updateMediaItem(): success: value of mediaAudioUrl: " + mediaAudioUrl);
+            console.log("json-common: updateMediaItem(): success: value pf changePageTo: " + changePageTo)
+            if (mediaAudioUrl == null) {
+                console.log("json-common: updateMediaItem(): no media audio file to upload.");
+                if (changePageTo != null)
+                    $.mobile.changePage(changePageTo);
+                return;
+            }
+            var ft = new FileTransfer();
+            // error checking needed here
+            ft.upload(mediaAudioUrl, encodeURI(tsServiceURLDomain + "tssvc/resourcesS/media/audio/" + mediaId), null, null, options);
+
             if (changePageTo != null)
                 $.mobile.changePage(changePageTo);
 
@@ -164,7 +176,9 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCatego
 //            alert(xhr.responseText);
             //$.mobile.changePage("index.html");
         }
-    })
+    })   ;
+
+
 }
 
 function removeMediaItemStorage() {
@@ -172,6 +186,7 @@ function removeMediaItemStorage() {
     console.log("json-common: removeMediaItemStorage()");
 
     sessionStorage.removeItem("fileUrl");
+    sessionStorage.removeItem("fileAudioUrl");
     sessionStorage.removeItem("fileName");
     sessionStorage.removeItem("fileType");
     sessionStorage.removeItem("fileDate");

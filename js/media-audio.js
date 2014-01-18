@@ -10,6 +10,9 @@ var audioDebugFieldId=null;
 var audioRecordStatusDiv=null;
 var audioRecordStatusCounterDiv=null;
 
+// session keys
+var audioPlayerUrlSessionKeyName=null;
+
 // 'prviate' instance variables
 var audioRecorder = null;
 var audioPlayer = null;
@@ -32,7 +35,7 @@ function audioLogLine(msg) {
 }
 
 function audioInitialize(_audioStartRecFieldId, _audioStopRecFieldId, _audioPlayerFieldId, _audioJPlayerFieldId,
-         _audioRecordStatusDiv, _audioRecordStatusCounterDiv, _audioDebugFieldId) {
+         _audioRecordStatusDiv, _audioRecordStatusCounterDiv, _audioPlayerUrlSessionKeyName, _audioDebugFieldId) {
 
    audioDebugFieldId = _audioDebugFieldId;
 
@@ -49,6 +52,7 @@ function audioInitialize(_audioStartRecFieldId, _audioStopRecFieldId, _audioPlay
     audioJPlayerFieldId = _audioJPlayerFieldId;
     audioRecordStatusDiv = _audioRecordStatusDiv;
     audioRecordStatusCounterDiv = _audioRecordStatusCounterDiv;
+    audioPlayerUrlSessionKeyName = _audioPlayerUrlSessionKeyName;
 
     if (audioIsJPlayer == "true")
         audioJsCreateJPlayer("no.wav");
@@ -260,6 +264,8 @@ function audioJsStopRecording() {
     audioJsClearProgressTimer();
 
     document.getElementById(audioRecordStatusDiv).innerHTML = "Recording stopped.";
+
+    sessionStorage.setItem(audioPlayerUrlSessionKeyName, mediaFileFullName);
 
     audioLogLine("audioJs: audioJsStopRecording(): end. ");
 }

@@ -2,7 +2,7 @@
 console.log("mediaAddPage js: Executing media-add.js");
 
 $(document).on('pageinit', '#mediaAddPage', function() {
-    audioInitialize("audioStartRecID", "audioStopRecID", "audioMediaAudioPlayCtl", "jquery_jplayer_1", "audioRecStatusID", "audioRecPos","audioJsDebugArea");
+    audioInitialize("audioStartRecID", "audioStopRecID", "audioMediaAudioPlayCtl", "jquery_jplayer_1", "audioRecStatusID", "audioRecPos","fileAudioUrl", "audioJsDebugArea");
 
     $('#mediaAddDateSwitch').change(function() {
         var myswitch = $(this);
@@ -136,8 +136,6 @@ function fileok(r) {
    var theResp = "Success. Code = " + r.responseCode + " Resposne = " + r.response + " sent = " + r.byteSent;
     $("#fileUploadTxt").attr("value",theResp);
 
-    removeMediaItemStorage();
-
     var respObj = JSON.parse(r.response);
     var selectedValsArray = $('#categoryList').val();
     console.log("mediaAddPageAdd: fileOK(): selected Category Array" + selectedValsArray);
@@ -154,7 +152,9 @@ function fileok(r) {
     else
         dateForSvc = $('#mediaAddApxDateTxt').val();
 
-    updateMediaItem(respObj.id, $('#mediaAddTitleTxt').val(), dateForSvc,$('#mediaAddDescrTxt').val(), jsonStringArr, newPage, document.getElementById('fileUploadTxt'));
+    updateMediaItem(respObj.id, $('#mediaAddTitleTxt').val(), dateForSvc,$('#mediaAddDescrTxt').val(), jsonStringArr, sessionStorage.getItem("fileAudioUrl"), newPage, document.getElementById('fileUploadTxt'));
+
+    removeMediaItemStorage();
 
     navigator.camera.cleanup(function() { console.log("Camera cleanup success.")}, function(message) { console.log("Camera cleanup failed.")});
 }
@@ -218,7 +218,7 @@ function uploadFileFromUrl() {
                         dateForSvc = $('#mediaAddDateTxt').val();
                     else
                         dateForSvc = $('#mediaAddApxDateTxt').val();
-                    updateMediaItem(respObj.id, $('#mediaAddTitleTxt').val(), dateForSvc, $('#mediaAddDescrTxt').val(), jsonStringArr, newPage, document.getElementById('fileUploadTxt'));
+                    updateMediaItem(respObj.id, $('#mediaAddTitleTxt').val(), dateForSvc, $('#mediaAddDescrTxt').val(), jsonStringArr,  sessionStorage.getItem("fileAudioUrl"), newPage, document.getElementById('fileUploadTxt'));
 
 
 
