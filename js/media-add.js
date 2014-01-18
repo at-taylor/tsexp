@@ -3,7 +3,23 @@ console.log("mediaAddPage js: Executing media-add.js");
 
 $(document).on('pageinit', '#mediaAddPage', function() {
     audioInitialize("audioStartRecID", "audioStopRecID", "audioMediaAudioPlayCtl", "jquery_jplayer_1", "audioRecStatusID", "audioRecPos","audioJsDebugArea");
+
+    $('#mediaAddDateSwitch').change(function() {
+        var myswitch = $(this);
+        var show     = myswitch[0].selectedIndex == 1 ? true:false;
+
+        if(show) {
+
+            $('#mediaAddApxDateDiv').fadeIn('slow');
+            $('#mediaAddExactDateDiv').fadeOut();
+        } else {
+
+            $('#mediaAddExactDateDiv').fadeIn('slow');
+            $('#mediaAddApxDateDiv').fadeOut();
+        }
+    });
 });
+
 $(document).on('pagebeforeshow', '#mediaAddPage', function()
 {
 //    console.log( $.mobile.urlHistory.stack );
@@ -12,10 +28,11 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
     // AN ADD PAGE SEQUENCE OF EVENTS
 
     // 1. Reset input fields to initialized state to unset any cached content prior to dynamic content load
-    $('#titleTxt').val("");
-    $('#dateTxt').val("");
-    $('#descrTxt').val("");
-    $('#theImage').attr("src", "");
+    $('#mediaAddTitleTxt').val("");
+    $('#mediaAddDateTxt').val("");
+    $('#mediaAddApxDateTxt').val("");
+    $('#mediaAddDescrTxt').val("");
+    $('#mediaAddImage').attr("src", "");
     $("#fileInfoTxt").val("");
     $("#fileLocTxt").val("");
 
@@ -32,7 +49,7 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
 
 
     // 3b. Load content from session state (if applicable)
-    $("#theImage").attr("src",sessionStorage.getItem("fileUrl"));
+    $("#mediaAddImage").attr("src",sessionStorage.getItem("fileUrl"));
     var theFileInfo = "Name: " + sessionStorage.getItem("fileName") + " Type: " + sessionStorage.getItem("fileType") +
         " Size: " + sessionStorage.getItem("fileSize") + " Date: " + sessionStorage.getItem("fileDate");
     $("#fileInfoTxt").val(theFileInfo);
@@ -131,7 +148,13 @@ function fileok(r) {
     var theTime = new Date().getTime();
     //var newPage = 'media-library-grid.html?nocache=' + theTime;
     var newPage=    'media-capture.html';
-    updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), jsonStringArr, newPage, document.getElementById('fileUploadTxt'));
+    var dateForSvc = null;
+    if ($('#mediaAddDateSwitch').val() == 0)       // exact
+        dateForSvc = $('#mediaAddDateTxt').val();
+    else
+        dateForSvc = $('#mediaAddApxDateTxt').val();
+
+    updateMediaItem(respObj.id, $('#mediaAddTitleTxt').val(), dateForSvc,$('#mediaAddDescrTxt').val(), jsonStringArr, newPage, document.getElementById('fileUploadTxt'));
 
     navigator.camera.cleanup(function() { console.log("Camera cleanup success.")}, function(message) { console.log("Camera cleanup failed.")});
 }
@@ -190,7 +213,12 @@ function uploadFileFromUrl() {
                     //var newPage = 'media-library-grid.html?nocache='+ theTime;
                     var newPage = 'media-capture.html';
                     console.log("mediaAddPageAdd: uploadFileFromUrl(): calling update media with page change of :" + newPage);
-                    updateMediaItem(respObj.id, $('#titleTxt').val(), $('#dateTxt').val(),$('#descrTxt').val(), jsonStringArr, newPage, document.getElementById('fileUploadTxt'));
+                    var dateForSvc = null;
+                    if ($('#mediaAddDateSwitch').val() == 0)       // exact
+                        dateForSvc = $('#mediaAddDateTxt').val();
+                    else
+                        dateForSvc = $('#mediaAddApxDateTxt').val();
+                    updateMediaItem(respObj.id, $('#mediaAddTitleTxt').val(), dateForSvc, $('#mediaAddDescrTxt').val(), jsonStringArr, newPage, document.getElementById('fileUploadTxt'));
 
 
 

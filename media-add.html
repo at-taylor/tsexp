@@ -31,13 +31,28 @@
                     <h1>About this Media</h1>
                 </div>
                 <div data-role="fieldcontainer">
-                    <label for="titleTxt">Title:</label><input type="text" id="titleTxt" name="titleTxt" length=80 placeholder="Enter a Title for this Media">
+                    <label for="mediaAddtitleTxt">Title:</label><input type="text" id="mediaAddTitleTxt" length=80 placeholder="Enter a Title for this Media">
                 </div>
-                <div data-role="fieldcontainer">
-                    <label for="dateTxt">Date Taken:</label><input type="date" data-role="datebox" id="dateTxt" >
+                <div id="mediaAddDateToggle" class="flipSwitchContainer" style=".ui-slider-switch { width: 12em };">
+                    <label for="mediaAddDateSwitch">Exact or approximate date:</label>
+                    <select id="mediaAddDateSwitch" data-role="slider">
+                        <option value="0">Exact</option>
+                        <option value="1">Around</option>
+                    </select>
+
                 </div>
+
+                <div id="mediaAddExactDateDiv" class="show">
+                    <label for="mediaAddDateTxt">Date:</label><input type="date" data-role="datebox" id="mediaAddDateTxt" >
+                </div>
+                <div id="mediaAddApxDateDiv" class="hide">
+                    <label for="mediaAddApxDateTxt">Year:</label><input type="text"  id="mediaAddApxDateTxt" placeholder="Enter year:">
+                </div>
+                <!--<div data-role="fieldcontainer">-->
+                    <!--<label for="dateTxt">Date Taken:</label><input type="date" data-role="datebox" id="dateTxt" >-->
+                <!--</div>-->
                 <div data-role="fieldcontainer">
-                    <label for="descrTxt">Description:</label><textarea rows="4" cols="50" id="descrTxt" name="descrTxt" length=200 placeholder="Enter a descrition for this media"></textarea>
+                    <label for="mediaAddDescrTxt">Description:</label><textarea rows="4" cols="50" id="mediaAddDescrTxt"  length=200 placeholder="Enter a descrition for this media"></textarea>
                 </div>
                 <div data-role="fieldcontainer">
                     <div id="categoryDiv">
@@ -66,7 +81,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <img id="theImage" width=320 >
+                                <img id="mediaAddImage" width=320 >
                             </td>
                         </tr>
                         <tr>
@@ -224,6 +239,10 @@
             </div>    <!-- end of block b -->
 
         </div>
+
+        <label for="fileInfoTxt"></label><input type="hidden" id="fileInfoTxt" name="fileInfoTxt" >
+        <label for="fileLocTxt"></label><input type="hidden" id="fileLocTxt" name="fileLocTxt" >
+        <label for="fileUploadTxt"></label><input type="hidden" id="fileUploadTxt" name="fileUploadTxt" >
 
         <div id="mediaAddStatus"></div>
 
