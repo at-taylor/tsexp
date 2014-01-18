@@ -306,3 +306,10 @@ margin-bottom: 20px ;
     padding-left: 20px;
     padding-right: 20px;
 }
+
+.ui-datepicker-calendar {
+    display: none;
+}
+
+.hide {display:none;}
+.show {display:inherit;}

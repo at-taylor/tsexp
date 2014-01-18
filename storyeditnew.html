@@ -20,7 +20,7 @@
         <h2 >Tell Story</h2>
 
         <section class="ui-grid-a">
-            <div class="ui-block-a" style="width=60%">
+            <div class="ui-block-a" style="width:60%">
                 <label for="storyEditNewTitleTxt">Title:</label><input type="text" id="storyEditNewTitleTxt" length=80 >
                 <div class="flipSwitchContainer" style=".ui-slider-switch { width: 9em };">
                    <label for="storyEditNewPrivacySwitch">Story privacy setting:</label>
@@ -29,7 +29,34 @@
                      <option value="1">Private</option>
                    </select>
                 </div>
-                <label for="storyEditNewDateTxt">Date:</label><input type="date" data-role="datebox" id="storyEditNewDateTxt" >
+
+
+                    <div id="dateToggle" class="flipSwitchContainer" style=".ui-slider-switch { width: 12em };">
+                        <label for="storyEditNewDateSwitch">Exact or approximate date:</label>
+                        <select id="storyEditNewDateSwitch" data-role="slider">
+                            <option value="0">Exact</option>
+                            <option value="1">Around</option>
+                        </select>
+
+                    </div>
+
+
+
+                <div id="exactdate" class="show">
+                    <label for="storyEditNewDateTxt">Date:</label><input type="date" data-role="datebox" id="storyEditNewDateTxt" >
+                </div>
+
+                <div id="approxdate" class="hide">
+                    <label for="storyEditApproxDateTxt">Year:</label><input type="text"  id="storyEditApproxDateTxt" placeholder="Enter year:">
+                </div>
+
+
+
+
+
+
+
+                <!--<label for="storyEditNewDateTxt">Date:</label><input type="date" data-role="datebox" id="storyEditNewDateTxt" >-->
                 <div data-role="fieldcontainer">
                     <div id="storyCategoryDiv">
                         <label for="storyEditNewCategoryList">Categories</label>
@@ -74,6 +101,27 @@
     <link type="text/css" rel="stylesheet" href="css/jquery-te-1.4.0.css">
     <script type="text/javascript" src="js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
     <script src="js/storyeditnew.js"></script>
+
+    <!--<script>-->
+    <!--$(function() {-->
+        <!--$("#dateToggle").slider({-->
+             <!--slide: function(event, ui) {-->
+                 <!--if (ui.value = 0) {-->
+                     <!--$("#exactdate").fadeIn("slow");-->
+                     <!--$("#approxdate").fadeOut("slow");-->
+                 <!--}-->
+                 <!--else if (ui.value = 1){-->
+                    <!--$("#exactdate").fadeOut("slow");-->
+                    <!--$("#approxdate").fadeIn("slow");-->
+                 <!--}-->
+
+             <!--}-->
+         <!--});-->
+    <!--});-->
+
+    <!--</script>-->
+
+
 
 
 </div> <!-- end of storyEditNewPage -->

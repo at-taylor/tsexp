@@ -74,6 +74,16 @@ $(document).on('pagebeforeshow', '#storyEditNewPage', function(){
     else
         $('#storyEditNewPrivacySwitch').val("0").slider("refresh");
 
+
+
+
+
+
+
+
+
+
+
     // categories
 
     console.log("storyEditNewPage: pagebeforeshow(): Start: categories");
@@ -200,7 +210,46 @@ $(document).on('pagebeforeshow', '#storyEditNewPage', function(){
 
 });
 
-function storyEditNewSetItems()
+//    $(function() {
+//
+//        console.log("storyEditNewDateSwitch:in ");
+//
+//        $("#storyEditNewDateSwitch").slider({
+//            slide: function(event, ui) {
+//                if (ui.value = 0) {
+//                    $("#exactdate").fadeIn("slow");
+//                    $("#approxdate").fadeOut("slow");
+//                }
+//                else if (ui.value = 1){
+//                    $("#exactdate").fadeOut("slow");
+//                    $("#approxdate").fadeIn("slow");
+//                }
+//
+//            }
+//        });
+//    });
+
+
+$('#storyEditNewDateSwitch').change(function() {
+    var myswitch = $(this);
+    var show     = myswitch[0].selectedIndex == 1 ? true:false;
+
+    if(show) {
+
+        $('#approxdate').fadeIn('slow');
+        $('#exactdate').fadeOut();
+    } else {
+
+        $('#exactdate').fadeIn('slow');
+        $('#approxdate').fadeOut();
+    }
+});
+
+
+
+
+
+    function storyEditNewSetItems()
 {
     console.log("storyEditNewPage: storyEditNewSetItems: Start");
 
@@ -234,3 +283,6 @@ function storyEditNewSetItems()
     sessionStorage.setItem("storyEditNewProcessFlag", "false");
 
 }
+
+
+
