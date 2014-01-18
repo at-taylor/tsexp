@@ -110,7 +110,6 @@ function uploadFileFromFileHandle ()
     var params = {};
     params.value1 = "test";
     params.value2 = "param";
-
     options.params = params;
 
     statusDom = document.querySelector('#mediaAddStatus');

@@ -156,12 +156,24 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCatego
                     $.mobile.changePage(changePageTo);
                 return;
             }
+            var options = new FileUploadOptions();
+            options.fileKey="file";
+            options.fileName= "audio.wav";
+            options.mimeType="audio/wav";
+
+            var params = {};
+            params.value1 = "test";
+            params.value2 = "param";
+            options.params = params;
             var ft = new FileTransfer();
             // error checking needed here
-            ft.upload(mediaAudioUrl, encodeURI(tsServiceURLDomain + "tssvc/resourcesS/media/audio/" + mediaId), null, null, options);
-
-            if (changePageTo != null)
-                $.mobile.changePage(changePageTo);
+            ft.upload(mediaAudioUrl, encodeURI(tsServiceURLDomain + "tssvc/resourcesS/media/audio/" + mediaId), function() {
+                $(jQErrorName).val("in audio upload success");
+                if (changePageTo != null)
+                    $.mobile.changePage(changePageTo);
+            }, function() {
+                $(jQErrorName).val("in audio upload fail");
+            }, options);
 
         },
         error: function(xhr, status, error) {
