@@ -1,6 +1,9 @@
 
 console.log("mediaAddPage js: Executing media-add.js");
 
+$(document).on('pageinit', '#mediaAddPage', function() {
+    audioInitialize("audioStartRecID", "audioStopRecID", "audioMediaAudioPlayCtl", "jquery_jplayer_1", "audioRecStatusID", "audioRecPos","audioJsDebugArea");
+});
 $(document).on('pagebeforeshow', '#mediaAddPage', function()
 {
 //    console.log( $.mobile.urlHistory.stack );

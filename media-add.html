@@ -9,15 +9,27 @@
 
     <div data-theme="b" data-role="header" data-position="fixed" class="TsHeader" >
         <h1>Treasured Stories</h1>
+
     </div>
 
     <div data-role="content">
-        <div >
-            <h1>Add Media</h1>
-        </div>
+
+        <!--<div>-->
+            <!--<a id="uploadConfirmPopLink" href="#uploadConfirm" class="ui-btn-right" data-theme="d" data-mini= "true"  data-role="button" data-rel="popup">Add this Media</a>-->
+            <!--<a id="uploadCancelPopLink" href="#cancelConfirm" class="ui-btn-right" data-theme="d" data-mini= "true" data-role="button" data-rel="popup">Cancel It Completely</a>-->
+
+            <!--&lt;!&ndash;<div style="text-align: right; float:right; padding-right: 2%;">&ndash;&gt;-->
+            <!--&lt;!&ndash;<a id="storyEditNewNextBtn" href="#" data-role="none" data-shadow="false" data-theme="none">&ndash;&gt;-->
+            <!--&lt;!&ndash;<img src="img/navbut/next1.png" border="0"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;</a>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</div>-->
 
         <div class="ui-grid-a">
-            <div class="ui-block-a" style="width:55%; padding-left: 5%; padding-right: 2%">
+            <div class="ui-block-a" style="width:40%; padding-left: 2%; padding-right: 2%">
+                <div >
+                    <h1>About this Media</h1>
+                </div>
                 <div data-role="fieldcontainer">
                     <label for="titleTxt">Title:</label><input type="text" id="titleTxt" name="titleTxt" length=80 placeholder="Enter a Title for this Media">
                 </div>
@@ -38,15 +50,94 @@
                         </select>
                     </div> <!-- categoryDiv -->
                 </div>
+
+                <a id="uploadConfirmPopLink" href="#uploadConfirm"  data-theme="d"  data-role="button" data-rel="popup">Add this Media</a>
+                <a id="uploadCancelPopLink" href="#cancelConfirm"  data-theme="d"  data-role="button" data-rel="popup">Cancel It Completely</a>
+
             </div>  <!-- end of block a -->
-            <div class="ui-block-b" style="text-align: center; width:45%; padding-left: 2%; padding-right: 5%">
-                <img id="theImage" heigth=360 width=270 >
-                <label for="fileInfoTxt"></label><input type="hidden" id="fileInfoTxt" name="fileInfoTxt" >
-                <label for="fileLocTxt"></label><input type="hidden" id="fileLocTxt" name="fileLocTxt" >
-                <!--<button id="uploadBtn" name="uploadBtn">Upload My Media</button>-->
-                <a id="uploadConfirmPopLink" href="#uploadConfirm" data-role="button" data-rel="popup">Upload My Media</a>
-                <a id="uploadCancelPopLink" href="#cancelConfirm" data-role="button" data-rel="popup">Cancel</a>
-                <label for="fileUploadTxt"></label><input type="hidden" id="fileUploadTxt" name="fileUploadTxt" >
+            <div class="ui-block-b" style="text-align: center; width:60%; padding-left: 0%; padding-right: 2%">
+
+                <div class="ui-grid-a">
+                    <div class="ui-block-a" style="width:55%; padding-left: 5%; padding-right: 2%">
+                        <img id="theImage" width=320 >
+                    </div>    <!-- inner block a -->
+                    <div class="ui-block-b" style="text-align: center; width:45%; padding-left: 2%; padding-right: 5%">
+                        <div >
+                            <h3>Provide a Narration</h3>
+                        </div>
+                        <a id="audioStartRecID" onclick="audioJsStartRecording()">
+                            <img src="img/navbut/record_btn_175.png"  >
+                        </a>
+                        <p>
+                        <div id="audioRecStatusID" style="float: left;">Status
+                        </div>
+                        <div  id="audioRecPos" stype="float: right;"> &nbsp;&nbsp;Length
+                        </div>
+                        <div style="clear:both"></div>
+                        </p>
+                        <p>
+                            <button data-role="button" data-mini="true"><i style="color: #333;" class="fa fa-stop fa-2x"></i>-</button>
+                        </p>
+                        <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+                        <div id="jp_container_1" class="jp-audio">
+                            <div class="jp-type-single">
+                                <div class="jp-gui jp-interface">
+                                    <ul class="jp-controls">
+                                        <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+                                        <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+                                        <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+                                        <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+                                        <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+                                        <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+                                    </ul>
+                                    <div class="jp-progress">
+                                        <div class="jp-seek-bar">
+                                            <div class="jp-play-bar"></div>
+                                        </div>
+                                    </div>
+                                    <div class="jp-volume-bar">
+                                        <div class="jp-volume-bar-value"></div>
+                                    </div>
+                                    <div class="jp-time-holder">
+                                        <div class="jp-current-time"></div>
+                                        <div class="jp-duration"></div>
+
+                                        <ul class="jp-toggles">
+                                            <li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
+                                            <li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="jp-title" style="line-height:.75;">
+                                    <ul>
+                                        <li>Preview Narration</li>
+                                    </ul>
+                                </div>
+                                <div class="jp-no-solution">
+                                    <span>Update Required</span>
+                                    To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<p>-->
+                            <!--<a data-role="none" data-theme="none" class="ui-diasbled" href="#" id="audioStopRecID" onclick="audioJsStopRecording()">-->
+                                <!--<i data-role="none" class="ui-diasbled" data-theme="none" style="color: #333;" class="fa fa-stop fa-2x"></i>-->
+                                <!--&lt;!&ndash;<i data-role="none" data-theme="none" class="fa fa-spinner fa-spin"></i>&ndash;&gt;-->
+                            <!--</a>-->
+                            <!--&nbsp;&nbsp; Stop-->
+                            <!--&lt;!&ndash;<span style="font-family: Helvetica,Arial,sans-serif;font-size:3;">Stop Recording</span>&ndash;&gt;-->
+                        <!--</p>-->
+
+                        <label for="fileInfoTxt"></label><input type="hidden" id="fileInfoTxt" name="fileInfoTxt" >
+                        <label for="fileLocTxt"></label><input type="hidden" id="fileLocTxt" name="fileLocTxt" >
+                    <!--<button id="uploadBtn" name="uploadBtn">Upload My Media</button>-->
+                    <!--<a id="uploadConfirmPopLink" href="#uploadConfirm" data-role="button" data-rel="popup">Upload My Media</a>-->
+                    <!--<a id="uploadCancelPopLink" href="#cancelConfirm" data-role="button" data-rel="popup">Cancel</a>-->
+                        <label for="fileUploadTxt"></label><input type="hidden" id="fileUploadTxt" name="fileUploadTxt" >
+                    </div> <!-- inner block b -->
+                </div>  <!-- end of inner grid -->
+
             </div>    <!-- end of block b -->
 
         </div>
@@ -80,6 +171,8 @@
             <!--<a href="#"><img height="51" width="50" src="img/navbut/requestStory.png" /></a>-->
         <!--</div>-->
 
+        <textarea id="audioJsDebugArea">
+        </textarea>
 
     </div>    <!-- end of content div -->
 
