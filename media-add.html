@@ -46,7 +46,7 @@
                     <label for="mediaAddDateTxt">Date:</label><input type="date" data-role="datebox" id="mediaAddDateTxt" >
                 </div>
                 <div id="mediaAddApxDateDiv" class="hide">
-                    <label for="mediaAddApxDateTxt">Year:</label><input type="text"  id="mediaAddApxDateTxt" placeholder="Enter year:">
+                    <label for="mediaAddApxDateTxt">Year:</label><input type="number" min=1600 max=2014 id="mediaAddApxDateTxt" placeholder="Enter year:">
                 </div>
                 <!--<div data-role="fieldcontainer">-->
                     <!--<label for="dateTxt">Date Taken:</label><input type="date" data-role="datebox" id="dateTxt" >-->
@@ -240,9 +240,9 @@
 
         </div>
 
-        <label for="fileInfoTxt"></label><input type="hidden" id="fileInfoTxt" name="fileInfoTxt" >
-        <label for="fileLocTxt"></label><input type="hidden" id="fileLocTxt" name="fileLocTxt" >
-        <label for="fileUploadTxt"></label><input type="hidden" id="fileUploadTxt" name="fileUploadTxt" >
+        <label for="fileInfoTxt"></label><input type="text" id="fileInfoTxt" name="fileInfoTxt" >
+        <label for="fileLocTxt"></label><input type="text" id="fileLocTxt" name="fileLocTxt" >
+        <label for="fileUploadTxt"></label><input type="text" id="fileUploadTxt" name="fileUploadTxt" >
 
         <div id="mediaAddStatus"></div>
 
