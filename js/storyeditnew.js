@@ -177,7 +177,7 @@ $(document).on('pagebeforeshow', '#storyEditNewPage', function(){
         console.log("storyEditNewPage: storyEditNewNextBtn: onclick()");
 
         storyEditNewSetItems();
-        $.mobile.changePage('storypreview2.html');
+        $.mobile.changePage('storyNarrate.html');
 
 //        var val = new Array();
 //        $(':checkbox:checked').each(function(i){

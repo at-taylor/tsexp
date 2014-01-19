@@ -53,7 +53,7 @@ function audioInitialize(_audioStartRecFieldId, _audioStopRecFieldId, _audioPlay
     audioRecordStatusDiv = _audioRecordStatusDiv;
     audioRecordStatusCounterDiv = _audioRecordStatusCounterDiv;
     audioPlayerUrlSessionKeyName = _audioPlayerUrlSessionKeyName;
-
+//
     if (audioIsJPlayer == "true")
         audioJsCreateJPlayer("no.wav");
 
@@ -112,7 +112,7 @@ function audioJsCreateJPlayer(fileName) {
             $(this).jPlayer("setMedia", {
 //                        m4a:"http://www.jplayer.org/audio/m4a/TSP-01-Cro_magnon_man.m4a",
 //                        oga:"http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg"
-                wav: fileName
+                wav: "G2MTestSound.wav" //fileName
             });
         },
         swfPath: "js",

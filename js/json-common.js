@@ -217,4 +217,5 @@ function removeNewStoryStorage() {
     sessionStorage.removeItem("storyDate");
     sessionStorage.removeItem("storyCategories");
     sessionStorage.removeItem("storyPrivacy");
+    sessionStorage.removeItem("storyAudioUrl");
 }
