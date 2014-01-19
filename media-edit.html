@@ -33,9 +33,25 @@
             <div data-role="fieldcontainer">
                 <label for="editTitleTxt">Title:</label><input type="text" id="editTitleTxt"  length=80 placeholder="Enter a Title for this Media">
             </div>
-            <div data-role="fieldcontainer">
-                <label for="editDateTxt">Date Taken:</label><input type="date" data-role="datebox"  id="editDateTxt" >
+            <!--<div data-role="fieldcontainer">-->
+                <!--<label for="editDateTxt">Date Taken:</label><input type="date" data-role="datebox"  id="editDateTxt" >-->
+            <!--</div>-->
+
+            <div id="mediaEditDateToggle" class="flipSwitchContainer" style=".ui-slider-switch { width: 12em };">
+                <label for="mediaEditDateSwitch">Exact or approximate date:</label>
+                <select id="mediaEditDateSwitch" data-role="slider">
+                    <option value="0">Exact</option>
+                    <option value="1">Around</option>
+                </select>
+
             </div>
+            <div id="mediaEditExactDateDiv" class="show">
+                <label for="mediaEditDateTxt">Date:</label><input type="date" data-role="datebox" id="mediaEditDateTxt" >
+            </div>
+            <div id="mediaEditApxDateDiv" class="hide">
+                <label for="mediaEditApxDateTxt">Year:</label><input type="number" min=1600 max=2014 id="mediaEditApxDateTxt" placeholder="Enter year:">
+            </div>
+
             <div data-role="fieldcontainer">
                 <label for="editDescrTxt">Description:</label><textarea rows="4" cols="50" id="editDescrTxt" length=200 placeholder="Enter a descrition for this media"></textarea>
             </div>

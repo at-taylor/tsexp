@@ -2,7 +2,7 @@
 console.log("mediaAddPage js: Executing media-add.js");
 
 $(document).on('pageinit', '#mediaAddPage', function() {
-    audioInitialize("audioStartRecID", "audioStopRecID", "audioMediaAudioPlayCtl", "jquery_jplayer_1", "audioRecStatusID", "audioRecPos","fileAudioUrl", "audioJsDebugArea");
+
 
     $('#mediaAddDateSwitch').change(function() {
         var myswitch = $(this);
@@ -24,6 +24,8 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
 {
 //    console.log( $.mobile.urlHistory.stack );
     console.log("mediaAddPage: pagebeforeshow()");
+
+    audioInitialize("audioStartRecID", "audioStopRecID", "audioMediaAudioPlayCtl", "jquery_jplayer_1", "audioRecStatusID", "audioRecPos","fileAudioUrl", "audioJsDebugArea");
 
     // AN ADD PAGE SEQUENCE OF EVENTS
 

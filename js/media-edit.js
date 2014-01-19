@@ -82,6 +82,7 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
         $('#editDateTxt').val(data.mediaDateRaw);
         $('#editDescrTxt').val(data.descr);
         $('#editImage').attr("src", data.url);
+        //data.recordingUrl;
 
         console.log("mediaEditPage: pagebeforeshow(): Pull Categories");
         var categoryArray = JSON.parse(sessionStorage.getItem("appCacheCatIds"));

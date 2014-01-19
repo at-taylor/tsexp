@@ -106,9 +106,10 @@ $(document).on('pagebeforeshow', '#storyStartPage', function(){
         $(this).addClass('ui-disabled');
 
         $('#controlgroup .ui-checkbox').remove(); // get rid of media checkbox items (storyEditNewPage)
+        $.mobile.changePage('tsnav.html');
+
         removeNewStoryStorage();
 
-        $.mobile.changePage('tsnav.html');
     });
 
 
