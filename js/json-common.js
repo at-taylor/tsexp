@@ -238,7 +238,7 @@ function removeFile(theFile) {
                         });
                 }
                 ,function() {
-                    console.log"Create File Entry FAILED");
+                    console.log("Create File Entry FAILED");
                 });
         },
         function() {

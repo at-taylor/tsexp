@@ -41,6 +41,8 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
     $("#fileInfoTxt").val("");
     $("#fileLocTxt").val("");
     $('#audioJsDebugArea').val("");
+    $('#audioRecStatusID').html("");
+    $('#audioRecPos').html("");
 
     // 2, Reset buttons to initialized state
     $('#uploadBtn').button('enable');
