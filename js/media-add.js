@@ -27,6 +27,9 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
 
     audioInitialize("audioStartRecID", "audioStopRecID", "audioMediaAudioPlayCtl", "jquery_jplayer_1", "audioRecStatusID", "audioRecPos","fileAudioUrl", "audioJsDebugArea");
 
+//    function audioInitialize(_audioStartRecFieldId, _audioStopRecFieldId, _audioPlayerFieldId, _audioJPlayerFieldId,
+//                             _audioRecordStatusDiv, _audioRecordStatusCounterDiv, _audioPlayerUrlSessionKeyName, _audioDebugFieldId
+
     // AN ADD PAGE SEQUENCE OF EVENTS
 
     // 1. Reset input fields to initialized state to unset any cached content prior to dynamic content load
@@ -93,6 +96,38 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
         $('#uploadCancelPopLink').addClass('ui-disabled');
 
         removeMediaItemStorage();
+
+        // this needs to be removed, testing only
+
+        audioLogLine("value of url: " + sessionStorage.getItem("fileAudioUrl"));
+        var theFile = sessionStorage.getItem("fileAudioUrl");
+
+        //function onDeviceReady() {
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
+                function (fileSystem) {
+                    audioLogLine("Create File System OK");
+                    fileSystem.root.getFile(theFile, {create: false, exclusive: false}
+                        ,function (fileEntry) {
+                            audioLogLine("Create File Entry OK");
+                            fileEntry.createWriter(
+                                function (writer) {
+                                    audioLogLine("Create Writer OK");
+                                    audioLogLine("BEFORE TRUNCATE");
+                                    writer.truncate(0);
+                                    audioLogLine("AFTER TRUNCATE");
+                                },
+                                function () {
+                                    audioLogLine("Create Writer FAILED");
+                                });
+                        }
+                        ,function() {
+                            audioLogLine("Create File Entry FAILED");
+                        });
+                },
+                function() {
+                    audioLogLine("Create File System : FAILED");
+                });
+        //}
 
         $.mobile.changePage('media-capture.html');
 

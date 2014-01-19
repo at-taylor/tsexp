@@ -55,8 +55,8 @@ function audioInitialize(_audioStartRecFieldId, _audioStopRecFieldId, _audioPlay
     audioPlayerUrlSessionKeyName = _audioPlayerUrlSessionKeyName;
 //
     if (audioIsJPlayer == "true")         {
-        audioJsCreateJPlayer(_audioPlayerFieldId, "no.wav");
-        audioSetPlayerFileName('_audioPlayerFieldId', 'no.wav');
+        audioJsCreateJPlayer(audioJPlayerFieldId, "no.wav");
+        audioSetPlayerFileName(audioJPlayerFieldId, "no.wav");
     }
 
     audioJsSetButtonState(audioStateEnum.start);

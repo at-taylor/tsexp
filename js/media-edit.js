@@ -79,7 +79,20 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
             iItr = Number(iItr) + 1;
         }
         $('#editTitleTxt').val(data.title);
-        $('#editDateTxt').val(data.mediaDateRaw);
+        var dateValue = data.mediaDateRaw;
+        console.log("mediaEditPage: Date Raw: " + dateValue);
+        if (dateValue != null)
+            if (dateValue.length == 10)  {
+                $('#mediaEditDateTxt').val(dateValue);
+                $('#mediaEditDateSwitch').val("0").slider("refresh");  //exact date
+                console.log("mediaEditPage: Setting date switch exact.");
+            }
+            else {
+                $('#mediaEditApxDateTxt').val(dateValue);
+                $('#mediaEditDateSwitch').val("1").slider("refresh");  //non-exact date
+                console.log("mediaEditPage: Setting date switch non-exact.");
+            }
+
         $('#editDescrTxt').val(data.descr);
         $('#editImage').attr("src", data.url);
         //data.recordingUrl;
