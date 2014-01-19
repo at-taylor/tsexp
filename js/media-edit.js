@@ -96,17 +96,20 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
         $('#editTitleTxt').val(data.title);
         var dateValue = data.mediaDateRaw;
         console.log("mediaEditPage: Date Raw: " + dateValue);
-        if (dateValue != null)
+        if ((dateValue != null)    && (dateValue != ""))    {
+            console.log("mediaEditPage: Date Raw Length: " + dateValue.length);
             if (dateValue.length == 10)  {
                 $('#mediaEditDateTxt').val(dateValue);
                 $('#mediaEditDateSwitch').val("0").slider("refresh");  //exact date
                 console.log("mediaEditPage: Setting date switch exact.");
             }
-            else {
+            else if (dateValue.length == 4) {
                 $('#mediaEditApxDateTxt').val(dateValue);
                 $('#mediaEditDateSwitch').val("1").slider("refresh");  //non-exact date
                 console.log("mediaEditPage: Setting date switch non-exact.");
             }
+        }   else
+        console.log("mediaEditPage: Date not present.");
 
         $('#editDescrTxt').val(data.descr);
         $('#editImage').attr("src", data.url);
@@ -166,24 +169,13 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
         sessionStorage.setItem("mediaEditProcessFlag", "false");
 
         // sort out date value to pass in update
-        var dateValue = data.mediaDateRaw;
-        console.log("mediaEditPage: Date Raw: " + dateValue);
-        if (dateValue != null)
-            if (dateValue.length == 10)  {
-                $('#mediaEditDateTxt').val(dateValue);
-                $('#mediaEditDateSwitch').val("0").slider("refresh");  //exact date
-                console.log("mediaEditPage: Setting date switch exact.");
-            }
-            else {
-                $('#mediaEditApxDateTxt').val(dateValue);
-                $('#mediaEditDateSwitch').val("1").slider("refresh");  //non-exact date
-                console.log("mediaEditPage: Setting date switch non-exact.");
-            }
+        var dateValue;
         if ($('#mediaEditDateSwitch').val() == "0")
             dateValue = $('#mediaEditDateTxt').val();
         else
             dateValue = $('#mediaEditApxDateTxt').val();
-        updateMediaItem(mediaId, $('#editTitleTxt').val(), dateValue,$('#editDescrTxt').val(), jsonStringArr, null, newPage, document.getElementById('editErrorTxt'));
+        console.log("mediaEditPage: editBtn.click():  Data Value for Update: " + dateValue);
+        updateMediaItem(mediaId, $('#editTitleTxt').val(), dateValue,$('#editDescrTxt').val(), jsonStringArr, null, newPage, document.getElementById('editErrorTxt'), document.getElementById('editErrorTxt'));
 
     });
 

@@ -157,7 +157,7 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCatego
                     $.mobile.changePage(changePageTo);
                 return;
             }
-            $(jQErrorAudio).val("Beginning audio upload for id= " + mediaId);
+            $(jQErrorAudio).val("Beginning audio upload for id= " + mediaId + " file: " + mediaAudioUrl + " ");
 
             var options = new FileUploadOptions();
             options.fileKey="file";
