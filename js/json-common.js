@@ -135,11 +135,12 @@ function setCategoryList(element) {
 
 }
 
-function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCategories, mediaAudioUrl, changePageTo, errorElement) {
+function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCategories, mediaAudioUrl, changePageTo, errorElement, audioErrorElement) {
 
     console.log("json-common: updateMediaItem() for media item id: " + mediaId);
 
     var jQErrorName = '#' + errorElement.id;
+    var jQErrorAudio = '#' + audioErrorElement.id;
 
     $.ajax({
         type: "POST",
@@ -156,6 +157,8 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCatego
                     $.mobile.changePage(changePageTo);
                 return;
             }
+            $(jQErrorAudio).val("Beginning audio upload for id= " + mediaId);
+
             var options = new FileUploadOptions();
             options.fileKey="file";
             options.fileName= "audio.wav";
@@ -171,8 +174,9 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCatego
                 $(jQErrorName).val("in audio upload success");
                 if (changePageTo != null)
                     $.mobile.changePage(changePageTo);
-            }, function() {
-                $(jQErrorName).val("in audio upload fail");
+            }, function(error) {
+                $(jQErrorAudio).val($(jQErrorAudio).val() + " code= " + error.code + " src = " + error.source + " target= " + error.target);
+
             }, options);
 
         },

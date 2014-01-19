@@ -14,7 +14,7 @@
 
     <div data-role="content">
 
-    <button id="testAddAudioBtn2" onclick="audioSetPlayerFileName('jquery_jplayer_1', 'G2MTestSound.wav');">Click to add file</button>
+    <button id="testAddAudioBtn2" onclick="audioSetPlayerFileName('jquery_jplayer_1', 'G2MTestSound.wav');sessionStorage.setItem('fileAudioUrl','G2MTestSound.wav');">Click to add file</button>
 
     <!--<div>-->
             <!--<a id="uploadConfirmPopLink" href="#uploadConfirm" class="ui-btn-right" data-theme="d" data-mini= "true"  data-role="button" data-rel="popup">Add this Media</a>-->
@@ -243,6 +243,7 @@
         <textarea id="audioJsDebugArea">
         </textarea>
 
+        <label for="audioFileInfoTxt"></label><input type="text" id="audioFileInfoTxt" >
         <label for="fileInfoTxt"></label><input type="text" id="fileInfoTxt" name="fileInfoTxt" >
         <label for="fileLocTxt"></label><input type="text" id="fileLocTxt" name="fileLocTxt" >
         <label for="fileUploadTxt"></label><input type="text" id="fileUploadTxt" name="fileUploadTxt" >

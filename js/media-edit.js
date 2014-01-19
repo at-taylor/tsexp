@@ -164,7 +164,26 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
         var newPage = 'media-library-grid.html';
 
         sessionStorage.setItem("mediaEditProcessFlag", "false");
-        updateMediaItem(mediaId, $('#editTitleTxt').val(), $('#editDateTxt').val(),$('#editDescrTxt').val(), jsonStringArr, newPage, document.getElementById('editErrorTxt'));
+
+        // sort out date value to pass in update
+        var dateValue = data.mediaDateRaw;
+        console.log("mediaEditPage: Date Raw: " + dateValue);
+        if (dateValue != null)
+            if (dateValue.length == 10)  {
+                $('#mediaEditDateTxt').val(dateValue);
+                $('#mediaEditDateSwitch').val("0").slider("refresh");  //exact date
+                console.log("mediaEditPage: Setting date switch exact.");
+            }
+            else {
+                $('#mediaEditApxDateTxt').val(dateValue);
+                $('#mediaEditDateSwitch').val("1").slider("refresh");  //non-exact date
+                console.log("mediaEditPage: Setting date switch non-exact.");
+            }
+        if ($('#mediaEditDateSwitch').val() == "0")
+            dateValue = $('#mediaEditDateTxt').val();
+        else
+            dateValue = $('#mediaEditApxDateTxt').val();
+        updateMediaItem(mediaId, $('#editTitleTxt').val(), dateValue,$('#editDescrTxt').val(), jsonStringArr, null, newPage, document.getElementById('editErrorTxt'));
 
     });
 

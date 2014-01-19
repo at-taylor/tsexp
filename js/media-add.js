@@ -38,6 +38,7 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
     $('#mediaAddApxDateTxt').val("");
     $('#mediaAddDescrTxt').val("");
     $('#mediaAddImage').attr("src", "");
+    $("#audioFileInfoTxt").val("");
     $("#fileInfoTxt").val("");
     $("#fileLocTxt").val("");
     $('#audioJsDebugArea').val("");
@@ -158,7 +159,8 @@ function fileok(r) {
     else
         dateForSvc = $('#mediaAddApxDateTxt').val();
 
-    updateMediaItem(respObj.id, $('#mediaAddTitleTxt').val(), dateForSvc,$('#mediaAddDescrTxt').val(), jsonStringArr, sessionStorage.getItem("fileAudioUrl"), newPage, document.getElementById('fileUploadTxt'));
+    updateMediaItem(respObj.id, $('#mediaAddTitleTxt').val(), dateForSvc,$('#mediaAddDescrTxt').val(), jsonStringArr, sessionStorage.getItem("fileAudioUrl"), newPage,
+        document.getElementById('fileUploadTxt'), document.getElementById('audioFileInfoTxt'));
 
     removeMediaItemStorage();
 
@@ -224,7 +226,8 @@ function uploadFileFromUrl() {
                         dateForSvc = $('#mediaAddDateTxt').val();
                     else
                         dateForSvc = $('#mediaAddApxDateTxt').val();
-                    updateMediaItem(respObj.id, $('#mediaAddTitleTxt').val(), dateForSvc, $('#mediaAddDescrTxt').val(), jsonStringArr,  sessionStorage.getItem("fileAudioUrl"), newPage, document.getElementById('fileUploadTxt'));
+                    updateMediaItem(respObj.id, $('#mediaAddTitleTxt').val(), dateForSvc, $('#mediaAddDescrTxt').val(), jsonStringArr,  sessionStorage.getItem("fileAudioUrl"), newPage,
+                        document.getElementById('fileUploadTxt'), document.getElementById('audioFileInfoTxt'));
 
 
 
