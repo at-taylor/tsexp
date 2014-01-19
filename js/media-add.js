@@ -129,7 +129,7 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
                 });
         //}
 
-        $.mobile.changePage('media-capture.html');
+        //$.mobile.changePage('media-capture.html');
 
     });
 
