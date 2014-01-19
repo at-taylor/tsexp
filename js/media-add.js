@@ -40,6 +40,7 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
     $('#mediaAddImage').attr("src", "");
     $("#fileInfoTxt").val("");
     $("#fileLocTxt").val("");
+    $('#audioJsDebugArea').val("");
 
     // 2, Reset buttons to initialized state
     $('#uploadBtn').button('enable');
@@ -95,8 +96,6 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
         $('#uploadConfirmPopLink').addClass('ui-disabled');
         $('#uploadCancelPopLink').addClass('ui-disabled');
 
-        removeMediaItemStorage();
-
         // this needs to be removed, testing only
 
         audioLogLine("value of url: " + sessionStorage.getItem("fileAudioUrl"));
@@ -129,6 +128,7 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
                 });
         //}
 
+        removeMediaItemStorage();
         //$.mobile.changePage('media-capture.html');
 
     });
