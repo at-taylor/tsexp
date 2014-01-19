@@ -153,6 +153,7 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCatego
             console.log("json-common: updateMediaItem(): success: value pf changePageTo: " + changePageTo)
             if (mediaAudioUrl == null) {
                 console.log("json-common: updateMediaItem(): no media audio file to upload.");
+                removeMediaItemStorage();
                 if (changePageTo != null)
                     $.mobile.changePage(changePageTo);
                 return;
@@ -161,7 +162,8 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCatego
 
             var options = new FileUploadOptions();
             options.fileKey="file";
-            options.fileName= mediaAudioUrl.substr(mediaAudioUrl.lastIndexOf('/') + 1);
+//            options.fileName= mediaAudioUrl.substr(mediaAudioUrl.lastIndexOf('/') + 1);
+            options.fileName="audio.wav";
             options.mimeType="audio/wav";
 
             var params = {};
@@ -171,10 +173,11 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCatego
 
             var ft = new FileTransfer();
             // error checking needed here
-            ft.upload(mediaAudioUrl, encodeURI(tsServiceURLDomain + "tssvc/resourcesS/media/audio/" + mediaId), function() {
-                $(jQErrorName).val("in audio upload success");
-                if (changePageTo != null)
-                    $.mobile.changePage(changePageTo);
+            ft.upload(mediaAudioUrl, encodeURI(tsServiceURLDomain + "tssvc/resourcesS/media/audio/" + mediaId), function(fileUploadResult) {
+                $(jQErrorName).val($(jQErrorAudio).val() + " success: " + fileUploadResult.response);
+                removeMediaItemStorage();
+//                if (changePageTo != null)
+//                    $.mobile.changePage(changePageTo);
             }, function(error) {
                 $(jQErrorAudio).val($(jQErrorAudio).val() + " code= " + error.code + " src = " + error.source + " target= " + error.target);
 
@@ -204,13 +207,13 @@ function removeMediaItemStorage() {
 
     var theFile = sessionStorage.getItem("fileAudioUrl");
 
-    if (theFile != null)   {
-        //function onDeviceReady() {
-        console.log("json-common: removeMediaItemStorage():  Audio file to remove");
-        removeFile(theFile);
-    }
-    else
-        console.log("json-common: removeMediaItemStorage():  No audio file to remove");
+//    if (theFile != null)   {
+//        //function onDeviceReady() {
+//        console.log("json-common: removeMediaItemStorage():  Audio file to remove");
+//        removeFile(theFile);
+//    }
+//    else
+//        console.log("json-common: removeMediaItemStorage():  No audio file to remove");
 
     sessionStorage.removeItem("fileUrl");
     sessionStorage.removeItem("fileAudioUrl");
@@ -218,6 +221,8 @@ function removeMediaItemStorage() {
     sessionStorage.removeItem("fileType");
     sessionStorage.removeItem("fileDate");
     sessionStorage.removeItem("fileSize");
+
+    navigator.camera.cleanup(function() { console.log("Camera cleanup success.")}, function(message) { console.log("Camera cleanup failed.")});
 }
 
 

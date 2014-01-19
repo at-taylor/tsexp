@@ -162,9 +162,6 @@ function fileok(r) {
     updateMediaItem(respObj.id, $('#mediaAddTitleTxt').val(), dateForSvc,$('#mediaAddDescrTxt').val(), jsonStringArr, sessionStorage.getItem("fileAudioUrl"), newPage,
         document.getElementById('fileUploadTxt'), document.getElementById('audioFileInfoTxt'));
 
-    //removeMediaItemStorage();
-
-    navigator.camera.cleanup(function() { console.log("Camera cleanup success.")}, function(message) { console.log("Camera cleanup failed.")});
 }
 
 
@@ -202,8 +199,6 @@ function uploadFileFromUrl() {
             xhr.onreadystatechange=function() {
                 if (xhr.readyState==4) {
 
-                    removeMediaItemStorage();
-
                     console.log("mediaAddPageAdd: uploadFileFromUrl():file upload response: " + xhr.responseText);
                     var respObj = JSON.parse(xhr.responseText)  ;
                     console.log("mediaAddPageAdd: uploadFileFromUrl():file assigned media id: " + respObj.id);
@@ -228,7 +223,6 @@ function uploadFileFromUrl() {
                         dateForSvc = $('#mediaAddApxDateTxt').val();
                     updateMediaItem(respObj.id, $('#mediaAddTitleTxt').val(), dateForSvc, $('#mediaAddDescrTxt').val(), jsonStringArr,  sessionStorage.getItem("fileAudioUrl"), newPage,
                         document.getElementById('fileUploadTxt'), document.getElementById('audioFileInfoTxt'));
-
 
 
                 }
