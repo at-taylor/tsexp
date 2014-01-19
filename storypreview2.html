@@ -34,8 +34,29 @@
         <div class="ui-block-a" style="width=60%">
             <div id="preview">
                 <hr>
-                <h1><div id="storyPreviewTitleTxt"></div></h1>
-                <h2><div id="storyPreviewDateTxt" ></div></h2>
+                <div>
+                    <div style="float: left; "><h2><div style="vertical-align: text-top;" id="storyPreviewTitleTxt"></div></h2></div>
+                    <div style="float: right; vertical-align: bottom;">
+                        <div class="storyPreviewFlipSwitchContainer" style=".ui-slider-switch { width: 9em };">
+                            <select id="storyPreviewNewPrivacySwitch" disabled data-role="slider">
+                                <option value="0">Public</option>
+                                <option value="1">Private</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                 <div style="clear:both"></div>
+
+
+                <h3><div id="storyPreviewDateTxt" ></div></h3>
+                <!--<div id="storyPreviewDateToggle" class="flipSwitchContainer" style=".ui-slider-switch { width: 12em };">-->
+                    <!--<label for="storyPreviewNewDateSwitch">Exact or approximate date:</label>-->
+                    <!--<select id="storyPreviewNewDateSwitch" disabled data-role="slider">-->
+                        <!--<option value="0">Exact</option>-->
+                        <!--<option value="1">Around</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+
                 <div id="previewCategoryDiv">
                    <a id="categoryBtn" class="categoryBtn" data-theme="none" data-role="none">
                         <!--<i class="fa fa-tag fa-4x" style="color:white;" data-theme="none" data-role="none"></i>Love-->
@@ -43,11 +64,46 @@
                         <!--<i class="fa fa-tag fa-4x" style="color:white;" data-theme="none" data-role="none"></i>Work-->
                     </a>
                 </div>
-                <div class="storyPreviewFlipSwitchContainer" style=".ui-slider-switch { width: 9em };">
-                    <select id="storyPreviewNewPrivacySwitch" disabled data-role="slider">
-                        <option value="0">Public</option>
-                        <option value="1">Private</option>
-                    </select>
+                <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+                <div id="jp_container_1" class="jp-audio">
+                    <div class="jp-type-single">
+                        <div class="jp-gui jp-interface">
+                            <ul class="jp-controls">
+                                <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+                                <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+                                <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+                                <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+                                <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+                                <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+                            </ul>
+                            <div class="jp-progress">
+                                <div class="jp-seek-bar">
+                                    <div class="jp-play-bar"></div>
+                                </div>
+                            </div>
+                            <div class="jp-volume-bar">
+                                <div class="jp-volume-bar-value"></div>
+                            </div>
+                            <div class="jp-time-holder">
+                                <div class="jp-current-time"></div>
+                                <div class="jp-duration"></div>
+
+                                <ul class="jp-toggles">
+                                    <li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
+                                    <li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="jp-title" style="line-height:.75;">
+                            <ul style="font: italic" id="storyPreviewNewAudioTitleList">
+                                <li id="storyPreviewNewAudioTitleListItem"></li>
+                            </ul>
+                        </div>
+                        <div class="jp-no-solution">
+                            <span>Update Required</span>
+                            To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+                        </div>
+                    </div>
                 </div>
                 <hr>
                 <div id="storyPreviewContent" ></div>
@@ -118,6 +174,8 @@
         console.log("storyNewPreviewPage: pagebeforeshow(); Called with Date: " + sessionStorage.getItem("storyDate"));
         console.log("storyNewPreviewPage: pagebeforeshow(); Called with Content: " + sessionStorage.getItem("storyContent"));
         console.log("storyNewPreviewPage: pagebeforeshow(); Called with Categories: " + sessionStorage.getItem("storyCategories"));
+        console.log("storyNewPreviewPage: pagebeforeshow(); Called with Audio Url: " + sessionStorage.getItem("storyAudioUrl"));
+        console.log("storyNewPreviewPage: pagebeforeshow(); Called with Audio Url: " + sessionStorage.getItem("storyDateSlider"));
 
         // 1. Reset buttons to initialized state
         $('#storyNewPublishUploadBtn').button('enable');
@@ -127,23 +185,36 @@
         $('#storyPreviewNewBackBtn').removeClass('ui-disabled');
         $('#storyPreviewNewEditBtn').removeClass('ui-disabled');
 
+        if (sessionStorage.getItem("storyAudioUrl") == null)
+            audioJsCreateJPlayer("jquery_jplayer_1", "no.wav");
+        else
+            audioJsCreateJPlayer("jquery_jplayer_1", sessionStorage.getItem("storyAudioUrl"));
+
         $('#storyPreviewTitleTxt').html("");
         $('#storyPreviewTitleTxt').append(sessionStorage.getItem("storyTitle"));
+        $('#storyPreviewNewAudioTitleListItem').html("");
+        $('#storyPreviewNewAudioTitleListItem').append(sessionStorage.getItem("storyTitle") + " narration");
+        //$('#storyPreviewNewAudioTitleList').listview('refresh');
+
 
         $('#storyPreviewNewPrivacySwitch').val(sessionStorage.getItem("storyPrivacy")).slider("refresh");
+        //$('#storyPreviewNewDateSwitch').val(sessionStorage.getItem("storyDateSlider")).slider("refresh");
 
         $('#storyPreviewDateTxt').html("");
         var storyDate = sessionStorage.getItem("storyDate");
         var storyDateLen = storyDate.length;
 
-        if (storyDateLen == 10) {
-            //var dateFormatted = new Date(storyDate.substring(0,3), storyDate.substring(5,6), storyDate.substring(8,9));
+        if (sessionStorage.getItem("storyDateSlider") == 0) { //exact
+            if (storyDateLen == 10) {
+                //var dateFormatted = new Date(storyDate.substring(0,3), storyDate.substring(5,6), storyDate.substring(8,9));
 //            console.log("mm: " + storyDate.substring(5,7));
 //            console.log("yy: " + storyDate.substring(0,4));
 //            console.log("dd: " +  storyDate.substring(8,10));
-            var dateFormatted = printMonth(storyDate.substring(5,7)) + ' ' + storyDate.substring(8,10) + ', ' + storyDate.substring(0,4);
-            $('#storyPreviewDateTxt').append(dateFormatted);
-        }
+                var dateFormatted = printMonth(storyDate.substring(5,7)) + ' ' + storyDate.substring(8,10) + ', ' + storyDate.substring(0,4);
+                $('#storyPreviewDateTxt').append(dateFormatted);
+            }
+        } else
+            $('#storyPreviewDateTxt').append(storyDate);
 
         $('#storyPreviewContent').html("");
         $('#storyPreviewContent').append(sessionStorage.getItem("storyContent"));
@@ -248,6 +319,9 @@
                 storyAddJson.storyYY = storyDate.substring(0,4);
                 storyAddJson.storyDD = storyDate.substring(8,10);
             }
+            if (storyDate.length = 4) {
+                storyAddJson.storyYY = storyDate;
+            }
 
             console.log("storyPreviewNewPage: publish: json=" + JSON.stringify(storyAddJson));
 
@@ -260,27 +334,45 @@
                 //data: "storyAddJson=" + storyAddJson,
                 cache: false,
                 success: function(data) {
-                    //validate the response here, set variables... whatever needed
-                    //and if credentials are valid, forward to the next page
-                    //alert ("logon valid");
+
                     console.log("storyPreviewNewPage: addStory: success data: " + data);
-                    //console.log("loginPage: login: success: webSession: " + data.webSessionId);
-                    //console.log("loginPage: login: success: msg: " + data.msg);
+                    console.log("storyPreviewNewPage: addStory: success Story Id: " + data.id);
 
-                    //if (data.isAuth = "true")  {
-                        //alert("data is" + data.isAuth) ;
-                    removeNewStoryStorage();
-                    $('#controlgroup .ui-checkbox').remove(); // get rid of media checkbox items (storyEditNewPage)
+                    console.log("storyPreviewNewPage: addStory: checking if Audio narration exists.  Follows session value:");
+                    console.log(sessionStorage.getItem("storyAudioUrl"));
 
-                    $.mobile.changePage('tsnav.html');
-                    //}
-                    //else
-                      //  alert("Please try to login again");
+                    if (sessionStorage.getItem("storyAudioUrl") == null) {
+                        removeNewStoryStorage();
+                        $('#controlgroup .ui-checkbox').remove(); // get rid of media checkbox items (storyEditNewPage)
+                        $.mobile.changePage('tsnav.html');
+                        return;
+                    }
+                    var options = new FileUploadOptions();
+                    options.fileKey="file";
+                    options.fileName= "audio.wav";
+                    options.mimeType="audio/wav";
+
+                    var params = {};
+                    params.value1 = "test";
+                    params.value2 = "param";
+                    options.params = params;
+                    var ft = new FileTransfer();
+                    // error checking needed here
+                    ft.upload(mediaAudioUrl, encodeURI(tsServiceURLDomain + "tssvc/resourcesS/stories/audio/" + data.id), function() {
+                        //$(jQErrorName).val("in audio upload success");
+                        removeNewStoryStorage();
+                        $('#controlgroup .ui-checkbox').remove(); // get rid of media checkbox items (storyEditNewPage)
+                        $.mobile.changePage('tsnav.html');
+                        return;
+                    }, function() {
+                        alert("in audio upload fail");
+                    }, options);
+
                 },
                 error: function() { // server couldn't be reached or other error
                     alert("Story add failed");
                 }
-            })
+            })      ;
 
 //            var fileUrl = sessionStorage.getItem("fileUrl");
 //            var mediaId;

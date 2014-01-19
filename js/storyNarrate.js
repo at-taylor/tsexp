@@ -35,6 +35,8 @@ $(document).on('pagebeforeshow', '#storyNarratePage', function(){
     $('#storyNarrateBackBtn').removeClass('ui-disabled');
     $('#storyNarrateNextBtn').removeClass('ui-disabled');
 
+    $('#narrateAudioJsDebugArea').val("");
+
     audioInitialize("narrateStartRecID", "narrateStopRecID", "narrateMediaAudioPlayCtl", "jquery_jplayer_1", "narrateRecStatusID", "narrateRecPos","storyAudioUrl", "narrateAudioJsDebugArea");
 
     var audioUrl = sessionStorage.getItem("storyAudioUrl");

@@ -209,6 +209,11 @@ function removeNewStoryStorage() {
 
     console.log("json-common: removeNewStoryStorage()");
 
+    if (sessionStorage.getItem("storyAudioUrl") != null) {
+        var theFile = sessionStorage.getItem("storyAudioUrl");
+        theFile.createWriter(function (writer) {writer.truncate(0);}, function(evt) { alert("truncate failed: " + evt.errr.code);});
+    }
+
     sessionStorage.removeItem("storyStarterCategoryId");
     sessionStorage.removeItem("storyStarterId") ;
     sessionStorage.removeItem("storyMediaItems");
@@ -218,4 +223,5 @@ function removeNewStoryStorage() {
     sessionStorage.removeItem("storyCategories");
     sessionStorage.removeItem("storyPrivacy");
     sessionStorage.removeItem("storyAudioUrl");
+    sessionStorage.removeItem("storyDateSlider");
 }

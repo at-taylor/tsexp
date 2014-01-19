@@ -54,8 +54,10 @@ function audioInitialize(_audioStartRecFieldId, _audioStopRecFieldId, _audioPlay
     audioRecordStatusCounterDiv = _audioRecordStatusCounterDiv;
     audioPlayerUrlSessionKeyName = _audioPlayerUrlSessionKeyName;
 //
-    if (audioIsJPlayer == "true")
-        audioJsCreateJPlayer("no.wav");
+    if (audioIsJPlayer == "true")         {
+        audioJsCreateJPlayer(_audioPlayerFieldId, "no.wav");
+        audioSetPlayerFileName('_audioPlayerFieldId', 'no.wav');
+    }
 
     audioJsSetButtonState(audioStateEnum.start);
 
@@ -103,16 +105,16 @@ function playMusic() {
     }
 }
 
-function audioJsCreateJPlayer(fileName) {
+function audioJsCreateJPlayer(audioControlName, fileName) {
 
-    audioLogLine("audioJs: audioCreateJPlayer(): start called with: " + fileName + " JPlayer control field: " + audioJPlayerFieldId);
+    audioLogLine("audioJs: audioCreateJPlayer(): start called with: " + fileName + " JPlayer control field: " + audioControlName);
 
-    $('#'+audioJPlayerFieldId).jPlayer({
+    $('#'+audioControlName).jPlayer({
         ready: function (event) {
             $(this).jPlayer("setMedia", {
 //                        m4a:"http://www.jplayer.org/audio/m4a/TSP-01-Cro_magnon_man.m4a",
 //                        oga:"http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg"
-                wav: "G2MTestSound.wav" //fileName
+                wav: fileName
             });
         },
         swfPath: "js",

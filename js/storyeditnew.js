@@ -266,7 +266,10 @@ $('#storyEditNewDateSwitch').change(function() {
     sessionStorage.setItem("storyTitle", $('#storyEditNewTitleTxt').val()) ;
     console.log("storyEditNewPage: storyEditNewSetItems: cached Story Title: " + sessionStorage.getItem("storyTitle"));
 
-    sessionStorage.setItem("storyDate", $('#storyEditNewDateTxt').val()) ;
+    if ($('#storyEditNewDateSwitch').val() == 0)           //exact
+        sessionStorage.setItem("storyDate", $('#storyEditNewDateTxt').val()) ;
+    else
+        sessionStorage.setItem("storyDate", $('#storyEditApproxDateTxt').val());
     console.log("storyEditNewPage: storyEditNewSetItems: cached Story Date: " + sessionStorage.getItem("storyDate"));
 
     var theStoryContent = $('.jqte-test').val();
@@ -279,6 +282,7 @@ $('#storyEditNewDateSwitch').change(function() {
     console.log("storyEditNewPage: storyEditNewSetItems: cached Story Categories: " + sessionStorage.getItem("storyCategories"));
 
     sessionStorage.setItem("storyPrivacy", $('#storyEditNewPrivacySwitch').val());
+    sessionStorage.setItem("storyDateSlider", $('#storyEditNewDateSwitch').val());
 
     sessionStorage.setItem("storyEditNewProcessFlag", "false");
 
