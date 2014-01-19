@@ -135,7 +135,9 @@ function uploadFileFromFileHandle ()
             }
         }
     };
+
     var imageURI = sessionStorage.getItem("fileUrl");
+    $("#fileUploadTxt").val($("#fileUploadTxt").val() + "File: " + imageURI + " name: " + options.fileName + " type: " + options.fileType);
     ft.upload(imageURI, encodeURI(tsServiceURLDomain + "tssvc/resourcesS/upload"), fileok, filefail, options);
 
 }
@@ -168,7 +170,8 @@ function fileok(r) {
 function filefail(error) {
 
     var theResp = "Error. Code = " + error.code + " source = " + error.source + " target = " + error.target;
-    $("#fileUploadTxt").attr("value",theResp);
+    $("#fileUploadTxt").val($("#fileUploadTxt").val() + " " + theResp);
+
     //alert("An error has occurred: Code = " + error.code);
     //console.log("upload error source " + error.source);
     //console.log("upload error target " + error.target);

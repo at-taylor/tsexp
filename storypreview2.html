@@ -186,9 +186,9 @@
         $('#storyPreviewNewEditBtn').removeClass('ui-disabled');
 
         if (sessionStorage.getItem("storyAudioUrl") == null)
-            audioJsCreateJPlayer("jquery_jplayer_1", "no.wav");
+            audioSetPlayerFileName("jquery_jplayer_1", "no.wav");
         else
-            audioJsCreateJPlayer("jquery_jplayer_1", sessionStorage.getItem("storyAudioUrl"));
+            audioSetPlayerFileName("jquery_jplayer_1", sessionStorage.getItem("storyAudioUrl"));
 
         $('#storyPreviewTitleTxt').html("");
         $('#storyPreviewTitleTxt').append(sessionStorage.getItem("storyTitle"));
