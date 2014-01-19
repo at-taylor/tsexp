@@ -161,13 +161,14 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCatego
 
             var options = new FileUploadOptions();
             options.fileKey="file";
-            options.fileName= "audio.wav";
+            options.fileName= mediaAudioUrl.substr(mediaAudioUrl.lastIndexOf('/') + 1);
             options.mimeType="audio/wav";
 
             var params = {};
             params.value1 = "test";
             params.value2 = "param";
             options.params = params;
+
             var ft = new FileTransfer();
             // error checking needed here
             ft.upload(mediaAudioUrl, encodeURI(tsServiceURLDomain + "tssvc/resourcesS/media/audio/" + mediaId), function() {
