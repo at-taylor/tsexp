@@ -162,7 +162,7 @@ function fileok(r) {
     updateMediaItem(respObj.id, $('#mediaAddTitleTxt').val(), dateForSvc,$('#mediaAddDescrTxt').val(), jsonStringArr, sessionStorage.getItem("fileAudioUrl"), newPage,
         document.getElementById('fileUploadTxt'), document.getElementById('audioFileInfoTxt'));
 
-    removeMediaItemStorage();
+    //removeMediaItemStorage();
 
     navigator.camera.cleanup(function() { console.log("Camera cleanup success.")}, function(message) { console.log("Camera cleanup failed.")});
 }
