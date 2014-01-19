@@ -197,6 +197,16 @@ function removeMediaItemStorage() {
 
     console.log("json-common: removeMediaItemStorage()");
 
+    var theFile = sessionStorage.getItem("fileAudioUrl");
+
+    if (theFile != null)   {
+        //function onDeviceReady() {
+        console.log("json-common: removeMediaItemStorage():  Audio file to remove");
+        removeFile(theFile);
+    }
+    else
+        console.log("json-common: removeMediaItemStorage():  No audio file to remove");
+
     sessionStorage.removeItem("fileUrl");
     sessionStorage.removeItem("fileAudioUrl");
     sessionStorage.removeItem("fileName");
@@ -205,14 +215,44 @@ function removeMediaItemStorage() {
     sessionStorage.removeItem("fileSize");
 }
 
+
+function removeFile(theFile) {
+
+    console.log("json-common: removeFile(): " + theFile);
+
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
+        function (fileSystem) {
+            console.log("Create File System OK");
+            fileSystem.root.getFile(theFile, {create: false, exclusive: false}
+                ,function (fileEntry) {
+                    console.log("Create File Entry OK");
+                    fileEntry.createWriter(
+                        function (writer) {
+                            console.log("Create Writer OK");
+                            //audioLogLine("BEFORE TRUNCATE");
+                            writer.truncate(0);
+                            //audioLogLine("AFTER TRUNCATE");
+                        },
+                        function () {
+                            console.log("Create Writer FAILED");
+                        });
+                }
+                ,function() {
+                    console.log"Create File Entry FAILED");
+                });
+        },
+        function() {
+            console.log("Create File System : FAILED");
+        });
+}
 function removeNewStoryStorage() {
 
     console.log("json-common: removeNewStoryStorage()");
 
-    if (sessionStorage.getItem("storyAudioUrl") != null) {
-        var theFile = sessionStorage.getItem("storyAudioUrl");
-        theFile.createWriter(function (writer) {writer.truncate(0);}, function(evt) { alert("truncate failed: " + evt.errr.code);});
-    }
+//    if (sessionStorage.getItem("storyAudioUrl") != null) {
+//        var theFile = sessionStorage.getItem("storyAudioUrl");
+//        theFile.createWriter(function (writer) {writer.truncate(0);}, function(evt) { alert("truncate failed: " + evt.errr.code);});
+//    }
 
     sessionStorage.removeItem("storyStarterCategoryId");
     sessionStorage.removeItem("storyStarterId") ;

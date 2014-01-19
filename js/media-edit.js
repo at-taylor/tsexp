@@ -13,6 +13,21 @@ $(document).on('pageinit', '#mediaEditPage', function(){
     else
         console.log("mediaEditPage: Categories succesfully retrieved from cache");
 
+    $('#mediaEditDateSwitch').change(function() {
+        var myswitch = $(this);
+        var show     = myswitch[0].selectedIndex == 1 ? true:false;
+
+        if(show) {
+
+            $('#mediaEditApxDateDiv').fadeIn('slow');
+            $('#mediaEditExactDateDiv').fadeOut();
+        } else {
+
+            $('#mediaEditExactDateDiv').fadeIn('slow');
+            $('#mediaEditApxDateDiv').fadeOut();
+        }
+    });
+
     console.log("mediaEditPage: pageinit(): end");
 });
 

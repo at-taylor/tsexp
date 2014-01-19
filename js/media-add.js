@@ -96,40 +96,8 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
         $('#uploadConfirmPopLink').addClass('ui-disabled');
         $('#uploadCancelPopLink').addClass('ui-disabled');
 
-        // this needs to be removed, testing only
-
-        audioLogLine("value of url: " + sessionStorage.getItem("fileAudioUrl"));
-        var theFile = sessionStorage.getItem("fileAudioUrl");
-
-        //function onDeviceReady() {
-            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
-                function (fileSystem) {
-                    audioLogLine("Create File System OK");
-                    fileSystem.root.getFile(theFile, {create: false, exclusive: false}
-                        ,function (fileEntry) {
-                            audioLogLine("Create File Entry OK");
-                            fileEntry.createWriter(
-                                function (writer) {
-                                    audioLogLine("Create Writer OK");
-                                    audioLogLine("BEFORE TRUNCATE");
-                                    writer.truncate(0);
-                                    audioLogLine("AFTER TRUNCATE");
-                                },
-                                function () {
-                                    audioLogLine("Create Writer FAILED");
-                                });
-                        }
-                        ,function() {
-                            audioLogLine("Create File Entry FAILED");
-                        });
-                },
-                function() {
-                    audioLogLine("Create File System : FAILED");
-                });
-        //}
-
         removeMediaItemStorage();
-        //$.mobile.changePage('media-capture.html');
+        $.mobile.changePage('media-capture.html');
 
     });
 
