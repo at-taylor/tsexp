@@ -361,10 +361,10 @@
                 cache: false,
                 success: function(data) {
 
-                    $('#storyPreviewDebugArea').val("Success Story Id: " + data.id);
+                    //$('#storyPreviewDebugArea').val("Success Story Id: " + data.id);
 
                     console.log("storyPreviewNewPage: addStory: success data: " + data);
-                    console.log("storyPreviewNewPage: addStory: success Story Id: " + data.id);
+                    //console.log("storyPreviewNewPage: addStory: success Story Id: " + data.id);
 
                     console.log("storyPreviewNewPage: addStory: checking if Audio narration exists.  Follows session value:");
                     var mediaAudioUrl = sessionStorage.getItem("storyAudioUrl");

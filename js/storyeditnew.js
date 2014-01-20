@@ -26,6 +26,24 @@ $(document).on('pageinit', '#storyEditNewPage', function(){
     }
     else
         console.log("storyEditNewPage: pageinit(): Categories succesfully retrieved from cache");
+
+    $('#storyEditNewDateSwitch').change(function() {
+
+        console.log("storyEditNew: storyEditNewDateSwitch: change()");
+
+        var myswitch = $(this);
+        var show     = myswitch[0].selectedIndex == 1 ? true:false;
+
+        if(show) {
+
+            $('#approxdate').fadeIn('slow');
+            $('#exactdate').fadeOut();
+        } else {
+
+            $('#exactdate').fadeIn('slow');
+            $('#approxdate').fadeOut();
+        }
+    });
 //
 //    $('#storyEditNewCategoryList option').remove();
 //    for (i = 0; i < categoryArray.length; i++) {
@@ -38,6 +56,21 @@ $(document).on('pageinit', '#storyEditNewPage', function(){
 
     console.log("storyEditNewPage: pageinit(): end");
 });
+
+function flipDateSwitch (val) {
+
+    console.log("storyEditNew: flipDateSwitch: " + val);
+
+    if(val == "0") {
+
+        $('#approxdate').fadeIn('slow');
+        $('#exactdate').fadeOut();
+    } else {
+
+        $('#exactdate').fadeIn('slow');
+        $('#approxdate').fadeOut();
+    }
+}
 
 $(document).on('pagebeforeshow', '#storyEditNewPage', function(){
 
@@ -56,33 +89,58 @@ $(document).on('pagebeforeshow', '#storyEditNewPage', function(){
       //1a.  Initialize input fields on the page to remove any cached values
     $('#storyEditNewTitleTxt').val("");
     $('#storyEditNewDateTxt').val("");
+    $('#storyEditApproxDateTxt').val("");
     $('#storyEditNewContentTxt').val("");
-    // clear selected both in categories and media
+    $('#storyEditNewDateSwitch').val("0").slider("refresh");
 
     //1b. Carryover values from session storage as needed
     $('#storyEditNewTitleTxt').val(sessionStorage.getItem("storyTitle"));
-    $('#storyEditNewDateTxt').val(sessionStorage.getItem("storyDate"));
     $('#storyEditNewContentTxt').val(sessionStorage.getItem("storyContent"));
     $('.jqte_editor').html("");  // clear the innards of the rich text editor
     $('.jqte_editor').html(sessionStorage.getItem("storyContent"));
 
-    console.log("try resetting text in the text control on reload of page");
-    //$('.jqte-test').jqte();  // try rebuilding
-
+    // Privacy Setting Switch: reset from session
     if (sessionStorage.getItem("storyPrivacy") != null)
         $('#storyEditNewPrivacySwitch').val(sessionStorage.getItem("storyPrivacy")).slider("refresh");
     else
         $('#storyEditNewPrivacySwitch').val("0").slider("refresh");
 
+    // Date Switch
+
+    var dateSliderSwitchState = sessionStorage.getItem("storyDateSlider");
+    console.log("storyEditNewPage: pagebeforeshow(): Date Switch session State follows:");
+    console.log(dateSliderSwitchState);
+
+    if (dateSliderSwitchState == "1")
+        $('#storyEditNewDateSwitch').val("1").slider("refresh");
+    var dateValue =    sessionStorage.getItem("storyDate");
+    console.log("storyEditNewPage: pagebeforeshow(): Date from session State follows:");
+    console.log(dateValue);
+    if (dateValue != null)
+        if ($('#storyEditNewDateSwitch').val() == 0)
+            $('#storyEditNewDateTxt').val(dateValue);
+        else if ($('#storyEditNewDateSwitch').val() == 1)
+            $('#storyEditApproxDateTxt').val(dateValue);
+        else
+            console.log("storyEditNewPage:pagebeforeshow(): unknown switch value:" + $('#storyEditNewDateSwitch').val());
+    else
+        flipDateSwitch("1");
 
 
-
-
-
-
-
-
-
+//    if (sessionStorage.getItem("storyDateSlider") != null)
+//        $('#storyEditNewDateSwitch').val(sessionStorage.removeItem("storyDateSlider")).slider("refresh");
+//        if (sessionStorage.getItem("storyDateSlider") == "0")
+//            flipDateSwitch("0");
+//        else (sessionStorage.getItem("storyDateSlider") == "1")
+//            flipDateSwitch("1");
+//        if (sessionStorage.getItem("storyDate") != null)
+//            if (sessionStorage.getItem("storyDateSlider") == "0")
+//                $('#storyEditNewDateTxt').val(sessionStorage.getItem("storyDate"));
+//            else
+//                $('#storyEditApproxDateTxt').val(sessionStorage.getItem("storyDate"));
+//        //storyEditApproxDateTxt
+//    else
+//        $('#storyEditNewDateSwitch').val("0").slider("refresh");
 
     // categories
 
@@ -228,26 +286,6 @@ $(document).on('pagebeforeshow', '#storyEditNewPage', function(){
 //            }
 //        });
 //    });
-
-
-$('#storyEditNewDateSwitch').change(function() {
-    var myswitch = $(this);
-    var show     = myswitch[0].selectedIndex == 1 ? true:false;
-
-    if(show) {
-
-        $('#approxdate').fadeIn('slow');
-        $('#exactdate').fadeOut();
-    } else {
-
-        $('#exactdate').fadeIn('slow');
-        $('#approxdate').fadeOut();
-    }
-});
-
-
-
-
 
     function storyEditNewSetItems()
 {

@@ -43,6 +43,11 @@ $(document).on('pagebeforeshow', '#storyNarratePage', function(){
     console.log("storyNarratePage: Checking for existing session Audio Url.  Session value: " + audioUrl);
     if (audioUrl != null)   // reset the player's file
         audioSetPlayerFileName( "jquery_jplayer_1", audioUrl);
+    else {
+        $('#narrateRecStatusID').html("");
+        $('#narrateRecPos').html("");
+    }
+
     
     // Event Handlers
 
