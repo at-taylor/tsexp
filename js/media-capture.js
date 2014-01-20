@@ -389,7 +389,7 @@ var app = {
         $('mediaCaptureDeviceBtn').addClass('ui-disabled');
         console.log("mediaCapturePage: device: clicked()");
         var cameraPopoverOptions = new CameraPopoverOptions(220, 600, 640, 960, Camera.PopoverArrowDirection.ARROW_DOWN) ;
-        navigator.camera.getPicture(onSuccessURItoMediaAdd, onFail, { quality: 10, saveToPhotoAlbum: true,
+        navigator.camera.getPicture(onSuccessURItoMediaAdd, onFail, { quality: 10, saveToPhotoAlbum: false,
             targetWidth: 300, targetHeight: 300,
             destinationType: Camera.DestinationType.FILE_URI,sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
             mediaType: Camera.MediaType.ALLMEDIA, popoverOptions:cameraPopoverOptions
@@ -441,14 +441,19 @@ var app = {
             {
                 $('mediaCaptureVideoBtn').addClass('ui-disabled');
 
-                document.getElementById('testMsg').value = "mediaCapturePage: captureVideo()";
+                $('#testMsg').val("captureVideo(): start ");
+
+               // document.getElementById('testMsg').value = "mediaCapturePage: captureVideo()";
 
                 removeMediaItemStorage();
 
-                document.getElementById('testVideoEmbed').src = mediaFiles[0];
+                $('#testMsg').val( $('#testMsg').val() + "after storage removal ...");
+                //document.getElementById('testVideoEmbed').src = mediaFiles[0];
 
-                var imageURI = mediaFiles[0];
-                document.getElementById('testMsg').value("uri: " + imageURI);
+                var imageURI = mediaFiles[0].fullPath;
+                $('#testMsg').val( $('#testMsg').val() + " full path: " + imageURI);
+
+               // document.getElementById('testMsg').value("uri: " + imageURI);
 
                 sessionStorage.setItem("fileUrl", imageURI);
                 sessionStorage.setItem("fileName", imageURI.substr(imageURI.lastIndexOf('/')+1));
@@ -456,10 +461,9 @@ var app = {
 
                 sessionStorage.setItem("fileDate", "no date");
                 sessionStorage.setItem("fileSize", "no size");
-                console.log(sessionStorage.getItem("fileUrl"));
 
                 //alert("after set item");
-                $.mobile.changePage('media-add.html');
+                //$.mobile.changePage('media-add.html');
 
 //                var options = new FileUploadOptions();
 //                options.fileKey="file";
@@ -476,11 +480,9 @@ var app = {
 //
 //                var ft = new FileTransfer();
                 //ft.upload(mediaFiles[0], encodeURI("http://216.74.49.91:8080/tssvc/resourcesS/upload"), fileok, filefail, options);
-                alert("exiting ...")
             }, function(error)
             {
-                console.log('Video capture failed');
-                alert ('video failed');
+                $('#testMsg').val("captureVideo(): error "+ error.code);
             },
             {
                 limit: 1,
