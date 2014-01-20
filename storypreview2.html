@@ -64,7 +64,7 @@
                         <!--<i class="fa fa-tag fa-4x" style="color:white;" data-theme="none" data-role="none"></i>Work-->
                     </a>
                 </div>
-                <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+                <div id="jquery_jplayer_preview" class="jp-jplayer"></div>
                 <div id="jp_container_1" class="jp-audio">
                     <div class="jp-type-single">
                         <div class="jp-gui jp-interface">
@@ -160,7 +160,7 @@
 
 <link type="text/css" rel="stylesheet" href="demo.css">
 
-
+<script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
 <script type="text/javascript">
 
     console.log("storyNewPreviewPage: init");
@@ -175,7 +175,7 @@
         console.log("storyNewPreviewPage: pagebeforeshow(); Called with Content: " + sessionStorage.getItem("storyContent"));
         console.log("storyNewPreviewPage: pagebeforeshow(); Called with Categories: " + sessionStorage.getItem("storyCategories"));
         console.log("storyNewPreviewPage: pagebeforeshow(); Called with Audio Url: " + sessionStorage.getItem("storyAudioUrl"));
-        console.log("storyNewPreviewPage: pagebeforeshow(); Called with Audio Url: " + sessionStorage.getItem("storyDateSlider"));
+        console.log("storyNewPreviewPage: pagebeforeshow(); Called with Date Slider Value: " + sessionStorage.getItem("storyDateSlider"));
 
         // 1. Reset buttons to initialized state
         $('#storyNewPublishUploadBtn').button('enable');
@@ -190,15 +190,18 @@
             audioFileName = "no.wav";
         else
             audioFileName = sessionStorage.getItem("storyAudioUrl");
-        console.log("storyNewPreviewPage: pagebeforeshor(): audioFileName: " + audioFileName);
+        console.log("storyNewPreviewPage: pagebeforeshow(): audioFileName: " + audioFileName);
 
-        $('#jquery_jplayer_1').jPlayer({
+        console.log("storyNewPreviewPage: destroy and recreate JPlayer");
+        $('#jquery_jplayer_preview').jPlayer( "destroy" );
+        $('#jquery_jplayer_preview').jPlayer({
             ready: function (event) {
+                console.log("storyNewPreview: in JPlayer ready function")     ;
                 $(this).jPlayer("setMedia", {
 //                        m4a:"http://www.jplayer.org/audio/m4a/TSP-01-Cro_magnon_man.m4a",
 //                        oga:"http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg"
                     wav: audioFileName
-                });
+                }).jPlayer("play");
             },
             swfPath: "js",
             //supplied: "m4a, oga",
@@ -298,6 +301,9 @@
         $(document).off('click', '#storyNewPublishUploadBtn').on('click', '#storyNewPublishUploadBtn',function(event) {
 
             console.log("storyPreviewPage: storyNewPublishUploadBtn.click()");
+
+            console.log("storyPreviewPage: storyPreviewNewPublishUploadBtn: turning off audio play.")  ;
+            $('#jquery_jplayer_preview').jPlayer("stop");
 
             $('#storyNewPublishUploadBtn').button('disable');
             $('#storyNewCancelBtn').button('disable');
@@ -409,6 +415,8 @@
         $(document).off('click', '#storyNewCancelBtn').on('click', '#storyNewCancelBtn',function(event) {
 
             console.log("storyPreviewPage: storyNewCancelBtn.click()");
+            console.log("storyPreviewPage: storyNewCancelBtn: turning off audio play.")  ;
+            $('#jquery_jplayer_preview').jPlayer("stop");
 
             $('#storyNewCancelBtn').button('disable');
             $('#storyNewPublishUploadBtn').button('disable');
@@ -425,6 +433,8 @@
         $(document).off('click', '#storyPreviewNewBackBtn').on('click', '#storyPreviewNewBackBtn',function(event) {
 
             console.log("storyPreviewPage: storyPreviewNewBackBtn.click()");
+            console.log("storyPreviewPage: storyPreviewNewBackBtn: turning off audio play.")  ;
+            $('#jquery_jplayer_preview').jPlayer("stop");
 
             $.mobile.changePage('storyNarrate.html');
 
@@ -433,6 +443,8 @@
         $(document).off('click', '#storyPreviewNewEditBtn').on('click', '#storyPreviewNewEditBtn',function(event) {
 
             console.log("storyPreviewPage: storyPreviewNewEditBtn.click()");
+            console.log("storyPreviewPage: storyPreviewNewEditBtn: turning off audio play.")  ;
+            $('#jquery_jplayer_preview').jPlayer("stop");
 
             $.mobile.changePage('storyNarrate.html');
 
