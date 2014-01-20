@@ -463,7 +463,7 @@ var app = {
                 sessionStorage.setItem("fileSize", "no size");
 
                 //alert("after set item");
-                //$.mobile.changePage('media-add.html');
+                $.mobile.changePage('media-add.html');
 
 //                var options = new FileUploadOptions();
 //                options.fileKey="file";

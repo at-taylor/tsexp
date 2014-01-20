@@ -37,7 +37,8 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
     $('#mediaAddDateTxt').val("");
     $('#mediaAddApxDateTxt').val("");
     $('#mediaAddDescrTxt').val("");
-    $('#mediaAddImage').attr("src", "");
+    //$('#mediaAddImage').attr("src", "");
+    $('#mediaAddMediaContainer').html("");
     $("#audioFileInfoTxt").val("");
     $("#fileInfoTxt").val("");
     $("#fileLocTxt").val("");
@@ -58,7 +59,18 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
 
 
     // 3b. Load content from session state (if applicable)
-    $("#mediaAddImage").attr("src",sessionStorage.getItem("fileUrl"));
+    var videoOrImageTag;
+    var theFileType = sessionStorage.getItem("fileType");
+    var theFileUrl = sessionStorage.getItem("fileUrl");
+    if (theFileType == "image/jpeg")
+        videoOrImageTag =  '<img width = 320 src= '+ theFileUrl +'>'
+    else
+        videoOrImageTag = "<video width=320 poster='img/navbut/blank-video.jpg' controls><source  type='image/mov' src=" + theFileUrl + "></video>"
+     //image/mov
+    console.log("mediaAddPageAdd: video/image tag: " + videoOrImageTag);
+
+    //$("#mediaAddImage").attr("src",sessionStorage.getItem("fileUrl"));
+    $('#mediaAddMediaContainer').append(videoOrImageTag);
     var theFileInfo = "Name: " + sessionStorage.getItem("fileName") + " Type: " + sessionStorage.getItem("fileType") +
         " Size: " + sessionStorage.getItem("fileSize") + " Date: " + sessionStorage.getItem("fileDate");
     $("#fileInfoTxt").val(theFileInfo);
