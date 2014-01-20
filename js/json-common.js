@@ -222,7 +222,7 @@ function removeMediaItemStorage() {
     sessionStorage.removeItem("fileDate");
     sessionStorage.removeItem("fileSize");
 
-    navigator.camera.cleanup(function() { console.log("Camera cleanup success.")}, function(message) { console.log("Camera cleanup failed.")});
+    //navigator.camera.cleanup(function() { console.log("Camera cleanup success.")}, function(message) { console.log("Camera cleanup failed.")});
 }
 
 
