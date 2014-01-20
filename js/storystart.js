@@ -16,7 +16,7 @@ $(document).on('pageinit', '#storyStartPage', function(){
 
     if (starterCatIdArr  == null) {
         console.log("storyStartPage: Starter Category cache entries are null.  Need to rebuild cache.");
-        appCacheCategoryList("appCacheStarterCat");
+        //appCacheCategoryList("appCacheStarterCat");
     }
     else
         console.log("storyStartPage: pageinit(): Starter Categories succesfully retrieved from cache");

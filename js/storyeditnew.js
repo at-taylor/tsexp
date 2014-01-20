@@ -14,8 +14,8 @@ $(document).on('pageinit', '#storyEditNewPage', function(){
     console.log("storyEditNewPage: pageinit(): begin");
 
     // initialize the rich text control
-    console.log("storyEditNewPage: pageinit(): Initializing rich text control (jqte)");
-    $('.jqte-test').jqte();
+    console.log("storyEditNewPage: pageinit(): Initializing rich text control by id:");
+    $('#storyEditNewContentTxt').jqte();
 
     console.log("storyEditNewPage: pageinit(): Attempting to retrieve categories from cache");
     var categoryArray = JSON.parse(sessionStorage.getItem("appCacheCatIds"));
