@@ -38,10 +38,65 @@
             $.mobile.page.prototype.options.domCache = true;
             localStorage.clear();
             sessionStorage.clear();
+
             $('#login_submit').addClass('ui-disabled');
+
+            // starter categories
+            var prefix = "appCache";
+            var starterCatPrefix = prefix + "StarterCat";
+            var starterCategoryStorageIdName = starterCatPrefix + "Ids";
+            sessionStorage.removeItem(starterCategoryStorageIdName);
+            var startersCatIdArr = new Array();
+            $.ajax({
+                type: "GET",
+                url: tsServiceURLDomain + "tssvc/resourcesS/stories/starters/categories/",
+                //data:'mediaTitle='+ mediaTitle +'&mediaDate='+ mediaDate +'&mediaDescr='+ mediaDescr +'&catList='+ mediaCategories,
+                cache: false,
+                async: false,
+                success: function(data) {
+                    var categories = data.storyStarterCategoryModelList;
+                    $.each(categories, function(index, category) {
+
+                        startersCatIdArr.push(category.starterCategoryId);
+                        console.log("json-common: appCacheStoryStarterCategoryList: item: " + category.starterCategoryId + " descr: " + category.starterCategoryTitle);
+                        sessionStorage.removeItem(starterCatPrefix + category.starterCategoryId );
+                        sessionStorage.setItem(starterCatPrefix + category.starterCategoryId , category.starterCategoryTitle);
+                    });
+                    sessionStorage.setItem(starterCategoryStorageIdName, JSON.stringify(startersCatIdArr));
+                    console.log("json-common: appCacheStoryStarterCategoryList(): story starter category id: " + sessionStorage.getItem(starterCategoryStorageIdName));
+                }
+            });
+
+            var catPrefix = prefix + "Cat";
+            var categoryStorageIdName = catPrefix+ "Ids";
+            sessionStorage.removeItem(categoryStorageIdName);
+            $.ajax({
+                type: "GET",
+                url: tsServiceURLDomain + "tssvc/resourcesS/categories",
+                //data:'mediaTitle='+ mediaTitle +'&mediaDate='+ mediaDate +'&mediaDescr='+ mediaDescr +'&catList='+ mediaCategories,
+                cache: false,
+                async: false,
+                success: function(data) {
+                    var categoryIdArray = new Array();
+                    cat = data.categoryModelList;
+
+                    $.each(cat, function(index, item) {
+                        //$("option[value='" + item.categoryId + "'']").remove ();     // remove option if already exists
+                        console.log("json-common: appCacheCategoryList: item: " + item.categoryId + " descr: " + item.categoryDescr);
+                        sessionStorage.removeItem(catPrefix + item.categoryId);
+                        sessionStorage.setItem(catPrefix + item.categoryId, item.categoryDescr);
+                        categoryIdArray.push(item.categoryId);
+
+                    });
+                    sessionStorage.setItem(categoryStorageIdName, JSON.stringify(categoryIdArray));
+                    console.log("json-common: appCacheCategoryList(): category array: " + sessionStorage.getItem(categoryStorageIdName));
+               }
+            });
+
+            $('#login_submit').removeClass('ui-disabled');
             //appCacheCategoryList("appCacheCat");
             //appCacheStoryStarterCategoryList("appCacheStarterCat");
-            appCacheConsol("appCache");
+            //appCacheConsol("appCache");
             console.log("   end mobileinit");
         } );
     </script>
@@ -77,7 +132,7 @@
             <p style="text-align:center;"><label for="remember" style="color: #2C2727;" >Remember me</label>
             <input type="checkbox" data-inline="true" data-theme="none" id="remember" name="remember" value="yes"> </p>
 
-            <p> <a data-role="button" id="login_submit" data-inline="true" data-theme="none" ><img src="img/navbut/signin_btn_192x49.png"></a></p>
+            <p> <a data-role="button" id="login_submit"  data-inline="true" data-theme="none" ><img src="img/navbut/signin_btn_192x49.png"></a></p>
 
             <p><a href="#">Forgot password?</a> or <a href="#">create an account?</a> </p>
 
@@ -93,7 +148,7 @@
            // $('#loginPage').bind('pageinit', function(event) {
 
                 console.log("loginPage: pagebeforeshow: start");
-                $('#login_submit').removeClass('ui-disabled');
+                //$('#login_submit').removeClass('ui-disabled');
 
                 $(document).off('click', '#login_submit').on('click', '#login_submit',function(event) {
 

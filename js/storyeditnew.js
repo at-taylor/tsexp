@@ -14,8 +14,7 @@ $(document).on('pageinit', '#storyEditNewPage', function(){
     console.log("storyEditNewPage: pageinit(): begin");
 
     // initialize the rich text control
-    console.log("storyEditNewPage: pageinit(): Initializing rich text control by id:");
-    $('#storyEditNewContentTxt').jqte();
+    console.log("storyEditNewPage: pageinit(): jqte init removed.");
 
     console.log("storyEditNewPage: pageinit(): Attempting to retrieve categories from cache");
     var categoryArray = JSON.parse(sessionStorage.getItem("appCacheCatIds"));
@@ -95,9 +94,38 @@ $(document).on('pagebeforeshow', '#storyEditNewPage', function(){
 
     //1b. Carryover values from session storage as needed
     $('#storyEditNewTitleTxt').val(sessionStorage.getItem("storyTitle"));
-    $('#storyEditNewContentTxt').val(sessionStorage.getItem("storyContent"));
-    $('.jqte_editor').html("");  // clear the innards of the rich text editor
-    $('.jqte_editor').html(sessionStorage.getItem("storyContent"));
+    if (sessionStorage.getItem("storyContent") != null)
+        $('#storyEditNewContentTxt').val(sessionStorage.getItem("storyContent"));
+
+    // Rich Text Control (jqte)
+//    console.log("Full re-initialization of JQTE 2");
+//    var jqteCtr = Number(0);
+//    if (sessionStorage.getItem("jqteCtr") == null)
+//        sessionStorage.setItem("jqteCtr", "0");
+//    else {
+//        jqteCtr = Number(sessionStorage.getItem("jqteCtr")) + Number(1);
+//        sessionStorage.setItem("jqteCtr", jqteCtr);
+//    }
+//    if (sessionStorage.getItem("storyContent") == null) {
+//        console.log("INITIALIZE");
+//        $('.jqte-test').jqte();
+//    } else  {
+//        $('.jqte').remove();
+//        //$('.jqte-test').jqte();
+//        $('#jqteContainer').html("");
+//        var appendString = "<textarea id='storyEditNewContentTxt" + jqteCtr + "' class='jqte-test" + jqteCtr + "'>" +   sessionStorage.getItem("storyContent") + "</textarea>";
+//        $('#jqteContainer').html(appendString);
+//        $('.jqte-test' + jqteCtr).jqte();
+//        console.log("REENRTY - Full");
+    //}
+
+    //$('.jqte_editor').html("");  // clear the innards of the rich text editor
+    //$('.jqte_editor').html(sessionStorage.getItem("storyContent"));
+//    if (sessionStorage.getItem("storyContent") == null)
+//        $('#storyEditNewContentTxt').jqte({placeholder: "Please write your story here"});
+//    else
+//        $('#storyEditNewContentTxt').jqteVal(sessionStorage.getItem("storyContent"));
+    //$('#storyEditNewContentTxt').jqteVal("New article in pageshow");
 
     // Privacy Setting Switch: reset from session
     if (sessionStorage.getItem("storyPrivacy") != null)

@@ -208,17 +208,14 @@
 
                 console.log("MainNavPage: logout_submit: click()");
 
-                $('#logout_submit').addClass('ui-disabled');
+                //$('#logout_submit').addClass('ui-disabled');
 
                 $.ajax({
                     type: "GET",
                     url: tsServiceURLDomain + "tssvc/resourcesS/logout",
-                    //data:'user='+ $('#user').val() +'&pass='+ $('#pass').val(),
                     cache: false,
                     success: function(data) {
                         console.log("ManNavPage: logout: success: data=" + data);
-                        //
-                        // alert("data is" + data) ;
                         $.mobile.changePage("index.html");
                     },
                     done: function (data) {
@@ -226,10 +223,10 @@
                     },
                     error: function(xhr, status, error) {
                         console.log("ManNavPage: logout: error:");
-                        alert("in error");
-                        alert("status: " + status) ;
-                        alert("error: " + error);
-                        alert(xhr.responseText);
+//                        alert("in error");
+//                        alert("status: " + status) ;
+//                        alert("error: " + error);
+//                        alert(xhr.responseText);
                         $.mobile.changePage("index.html");
                     }
                 })
