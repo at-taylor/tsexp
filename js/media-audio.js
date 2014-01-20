@@ -276,22 +276,23 @@ function audioJsSetButtonState(targetState)
 {
 
     audioLogLine("audioRecordApp: setButtonState(): start: state requested: " + targetState);
+    audioLogLine("audioRecordApp: setButtonState(): not disabling stop button");
 
     if (targetState == audioStateEnum.start) // only "record" is enabled
     {
         $('#'+audioStartRecFieldId).removeClass('ui-disabled') ;
-        $('#'+audioStopRecFieldId).addClass('ui-disabled') ;
+       // $('#'+audioStopRecFieldId).addClass('ui-disabled') ;
 
     }
     else if (targetState == audioStateEnum.recording) // only "stoprec" is enabled
     {
         $('#'+audioStartRecFieldId).addClass('ui-disabled') ;
-        $('#'+audioStopRecFieldId).removeClass('ui-disabled') ;
+       // $('#'+audioStopRecFieldId).removeClass('ui-disabled') ;
     }
     else if (targetState == this.audioStateEnum.finishRec)      // this could be used to enable a remove or restart button
     {
         $('#'+audioStartRecFieldId).removeClass('ui-disabled') ;
-        $('#'+audioStopRecFieldId).addClass('ui-disabled') ;
+       // $('#'+audioStopRecFieldId).addClass('ui-disabled') ;
     }
 
     audioLogLine("audioRecordApp: setButtonState(): end: state requested: " + targetState);
