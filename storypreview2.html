@@ -128,6 +128,7 @@
         </div>
 
     </section>
+    <textarea id="storyPreviewDebugArea" ></textarea>
 
     <div data-role="popup" id="storyNewPublishConfirm">
         <h2>Would you like to upload this story to your Treasured Stories account?</h2>
@@ -360,37 +361,50 @@
                 cache: false,
                 success: function(data) {
 
+                    $('#storyPreviewDebugArea').val("Success Story Id: " + data.id);
+
                     console.log("storyPreviewNewPage: addStory: success data: " + data);
                     console.log("storyPreviewNewPage: addStory: success Story Id: " + data.id);
 
                     console.log("storyPreviewNewPage: addStory: checking if Audio narration exists.  Follows session value:");
-                    console.log(sessionStorage.getItem("storyAudioUrl"));
+                    var mediaAudioUrl = sessionStorage.getItem("storyAudioUrl");
+                    $('#storyPreviewDebugArea').val($('#storyPreviewDebugArea').val() + " url: " + mediaAudioUrl)   ;
+                    console.log(mediaAudioUrl);
 
-                    if (sessionStorage.getItem("storyAudioUrl") == null) {
+                    if (mediaAudioUrl == null) {
+                        $('#storyPreviewDebugArea').val($('#storyPreviewDebugArea').val() + " in url null " );
                         removeNewStoryStorage();
                         $('#controlgroup .ui-checkbox').remove(); // get rid of media checkbox items (storyEditNewPage)
                         $.mobile.changePage('tsnav.html');
                         return;
                     }
+                    $('#storyPreviewDebugArea').val($('#storyPreviewDebugArea').val() + " url not null ... " );
                     var options = new FileUploadOptions();
                     options.fileKey="file";
                     options.fileName= "audio.wav";
                     options.mimeType="audio/wav";
 
+                    $('#storyPreviewDebugArea').val($('#storyPreviewDebugArea').val() + " after options set ... " );
+
                     var params = {};
                     params.value1 = "test";
                     params.value2 = "param";
                     options.params = params;
+
                     var ft = new FileTransfer();
+                    $('#storyPreviewDebugArea').val($('#storyPreviewDebugArea').val() + " after ft created ... " );
+                    $('#storyPreviewDebugArea').val($('#storyPreviewDebugArea').val() + " url " + tsServiceURLDomain + "tssvc/resourcesS/stories/audio/" + data.id);
                     // error checking needed here
                     ft.upload(mediaAudioUrl, encodeURI(tsServiceURLDomain + "tssvc/resourcesS/stories/audio/" + data.id), function() {
                         //$(jQErrorName).val("in audio upload success");
+                        $('#storyPreviewDebugArea').val($('#storyPreviewDebugArea').val() + " in call success ... " );
                         removeNewStoryStorage();
                         $('#controlgroup .ui-checkbox').remove(); // get rid of media checkbox items (storyEditNewPage)
                         $.mobile.changePage('tsnav.html');
                         return;
-                    }, function() {
+                    }, function(error) {
                         alert("in audio upload fail");
+                        $('#storyPreviewDebugArea').val($('#storyPreviewDebugArea').val() + " code= " + error.code + " src = " + error.source + " target= " + error.target);
                     }, options);
 
                 },
