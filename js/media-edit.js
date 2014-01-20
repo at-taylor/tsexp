@@ -74,9 +74,6 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
     $('#editImage').attr("src", "");
     $('#editErrorTxt').val("");
 
-    //console.log("activePage: " + $.mobile.activePage.data('url')   );
-    //console.log("urlHistory: " + $.mobile.urlHistory.getActive().url)   ;
-
     //4.  Get the content of what is being edited
     var categoryResultArray = new Array();
     $.getJSON(tsServiceURLDomain + "tssvc/resourcesS/media" + '/' + mediaId, function(data) {
@@ -114,6 +111,27 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
         $('#editDescrTxt').val(data.descr);
         $('#editImage').attr("src", data.url);
         //data.recordingUrl;
+        console.log("mediaEditPage: destroy and recreate JPlayer");
+        var audioFileName = data.recordingUrl;
+        if (audioFileName == null)
+            audioFileName = "no.wav";
+        $('#jquery_jplayer_mediaEdit').jPlayer( "destroy" );
+        $('#jquery_jplayer_mediaEdit').jPlayer({
+            ready: function (event) {
+                console.log("mediaEditPage: in JPlayer ready function")     ;
+                $(this).jPlayer("setMedia", {
+//                        m4a:"http://www.jplayer.org/audio/m4a/TSP-01-Cro_magnon_man.m4a",
+//                        oga:"http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg"
+                    wav: audioFileName
+                }).jPlayer("play");
+            },
+            swfPath: "js",
+            //supplied: "m4a, oga",
+            supplied: "wav",
+            wmode: "window",
+            smoothPlayBar: true,
+            keyEnabled: true
+        });
 
         console.log("mediaEditPage: pagebeforeshow(): Pull Categories");
         var categoryArray = JSON.parse(sessionStorage.getItem("appCacheCatIds"));
