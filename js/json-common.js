@@ -190,7 +190,7 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCatego
             console.log("json-common: updateMediaItem(): error: status=" + status);
             console.log("json-common: updateMediaItem(): error: error=" + error);
             $(jQErrorName).val(xhr.responseText);
-            alert("There was a problem adding this media.  Please check your connection and try again.");
+            //alert("There was a problem adding this media.  Please check your connection and try again.");
 //            alert("status: " + status) ;
 //            alert("error: " + error);
 //            alert(xhr.responseText);

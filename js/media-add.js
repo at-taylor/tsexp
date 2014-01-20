@@ -65,8 +65,9 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
     if (theFileType == "image/jpeg")
         videoOrImageTag =  '<img width = 320 src= '+ theFileUrl +'>'
     else
-        videoOrImageTag = "<video width=320 poster='img/navbut/blank-video.jpg' controls><source  type='image/mov' src=" + theFileUrl + "></video>"
-     //image/mov
+        videoOrImageTag = "<video width=320 poster='img/navbut/blank-video.jpg' controls autoplay src='" + theFileUrl + "'></video>"
+
+    //image/mov
     console.log("mediaAddPageAdd: video/image tag: " + videoOrImageTag);
 
     //$("#mediaAddImage").attr("src",sessionStorage.getItem("fileUrl"));
