@@ -174,7 +174,7 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCatego
             var ft = new FileTransfer();
             // error checking needed here
             ft.upload(mediaAudioUrl, encodeURI(tsServiceURLDomain + "tssvc/resourcesS/media/audio/" + mediaId), function(fileUploadResult) {
-                $(jQErrorName).val($(jQErrorAudio).val() + " success: " + fileUploadResult.response);
+                $(jQErrorAudio).val($(jQErrorAudio).val() + " success: " + fileUploadResult.response);
                 removeMediaItemStorage();
 //                if (changePageTo != null)
 //                    $.mobile.changePage(changePageTo);
