@@ -176,8 +176,8 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCatego
             ft.upload(mediaAudioUrl, encodeURI(tsServiceURLDomain + "tssvc/resourcesS/media/audio/" + mediaId), function(fileUploadResult) {
                 $(jQErrorAudio).val($(jQErrorAudio).val() + " success: " + fileUploadResult.response);
                 removeMediaItemStorage();
-//                if (changePageTo != null)
-//                    $.mobile.changePage(changePageTo);
+                if (changePageTo != null)
+                    $.mobile.changePage(changePageTo);
             }, function(error) {
                 $(jQErrorAudio).val($(jQErrorAudio).val() + " code= " + error.code + " src = " + error.source + " target= " + error.target);
 
@@ -190,11 +190,11 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCatego
             console.log("json-common: updateMediaItem(): error: status=" + status);
             console.log("json-common: updateMediaItem(): error: error=" + error);
             $(jQErrorName).val(xhr.responseText);
-//            alert("in error");
+            alert("There was a problem adding this media.  Please check your connection and try again.");
 //            alert("status: " + status) ;
 //            alert("error: " + error);
 //            alert(xhr.responseText);
-            //$.mobile.changePage("index.html");
+            $.mobile.changePage("index.html");
         }
     })   ;
 
