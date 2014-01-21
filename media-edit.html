@@ -49,11 +49,11 @@
                 <label for="mediaEditDateTxt">Date:</label><input type="date" data-role="datebox" id="mediaEditDateTxt" >
             </div>
             <div id="mediaEditApxDateDiv" class="hide">
-                <label for="mediaEditApxDateTxt">Year:</label><input type="number" min=1600 max=2014 id="mediaEditApxDateTxt" placeholder="Enter year:">
+                <label for="mediaEditApxDateTxt">Year:</label><input type="number" min=1600 max=2014 id="mediaEditApxDateTxt" placeholder="Enter year : ex: 1969">
             </div>
 
             <div data-role="fieldcontainer">
-                <label for="editDescrTxt">Description:</label><textarea rows="4" cols="50" id="editDescrTxt" length=200 placeholder="Enter a descrition for this media"></textarea>
+                <label for="editDescrTxt">Description:</label><textarea rows="4" cols="50" id="editDescrTxt" length=200 placeholder="Enter a description for this media"></textarea>
             </div>
             <div data-role="fieldcontainer">
                 <div id="editCategoryDiv">
@@ -139,6 +139,12 @@
 
     </div>
 
+    <div data-role="popup" id="mediaEditNewDateDialog" title="Year">
+            <p>Please enter a full date between 1800 and the present.</p>
+    </div>
+    <div data-role="popup" id="mediaEditNewYearDialog" title="Year">
+            <p>Please enter a year between 1800 and the present.</p>
+    </div>
 
     <div data-role="popup" id="editConfirm">
         <h2>This will change the media data</h2>

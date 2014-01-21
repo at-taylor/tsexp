@@ -26,6 +26,17 @@ $(document).on('pageinit', '#storyEditNewPage', function(){
     else
         console.log("storyEditNewPage: pageinit(): Categories succesfully retrieved from cache");
 
+    $('#storyEditNewDateTxt').blur(function() {
+
+        fullDateEdit("storyEditNewDateTxt", "storyEditNewDateDialog");
+
+    } );
+
+    $('#storyEditApproxDateTxt').blur(function() {
+        yearDateEdit("storyEditApproxDateTxt","storyEditNewYearDialog" );
+
+    } );
+
     $('#storyEditNewDateSwitch').change(function() {
 
         console.log("storyEditNew: storyEditNewDateSwitch: change()");

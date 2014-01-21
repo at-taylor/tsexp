@@ -135,6 +135,73 @@ function setCategoryList(element) {
 
 }
 
+function yearDateEdit (dateCtl, dialogCtl) {
+
+    var jDateCtl = '#' + dateCtl;
+    var jDialogCtl =  '#' + dialogCtl;
+    
+    var xdateDate = new XDate();
+
+    // see if not a number
+    if (isNaN($(jDateCtl).val())) {
+        $(jDateCtl).val("");
+        $(jDialogCtl).popup( "open" )     ;
+        return;
+    }
+    if ($(jDateCtl).val().length != 4) {
+        $(jDateCtl).val("");
+        $(jDialogCtl).popup( "open" )  ;
+        return;
+    }
+    var dateNumber = Number($(jDateCtl).val());
+    if ((dateNumber < 1800) || (dateNumber > xdateDate.getFullYear()))   {
+        $(jDateCtl).val("");
+        $(jDialogCtl).popup( "open" )   ;
+        return;
+    }
+}
+
+
+function fullDateEdit(dateCtl, dialogCtl) {
+
+    var jDateCtl = '#' + dateCtl;
+    var jDialogCtl =  '#' + dialogCtl;
+    
+    var xdateDate = new XDate($(jDateCtl).val());
+    var xdateToday = new XDate();
+
+    if (!xdateDate.valid()) {
+        $(jDateCtl).val("");
+        $(jDialogCtl).popup( "open" )     ;
+        return;
+    }
+
+    if ((xdateDate.getFullYear < 1800) || (xdateDate.getFullYear() > xdateToday.getFullYear())) {
+        $(jDateCtl).val("");
+        $(jDialogCtl).popup( "open" )     ;
+        return;
+    }
+
+    if (xdateDate.getFullYear() != xdateToday.getFullYear())
+        return;
+
+    if (xdateDate.getMonth() > xdateToday.getMonth())   {
+        $(jDateCtl).val("");
+        $(jDialogCtl).popup( "open" )  ;
+        return;
+    }
+
+    if (xdateDate.getMonth() != xdateToday.getMonth())
+        return;
+
+
+    if (xdateDate.getDay() > xdateToday.getDay())   {
+        $(jDateCtl).val("");
+        $(jDialogCtl).popup( "open" )  ;
+        return;
+    }
+}
+
 function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCategories, mediaAudioUrl, changePageTo, errorElement, audioErrorElement) {
 
     console.log("json-common: updateMediaItem() for media item id: " + mediaId);
