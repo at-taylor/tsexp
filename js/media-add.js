@@ -25,7 +25,7 @@ $(document).on('pagebeforeshow', '#mediaAddPage', function()
 //    console.log( $.mobile.urlHistory.stack );
     console.log("mediaAddPage: pagebeforeshow()");
 
-    audioInitialize("audioStartRecID", "audioStopRecID", "audioMediaAudioPlayCtl", "jquery_jplayer_1", "audioRecStatusID", "audioRecPos","fileAudioUrl", "audioJsDebugArea");
+    audioInitialize("audioStartRecID", "audioStopRecID", "audioMediaAudioPlayCtl", "jquery_jplayer_mediaAdd", "audioRecStatusID", "audioRecPos","fileAudioUrl", "audioJsDebugArea");
 
 //    function audioInitialize(_audioStartRecFieldId, _audioStopRecFieldId, _audioPlayerFieldId, _audioJPlayerFieldId,
 //                             _audioRecordStatusDiv, _audioRecordStatusCounterDiv, _audioPlayerUrlSessionKeyName, _audioDebugFieldId

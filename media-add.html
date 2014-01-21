@@ -47,13 +47,13 @@
                     <label for="mediaAddDateTxt">Date:</label><input type="date" data-role="datebox" id="mediaAddDateTxt" >
                 </div>
                 <div id="mediaAddApxDateDiv" class="hide">
-                    <label for="mediaAddApxDateTxt">Year:</label><input type="number" min=1600 max=2014 id="mediaAddApxDateTxt" placeholder="Enter year:">
+                    <label for="mediaAddApxDateTxt">Year:</label><input type="number" min=1600 max=2014 id="mediaAddApxDateTxt" placeholder="Enter year: ex: 1969">
                 </div>
                 <!--<div data-role="fieldcontainer">-->
                     <!--<label for="dateTxt">Date Taken:</label><input type="date" data-role="datebox" id="dateTxt" >-->
                 <!--</div>-->
                 <div data-role="fieldcontainer">
-                    <label for="mediaAddDescrTxt">Description:</label><textarea rows="4" cols="50" id="mediaAddDescrTxt"  length=200 placeholder="Enter a descrition for this media"></textarea>
+                    <label for="mediaAddDescrTxt">Description:</label><textarea rows="4" cols="50" id="mediaAddDescrTxt"  length=200 placeholder="Enter a description for this media"></textarea>
                 </div>
                 <div data-role="fieldcontainer">
                     <div id="categoryDiv">
@@ -93,6 +93,7 @@
                         </tr>
                         <tr>
                             <td>
+                                <h3>Tell about this Media</h3>
                                 <a id="audioStartRecID" onclick="audioJsStartRecording()">
                                     <img src="img/navbut/record_btn_175.png"  >
                                 </a>
@@ -112,7 +113,7 @@
                                     </tr>
                                 </table>
                                 </p>
-                                <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+                                <div id="jquery_jplayer_mediaAdd" class="jp-jplayer"></div>
                                 <div id="jp_container_1" class="jp-audio">
                                 <div class="jp-type-single">
                                 <div class="jp-gui jp-interface">
@@ -243,14 +244,14 @@
         </div>
 
 
-        <textarea id="audioJsDebugArea">
-        </textarea>
+        <input type="hidden" id="audioJsDebugArea">
+        <!--</textarea>-->
 
-        <label for="audioFileInfoTxt"></label><textarea id="audioFileInfoTxt" ></textarea>
-        <label for="fileUploadTxt"></label><textarea id="fileUploadTxt" ></textarea>
+        <label for="audioFileInfoTxt"></label><input type="hidden" id="audioFileInfoTxt" > <!--</textarea>-->
+        <label for="fileUploadTxt"></label><input type="hidden" id="fileUploadTxt" >     <!--</textarea>-->
 
-        <label for="fileInfoTxt"></label><input type="text" id="fileInfoTxt" name="fileInfoTxt" >
-        <label for="fileLocTxt"></label><input type="text" id="fileLocTxt" name="fileLocTxt" >
+        <label for="fileInfoTxt"></label><input type="hidden" id="fileInfoTxt" name="fileInfoTxt" >
+        <label for="fileLocTxt"></label><input type="hidden" id="fileLocTxt" name="fileLocTxt" >
 
         <div id="mediaAddStatus"></div>
 
@@ -262,7 +263,7 @@
         </div>   <!-- end of upload confirm -->
 
         <div data-role="popup" id="cancelConfirm">
-            <h2>If you confirm you would like to cancel no information for this media will be saved to the Treasured Stories server. </h2>
+            <h3>If you confirm you would like to cancel no information for this media will be saved to the Treasured Stories server. </h3>
             <button type="submit" id="cancelBtn" name="cancelBtn">Yes, Cancel and do not upload anything</button>
             <a href="#" data-rel="back" data-role="button" data-theme="a" >No, just close this dialog for now</a>
 
