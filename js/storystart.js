@@ -12,29 +12,29 @@ $(document).on('pageinit', '#storyStartPage', function(){
 
     console.log("storyStartPage: init(): begin");
     // the elements of this content do not change from user selection, just the values
-    var starterCatIdArr    = JSON.parse(sessionStorage.getItem(("appCacheStarterCatIds")));
-
-    if (starterCatIdArr  == null) {
-        console.log("storyStartPage: Starter Category cache entries are null.  Need to rebuild cache.");
-        //appCacheCategoryList("appCacheStarterCat");
-    }
-    else
-        console.log("storyStartPage: pageinit(): Starter Categories succesfully retrieved from cache");
-
-    $('#showStoryStartersList li').remove();
-    for (i = 0; i < starterCatIdArr.length; i++) {
-        var starterCatDescr = sessionStorage.getItem("appCacheStarterCat" + starterCatIdArr[i]);
-
-        var listItemLine = "<li id=catListItem" + starterCatIdArr[i] + " onclick='showIt(" + starterCatIdArr[i] + ");'> <a href='#'>" + starterCatDescr+ '</a></li>' ;
-        console.log("storyStartPage: pageinit(): List Item Line = " + listItemLine);
-        $('#showStoryStartersList').append(listItemLine);
-    }
-    $('#showStoryStartersList').listview('refresh');
-    console.log("storyStartPage: pageinit(): Resetting theme of Starter Categories after refresh");
-    for (var i=1;i<starterCatIdArr.length+1;i++)
-    {
-        $("#catListItem" + i).buttonMarkup({theme: 'c'});
-    }
+//    var starterCatIdArr    = JSON.parse(sessionStorage.getItem(("appCacheStarterCatIds")));
+//
+//    if (starterCatIdArr  == null) {
+//        console.log("storyStartPage: Starter Category cache entries are null.  Need to rebuild cache.");
+//        //appCacheCategoryList("appCacheStarterCat");
+//    }
+//    else
+//        console.log("storyStartPage: pageinit(): Starter Categories succesfully retrieved from cache");
+//
+//    $('#showStoryStartersList li').remove();
+//    for (i = 0; i < starterCatIdArr.length; i++) {
+//        var starterCatDescr = sessionStorage.getItem("appCacheStarterCat" + starterCatIdArr[i]);
+//
+//        var listItemLine = "<li id=catListItem" + starterCatIdArr[i] + " onclick='showIt(" + starterCatIdArr[i] + ");'> <a href='#'>" + starterCatDescr+ '</a></li>' ;
+//        console.log("storyStartPage: pageinit(): List Item Line = " + listItemLine);
+//        $('#showStoryStartersList').append(listItemLine);
+//    }
+//    $('#showStoryStartersList').listview('refresh');
+//    console.log("storyStartPage: pageinit(): Resetting theme of Starter Categories after refresh");
+//    for (var i=1;i<starterCatIdArr.length+1;i++)
+//    {
+//        $("#catListItem" + i).buttonMarkup({theme: 'c'});
+//    }
 
     console.log("storyStartPage: init(): end");
 
@@ -51,8 +51,48 @@ $(document).on('pagebeforeshow', '#storyStartPage', function(){
     $('#storyStarterTitleTxt').val(sessionStorage.getItem("storyTitle"));
 
     //
-    // 1b.  Pull and set values as needed from session storage
+    // 1b.  Story Starters: pull from cache of ajax call if not loaded
     //
+    var storyStarterCacheStatus = sessionStorage.getItem("cacheStatusStoryStarters");
+    console.log("storyStartPage: pagebeforeshow(): Checking cache status of story starters: " + storyStarterCacheStatus);
+    if (storyStarterCacheStatus == "false") {
+
+        console.log("storyStartPage: pagebeforeshow(): Loading Cache of Story Starters: begin");
+        var prefix = "appCache";
+        var starterCatPrefix = prefix + "StarterCat";
+        var starterCategoryStorageIdName = starterCatPrefix + "Ids";
+        sessionStorage.removeItem(starterCategoryStorageIdName);
+        var startersCatIdArrLoad = new Array();
+
+        $('#showStoryStartersList li').remove();
+        $.ajax({
+            type: "GET",
+            url: tsServiceURLDomain + "tssvc/resourcesS/stories/starters/categories/",
+            //data:'mediaTitle='+ mediaTitle +'&mediaDate='+ mediaDate +'&mediaDescr='+ mediaDescr +'&catList='+ mediaCategories,
+            cache: false,
+            async: false,
+            success: function(data) {
+                var categories = data.storyStarterCategoryModelList;
+                $.each(categories, function(index, category) {
+
+                    startersCatIdArrLoad.push(category.starterCategoryId);
+                    console.log("       appCacheStoryStarterCategoryList: item: " + category.starterCategoryId + " descr: " + category.starterCategoryTitle);
+                    sessionStorage.removeItem(starterCatPrefix + category.starterCategoryId );
+                    sessionStorage.setItem(starterCatPrefix + category.starterCategoryId , category.starterCategoryTitle);
+
+                    var listItemLine = "<li id=catListItem" + category.starterCategoryId + " onclick='showIt(" + category.starterCategoryId+ ");'> <a href='#'>" + category.starterCategoryTitle+ '</a></li>' ;
+
+                    $('#showStoryStartersList').append(listItemLine);
+                });
+                sessionStorage.setItem(starterCategoryStorageIdName, JSON.stringify(startersCatIdArrLoad));
+                console.log("           appCacheStoryStarterCategoryList(): story starter category id: " + sessionStorage.getItem(starterCategoryStorageIdName));
+                $('#showStoryStartersList').listview('refresh');
+            }
+        });
+        sessionStorage.setItem("cacheStatusStoryStarters", "true");
+        console.log("storyStartPage: pagebeforeshow(): Loading Cache of Story Starters: end");
+    }
+
     console.log("storyStartPage: pagebeforeshow(): Resetting theme of Starter Categories.");
     var starterCatIdArr    = JSON.parse(sessionStorage.getItem(("appCacheStarterCatIds")));
     for (var i=1;i<starterCatIdArr.length+1;i++)
@@ -188,7 +228,7 @@ function showIt(id) {
 
             //console.log("Index: " + index + " Question: " + starter.starterQuestion + " id: " + starter.starterId);
             //var listItemLine = "<li>" + starter.starterQuestion + '</li>'   ;
-            var listItemLine = "<li id=starterListItem" + starter.starterId + " onclick='setIt(" + starter.starterId + ");'> <a href='#'>" + starter.starterQuestion + '</a></li>'
+            var listItemLine = "<li data-icon='false' id=starterListItem" + starter.starterId + " onclick='setIt(" + starter.starterId + ");'> <a href='#'>" + starter.starterQuestion + '</a></li>'
             //console.log("storyStartPage: showIt: List Item Line = " + listItemLine);
             $('#showStoryStarters').append(listItemLine);
 

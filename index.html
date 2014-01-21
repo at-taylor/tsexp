@@ -38,35 +38,37 @@
             $.mobile.page.prototype.options.domCache = true;
             localStorage.clear();
             sessionStorage.clear();
+            sessionStorage.setItem("cacheStatusStoryStarters", "false");
 
             $('#login_submit').addClass('ui-disabled');
 
             // starter categories
+//            var prefix = "appCache";
+//            var starterCatPrefix = prefix + "StarterCat";
+//            var starterCategoryStorageIdName = starterCatPrefix + "Ids";
+//            sessionStorage.removeItem(starterCategoryStorageIdName);
+//            var startersCatIdArr = new Array();
+//            $.ajax({
+//                type: "GET",
+//                url: tsServiceURLDomain + "tssvc/resourcesS/stories/starters/categories/",
+//                //data:'mediaTitle='+ mediaTitle +'&mediaDate='+ mediaDate +'&mediaDescr='+ mediaDescr +'&catList='+ mediaCategories,
+//                cache: false,
+//                async: false,
+//                success: function(data) {
+//                    var categories = data.storyStarterCategoryModelList;
+//                    $.each(categories, function(index, category) {
+//
+//                        startersCatIdArr.push(category.starterCategoryId);
+//                        console.log("json-common: appCacheStoryStarterCategoryList: item: " + category.starterCategoryId + " descr: " + category.starterCategoryTitle);
+//                        sessionStorage.removeItem(starterCatPrefix + category.starterCategoryId );
+//                        sessionStorage.setItem(starterCatPrefix + category.starterCategoryId , category.starterCategoryTitle);
+//                    });
+//                    sessionStorage.setItem(starterCategoryStorageIdName, JSON.stringify(startersCatIdArr));
+//                    console.log("json-common: appCacheStoryStarterCategoryList(): story starter category id: " + sessionStorage.getItem(starterCategoryStorageIdName));
+//                }
+//            });
+
             var prefix = "appCache";
-            var starterCatPrefix = prefix + "StarterCat";
-            var starterCategoryStorageIdName = starterCatPrefix + "Ids";
-            sessionStorage.removeItem(starterCategoryStorageIdName);
-            var startersCatIdArr = new Array();
-            $.ajax({
-                type: "GET",
-                url: tsServiceURLDomain + "tssvc/resourcesS/stories/starters/categories/",
-                //data:'mediaTitle='+ mediaTitle +'&mediaDate='+ mediaDate +'&mediaDescr='+ mediaDescr +'&catList='+ mediaCategories,
-                cache: false,
-                async: false,
-                success: function(data) {
-                    var categories = data.storyStarterCategoryModelList;
-                    $.each(categories, function(index, category) {
-
-                        startersCatIdArr.push(category.starterCategoryId);
-                        console.log("json-common: appCacheStoryStarterCategoryList: item: " + category.starterCategoryId + " descr: " + category.starterCategoryTitle);
-                        sessionStorage.removeItem(starterCatPrefix + category.starterCategoryId );
-                        sessionStorage.setItem(starterCatPrefix + category.starterCategoryId , category.starterCategoryTitle);
-                    });
-                    sessionStorage.setItem(starterCategoryStorageIdName, JSON.stringify(startersCatIdArr));
-                    console.log("json-common: appCacheStoryStarterCategoryList(): story starter category id: " + sessionStorage.getItem(starterCategoryStorageIdName));
-                }
-            });
-
             var catPrefix = prefix + "Cat";
             var categoryStorageIdName = catPrefix+ "Ids";
             sessionStorage.removeItem(categoryStorageIdName);
