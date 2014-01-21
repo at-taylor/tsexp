@@ -52,8 +52,9 @@ $(document).on('pagebeforeshow', '#mediaLibGridPage', function(){
 //            console.log("url?" + item.url);
 
             var videoOrImageTag;
-            if (item.fileType == "mp4")
-                videoOrImageTag = '<video ><source  type="video/mp4" src=' + item.url + '></video>'
+            if ((item.fileType == "mp4")   || (item.fileType == "mov") || (item.fileType == "MOV"))
+               // videoOrImageTag = '<video ><source  type="video/mp4" src=' + item.url + '></video>'
+                videoOrImageTag =  "<img src='img/navbut/blank-video.jpg''>"
             else
                 videoOrImageTag =  '<img src= '+ item.url +'>'
 

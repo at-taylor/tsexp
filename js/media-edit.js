@@ -71,7 +71,8 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
     $('#editTitleTxt').val("");
     $('#editDateTxt').val("");
     $('#editDescrTxt').val("");
-    $('#editImage').attr("src", "");
+    //$('#editImage').attr("src", "");
+    $('#mediaEditMediaContainer').html("");
     $('#editErrorTxt').val("");
 
     //4.  Get the content of what is being edited
@@ -109,7 +110,18 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
         console.log("mediaEditPage: Date not present.");
 
         $('#editDescrTxt').val(data.descr);
-        $('#editImage').attr("src", data.url);
+        //$('#editImage').attr("src", data.url);
+        var videoOrImageTag;
+        var theFileType = data.fileType;
+        var theFileUrl = data.url;
+        if ((theFileType == "mp4")   || (theFileType == "mov") || (theFileType == "MOV"))
+            videoOrImageTag = "<video width=320 poster='img/navbut/blank-video.jpg' controls src='" + theFileUrl + "'></video>"
+        else
+            videoOrImageTag =  '<img width=320 src= '+ theFileUrl +'>';
+        //image/mov
+        console.log("mediaAddPageAdd: video/image tag: " + videoOrImageTag);
+        $('#mediaEditMediaContainer').append(videoOrImageTag);
+
         //data.recordingUrl;
         console.log("mediaEditPage: destroy and recreate JPlayer");
         var audioFileName = data.recordingUrl;

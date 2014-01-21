@@ -486,7 +486,7 @@ var app = {
             },
             {
                 limit: 1,
-                duration: 12
+                duration: 120
             });
 
 
