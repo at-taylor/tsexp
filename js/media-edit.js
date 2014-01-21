@@ -14,6 +14,9 @@ $(document).on('pageinit', '#mediaEditPage', function(){
         console.log("mediaEditPage: Categories succesfully retrieved from cache");
 
     $('#mediaEditDateSwitch').change(function() {
+
+        console.log("mediaEditPage: mediaEditDateSwitchChange()");
+
         var myswitch = $(this);
         var show     = myswitch[0].selectedIndex == 1 ? true:false;
 
@@ -32,12 +35,28 @@ $(document).on('pageinit', '#mediaEditPage', function(){
 });
 
 
+function flipEditMediaDateSwitch (val) {
+
+    console.log("mediaEditPage: flipEditMediaDateSwitch: " + val);
+
+    if(val == "0") {
+
+        $('#mediaEditApxDateDiv').fadeIn('slow');
+        $('#mediaEditExactDateDiv').fadeOut();
+    } else {
+
+        $('#mediaEditExactDateDiv').fadeIn('slow');
+        $('#mediaEditApxDateDiv').fadeOut();
+    }
+}
+
+
 $(document).on('pagebeforeshow', '#mediaEditPage', function(){
 
     console.log('mediaEditPage: pagebeforeshow(): start');
 
-    console.log('mediaEditPage: pagebeforeshow(): Initialize buttons');
     // Initialize any buttons to initial state
+    console.log('mediaEditPage: pagebeforeshow(): Initialize buttons');
     $('#editBtn').button('enable');
     $('#cancelEditBtn').button('enable');
     $('#editConfirmPopLink').removeClass('ui-disabled');
@@ -74,6 +93,11 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
     //$('#editImage').attr("src", "");
     $('#mediaEditMediaContainer').html("");
     $('#editErrorTxt').val("");
+    $('#mediaEditDateTxt').val("");
+    $('#mediaEditApxDateTxt').val("");
+    $('#mediaEditDateSwitch').val("0").slider("refresh");
+
+
 
     //4.  Get the content of what is being edited
     var categoryResultArray = new Array();
@@ -91,23 +115,46 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
             categoryResultArray.push([i])  ;
             iItr = Number(iItr) + 1;
         }
+        //refresh title
         $('#editTitleTxt').val(data.title);
+
+        //refresh date
         var dateValue = data.mediaDateRaw;
         console.log("mediaEditPage: Date Raw: " + dateValue);
-        if ((dateValue != null)    && (dateValue != ""))    {
-            console.log("mediaEditPage: Date Raw Length: " + dateValue.length);
-            if (dateValue.length == 10)  {
+        console.log("date length: " + dateValue.length)
+        if (dateValue != null) {  // if date is missing just leave the page defaults
+            var dateValueAsXDate = new XDate(dateValue);
+            console.log(" xDate Valid result: " + dateValueAsXDate.valid());
+            console.log(" length check      : " + dateValue.length);
+            if (dateValueAsXDate.valid() && (dateValue.length > 4)) {   // this is a legitimate date
                 $('#mediaEditDateTxt').val(dateValue);
-                $('#mediaEditDateSwitch').val("0").slider("refresh");  //exact date
-                console.log("mediaEditPage: Setting date switch exact.");
-            }
-            else if (dateValue.length == 4) {
-                $('#mediaEditApxDateTxt').val(dateValue);
-                $('#mediaEditDateSwitch').val("1").slider("refresh");  //non-exact date
-                console.log("mediaEditPage: Setting date switch non-exact.");
-            }
-        }   else
-        console.log("mediaEditPage: Date not present.");
+                console.log("IN VALID DATE");
+                $('#mediaEditDateSwitch').val("0").slider("refresh");
+                flipEditMediaDateSwitch("1");
+            } else
+                if ((!isNaN(dateValue)) && (dateValue.length == 4)) {
+                    console.log("IN VALID YEAR");
+                    $('#mediaEditApxDateTxt').val(dateValue);
+                    $('#mediaEditDateSwitch').val("1").slider("refresh");
+                    flipEditMediaDateSwitch("0");
+                }
+        }
+
+//
+//        if ((dateValue != null)    && (dateValue != ""))    {
+//            console.log("mediaEditPage: Date Raw Length: " + dateValue.length);
+//            if (dateValue.length == 10)  {
+//                $('#mediaEditDateTxt').val(dateValue);
+//                $('#mediaEditDateSwitch').val("0").slider("refresh");  //exact date
+//                console.log("mediaEditPage: Setting date switch exact.");
+//            }
+//            else if (dateValue.length == 4) {
+//                $('#mediaEditApxDateTxt').val(dateValue);
+//                $('#mediaEditDateSwitch').val("1").slider("refresh");  //non-exact date
+//                console.log("mediaEditPage: Setting date switch non-exact.");
+//            }
+//        }   else
+//        console.log("mediaEditPage: Date not present.");
 
         $('#editDescrTxt').val(data.descr);
         //$('#editImage').attr("src", data.url);
@@ -119,7 +166,7 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
         else
             videoOrImageTag =  '<img width=320 src= '+ theFileUrl +'>';
         //image/mov
-        console.log("mediaAddPageAdd: video/image tag: " + videoOrImageTag);
+        console.log("mediaEditPage: video/image tag: " + videoOrImageTag);
         $('#mediaEditMediaContainer').append(videoOrImageTag);
 
         //data.recordingUrl;
