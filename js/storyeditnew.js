@@ -225,13 +225,23 @@ $(document).on('pagebeforeshow', '#storyEditNewPage', function(){
             $.each(media, function(index, item) {
 
                 //console.log("Index from url: " + item.url + " is " + item.url.substring(item.url.lastIndexOf('.')+1) );
-                var theExt = item.url.substring(item.url.lastIndexOf('.')+1);
-                if ((theExt == "jpg") || (theExt == "png") || (theExt == "JPG"))  {
+               // var theExt = item.url.substring(item.url.lastIndexOf('.')+1);
+                //<img width=100 height=100 src= "' + item.url + '">
+                var videoOrImageTag;
+                var theFileType = item.fileType;
+                var theFileUrl = item.url;
+                if ((theFileType == "mp4")   || (theFileType == "mov") || (theFileType == "MOV"))
+                    videoOrImageTag = '<img width=100 height=100 src=' + "img/navbut/blank-video.jpg" + '>';
+                else
+                    videoOrImageTag =  '<img width=100 height=100  src= '+ theFileUrl +'>';
+                console.log("tag: " + videoOrImageTag);
+                if ((theFileType == "jpg") || (theFileType == "png") || (theFileType == "JPG"))  {
+                //$el = $('<input type="checkbox" data-inline="true" id="mediaCheck' + item.id + '" class="mediaCheck" value=' + item.id +' ><label for="mediaCheck' + item.id +'">' + videoOrImageTag                          + '"></label>');
                     $el = $('<input type="checkbox" data-inline="true" id="mediaCheck' + item.id + '" class="mediaCheck" value=' + item.id +' ><label for="mediaCheck' + item.id +'"><img width=100 height=100 src= "' + item.url + '"></label>');
                     sessionStorage.setItem("storyAddMediaId" + item.id, item.url);
+                    //console.log("Element :" + $el);
+                    $( "#controlgroup" ).controlgroup( "container" )["append"]( $el );
                 }
-                //console.log("Element :" + $el);
-                $( "#controlgroup" ).controlgroup( "container" )["append"]( $el );
 
             });
             group.controlgroup( "refresh" );
