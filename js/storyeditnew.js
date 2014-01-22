@@ -336,7 +336,7 @@ $(document).on('pagebeforeshow', '#storyEditNewPage', function(){
 //        });
 //    });
 
-    function storyEditNewSetItems()
+function storyEditNewSetItems()
 {
     console.log("storyEditNewPage: storyEditNewSetItems: Start");
 

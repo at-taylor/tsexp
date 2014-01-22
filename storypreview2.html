@@ -121,6 +121,7 @@
 
                 <!--<button data-role="button" data-mini= "true" data-theme="b">Cancel It Completely</button>-->
             </div>    <!-- previewBtn div end -->
+            <div id="storyPreviewFeaturedTextContainer"></div>
             <div data-role="controlgroup" id="controlgroupPreview" data-type="horizontal">
                 <!--<input type="checkbox"  data-inline="true" id="testCheck" class="mediaCheck" value=1>-->
                 <!--<label for="testCheck"><img src= "http://app.treasuredstories.com/uploaded/media/image/p1809d3l0osiucqmv73513pr5.png" width=100></label>-->
@@ -187,6 +188,8 @@
         $('#storyPreviewNewBackBtn').removeClass('ui-disabled');
         $('#storyPreviewNewEditBtn').removeClass('ui-disabled');
 
+
+
         var audioFileName;
         if (sessionStorage.getItem("storyAudioUrl") == null)
             audioFileName = "no.wav";
@@ -213,7 +216,7 @@
             keyEnabled: true
         });
 
-
+        $('#storyPreviewFeaturedTextContainer').html("");
         $('#storyPreviewTitleTxt').html("");
         $('#storyPreviewTitleTxt').append(sessionStorage.getItem("storyTitle"));
         $('#storyPreviewNewAudioTitleListItem').html("");
@@ -274,14 +277,18 @@
 
         var mediaResultArray = JSON.parse(sessionStorage.getItem("storyMediaItems"));
 
-        console.log("storyPreviewPage: pagebeforeshow(): removing only checkboxes for the preview page");
+        console.log("storyPreviewPage: pagebeforeshow(): Media Item Array: " +  mediaResultArray);
         $('#controlgroupPreview .ui-checkbox').remove();
         if (mediaResultArray != null)
         {
+
+
             var group = $( "#controlgroupPreview" );
             //console.log("before inner for statement")
 
             for(i = 0; i < mediaResultArray.length; i++) {
+                if (i == 0)  // at least one media item exists
+                    $('#storyPreviewFeaturedTextContainer').append("<h3>Please select any media items below you wish to consider featured for this story.</h3>");
                 var $el;
                 var theUrl = sessionStorage.getItem("storyAddMediaId" + mediaResultArray[i]) ;
                 //console.log("before if check on url");
@@ -317,6 +324,26 @@
             var mediaArr = new Array();
             mediaArr = JSON.parse(sessionStorage.getItem("storyMediaItems"));
 
+            // data set on the preview page: featured media item(s)
+            console.log("storyPreviewPage: storyPreviewNewPublishUploadBtn: Determine any featured media items selected.")
+            var val = new Array();
+            $(' :checkbox:checked').each(function(i){
+                val[i] = $(this).val();
+                //console.log("inner label html: " + $('#mediaCheck657 label').html());
+                console.log("checked: " + $(this).val());
+            });
+            var uniqueArr = new Array();
+            var dupArr = new Array()
+            for (i = 0; i < val.length; i++) {
+                if (isInArray(uniqueArr, val[i]))  // see if the value is already in the unique keys array
+                {
+                    dupArr.push(val[i]);
+                } else
+                    uniqueArr.push(val[i]);
+            }
+            console.log("Unique Array: " + uniqueArr);
+            console.log("dup Array: " + dupArr);
+
             var storyContentClean = sessionStorage.getItem("storyContent");
 
             //str.replace(/blue/g,"red");
@@ -324,6 +351,7 @@
             //storyContentClean = encodeURI(storyContentClean);
             console.log("cleaning content: replace g " + storyContentClean);
 
+            console.log("storyPreviewPage: storyPreviewNewPublishUploadBtn: about to call storyAdd service.")
             var storyAddJson = {
                 title: sessionStorage.getItem("storyTitle"),
                 descr: null,
@@ -338,7 +366,8 @@
                 storyYY: null,
                 privacySetting: Number(sessionStorage.getItem("storyPrivacy")),
                 publishStatus: Number(0),
-                content:storyContentClean
+                content:storyContentClean,
+                mediaFeaturedList: dupArr
             }
             var storyDate = sessionStorage.getItem("storyDate");
             if (storyDate.length = 10)  {
@@ -469,6 +498,12 @@
         console.log("storyPreviewPage: pagebeforeshow(): end");
 
     });
+
+    function isInArray(array, search)
+    {
+        return (array.indexOf(search) >= 0) ? true : false;
+    }
+
 
     function printMonth(mm) {
         var month=new Array(12);
