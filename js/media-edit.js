@@ -121,7 +121,7 @@ $(document).on('pagebeforeshow', '#mediaEditPage', function(){
         //refresh date
         var dateValue = data.mediaDateRaw;
         console.log("mediaEditPage: Date Raw: " + dateValue);
-        console.log("date length: " + dateValue.length)
+        //console.log("date length: " + dateValue.length)
         if (dateValue != null) {  // if date is missing just leave the page defaults
             var dateValueAsXDate = new XDate(dateValue);
             console.log(" xDate Valid result: " + dateValueAsXDate.valid());
