@@ -130,7 +130,7 @@
         </div>
 
     </section>
-    <input type="hidden" id="storyPreviewDebugArea" ><!--</textarea>-->
+    <textarea id="storyPreviewDebugArea" ></textarea>
 
     <div data-role="popup" id="storyNewPublishConfirm">
         <h2>Would you like to upload this story to your Treasured Stories account?</h2>
@@ -349,11 +349,13 @@
             //str.replace(/blue/g,"red");
             storyContentClean = encodeURIComponent(storyContentClean);
             console.log("Story Content after: " + storyContentClean);
+            $('#storyPreviewDebugArea').val($('#storyPreviewDebugArea').val() + " story content after ... " + storyContentClean);
 
             var titleClean = sessionStorage.getItem("storyTitle");
             console.log("Title before: " + titleClean);
             titleClean = encodeURIComponent(titleClean) ;
             console.log("Title after: " + titleClean);
+            $('#storyPreviewDebugArea').val($('#storyPreviewDebugArea').val() + " title  after ... " + titleClean);
 
             //storyContentClean = storyContentClean.replace(/&nbsp;/g, " ");
             //storyContentClean = encodeURI(storyContentClean);
