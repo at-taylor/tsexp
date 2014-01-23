@@ -261,7 +261,7 @@ function updateMediaItem(mediaId, mediaTitle, mediaDate, mediaDescr, mediaCatego
 //            alert("status: " + status) ;
 //            alert("error: " + error);
 //            alert(xhr.responseText);
-            $.mobile.changePage("index.html");
+            //$.mobile.changePage("index.html");
         }
     })   ;
 

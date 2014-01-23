@@ -163,6 +163,11 @@ function fileok(r) {
     console.log("mediaAddPageAdd: fileOK(): selected Category Array" + selectedValsArray);
 
     var jsonStringArr = JSON.stringify(selectedValsArray);
+    if (jsonStringArr == null) {
+        console.log("CAT STRING IS NULL");
+        jsonStringArr = '"[]"';
+
+    }
     console.log("mediaAddPageAdd: fileOK(): selected Category Array as JSON" + jsonStringArr);
 
     var theTime = new Date().getTime();
@@ -174,6 +179,17 @@ function fileok(r) {
     else
         dateForSvc = $('#mediaAddApxDateTxt').val();
 
+
+    console.log("Title: ")
+    console.log($('#mediaAddTitleTxt').val());
+    console.log("Date : ");
+    console.log(dateForSvc);                             ;
+    console.log("Description  : ");
+    console.log($('#mediaAddDescrTxt').val());
+    console.log("cat Arr");
+    console.log(jsonStringArr);
+    console.log("url");
+    console.log(sessionStorage.getItem("fileAudioUrl"));
     updateMediaItem(respObj.id, $('#mediaAddTitleTxt').val(), dateForSvc,$('#mediaAddDescrTxt').val(), jsonStringArr, sessionStorage.getItem("fileAudioUrl"), newPage,
         document.getElementById('fileUploadTxt'), document.getElementById('audioFileInfoTxt'));
 
@@ -225,7 +241,18 @@ function uploadFileFromUrl() {
 
                     var selectedValsArray = $('#categoryList').val();
                     console.log("mediaAddPageAdd: uploadFileFromUrl(): selected Category Array" + selectedValsArray);
+
+
+
                     var jsonStringArr = JSON.stringify(selectedValsArray);
+                    console.log("jsonStringArr")
+                    console.log(jsonStringArr);
+                    if ((jsonStringArr == null ) || (jsonStringArr == "null")) {
+                        console.log("CAT STRING IS NULL");
+                        jsonStringArr = '"[]"';
+
+                    }
+
                     console.log("mediaAddPageAdd: uploadFileFromUrl: selected Category Array as JSON" + jsonStringArr);
 
                     var theTime = new Date().getTime();
@@ -237,6 +264,18 @@ function uploadFileFromUrl() {
                         dateForSvc = $('#mediaAddDateTxt').val();
                     else
                         dateForSvc = $('#mediaAddApxDateTxt').val();
+
+                    console.log("Title: ")
+                    console.log($('#mediaAddTitleTxt').val());
+                    console.log("Date : ");
+                    console.log(dateForSvc);                             ;
+                    console.log("Description  : ");
+                    console.log($('#mediaAddDescrTxt').val());
+                    console.log("cat Arr");
+                    console.log(jsonStringArr);
+                    console.log("url");
+                    console.log(sessionStorage.getItem("fileAudioUrl"));
+
                     updateMediaItem(respObj.id, $('#mediaAddTitleTxt').val(), dateForSvc, $('#mediaAddDescrTxt').val(), jsonStringArr,  sessionStorage.getItem("fileAudioUrl"), newPage,
                         document.getElementById('fileUploadTxt'), document.getElementById('audioFileInfoTxt'));
 
